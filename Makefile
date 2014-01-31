@@ -79,13 +79,5 @@ pushall:
 	cd ../iNZightMR; git push origin master
 	cd ../VIT; git push origin master
 
-replace:
-	cd ../iNZightVIT-WIN/prog_files/library; rm -rf vit iNZight iNZightPlots iNZightModules iNZightRegression iNZightMR iNZightTS
-	mv ../tmp/* ../iNZightVIT-WIN/prog_files/library/
-
-replaceMac:
-	cd ../iNZightVIT-MAC/Library/Frameworks/R.framework/Versions/2.15/Resources/library/; rm -rf vit iNZight iNZightPlots iNZightModules iNZightRegression iNZightMR iNZightTS
-	mv ../tmp/* ../iNZightVIT-MAC/Library/Frameworks/R.framework/Versions/2.15/Resources/Library/
-
 
 # How iNZighting! 
