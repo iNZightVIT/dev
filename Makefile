@@ -45,9 +45,11 @@ getMac:
 
 # and then this should update the packages.
 replaceMac:
-	cd ../iNZightVIT-MAC/Library/Frameworks/R.framework/Versions/2.15/Resources/library/; rm -rf vit iNZight iNZightPlots iNZightModules iNZightRegression iNZightMR iNZightTS
-	mv ../tmp/* ../iNZightVIT-MAC/Library/Frameworks/R.framework/Versions/2.15/Resources/Library/
+	cd ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/; rm -rf vit iNZight iNZightPlots iNZightModules iNZightRegression iNZightMR iNZightTS
+	mv ../tmp/* ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/
 
+rmMacG:
+	cd ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/; rm -rf gWidgets2 gWidgets2RGtk2
 
 # At the beginning/end of a session, it is a good idea to check the status of all of your repositories.
 statusall:
