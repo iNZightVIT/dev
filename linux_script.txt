@@ -1,0 +1,69 @@
+### INSTALL iNZightVIT on Linux ---------------------------------------- ###
+# (development build. Will contain bugs --- if you find any, please
+#  report to <tell029@aucklanduni.ac.nz>!
+
+# NB: these instructions haven't been vigorously tested, and there may
+#     be some version-specific dependencies missing. If this is the case,
+#     simply install (apt-get if it's a linux one, of install.packages()
+#     if it's for R). If you could email me any additional steps you needed,
+#     it would be appreciated.
+
+### -------------------------------------------------------------------- ###
+
+# In the Terminal:
+# Set up R
+sudo apt-get install r-base
+sudo apt-get install r-cran-rgtk2 r-cran-rgl r-cran-rodbc r-cran-cairodevice
+
+# Move to R
+R
+install.packages("devtools")
+update.packages()  # apt-get may have installed older versions, so you
+# need to update you need to type 'y' and press enter for all of the
+# packages that are out of date this may take a while... so you may
+# want to get a cup of coffee or something.
+
+# We need some packages for the GUI
+install.packages(c("gdata", "gpairs", "objectProperties", "cairoDevice",
+                   "MASS", "effects", "boot", "car", "s20x",
+                   "fields", "lattice"))
+library(devtools)
+install_github("gWidgets2", "jverzani")  # we are using a development version
+install_github("gWidgets2RGtk2", "jverzani")
+
+# Now you're hopefully ready to install the iNZight packages
+install_github(c("iNZightTS", "iNZightRegression", "iNZightMR",
+                 "iNZightModules", "iNZightPlots", "iNZight"), "iNZightVIT")
+
+# Make sure iNZight loads:
+library(iNZight)
+iNZight()
+
+# If so, try for VIT
+install.packages(c("car", "gWidgets", "gWidgetsRGtk2", "plyr"))
+q("no")
+
+# Back in terminal, install these (for better graphics)
+sudo apt-get install libgl1-mesa-dev-lts-  # press tab twice and select the correct version
+sudo apt-get install libglu-dev libxt-dev libfreetype6-dev fontconfig
+
+# And install in R
+R
+install.packages("Acinonyx", repos = "http://rforge.net/")
+library(devtools)
+install_github("VIT", "iNZightVIT")
+
+# If all went well ...
+library(vit)
+iNZightVIT()
+
+# ... you have iNZightVIT on Linux. Enjoy.
+
+
+######################################################################
+# If you find any errors with this guide, please pass them on to Tom
+# Elliott <tell029@aucklanduni.ac.nz>.  Because most of this is
+# currently using developmental versions, I can't promise everything
+# will work. It will likely just be a matter of checking error
+# messages for what dependencies weren't found and installing them.
+######################################################################
