@@ -20,7 +20,7 @@ build:
 
 # Now you can install them into a temporary directory: make all
 all:	
-	cd ../; R CMD INSTALL -l tmp iNZightTS iNZightMR iNZightTools iNZightRegression iNZightModules iNZightPlots iNZight VIT
+	cd ../; R CMD INSTALL -l tmp iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
 
 # You will need to install these once, and any time John updates the development version (unless it gets
 # uploaded to cran, then just forget this bit)
@@ -29,7 +29,7 @@ gWidgets2:
 
 # If you want to install to your local R library, then make here:
 here:
-	cd ../; R CMD INSTALL iNZightTS iNZightMR iNZightTools iNZightRegression iNZightModules iNZightPlots iNZight VIT
+	cd ../; R CMD INSTALL iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
 
 # And the gWidgets2 libraries:
 ghere:
