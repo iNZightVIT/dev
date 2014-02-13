@@ -26,7 +26,7 @@ Imports: iNZightRegression
 
 
 iNZight
-Depends: objectProperties, gWidgets2*
+Depends: objectProperties, cairoDevice, gWidgets2*
 Imports: grid, RGtk2, RODBC*, gdata, gWidgets2RGtk2*, iNZightPlots,
 iNZightTools
 Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
@@ -61,8 +61,10 @@ STANDALONE: need png* compiled correctly
 - Get XQuartz if using OS X >= 10.8
 
 Step 1: 
+update.packages(ask = FALSE)
 install.packages(c("car", "boot", "s20x", "survey", "mgcv", "digest",
 	           "rgl", "barcode", "gpairs", "RGtk2", "gdata", "memoise",
+		   "objectProperties", "cairoDevice",
 		   "gWidgets", "gWidgetsRGtk2", "plyr", "RODBC"))
 [select a CRAN mirror]
 
@@ -101,3 +103,9 @@ install.packages(paste0("~/Downloads/",
 
 
 
+Step 5:
+If everything went ok, you should have won:
+library(vit)
+iNZightVIT()
+
+Enjoy!
