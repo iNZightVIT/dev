@@ -51,3 +51,53 @@ Imports: methods, grid, gWidgets, RGtk2, gWidgetsRGtk2, plyr, RODBC*
 
 ----------------
 STANDALONE: need png* compiled correctly
+
+
+
+-----
+ TO INSTALL ALL (2.15):
+
+- Get GTK_2.18.5-X11.pkg
+- Get XQuartz if using OS X >= 10.8
+
+Step 1: 
+install.packages(c("car", "boot", "s20x", "survey", "mgcv", "digest",
+	           "rgl", "barcode", "gpairs", "RGtk2", "gdata", "memoise",
+		   "gWidgets", "gWidgetsRGtk2", "plyr", "RODBC"))
+[select a CRAN mirror]
+
+Step 2:
+Download gWidgets2.tar.gz and gWidgets2RGtk2.tar.gz from website and
+save them in the Downloads folder.
+install.packages(c("~/Downloads/gWidgets2_dev.tar.gz", "~/Downloads/gWidgets2RGtk2_dev.tar.gz"),
+	         repos = NULL, type = "source")
+
+NOTE: if you don't save them in "~/Downloads", then replace c("...",
+"...") with file.choose() and run twice.
+
+Step 3:
+Download the Acinonyx package for faster R graphics:
+install.packages("Acinonyx", repos = "http://rforge.net")
+
+Step 4:
+Download the following files ...
+
+- iNZightRegression.tar.gz
+- iNZightTS.tar.gz
+- iNZightPlots.tar.gz
+- iNZightMR.tar.gz
+- iNZightTools.tar.gz
+- iNZightModules.tar.gz
+- iNZight.tar.gz
+- VIT.tar.gz
+
+... and install using file.choose(), or if you save them all to
+~/Downloads:
+install.packages(paste0("~/Downloads/", 
+		        c("iNZightRegression", "iNZightTS", "iNZightPlots",
+		          "iNZightMR", "iNZightTools", "iNZightModules",
+	 		  "iNZight", "VIT"), ".tar.gz"),
+	         repos = NULL, type = "source")
+
+
+
