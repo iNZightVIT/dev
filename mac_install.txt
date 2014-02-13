@@ -60,6 +60,10 @@ STANDALONE: need png* compiled correctly
 - Get GTK_2.18.5-X11.pkg
 - Get XQuartz if using OS X >= 10.8
 
+- Download R version 2.15 (for compatibility with old Macs)
+- http://cran.r-project.org/bin/macosx/old/R-2.15.3.pkg
+- Install it.
+
 Step 1: 
 update.packages(ask = FALSE)
 install.packages(c("car", "boot", "s20x", "survey", "mgcv", "digest",
