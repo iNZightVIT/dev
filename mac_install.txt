@@ -65,13 +65,14 @@ update.packages(ask = FALSE)
 install.packages(c("car", "boot", "s20x", "survey", "mgcv", "digest",
 	           "rgl", "barcode", "gpairs", "RGtk2", "gdata", "memoise",
 		   "objectProperties", "cairoDevice",
-		   "gWidgets", "gWidgetsRGtk2", "plyr", "RODBC"))
+		   "gWidgets", "gWidgetsRGtk2", "plyr", "RODBC"),
+                 dependencies = TRUE)
 [select a CRAN mirror]
 
 Step 2:
 Download gWidgets2.tar.gz and gWidgets2RGtk2.tar.gz from website and
 save them in the Downloads folder.
-install.packages(c("~/Downloads/gWidgets2_dev.tar.gz", "~/Downloads/gWidgets2RGtk2_dev.tar.gz"),
+install.packages(c("~/Downloads/gWidgets2.tar.gz", "~/Downloads/gWidgets2RGtk2.tar.gz"),
 	         repos = NULL, type = "source")
 
 NOTE: if you don't save them in "~/Downloads", then replace c("...",
