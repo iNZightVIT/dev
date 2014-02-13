@@ -1,0 +1,53 @@
+To install on Mac:
+
+- GTK
+- XQuartz
+
+--------------------------------------------------------------
+iNZightRegression
+Depends: 
+Imports: grid, car
+
+
+iNZightPlots
+Depends: 
+Imports: grid, boot, s20x, survey
+(NOTE: will remove s20x dependency at a later stage)
+
+
+iNZightTS
+Depends: 
+Imports: grid
+
+
+iNZightMR
+Depends: 
+Imports: iNZightRegression
+
+
+iNZight
+Depends: objectProperties, gWidgets2*
+Imports: grid, RGtk2, RODBC*, gdata, gWidgets2RGtk2*, iNZightPlots,
+iNZightTools
+Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
+
+
+(iNZightModules)
+Depends:
+Imports: iNZightTools, iNZightRegression, iNZightMR, survey, mgcv,
+rgl, barcode, gpairs
+
+
+(iNZightTools)
+Depends: survey
+
+
+VIT/iNZightVIT
+Depends: 
+Imports: methods, grid, gWidgets, RGtk2, gWidgetsRGtk2, plyr, RODBC*
+
+
+
+
+----------------
+STANDALONE: need png* compiled correctly
