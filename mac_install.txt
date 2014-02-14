@@ -54,26 +54,29 @@ STANDALONE: need png* compiled correctly
 
 
 
------
- TO INSTALL ALL (2.15):
 
-- Get GTK_2.18.5-X11.pkg
-- Get XQuartz if using OS X >= 10.8
+----- 
+ TO INSTALL ALL (3.0):
+ 
+Step 1:
+- Get XQuartz
+- Get GTK_2.25.17-X11.pkg
 
-- Download R version 2.15 (for compatibility with old Macs)
-- http://cran.r-project.org/bin/macosx/old/R-2.15.3.pkg
+- Download latest version of R from
+- http://cran.r-project.org/ > `Download for (Mac) OS X`
 - Install it.
 
-Step 1: 
+Step 2:
 update.packages(ask = FALSE)
-install.packages(c("car", "boot", "s20x", "survey", "mgcv", "digest",
-	           "rgl", "barcode", "gpairs", "RGtk2", "gdata", "memoise",
-		   "objectProperties", "cairoDevice",
-		   "gWidgets", "gWidgetsRGtk2", "plyr", "RODBC"),
-                 dependencies = TRUE)
 [select a CRAN mirror]
 
-Step 2:
+install.packages(c("car", "boot", "s20x", "survey", "mgcv", "digest",
+	           "rgl", "barcode", "gpairs", "RGtk2", "gdata", "memoise",
+		   "objectProperties", "cairoDevice", "png",
+		   "gWidgets", "gWidgetsRGtk2", "plyr", "RODBC"),
+                 dependencies = TRUE)
+
+Step 3:
 Download gWidgets2.tar.gz and gWidgets2RGtk2.tar.gz from website and
 save them in the Downloads folder.
 install.packages(c("~/Downloads/gWidgets2.tar.gz", "~/Downloads/gWidgets2RGtk2.tar.gz"),
@@ -82,11 +85,30 @@ install.packages(c("~/Downloads/gWidgets2.tar.gz", "~/Downloads/gWidgets2RGtk2.t
 NOTE: if you don't save them in "~/Downloads", then replace c("...",
 "...") with file.choose() and run twice.
 
-Step 3:
-Download the Acinonyx package for faster R graphics:
-install.packages("Acinonyx", repos = "http://rforge.net")
 
 Step 4:
+
+If you plan on using the VIT module, then you will need the Acinonyx
+package. This is not distributed by CRAN, nor is it supported for R
+3.0. However, Simon Potter has created a binary version which works on
+R 3.0 on OS X 10.9 (Mavericks). If you have Mountain Lion or older, you will
+need to use R 2.15 and <follow these instructions> to use VIT.
+
+If you don't want to use VIT, <b>SKIP THIS STEP!</b>
+
+- Download Acinonyx.zip (unzip if it doesn't do this automatically)
+- Open up R (3.0) and type `.libPaths()`
+- Copy the library location *excluding the quotes*
+  (if more than one, just use the first --- if it doesn't work try the other)
+- Now open Finder > COMMAND + SHIFT + G
+- Paste the library location in the box > Click Go
+- Now copy the Acinonyx folder (in your downloads?) to this location (INSIDE library/)
+- Return to R > library(Acinonyx)
+  If this works, then you can use VIT --- if it doesn't, you can't unless you 
+  <follow these instructions> for R 2.15.
+
+Step 5:
+
 Download the following files ...
 
 - iNZightRegression.tar.gz
@@ -96,19 +118,82 @@ Download the following files ...
 - iNZightTools.tar.gz
 - iNZightModules.tar.gz
 - iNZight.tar.gz
-- VIT.tar.gz
+- vit.tar.gz
 
 ... and install using file.choose(), or if you save them all to
 ~/Downloads:
 install.packages(paste0("~/Downloads/", 
 		        c("iNZightRegression", "iNZightTS", "iNZightPlots",
 		          "iNZightMR", "iNZightTools", "iNZightModules",
-	 		  "iNZight", "VIT"), ".tar.gz"),
+	 		  "iNZight", "vit"), ".tar.gz"),
 	         repos = NULL, type = "source")
 
 
 
+Step 6:
+If everything went ok, you should have won:
+library(vit)
+iNZightVIT()
+
+Enjoy!
+=====================================================================
+-----
+ TO INSTALL ALL (2.15):
+
+Step 1:
+- Get GTK_2.18.5-X11.pkg
+- Get XQuartz if using OS X >= 10.8
+
+- Download R version 2.15 (for compatibility with old Macs)
+- http://cran.r-project.org/bin/macosx/old/R-2.15.3.pkg
+- Install it.
+
+Step 2: 
+update.packages(ask = FALSE)
+[select a CRAN mirror]
+
+install.packages(c("car", "boot", "s20x", "survey", "mgcv", "digest",
+	           "rgl", "barcode", "gpairs", "RGtk2", "gdata", "memoise",
+		   "objectProperties", "cairoDevice", "png",
+		   "gWidgets", "gWidgetsRGtk2", "plyr", "RODBC"),
+                 dependencies = TRUE)
+
+Step 3:
+Download gWidgets2.tar.gz and gWidgets2RGtk2.tar.gz from website and
+save them in the Downloads folder.
+install.packages(c("~/Downloads/gWidgets2.tar.gz", "~/Downloads/gWidgets2RGtk2.tar.gz"),
+	         repos = NULL, type = "source")
+
+NOTE: if you don't save them in "~/Downloads", then replace c("...",
+"...") with file.choose() and run twice.
+
+Step 4:
+Download the Acinonyx package for faster R graphics:
+install.packages("Acinonyx", repos = "http://rforge.net")
+
 Step 5:
+Download the following files ...
+
+- iNZightRegression.tar.gz
+- iNZightTS.tar.gz
+- iNZightPlots.tar.gz
+- iNZightMR.tar.gz
+- iNZightTools.tar.gz
+- iNZightModules.tar.gz
+- iNZight.tar.gz
+- vit.tar.gz
+
+... and install using file.choose(), or if you save them all to
+~/Downloads:
+install.packages(paste0("~/Downloads/", 
+		        c("iNZightRegression", "iNZightTS", "iNZightPlots",
+		          "iNZightMR", "iNZightTools", "iNZightModules",
+	 		  "iNZight", "vit"), ".tar.gz"),
+	         repos = NULL, type = "source")
+
+
+
+Step 6:
 If everything went ok, you should have won:
 library(vit)
 iNZightVIT()
