@@ -17,7 +17,7 @@ objectProperties,,
 cairoDevice,,
 png,,
 gWidgets,,
-gWidgets2RGtk2,,
+gWidgetsRGtk2,,
 plyr,,
 RODBC,,
 Acinonyx,3.0-0,OSX
