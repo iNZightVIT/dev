@@ -1,9 +1,17 @@
 INITIAL RELEASE VERSION: 28/2/2014
 
 iNZight v2.0.1
-- add ability to force a scatter plot for large sample sizes 
+- [new] add ability to force a scatter plot for large sample sizes 
 
 iNZightPlots v1.0.1
-- add ability to specify type of plot using `largesample = {TRUE,FALSE,NULL}`
+- [new] add ability to specify type of plot using `largesample = {TRUE,FALSE,NULL}`
   where `TRUE` uses grid plot, `FALSE` uses scatter plot, and `NULL` decides
   based on the sample size (default)
+  
+  
+  
+  
+  
+[new] = new feature
+[change] = altered/improved an existing feature
+[bugfix] = fixed a bug
