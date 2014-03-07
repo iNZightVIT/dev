@@ -4,7 +4,7 @@ iNZight v2.0.1
 - [new] add ability to force a scatter plot for large sample sizes
 - [new] add ability to convert missing observations to categorical levels
 - [bugfix] reorder levels and sort them by frequency now works correctly
-- [bugfix] iNZight now correctly doesn#t close if confirmation is denied
+- [bugfix] iNZight now correctly doesn't close if confirmation is denied
 
 iNZightTS
 - [bugfix] change the gpar of fill to NA of every rectangle object due to the reason 
