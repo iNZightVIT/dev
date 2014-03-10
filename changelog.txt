@@ -1,4 +1,5 @@
-INITIAL RELEASE VERSION: 28/2/2014
+------------------------------------------------------------------------------------------------
+NEXT RELEASE:
 
 iNZight v2.0.1
 - [new] add ability to force a scatter plot for large sample sizes
@@ -7,7 +8,7 @@ iNZight v2.0.1
 - [bugfix] reorder levels and sort them by frequency now works correctly
 - [bugfix] iNZight now correctly doesn't close if confirmation is denied
 
-iNZightTS
+iNZightTS v1.1.1
 - [bugfix] change the gpar of fill to NA of every rectangle object due to the reason 
   of new version of grob default fill is write. It will cover all the thing you execute 
   rectangle object before.
@@ -17,11 +18,14 @@ iNZightPlots v1.0.1
 - [new] add ability to specify type of plot using `largesample = {TRUE,FALSE,NULL}`
   where `TRUE` uses grid plot, `FALSE` uses scatter plot, and `NULL` decides
   based on the sample size (default)
-  
-  
-  
-  
-  
+- [change] the final viewport is the main data window, rather than the plot labels. 
+  This allows locator functionality, as well as custom additions to the plot.
+
+------------------------------------------------------------------------------------------------
+INITIAL RELEASE VERSION: 28/2/2014  
+
+
+------------------------------------------------------------------------------------------------
 [new] = new feature
 [change] = altered/improved an existing feature
 [bugfix] = fixed a bug
