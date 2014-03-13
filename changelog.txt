@@ -2,7 +2,7 @@
 NEXT RELEASE:
 
 iNZight v2.0.1
-- [new] add ability to force a scatter plot for large sample sizes
+- [new] add option to select type of plot (e.g., dot/hist or scatter/grid-density)
 - [new] add ability to convert missing observations to categorical levels
 - [new] add vertical sliders to the "Rename variables" and "Rename factor levels" windows
 - [bugfix] reorder levels and sort them by frequency now works correctly
