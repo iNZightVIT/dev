@@ -19,7 +19,10 @@ iNZightPlots v1.0.1
   where `TRUE` uses grid plot, `FALSE` uses scatter plot, and `NULL` decides
   based on the sample size (default)
 - [change] the final viewport is the main data window, rather than the plot labels. 
-  This allows locator functionality, as well as custom additions to the plot.
+  This allows locator functionality, as well as custom additions to
+  the plot.
+- [change] now displays the variable name and number of levels for
+  factors if there are too many levels when drawing a bar chart.
 
 ------------------------------------------------------------------------------------------------
 INITIAL RELEASE VERSION: 28/2/2014  

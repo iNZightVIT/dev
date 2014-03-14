@@ -89,6 +89,9 @@ pushall:
 	cd ../iNZightMR; git push origin master
 	cd ../VIT; git push origin master
 
+pullG:
+	cd ../gWidgets2; git pull origin master
+	cd ../gWidgets2RGtk2; git pull origin master
 
 # How iNZighting! 
 
