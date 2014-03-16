@@ -2,7 +2,8 @@
 NEXT RELEASE:
 
 iNZight v2.0.1
-- [new] add ability to force a scatter plot for large sample sizes
+- [new] add ability to specify type of plot; (default, dotplot, histogram) and
+  (default, scatterplot, grid-density)
 - [new] add ability to convert missing observations to categorical levels
 - [new] add vertical sliders to the "Rename variables" and "Rename factor levels" windows
 - [bugfix] reorder levels and sort them by frequency now works correctly
@@ -13,13 +14,20 @@ iNZightTS v1.1.1
   of new version of grob default fill is write. It will cover all the thing you execute 
   rectangle object before.
 
-
 iNZightPlots v1.0.1
 - [new] add ability to specify type of plot using `largesample = {TRUE,FALSE,NULL}`
   where `TRUE` uses grid plot, `FALSE` uses scatter plot, and `NULL` decides
   based on the sample size (default)
 - [change] the final viewport is the main data window, rather than the plot labels. 
   This allows locator functionality, as well as custom additions to the plot.
+- [change] display which variables cannot be plot due to too many levels, as well as the
+  number of levels. Also increased max levels to 101.
+- [new] add trend line and smoothers to legend
+
+
+iNZightRegression v1.1.1
+- [change] add maximum sample size (4000) for drawing bootstraps, as over this computation
+  time becomes too much and not much is gained from the bootstraps.
 
 ------------------------------------------------------------------------------------------------
 INITIAL RELEASE VERSION: 28/2/2014  
