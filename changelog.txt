@@ -22,7 +22,11 @@ iNZightPlots v1.0.1
   This allows locator functionality, as well as custom additions to the plot.
 - [change] display which variables cannot be plot due to too many levels, as well as the
   number of levels. Also increased max levels to 101.
-- [new] add trend line and smoothers to legend
+- [new] add trend line and smoothers to legend.
+- [bugfix] fix a bug where grid-density plot wasn't scaling properly with the axes.
+- [change] instead of using the absolute counts to decide what shade to use for 
+  grid-density plot, now uses quantiles, as when there are a few large numbers this was
+  resulting in a monotone of grey with a single black square in the middle.
 
 
 iNZightRegression v1.1.1
