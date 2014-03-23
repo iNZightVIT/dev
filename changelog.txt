@@ -13,6 +13,9 @@ iNZightTS v1.1.1
 - [bugfix] change the gpar of fill to NA of every rectangle object due to the reason 
   of new version of grob default fill is write. It will cover all the thing you execute 
   rectangle object before.
+- [new] add comparisonplot and get.x2 right now. get.x2 is a tools like get.x but return the
+  proportion value between (0,1] and it is calculating by using order to control the xaxis.
+  
 
 iNZightPlots v1.0.1
 - [new] add ability to specify type of plot using `largesample = {TRUE,FALSE,NULL}`
