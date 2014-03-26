@@ -1,50 +1,51 @@
 ------------------------------------------------------------------------------------------------
-NEXT RELEASE:
+RELEASE VERSION 2.0.1: 28/03/2014
 
 iNZight v2.0.1
-- [new] add ability to specify type of plot; (default, dotplot, histogram) and
++ [new] add ability to specify type of plot; (default, dotplot, histogram) and
   (default, scatterplot, grid-density)
-- [new] add ability to convert missing observations to categorical levels
-- [new] add vertical sliders to the "Rename variables" and "Rename factor levels" windows
-- [new] identify feature added to "Add to plot", which enables users to interactively 
++ [new] add ability to convert missing observations to categorical levels
++ [new] add vertical sliders to the "Rename variables" and "Rename factor levels" windows
++ [new] identify feature added to "Add to plot", which enables users to interactively 
   label points by id, or any other selected variable.
-- [bugfix] reorder levels and sort them by frequency now works correctly
-- [bugfix] iNZight now correctly doesn't close if confirmation is denied
++ [bugfix] reorder levels and sort them by frequency now works correctly
++ [bugfix] iNZight now correctly doesn't close if confirmation is denied
 
 iNZightTS v1.1.1
-- [bugfix] change the gpar of fill to NA of every rectangle object due to the reason 
++ [bugfix] change the gpar of fill to NA of every rectangle object due to the reason 
   of new version of grob default fill is write. It will cover all the thing you execute 
   rectangle object before.
-- [new] add comparisonplot and get.x2 right now. get.x2 is a tools like get.x but return the
++ [new] add comparisonplot and get.x2 right now. get.x2 is a tools like get.x but return the
   proportion value between (0,1] and it is calculating by using order to control the xaxis.
++ [bugfix] quick-fix for an issue with loading the grid package
   
 
 iNZightPlots v1.0.1
-- [new] add ability to specify type of plot using `largesample = {TRUE,FALSE,NULL}`
++ [new] add ability to specify type of plot using `largesample = {TRUE,FALSE,NULL}`
   where `TRUE` uses grid plot, `FALSE` uses scatter plot, and `NULL` decides
   based on the sample size (default)
-- [change] the final viewport is the main data window, rather than the plot labels. 
++ [change] the final viewport is the main data window, rather than the plot labels. 
   This allows locator functionality, as well as custom additions to the plot.
-- [change] display which variables cannot be plot due to too many levels, as well as the
++ [change] display which variables cannot be plot due to too many levels, as well as the
   number of levels. Also increased max levels to 101.
-- [new] add trend line and smoothers to legend.
-- [bugfix] fix a bug where grid-density plot wasn't scaling properly with the axes.
-- [change] instead of using the absolute counts to decide what shade to use for 
++ [new] add trend line and smoothers to legend.
++ [bugfix] fix a bug where grid-density plot wasn't scaling properly with the axes.
++ [change] instead of using the absolute counts to decide what shade to use for 
   grid-density plot, now uses quantiles, as when there are a few large numbers this was
   resulting in a monotone of grey with a single black square in the middle.
 
 
 iNZightRegression v1.1.1
-- [change] add maximum sample size (4000) for drawing bootstraps, as over this computation
++ [change] add maximum sample size (4000) for drawing bootstraps, as over this computation
   time becomes too much and not much is gained from the bootstraps.
-- [new] all plots implemented using the iNZightPlots functions, which builds on the
++ [new] all plots implemented using the iNZightPlots functions, which builds on the
   grid package. This provides speedier graphics, and simpler investigation with large
   sample sizes.
-- [change] smoothers on residual plots now use 50% quantile smoothers, rather than 
++ [change] smoothers on residual plots now use 50% quantile smoothers, rather than 
   loess smoothers (on the `grid` based version only), which greatly increases efficiency.
-- [change] p-values for normality (shapiro-wilk test) show P < 0.001 when it rounds down 
++ [change] p-values for normality (shapiro-wilk test) show P < 0.001 when it rounds down 
   to 0.
-- [bugfix] fixed issue with shapiro wilk test when sample size > 5000
++ [bugfix] fixed issue with shapiro wilk test when sample size > 5000
 
 ------------------------------------------------------------------------------------------------
 INITIAL RELEASE VERSION: 28/2/2014  
