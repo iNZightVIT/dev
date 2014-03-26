@@ -6,6 +6,8 @@ iNZight v2.0.1
   (default, scatterplot, grid-density)
 - [new] add ability to convert missing observations to categorical levels
 - [new] add vertical sliders to the "Rename variables" and "Rename factor levels" windows
+- [new] identify feature added to "Add to plot", which enables users to interactively 
+  label points by id, or any other selected variable.
 - [bugfix] reorder levels and sort them by frequency now works correctly
 - [bugfix] iNZight now correctly doesn't close if confirmation is denied
 
@@ -35,6 +37,14 @@ iNZightPlots v1.0.1
 iNZightRegression v1.1.1
 - [change] add maximum sample size (4000) for drawing bootstraps, as over this computation
   time becomes too much and not much is gained from the bootstraps.
+- [new] all plots implemented using the iNZightPlots functions, which builds on the
+  grid package. This provides speedier graphics, and simpler investigation with large
+  sample sizes.
+- [change] smoothers on residual plots now use 50% quantile smoothers, rather than 
+  loess smoothers (on the `grid` based version only), which greatly increases efficiency.
+- [change] p-values for normality (shapiro-wilk test) show P < 0.001 when it rounds down 
+  to 0.
+- [bugfix] fixed issue with shapiro wilk test when sample size > 5000
 
 ------------------------------------------------------------------------------------------------
 INITIAL RELEASE VERSION: 28/2/2014  
