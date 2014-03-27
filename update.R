@@ -8,12 +8,12 @@ updateDistribution <- function() {
     }
 
   # Download the versions.csv file from the server:
-    #versionsURL <- "https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/versions.txt"
-    #vertmp <- tempfile()
-    #con <- file(vertmp, open = "w")
-    #writeLines(getURL(versionsURL, ssl.verifypeer = FALSE), con)
-    #close(con)
-    vertmp <- file.choose()
+    versionsURL <- "https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/versions.txt"
+    vertmp <- tempfile()
+    con <- file(vertmp, open = "w")
+    writeLines(getURL(versionsURL, ssl.verifypeer = FALSE), con)
+    close(con)
+    #vertmp <- file.choose()  # this is for debugging
     v <- read.csv(vertmp, header = TRUE, stringsAsFactors = FALSE)
 
   # Set some other variables:
