@@ -13,7 +13,7 @@ updateDistribution <- function() {
     #con <- file(vertmp, open = "w")
     #writeLines(getURL(versionsURL, ssl.verifypeer = FALSE), con)
     #close(con)
-    vertmp <- "~/iNZight/dev/versions.txt"
+    vertmp <- file.choose()
     v <- read.csv(vertmp, header = TRUE, stringsAsFactors = FALSE)
 
   # Set some other variables:
@@ -22,7 +22,7 @@ updateDistribution <- function() {
     FILE_TYPE <- "win.binary"
 
   # -------------------------------------------------------------------------------- #
-  #                                                                   UPDATE UPDATER
+  # UPDATE UPDATER
   # Now check if the updater is old --- if it is, try to update it:
     newest.updater <- numeric_version(v[1, "Version"])
     if (UPDATER_VERSION < newest.updater) {
@@ -54,7 +54,7 @@ updateDistribution <- function() {
     v <- v[-1, ]
 
   # -------------------------------------------------------------------------------- #
-  #                                                                  CHECK R VERSION
+  # CHECK R VERSION
     R.rowv <- v$Version[v$Name == "R"]
     if (getRversion() < R.rowv & !useOldR) {
       # Need to download the latest version of iNZightVIT with a new version of R
@@ -82,10 +82,10 @@ updateDistribution <- function() {
 
 
   # -------------------------------------------------------------------------------- #
-  #                                                                  UPDATE PACKAGES
+  # UPDATE PACKAGES
   # Now update the necessary packages
   # NOTE: Used to use update.packages() to attempt updating everything, but this
-  #       was vulnerable to non-compatible releases (e.g., RGtk2 issue with Windows).
+  # was vulnerable to non-compatible releases (e.g., RGtk2 issue with Windows).
 
     for (i in 1:nrow(v)) {
         r <- v[i, ]
@@ -231,7 +231,7 @@ updateDistribution <- function() {
     wd <- options()$width
     hrl <- rep("=", wd)
     cat("\n", hrl, "\n\n", sep = "")
-    cat("        Updating complete.\n")
+    cat(" Updating complete.\n")
     cat("\n", hrl, "\n\n", sep = "")
 
     Sys.sleep(3)

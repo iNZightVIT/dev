@@ -1,5 +1,5 @@
-Name,Versions,Platform,Repository
-updateiNZightVIT,0.4,,
+Name,Version,Platform,Repository
+updateiNZightVIT,1.0,,
 R,3.0.1,,
 barcode,1.1,,
 base,3.0.1,,
@@ -54,7 +54,7 @@ quantreg,5.05,,
 Rcpp,0.11.1,,
 RCurl,1.95-4.1,,
 rgl,0.93.996,,
-RGtk2,2.20.27,,
+RGtk2,2.20.25,,
 RODBC,1.3-10,,
 rpart,4.1-7,,
 s20x,3.1-10,,
