@@ -8,15 +8,13 @@ updateDistribution <- function() {
     }
 
   # Download the versions.csv file from the server:
-    versionsURL <- "https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/versions.txt"
-    vertmp <- tempfile()
-    con <- file(vertmp, open = "w")
-    writeLines(getURL(versionsURL, ssl.verifypeer = FALSE), con)
-    close(con)
+    #versionsURL <- "https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/versions.txt"
+    #vertmp <- tempfile()
+    #con <- file(vertmp, open = "w")
+    #writeLines(getURL(versionsURL, ssl.verifypeer = FALSE), con)
+    #close(con)
+    vertmp <- "~/iNZight/dev/versions.txt"
     v <- read.csv(vertmp, header = TRUE, stringsAsFactors = FALSE)
-
-    print(v)
-    return()
 
   # Set some other variables:
     HOMEPAGE <- "https://www.stat.auckland.ac.nz/~wild/iNZight/"
@@ -91,5 +89,163 @@ updateDistribution <- function() {
 
     for (i in 1:nrow(v)) {
         r <- v[i, ]
+
+      # Check to see if the package is specific to another platform:
+        if (OSstring != r$Platform & r$Platform != "")
+            next
+
+      # Now see if package needs updating:
+        getNewPackage <-
+            if (r$Name %in% rownames(installed.packages()))
+                package_version(r$Version) > packageVersion(r$Name)
+            else
+                TRUE
+
+      # If we do need to get an updated package, download it:
+        if (getNewPackage) {
+            ## ---------------------------------------------------------- CRAN
+            if (r$Repository == "cran" | r$Repository == "") {
+              # Download the updated package from CRAN
+                success <- try(install.packages(r$Name, dependencies = TRUE), TRUE)
+                if (inherits(success, "try-error")) {
+                    if (isOSX) {
+                        cat("An error has occurred, perhaps a new version of iNZightVIT",
+                            "is required. Visiting the website now.\n")
+                        browseURL(HOMEPAGE)
+                        return()
+                    }
+                    library(tcltk)
+                    retval <-
+                        tk_messageBox(type = "ok",
+                                      message =
+                   paste0("An error has occurred updating iNZightVIT.\n\n",
+                          "Click OK to visit the iNZightVIT website and download a new copy."),
+                                      caption = "Update iNZightVIT",
+                                      default = "ok",
+                                      icon = "error")
+                    if (retval == "ok")
+                        browseURL(HOMEPAGE)
+                    return()
+                } else {
+                    cat(paste("Installed package:", r$Name), "\n")
+                }
+                
+                ## ---------------------------------------------------------- R-FORGE
+            } else if (r$Repository == "rforge") {
+              # This is essentially only Acinonyx
+                success <- try(install.packages(r$Name, repos = "http://rforge.net"))
+                if (inherits(success, "try-error")) {
+                    if (isOSX) {
+                        cat("An error has occurred, perhaps a new version of iNZightVIT",
+                            "is required. Visiting the website now.\n")
+                        browseURL(HOMEPAGE)
+                        return()
+                    }
+                    library(tcltk)
+                    retval <-
+                        tk_messageBox(type = "ok",
+                                      message =
+                   paste0("An error has occurred updating iNZightVIT.\n\n",
+                          "Click OK to visit the iNZightVIT website and download a new copy."),
+                                      caption = "Update iNZightVIT",
+                                      default = "ok",
+                                      icon = "error")
+                    if (retval == "ok")
+                        browseURL(HOMEPAGE)
+                    return()
+                } else {
+                    cat(paste("Installed package:", r$Name), "\n")
+                }
+
+                ## ---------------------------------------------------------- iNZight
+            } else if (r$Repository == "inzight") {
+                urlprefix <-
+                    sprintf("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/%s.%s/",
+                            getRversion()$major, getRversion()$minor)
+                fn <- paste(r$Name, FILE_EXT, sep = "")
+
+              # If OSX, we need to be able to install from zip.
+              # Just means we don't verify on install, just unzip to
+              # the right directory.
+              # **Must have $R_LIBRARIES set in the .command file**
+                if (isOSX) {
+                    success <- try(installMac(urlprefix, fn))
+                    if (inherits(success, "try-error")) {
+                        cat("An error has occurred, perhaps a new version of iNZightVIT",
+                            "is required, visiting the website now.\n")
+                        browseURL(HOMEPAGE)
+                        return()
+                    } else {
+                        cat(paste("Installed package:", r$Name), "\n")
+                    }
+                } else {
+                  # Must be windows:
+                    tmploc <- file.path(tempdir(), fn)
+                    download.file(paste(urlprefix, fn, sep = ""),
+                                  destfile = tmploc, method = downloadMethod)
+                    success <- try(install.packages(tmploc, repos = NULL,
+                                                    type = FILE_TYPE), TRUE)
+                    if (inherits(success, "try-error")) {
+                        library(tcltk)
+                        retval <- tk_messageBox(type = "ok",
+                                                message =
+                        paste0("An error has occurred updating iNZightVIT.\n\n",
+                               "Click OK to visit the iNZightVIT website and download",
+                               "a new copy."),
+                                                caption = "Update iNZightVIT",
+                                                default = "ok",
+                                                icon = "error")
+                    if (retval == "ok")
+                        browseURL(HOMEPAGE)
+                    file.remove(tmploc)
+                    return()
+                    } else {
+                        cat(paste("Installed package:", r$Name), "\n")
+                    }
+                }
+
+                file.remove(tmploc)
+            } else {
+                if (isOSX) {
+                    cat("An error has occurred, perhaps a new version of iNZightVIT",
+                        "is required. Visiting the website now.\n")
+                    browseURL(HOMEPAGE)
+                    return()
+                }
+                library(tcltk)
+                retval <-
+                    tk_messageBox(type = "ok",
+                                  message =
+                   paste0("An error has occurred updating iNZightVIT.\n\n",
+                          "Click OK to visit the iNZightVIT website and download a new copy."),
+                                  caption = "Update iNZightVIT",
+                                  default = "ok",
+                                  icon = "error")
+                if (retval == "ok")
+                    browseURL(HOMEPAGE)
+                return()
+            }
+        }
     }
+
+    wd <- options()$width
+    hrl <- rep("=", wd)
+    cat("\n", hrl, "\n\n", sep = "")
+    cat("        Updating complete.\n")
+    cat("\n", hrl, "\n\n", sep = "")
+
+    Sys.sleep(3)
+}
+
+installMac <- function(urlprefix, fn) {
+    fileurl <- paste(urlprefix, fn, sep = "")
+    filepath <- file.path(getwd(), fn)
+  # Download
+    download.file(fileurl, filepath, method = downloadMethod)
+  # "Install" -- just unzipping a precompiled binary
+    system(sprintf("unzip -oq %s -d %s", filepath, Sys.getenv("R_LIBRARIES")))
+  # Remove
+    file.remove(filepath)
+    
+    return(invisible(NULL))
 }
