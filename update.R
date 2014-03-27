@@ -15,6 +15,9 @@ updateDistribution <- function() {
     close(con)
     v <- read.csv(vertmp, header = TRUE, stringsAsFactors = FALSE)
 
+    print(v)
+    return()
+
   # Set some other variables:
     HOMEPAGE <- "https://www.stat.auckland.ac.nz/~wild/iNZight/"
     FILE_EXT <- ".zip"
@@ -32,7 +35,7 @@ updateDistribution <- function() {
         download.file(web.updater.url, updater.location, method = downloadMethod)
 
         if (isOSX) {
-            cat("A new version of the iNZightVIT updater has been downloaded.\n\n"
+            cat("A new version of the iNZightVIT updater has been downloaded.\n\n",
                 "Close R and run the updater script again to use it.\n")
             return()
         }
