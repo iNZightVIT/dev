@@ -29,7 +29,7 @@ updateDistribution <- function() {
       # Using an old updater --- need to attempt to re-download it:
         web.updater.url <-
             paste("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/",
-                  v[1, "Name"], "update.ext", ".R", sep = "")
+                  "updateiNZightVIT", update.ext, ".R", sep = "")
         download.file(web.updater.url, updater.location, method = downloadMethod)
 
         if (isOSX) {
