@@ -16,7 +16,7 @@ useOldR <- FALSE  # this can be set to TRUE for versions that need to
                   # stick with an old version of R
 
 UPDATER_VERSION <- numeric_version(1.0)
-updater.location <- file.path(getwd(), "Library", "updateiNZightVIT.R")
+updater.location <- file.path(getwd(), "updateiNZightVIT.R")
 update.ext <- "-MAC"  # this will be "-WIN", "-MAC", "-MAC-snowleopard" etc...
 
 source_https <- function(url, ...) {
