@@ -61,3 +61,5 @@ updateDistribution <- function() {
     if (retval == "ok")
         return()
 }
+
+updateDistribution()
