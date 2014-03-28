@@ -1,41 +1,31 @@
-dev
-===
+##dev
 
 This repository is where we can store all of our development scripts, files, bug lists, etc. 
 
-To Make:
---------
+----------------------------
+#TO START DEVELOPING iNZightVIT (assumes Linux):
 
+1. Create a new directory: `~/iNZight`
+   (This must be in your home directory)
+```
+mkdir ~/iNZight
+cd ~/iNZight
+```
+
+2. Inside `iNZight`, clone the `dev` repository (assumes git is set up):
 ```
 git clone git@github.com:iNZightVIT/dev
 cd dev
-make
 ```
 
-This assumes you have imported ALL of the required repositories. If you don't, then
+3. From inside the `dev` directory, build the full iNZight development directories:
 ```
-git clone git@github.com:iNZightVIT/name-of-package
-```
-to get the package.
-
-The suggest structure is to have a single `iNZight` folder, in which you have all of the packages. That is, you should have the following directories in `iNZight`:
-```
-iNZight, iNZightPlots, iNZightRegression, iNZightModules, iNZightTS, iNZightMR, VIT
+make build
+cd ..
 ```
 
-If you need to make a complete build, you will also need the `gWidgets2` packages from github:
-```
-git clone git@github.com:jverzani/gWidgets2
-git clone git@github.com:jverzani/gWidgets2RGtk2
-cd dev
-make gWidgets2
-```
-
-If you have all of these packages, you can build on your system for testing using:
-```
-cd dev
-make here
-```
+4. Now, inside `~/iNZight/`, you will have all of the required directories for 
+   developing iNZight.
 
 ----------------------------
 

@@ -16,7 +16,9 @@ build:
 	cd ../; git clone git@github.com:iNZightVIT/iNZightVIT-WIN
 	cd ../; git clone git@github.com:jverzani/gWidgets2
 	cd ../; git clone git@github.com:jverzani/gWidgets2RGtk2
-	cd ../; mkdir tmp
+	cd ../; mkdir tmp iNZightBuilds
+	cd ../iNZightBuilds; mkdir iNZight
+	cd ../iNZightBuilds/iNZight; mkdir 3.0 2.15
 
 # Now you can install them into a temporary directory: make all
 all:	
