@@ -1,5 +1,5 @@
 Name,Version,Platform,Repository
-updateiNZightVIT,1.0,,
+updateiNZightVIT.R,1.0,,
 R,3.0.1,,
 barcode,1.1,,
 base,3.0.1,,
