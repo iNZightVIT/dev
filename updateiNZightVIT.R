@@ -40,7 +40,7 @@ updateDistribution <- function() {
     
     web.updater.url <-
         paste("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/",
-              v[1, "Name"], "update.ext", ".R", sep = "")
+              "updateiNZightVIT", update.ext, ".R", sep = "")
     
     download.file(web.updater.url, updaterLoc, method = downloadMethod)
     
