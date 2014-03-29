@@ -7,6 +7,19 @@ updateDistribution <- function() {
         on.exit(options(repos = currCRAN))
     }
 
+    wd <- options()$width
+    hrl <- paste(rep("=", wd), collapse = "")
+
+  # Mac version is a bit uncooperative:
+    if (isOSX) {
+        cat("==========================================================\n\n")
+        cat("   iNZight will now attempt to update itself.\n\n",
+            "  If you do not see an \"Updating complete\" message,\n",
+            "  please retry the update. It may take several attempts\n",
+            "  on Mac computers, so please be patient.\n\n")
+        cat("==========================================================\n\n")
+    }
+
   # Download the versions.csv file from the server:
     versionsURL <- "https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/versions.txt"
     vertmp <- tempfile()
@@ -129,7 +142,7 @@ updateDistribution <- function() {
                 } else {
                     cat(paste("Installed package:", r$Name), "\n")
                 }
-                
+
                 ## ---------------------------------------------------------- R-FORGE
             } else if (r$Repository == "rforge") {
               # This is essentially only Acinonyx
@@ -226,11 +239,10 @@ updateDistribution <- function() {
         }
     }
 
-    wd <- options()$width
-    hrl <- rep("=", wd)
-    cat("\n", hrl, "\n\n", sep = "")
-    cat(" Updating complete.\n")
-    cat("\n", hrl, "\n\n", sep = "")
+
+    cat("==========================================================\n\n")
+    cat("                    Updating complete.\n\n")
+    cat("==========================================================\n\n")
 
     Sys.sleep(3)
 }
@@ -244,6 +256,6 @@ installMac <- function(urlprefix, fn) {
     system(sprintf("unzip -oq %s -d %s", filepath, Sys.getenv("R_LIBRARIES")))
   # Remove
     file.remove(filepath)
-    
+
     return(invisible(NULL))
 }
