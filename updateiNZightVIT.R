@@ -30,23 +30,23 @@ updateDistribution <- function() {
         downloadMethod <- "wget"
         stop("Updater not supported on this platform")
     }
-    
+
   # This is now to be used to update OLD updaters:
     updaterLoc <-
         if (isWindows)
             file.path(getwd(), "prog_files", "updateiNZightVIT.R")
         else
             Sys.getenv("R_PROFILE")
-    
+
     web.updater.url <-
         paste("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/",
               "updateiNZightVIT", update.ext, ".R", sep = "")
-    
+
     download.file(web.updater.url, updaterLoc, method = downloadMethod)
-    
+
     if (isOSX) {
         cat("The latest version of the iNZightVIT updater has been downloaded.\n\n",
-        	"You will need to run the updater one more time to complete the necessary updates."
+            "You will need to run the updater one more time to complete the necessary updates.",
             "Close R and run the updater script again to use it.\n")
         return()
     }
@@ -55,7 +55,7 @@ updateDistribution <- function() {
         tk_messageBox(type = "ok",
                       message =
                  paste0("A new version of the iNZightVIT updater has been downloaded.\n\n",
-                 		"You will need to run the updater one more time to complete the necessary updates."
+                        "You will need to run the updater one more time to complete the necessary updates.",
                         "Click OK to close R.\n\nRun the updater script once it has closed."),
                       caption = "Updated iNZightVIT Updater",
                       default = "ok",
