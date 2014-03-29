@@ -45,7 +45,8 @@ updateDistribution <- function() {
     download.file(web.updater.url, updaterLoc, method = downloadMethod)
     
     if (isOSX) {
-        cat("A new version of the iNZightVIT updater has been downloaded.\n\n",
+        cat("The latest version of the iNZightVIT updater has been downloaded.\n\n",
+        	"You will need to run the updater one more time to complete the necessary updates."
             "Close R and run the updater script again to use it.\n")
         return()
     }
@@ -53,7 +54,8 @@ updateDistribution <- function() {
     retval <-
         tk_messageBox(type = "ok",
                       message =
-                 paste0("A new version of the iNZightVIT updater has been downloaded\n\n",
+                 paste0("A new version of the iNZightVIT updater has been downloaded.\n\n",
+                 		"You will need to run the updater one more time to complete the necessary updates."
                         "Click OK to close R.\n\nRun the updater script once it has closed."),
                       caption = "Updated iNZightVIT Updater",
                       default = "ok",

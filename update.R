@@ -203,8 +203,6 @@ updateDistribution <- function() {
                         cat(paste("Installed package:", r$Name), "\n")
                     }
                 }
-
-                file.remove(tmploc)
             } else {
                 if (isOSX) {
                     cat("An error has occurred, perhaps a new version of iNZightVIT",
