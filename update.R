@@ -21,7 +21,11 @@ updateDistribution <- function() {
     }
 
   # Download the versions.csv file from the server:
-    versionsURL <- "https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/versions.txt"
+  # Will use a different versions file for both Mac and Windows so we can explicitely
+  # track the version of all packages!
+    versionsURL <-
+        paste0("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/versions",
+               update.ext, ".txt")
     vertmp <- tempfile()
     con <- file(vertmp, open = "w")
     writeLines(getURL(versionsURL, ssl.verifypeer = FALSE), con)
