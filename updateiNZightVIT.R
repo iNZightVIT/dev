@@ -31,6 +31,39 @@ updateDistribution <- function() {
         stop("Updater not supported on this platform")
     }
 
+    uoaCRAN <- structure("http://cran.stat.auckland.ac.nz", names = "CRAN")
+    currCRAN <- getOption("repos")
+    if (currCRAN["CRAN"] != uoaCRAN) {
+        options(repos = uoaCRAN)
+        on.exit(options(repos = currCRAN))
+    }
+    HOMEPAGE <- "https://www.stat.auckland.ac.nz/~wild/iNZight/"
+  # Need the RCurl package installed:
+    success <- try(install.packages("RCurl", dependencies = TRUE), TRUE)
+    if (inherits(success, "try-error")) {
+        if (isOSX) {
+            cat("An error has occurred, perhaps a new version of iNZightVIT",
+                "is required. Visiting the website now.\n")
+            browseURL(HOMEPAGE)
+            return()
+        }
+        library(tcltk)
+        retval <-
+            tk_messageBox(type = "ok",
+                          message =
+                   paste0("An error has occurred updating iNZightVIT.\n\n",
+                          "Click OK to visit the iNZightVIT website and download a new copy."),
+                          caption = "Update iNZightVIT",
+                          default = "ok",
+                          icon = "error")
+        if (retval == "ok")
+            browseURL(HOMEPAGE)
+        return()
+    } else {
+        cat(paste("Installed package: RCurl"), "\n")
+    }
+
+
   # This is now to be used to update OLD updaters:
     updaterLoc <-
         if (isWindows)

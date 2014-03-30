@@ -116,6 +116,11 @@ updateDistribution <- function() {
 
       # If we do need to get an updated package, download it:
         if (getNewPackage) {
+          # Only the snow-leopard build can use Acinonyx from rforge.
+          # Mavericks must download from iNZight server:
+            if (r$Name == "Acinonyx" & !useOldR)
+                r$Repository <- "inzight"
+
             ## ---------------------------------------------------------- CRAN
             if (r$Repository == "cran" | r$Repository == "") {
               # Download the updated package from CRAN
