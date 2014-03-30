@@ -35,7 +35,7 @@ updateDistribution <- function() {
     
   # Fix an issue when none of the platforms are specified (will be redundant soon anyway)
     v$Platform <- as.character(v$Platform) 
- 	  v$Platform[is.na(v$Platform)] <- "" 
+    v$Platform[is.na(v$Platform)] <- "" 
 
   # Set some other variables:
     HOMEPAGE <- "https://www.stat.auckland.ac.nz/~wild/iNZight/"
@@ -112,8 +112,8 @@ updateDistribution <- function() {
         r <- v[i, ]
         
       # Fix a bug when package versions are simply "1" or "2" ...
-      if (nchar(r$Version) == 1)
-        r$Version <- paste0(r$Version, ".0")
+        if (nchar(r$Version) == 1)
+            r$Version <- paste0(r$Version, ".0")
 
       # Check to see if the package is specific to another platform:
         if (OSstring != r$Platform & r$Platform != "")
