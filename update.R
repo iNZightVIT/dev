@@ -32,6 +32,10 @@ updateDistribution <- function() {
     close(con)
     #vertmp <- file.choose()  # this is for debugging
     v <- read.csv(vertmp, header = TRUE, stringsAsFactors = FALSE)
+    
+  # Fix an issue when none of the platforms are specified (will be redundant soon anyway)
+    v$Platform <- as.character(v$Platform) 
+ 	  v$Platform[is.na(v$Platform)] <- "" 
 
   # Set some other variables:
     HOMEPAGE <- "https://www.stat.auckland.ac.nz/~wild/iNZight/"
