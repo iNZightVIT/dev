@@ -38,7 +38,8 @@ updateDistribution <- function() {
         on.exit(options(repos = currCRAN))
     }
     HOMEPAGE <- "https://www.stat.auckland.ac.nz/~wild/iNZight/"
-  # Need the RCurl package installed:
+    
+  # Need the RCurl package installed (not included by default):
     success <- try(install.packages("RCurl", dependencies = TRUE), TRUE)
     if (inherits(success, "try-error")) {
         if (isOSX) {
