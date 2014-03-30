@@ -16,7 +16,7 @@ useOldR <- TRUE
 
 UPDATER_VERSION <- numeric_version(1.0)
 updater.location <- file.path(getwd(), "updateiNZightVIT.R")
-update.ext <- "-MAC"  # this will be "-WIN", "-MAC", "-MAC-snowleopard" etc...
+update.ext <- "-MAC-sl"  # this will be "-WIN", "-MAC", "-MAC-snowleopard" etc...
 
 source_https <- function(url, ...) {
   # load package
