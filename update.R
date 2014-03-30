@@ -110,6 +110,10 @@ updateDistribution <- function() {
 
     for (i in 1:nrow(v)) {
         r <- v[i, ]
+        
+      # Fix a bug when package versions are simply "1" or "2" ...
+      if (nchar(r$Version) == 1)
+        r$Version <- paste0(r$Version, ".0")
 
       # Check to see if the package is specific to another platform:
         if (OSstring != r$Platform & r$Platform != "")
