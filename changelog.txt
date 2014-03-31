@@ -1,6 +1,9 @@
 ------------------------------------------------------------------------------------------------
 NEXT RELEASE:
 
+iNZightPlots v1.0.2
+- [bugfix] print the correct x-variable name when showing summary information
+  for a quadratic trend.
 
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.1: 28/03/2014
