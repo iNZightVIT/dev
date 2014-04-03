@@ -1,16 +1,21 @@
 ------------------------------------------------------------------------------------------------
-NEXT RELEASE:
+UPDATE RELEASE: 04/04/2014
 
 iNZightPlots v1.0.2
 - [bugfix] print the correct x-variable name when showing summary information
   for a quadratic trend.
 
 iNZightRegression v1.1.2
-- [new] implemented partial residual plots to use iNZightPlots
+- [change] implemented partial residual plots to use iNZightPlots
   graphics when they are available.
 
 iNZightModules v1.0.1
-- [bugfix] spelling mistake so Poisson models wouldn't work
+//- [bugfix] spelling mistake so Poisson models wouldn't work
+- [change] lots of changes to the Time Series module, allowing multiplicative
+  trends to fit, as well as y-axis labels.
+
+iNZightTS v1.1.2
+- 
 
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.1: 28/03/2014
