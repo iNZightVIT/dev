@@ -15,7 +15,7 @@ iNZightModules v1.0.1
   trends to fit, as well as y-axis labels.
 
 iNZightTS v1.1.2
-- 
+- [bugfix] tiny change, and also every plot supporting ylab argument now. 
 
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.1: 28/03/2014
