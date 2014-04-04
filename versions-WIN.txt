@@ -29,12 +29,12 @@ gWidgets2RGtk2,1.0-4,,inzight
 gWidgetsRGtk2,0.0-82,,
 httr,0.3,,
 iNZight,2.0.1,,inzight
-iNZightModules,1.0.1,,inzight
+iNZightModules,1.0.2,,inzight
 iNZightMR,1.1,,inzight
-iNZightPlots,1.0.1,,inzight
-iNZightRegression,1.1.1,,inzight
+iNZightPlots,1.0.2,,inzight
+iNZightRegression,1.1.2,,inzight
 iNZightTools,1.0.0,,inzight
-iNZightTS,1.1.1,,inzight
+iNZightTS,1.1.2,,inzight
 KernSmooth,2.23-11,,
 lattice,0.20-27,,
 maps,2.3-6,,
