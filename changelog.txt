@@ -1,6 +1,9 @@
 ------------------------------------------------------------------------------------------------
 NEXT RELEASE:
 
+iNZightPlots v1.0.3
+- [bugfix] specifying `g2.level` with numbers wasn't working, has been fixed for plots,
+  summary and inference information.
 
 ------------------------------------------------------------------------------------------------
 UPDATE RELEASE: 04/04/2014
