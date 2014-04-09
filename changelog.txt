@@ -5,6 +5,11 @@ iNZightPlots v1.0.3
 - [bugfix] specifying `g2.level` with numbers wasn't working, has been fixed for plots,
   summary and inference information.
 
+iNZightModules v1.0.3
+- [new] the pairs plot, or scatter plot matrix, now takes a grouping variable.
+- [change] the pairs/scatter plot matrix draws a jittered dotplot rather than a 
+  barcode plot.
+
 ------------------------------------------------------------------------------------------------
 UPDATE RELEASE: 04/04/2014
 
