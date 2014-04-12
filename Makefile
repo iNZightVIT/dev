@@ -22,20 +22,20 @@ build:
 
 # Now you can install them into a temporary directory: make all
 all:	
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
+	cd ../; R CMD INSTALL -l tmp iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
 
 # You will need to install these once, and any time John updates the development version (unless it gets
 # uploaded to cran, then just forget this bit)
 gWidgets2:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp gWidgets2 gWidgets2RGtk2
+	cd ../; R CMD INSTALL -l tmp gWidgets2 gWidgets2RGtk2
 
 # If you want to install to your local R library, then make here:
 here:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
+	cd ../; R CMD INSTALL iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
 
 # And the gWidgets2 libraries:
 ghere:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL gWidgets2 gWidgets2RGtk2
+	cd ../; R CMD INSTALL gWidgets2 gWidgets2RGtk2
 
 # Now depending on your system, you will need to use either of the following 
 replace:
