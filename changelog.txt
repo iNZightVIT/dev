@@ -1,14 +1,23 @@
 ------------------------------------------------------------------------------------------------
 NEXT RELEASE:
 
+iNZight v2.0.3
+- [new] can now cycle through all two-variable plots for a selected Variable 1
+- [fix] identify functionality works for subsets (except when multi plots at once)
+- [change] can now specify to identify min/max points in a dot plot
+- [change] in the Add to Plot window for barcharts, reworded "segment by" to "colour by" 
+  for consistency.
+
 iNZightPlots v1.0.3
 - [bugfix] specifying `g2.level` with numbers wasn't working, has been fixed for plots,
   summary and inference information.
+- [fix] added more space to the y-axis on scatter plots
 
 iNZightModules v1.0.3
 - [new] the pairs plot, or scatter plot matrix, now takes a grouping variable.
 - [change] the pairs/scatter plot matrix draws a jittered dotplot rather than a 
   barcode plot.
+- [new] 2-variable explore plots in the Quick Explore menu
 
 ------------------------------------------------------------------------------------------------
 UPDATE RELEASE: 04/04/2014

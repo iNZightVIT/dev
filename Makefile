@@ -80,6 +80,37 @@ pullall:
 	cd ../iNZightMR; git pull origin master
 	cd ../VIT; git pull origin master
 
+fetchall:
+	cd ../iNZight; git fetch -p
+	cd ../iNZightModules; git fetch -p
+	cd ../iNZightPlots; git fetch -p
+	cd ../iNZightRegression; git fetch -p
+	cd ../iNZightTools; git fetch -p
+	cd ../iNZightTS; git fetch -p
+	cd ../iNZightMR; git fetch -p
+	cd ../VIT; git fetch -p
+
+masterall:
+	cd ../iNZight; git checkout master
+	cd ../iNZightModules; git checkout master
+	cd ../iNZightPlots; git checkout master
+	cd ../iNZightRegression; git checkout master
+	cd ../iNZightTools; git checkout master
+	cd ../iNZightTS; git checkout master
+	cd ../iNZightMR; git checkout master
+	cd ../VIT; git checkout master
+
+branchall:
+	cd ../iNZight; git branch -a
+	cd ../iNZightModules; git branch -a
+	cd ../iNZightPlots; git branch -a
+	cd ../iNZightRegression; git branch -a
+	cd ../iNZightTools; git branch -a
+	cd ../iNZightTS; git branch -a
+	cd ../iNZightMR; git branch -a
+	cd ../VIT; git branch -a
+
+
 # and when you're done, push all of your work to github so it's kept up to date.
 pushall:
 	cd ../iNZight; git push origin master

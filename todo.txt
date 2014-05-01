@@ -1,0 +1,20 @@
+To-do list for iNZight:
+=======================
+
+Frequency and Survey information:
+
+- barplots
+  - basics working - need to check over inference information / lines etc.
+- summary/inference needs implementation (low priority)
+- scatter plots working 
+  - need to implement for summary/inference (weights = n)
+
+- data import
+  - do this later!
+  - specify frequency column?
+- alternatively, in Manipulate Data, add "provide structure" option
+
+-------------------------------------------------------
+
+Identify feature
+- instable for dotplots; e.g., g1 = cellsource, etc
