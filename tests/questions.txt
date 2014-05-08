@@ -1,0 +1,16 @@
+QUESTIONS:
+
+- what to do for SIZEBY when missing values???
+
+    x   y sizeby
+1 152 150     12
+2 153 152     NA
+3 137 132     10
+4 115 130      9
+5 165 160     NA
+6 137  50     11
+
+
+- what to do with -Inf/Inf values? Make NA (therefore missing?)?
+
+- what to do for missing values of g2? 
