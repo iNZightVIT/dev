@@ -13,4 +13,4 @@ QUESTIONS:
 
 - what to do with -Inf/Inf values? Make NA (therefore missing?)?
 
-- what to do for missing values of g2? 
+- what to do for missing values of g2 + g2.level = ALL??
