@@ -30,14 +30,14 @@ iNZightPlot(ff)
 
 upd()
 iNZightPlot(height, armspan, g1 = cellsource, g1.level = 1:2, data = d)
-iNZightPlot(height, data = d, structure = fs)
-iNZightPlot(gender, data = d)
+#iNZightPlot(height, data = d, structure = fs)
+#iNZightPlot(gender, data = d)
 
 upd()
-ipar <- inzpar(jitter = "x")
-iNZightPlot(height, armspan, data = d, inzpar = ipar)
-iNZightPlot(height, armspan, data = d, jitter = "y")
-iNZightPlot(height, armspan, data = d)
+ipar <- inzpar(jitter = "y")
+iNZightPlot(height, age, data = d, inzpar = ipar)
+iNZightPlot(height, age, data = d, jitter = "y")
+iNZightPlot(height, age, data = d)
 
 upd()
 iNZightPlot(height, armspan, g1 = cellsource, g2 = travel, g2.level = "_MULTI", data = d)
@@ -70,7 +70,7 @@ iNZightPlot(height, armspan, data = d, cex.axis = 0.7)
 iNZightPlot(height, armspan, g1 = gender, g2 = cellsource, g2.level = "_MULTI", data = d)
 iNZightPlot(height, armspan, g1 = gender, g2 = cellsource, g2.level = "other", data = d)
 iNZightPlot(height, armspan, g1 = getlunch, g1.level = "none", data = d)
-iNZightPlot(height, g1 = getlunch, data = d)
+#iNZightPlot(height, g1 = getlunch, data = d)
 
 
 upd()
@@ -108,9 +108,16 @@ iNZightPlot(height, armspan, data = d, quant.smooth = "default")
 
 
 upd()
-iNZightPlot(height, armspan, data = d, colby = gender, g1 = getlunch, g2 = gender, g2.level = "_MULTI", col.pt = c("pink", "blue"))
+iNZightPlot(height, armspan, data = d, colby = gender, g1 = getlunch,
+            g2 = gender, g2.level = "_MULTI", col.pt = c("pink", "blue"))
 
 upd()
-iNZightPlot(height, armspan, g1 = gender, data = d, colby = cellcost)
+iNZightPlot(height, armspan, data = d, colby = rightfoot)
+iNZightPlot(height, cellcost, data = d, colby = cellcost)
+
+
+upd()
+iNZightPlot(height, armspan, data = d, sizeby = height)
+iNZightPlot(height, armspan, data = d, sizeby = cellcost, colby = rightfoot)
 
 ## --- things to do:
