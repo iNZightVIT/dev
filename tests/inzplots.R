@@ -117,7 +117,13 @@ iNZightPlot(height, cellcost, data = d, colby = cellcost)
 
 
 upd()
-iNZightPlot(height, armspan, data = d, sizeby = height)
+iNZightPlot(height, armspan, data = d)
+iNZightPlot(height, armspan, colby = gender, data = d)
+iNZightPlot(height, armspan, colby = cellsource, data = d)
+iNZightPlot(height, armspan, colby = cellcost, data = d)
+
+upd()
+iNZightPlot(height, armspan, data = d, sizeby = cellcost, colby = gender)
 iNZightPlot(height, armspan, data = d, sizeby = cellcost, colby = rightfoot)
 
 ## --- things to do:
