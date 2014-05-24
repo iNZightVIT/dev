@@ -109,7 +109,8 @@ iNZightPlot(height, armspan, data = d, quant.smooth = "default")
 
 upd()
 iNZightPlot(height, armspan, data = d, colby = gender, g1 = getlunch,
-            g2 = gender, g2.level = "_MULTI", col.pt = c("pink", "blue"))
+            g2 = gender, g2.level = "_MULTI", col.pt = c("pink", "blue"),
+            quant.smooth = "default", LOE = TRUE)
 
 upd()
 iNZightPlot(height, armspan, data = d, colby = rightfoot)
@@ -126,4 +127,20 @@ upd()
 iNZightPlot(height, armspan, data = d, sizeby = cellcost, colby = gender)
 iNZightPlot(height, armspan, data = d, sizeby = cellcost, colby = rightfoot)
 
-## --- things to do:
+
+X <- rep(seq(1:10), 2)
+Y <- runif(length(X), 0, 10)
+G <- factor(rep(c("male", "female"), each = length(X) / 2))
+
+upd()
+iNZightPlot(X, Y, join = TRUE)
+iNZightPlot(X, Y, colby = G, join = TRUE)
+
+
+d2 <- read.csv("~/iNZight/data/Gap Minder Data.csv", header = TRUE)
+d3 <- subset(d2, !is.na(d2$Population))
+
+upd(); st <- inzStructure("freq", Population, d3)
+iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d3, colby = Region, alpha = 0.4,
+            structure = st)
+
