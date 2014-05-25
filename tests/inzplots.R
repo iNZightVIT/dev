@@ -84,7 +84,6 @@ iNZightPlot(height, armspan, data = d, smooth = 0.5)
 iNZightPlot(height, armspan, data = d, smooth = 0.5, colby = gender, trend.by = TRUE)
 iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"))
 iNZightPlot(height, armspan, data = d, trend = "linear", colby = gender, trend.by = TRUE)
-            
 iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"), bs.inference = TRUE)
 
 
@@ -144,3 +143,14 @@ upd(); st <- inzStructure("freq", Population, d3)
 iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d3, colby = Region, alpha = 0.4,
             structure = st)
 
+# a pseudo-size thingy :
+wt <- rpois(nrow(d2), d2$GDP.per.Capita) + 1
+wt[is.na(wt)] <- rpois(sum(is.na(wt)), 1) + 1
+iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d2, colby = Region,
+            largesample = FALSE, sizeby = wt)
+iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d2, alpha = 0.5, cex.pt = 3,
+            structure = inzStructure("freq", wt)) -> o
+
+
+
+## need to output the correct frequencies (rather than rescaled ones...)
