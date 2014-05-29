@@ -126,6 +126,10 @@ upd()
 iNZightPlot(height, armspan, data = d, sizeby = cellcost, colby = gender)
 iNZightPlot(height, armspan, data = d, sizeby = cellcost, colby = rightfoot)
 
+upd()
+iNZightPlot(height, armspan, data = d, colby = gender, trend = "linear", trend.by = TRUE,
+            bs.inference = TRUE)
+
 
 X <- rep(seq(1:10), 2)
 Y <- runif(length(X), 0, 10)
@@ -146,11 +150,22 @@ iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d3, colby = Region, alp
 # a pseudo-size thingy :
 wt <- rpois(nrow(d2), d2$GDP.per.Capita) + 1
 wt[is.na(wt)] <- rpois(sum(is.na(wt)), 1) + 1
+
+upd()
 iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d2, colby = Region,
             largesample = FALSE, sizeby = wt)
+iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d2,
+            largesample = FALSE, sizeby = wt)
+iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d2, alpha = 0.5, cex.pt = 1,
+            structure = inzStructure("freq", wt), largesample = FALSE)
 iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d2, alpha = 0.5, cex.pt = 3,
             structure = inzStructure("freq", wt)) -> o
 
 
 
-## need to output the correct frequencies (rather than rescaled ones...)
+ds <- read.csv("~/iNZight/data/nhanes-03-04.chris.csv", header = TRUE)
+summary(ds)
+
+upd()
+iNZightPlot(BPXPLS, BPXSY1, data = ds, g1 = agegp, g2 = RIDRETH1, g2.level = 1,
+            structure = inzStructure("freq", as.integer(ds$WTINT2YR)))
