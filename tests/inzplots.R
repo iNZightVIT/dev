@@ -154,3 +154,9 @@ iNZightPlot(log(GDP.per.Capita), Life.Expectancy, data = d2, alpha = 0.5, cex.pt
 
 
 ## need to output the correct frequencies (rather than rescaled ones...)
+upd()
+iNZightPlot(armspan, height, g1 = getlunch, g2 = travel, g2.level = "_MULTI", data = d,
+            LOE = TRUE, trend = "linear")
+
+pdf("~/Desktop/plot.pdf", width = 10, height = 8)
+dev.off()
