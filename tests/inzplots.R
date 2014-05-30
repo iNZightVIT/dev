@@ -22,7 +22,10 @@ iNZightPlot(height, armspan, colby = gender, data = d)
 iNZightPlot(height, armspan, g2 = gender, g2.level = "male", data = d)
 
 upd()
-iNZightPlot(height, armspan, g2 = cellsource, g2.level = 2, data = d)
+iNZightPlot(height, armspan, g2 = cellsource, g2.level = 5, data = d)
+
+
+## Slight complication when g2 = SOMETHING without g1 --- need to completely forget about g2 ...
 
 upd()
 ff <- as.factor(sample(1:200, 500, TRUE))
