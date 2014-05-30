@@ -176,4 +176,5 @@ summary(ds)
 
 upd()
 iNZightPlot(BPXPLS, BPXSY1, data = ds, g1 = agegp, g2 = RIDRETH1, g2.level = 1,
-            structure = inzStructure("freq", as.integer(ds$WTINT2YR)))
+            structure = inzStructure("freq", WTINT2YR, ds, force = TRUE))
+
