@@ -178,3 +178,22 @@ upd()
 iNZightPlot(BPXPLS, BPXSY1, data = ds, g1 = agegp, g2 = RIDRETH1, g2.level = 1,
             structure = inzStructure("freq", WTINT2YR, ds, force = TRUE))
 
+
+upd()
+inzStructure(list(freq = WTINT2YR), data = ds, force.to.int = TRUE)
+
+upd()
+inzStructure(list(ids = ~1), data = ds, force.to.int = TRUE) ->a
+
+data(api)
+                                        # stratified sample
+dstrat<-svydesign(id=~1,strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
+                                        # one-stage cluster sample
+dclus1<-svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
+                                        # two-stage cluster sample: weights computed from population sizes.
+dclus2<-svydesign(id=~dnum+snum, fpc=~fpc1+fpc2, data=apiclus2)
+
+
+
+## moving on from scatter plots?
+print(iNZightPlot(armspan, height, data = d)$toplot)
