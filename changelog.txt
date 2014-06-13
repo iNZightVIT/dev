@@ -8,6 +8,7 @@ iNZight v2.0.3
 - [change] in the Add to Plot window for barcharts, reworded "segment by" to "colour by" 
   for consistency.
 - [change] the transparency slider now runs from 0% to 100%
+- [new] "Play" button for the first subset by variable (automatically cycle levels)
 
 iNZightPlots v1.0.3
 - [bugfix] specifying `g2.level` with numbers wasn't working, has been fixed for plots,
