@@ -1,43 +1,43 @@
 ------------------------------------------------------------------------------------------------
-NEXT RELEASE:
+RELEASE VERSION 2.0.2: 17/06/2014
 
-iNZight v2.0.3
-- [new] can now cycle through all two-variable plots for a selected Variable 1
-- [fix] identify functionality works for subsets (except when multi plots at once)
-- [change] can now specify to identify min/max points in a dot plot
-- [change] in the Add to Plot window for barcharts, reworded "segment by" to "colour by" 
+iNZight v2.0.2
++ [new] can now cycle through all two-variable plots for a selected Variable 1
++ [fix] identify functionality works for subsets (except when multi plots at once)
++ [change] can now specify to identify min/max points in a dot plot
++ [change] in the Add to Plot window for barcharts, reworded "segment by" to "colour by" 
   for consistency.
-- [change] the transparency slider now runs from 0% to 100%
-- [new] "Play" button for the first subset by variable (automatically cycle levels)
++ [change] the transparency slider now runs from 0% to 100%
++ [new] "Play" button for the first subset by variable (automatically cycle levels)
 
 iNZightPlots v1.0.3
-- [bugfix] specifying `g2.level` with numbers wasn't working, has been fixed for plots,
++ [bugfix] specifying `g2.level` with numbers wasn't working, has been fixed for plots,
   summary and inference information.
-- [fix] added more space to the y-axis on scatter plots
++ [fix] added more space to the y-axis on scatter plots
 
 iNZightModules v1.0.3
-- [new] the pairs plot, or scatter plot matrix, now takes a grouping variable.
-- [change] the pairs/scatter plot matrix draws a jittered dotplot rather than a 
++ [new] the pairs plot, or scatter plot matrix, now takes a grouping variable.
++ [change] the pairs/scatter plot matrix draws a jittered dotplot rather than a 
   barcode plot.
-- [new] 2-variable explore plots in the Quick Explore menu
++ [new] 2-variable explore plots in the Quick Explore menu
 
 ------------------------------------------------------------------------------------------------
 UPDATE RELEASE: 04/04/2014
 
 iNZightPlots v1.0.2
-- [bugfix] print the correct x-variable name when showing summary information
++ [bugfix] print the correct x-variable name when showing summary information
   for a quadratic trend.
 
 iNZightRegression v1.1.2
-- [change] implemented partial residual plots to use iNZightPlots
++ [change] implemented partial residual plots to use iNZightPlots
   graphics when they are available.
 
 iNZightModules v1.0.2
-- [change] lots of changes to the Time Series module, allowing multiplicative
++ [change] lots of changes to the Time Series module, allowing multiplicative
   trends to fit, as well as y-axis labels specification.
 
 iNZightTS v1.1.2
-- [bugfix] slight changes, and add ylab to all plots.
++ [bugfix] slight changes, and add ylab to all plots.
 
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.1: 28/03/2014
