@@ -9,12 +9,10 @@ H <- d$height; A <- d$armspan
 count <- rpois(500, 10)
 
 upd();
-fs <- inzStructure("freq", count)
 iNZightPlot(height, armspan, sizeby = age, data = d, colby = gender, col.pt = c("red", "blue"))
 
 upd()
-iNZightPlot(H, log(A), varnames = list(x = "height (cm)", freq = "count"),
-            structure = fs)
+iNZightPlot(H, log(A), varnames = list(x = "height (cm)"), freq = count)
 
 upd()
 d$height[10] <- Inf
@@ -27,14 +25,12 @@ iNZightPlot(height, armspan, g2 = cellsource, g2.level = 5, data = d)
 
 ## Slight complication when g2 = SOMETHING without g1 --- need to completely forget about g2 ...
 
-upd()
-ff <- as.factor(sample(1:200, 500, TRUE))
-iNZightPlot(ff)
+upd(); ff <- as.factor(sample(1:200, 500, TRUE)); iNZightPlot(ff)
 
 upd()
 iNZightPlot(height, armspan, g1 = cellsource, g1.level = 1:2, data = d)
-#iNZightPlot(height, data = d, structure = fs)
-#iNZightPlot(gender, data = d)
+iNZightPlot(height, data = d, structure = fs)
+iNZightPlot(gender, data = d)
 
 upd()
 ipar <- inzpar(jitter = "y")
@@ -197,3 +193,43 @@ dclus2<-svydesign(id=~dnum+snum, fpc=~fpc1+fpc2, data=apiclus2)
 
 ## moving on from scatter plots?
 print(iNZightPlot(armspan, height, data = d)$toplot)
+
+
+
+d2 <- data.frame(x = round(rnorm(10, 10, 2), 1),
+                 y = round(rnorm(10, 50, 3), 1),
+                 freq = rpois(10, 20),
+                 gender = rep(c("male", "female"), each = 5),
+                 cluster = sample(1:3, 10, TRUE),
+                 wt = rpois(10, 50))
+iNZightPlot(x, y, data = d2, sizeby = freq, alpha = 0.5)
+
+des <- svydesign(ids=~cluster, weights =~wt, data = d2)
+
+upd()
+iNZightPlot(x, y, data = d2, sizeby = freq)
+iNZightPlot(x, y, data = d2, freq = freq, sizeby = freq)
+iNZightPlot(x, y, design = des)
+
+
+
+upd()
+iNZightPlot(x, y, data = d2, sizeby = freq, g1 = gender)
+iNZightPlot(x, y, data = d2, freq = freq, g1 = gender)
+upd(); iNZightPlot(x, y, design = des, g1 = gender)
+upd(); iNZightPlot(x, y, design = des, g1 = cluster)
+
+iNZightPlot(x, data = d2, g1 = gender)
+iNZightPlot(x, data = d2, freq = freq, g1 = gender)
+iNZightPlot(x, design = des, g1 = gender)
+
+upd()
+iNZightPlot(y = height, x = armspan, data = d, g1 = gender,
+            g2 = getlunch, g2.level = "_MULTI")
+
+
+
+upd()
+iNZightPlot(x, y, data = d2)
+iNZightPlot(x, y, data = d2, freq = freq)
+iNZightPlot(x, y, design = des)
