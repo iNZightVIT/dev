@@ -1,7 +1,9 @@
 library(grid); library(survey); library(quantreg)
 upd <- function() {
-    try(system("rm ~/iNZight/iNZightPlots/R/*~"))
-    invisible(lapply(list.files("~/iNZight/iNZightPlots/R", full.names = TRUE), source))
+    dd <- "~/iNZight/iNZightPlots/R"
+    if (length(list.files(paste0(dd, "/*~"))) > 0)
+        system(paste0("rm", dd, "/*~"))
+    invisible(lapply(list.files(dd, full.names = TRUE), source))
 }
 upd()
 d <- read.csv("~/iNZight/data/Census at School-500.csv")
@@ -202,9 +204,11 @@ d2 <- data.frame(x = round(rnorm(10, 10, 2), 1),
                  gender = rep(c("male", "female"), each = 5),
                  cluster = sample(1:3, 10, TRUE),
                  wt = rpois(10, 50))
-iNZightPlot(x, y, data = d2, sizeby = freq, alpha = 0.5)
+iNZightPlot(x, y, data = d2, sizeby = freq, alpha = 0.5) -> pp
 
 des <- svydesign(ids=~cluster, weights =~wt, data = d2)
+
+svyplot(meals ~ acs.core, design = dclus2, style = "hex")
 
 upd()
 iNZightPlot(x, y, data = d2, sizeby = freq)
@@ -232,4 +236,21 @@ iNZightPlot(y = height, x = armspan, data = d, g1 = gender,
 upd()
 iNZightPlot(x, y, data = d2)
 iNZightPlot(x, y, data = d2, freq = freq)
-iNZightPlot(x, y, design = des)
+upd(); iNZightPlot(x, y, design = des)
+
+
+
+
+
+
+d3 <- read.csv("~/iNZight/data/Gap Minder Data.csv")
+plot(hexbin(log10(d3$GDP.per.Capita), d3$Life.Expectancy), style = "lattice")
+
+
+
+
+
+with(d, plot(armspan, height, pch = 19, cex = 2, col = rgb(0, 0, 0, count / max(count))))
+with(d, plot(armspan, height, pch = 1, cex = rescale(count)))
+with(d, svyplot(height ~ armspan, svydesign(ids=~1, weights=~count, data=d), style = "hex"))
+with(d, svyplot(height ~ armspan, svydesign(ids=~1, weights=~count, data=d), style = "grayhex"))
