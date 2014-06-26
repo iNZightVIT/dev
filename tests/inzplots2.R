@@ -33,7 +33,7 @@ iNZightPlot(y = height, x = armspan, data = d1, freq = year, g1 = gender, g2 = g
 upd()
 iNZightPlot(y = api99, x = api00, design = des1)
 iNZightPlot(y = api99, x = api00, design = des1, g1 = sch.wide)
-upd();iNZightPlot(y = api99, x = api00, design = des1, g1 = sch.wide, g2 = awards, g2.level = "_MULTI")[[2]][[1]]
+iNZightPlot(y = api99, x = api00, design = des1, g1 = sch.wide, g2 = awards, g2.level = "_MULTI")
 
 
 
@@ -55,5 +55,3 @@ iNZightPlot(y = BPXSAR, x = BPXDAR, design = des2)
 upd()
 iNZightPlot(meals, data = d4)
 iNZightPlot(meals, design = des1)
-
-hist(d4$meals)
