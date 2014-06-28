@@ -11,8 +11,8 @@ d2 <- read.csv("~/iNZight/data/nhanes-03-04.chris.csv", header = TRUE)
 d3 <- read.csv("~/iNZight/data/Gap Minder Data.csv")
 d4 <- apiclus2
 
-des1<-svydesign(id=~dnum+snum, fpc=~fpc1+fpc2, data=d4)
-des2 <- svydesign(id=~1, weights=~WTINT2YR, data=d2)
+des1 <- svydesign(ids=~dnum+snum, fpc=~fpc1+fpc2, data=d4)
+des2 <- svydesign(ids=~1, weights=~WTINT2YR, data=d2)
 
 
 ######################################################### X: NUMERIC; Y: NUMERIC
@@ -58,8 +58,7 @@ iNZightPlot(meals, design = des1)
 iNZightPlot(height, data = d1, freq = year)
 
 
-############################################################
-X:NUMERIC; Y:FACTOR
+############################################################ X:NUMERIC; Y:FACTOR
 upd()
 iNZightPlot(height, gender, data = d1)
 iNZightPlot(height, gender, data = d1, freq = year)
@@ -68,13 +67,6 @@ iNZightPlot(meals, awards, design = des1)
 iNZightPlot(height, gender, data = d1, g1 = gender)
 iNZightPlot(height, gender, data = d1, freq = year, g1 = gender)
 iNZightPlot(meals, awards, design = des1, g1 = awards)
-
-
-des3 <- svydesign(ids=~1, data = d1)
-table(d1$gender, d1$getlunch)
-svytable(~gender+getlunch, des3)
-
-
 
 
 ############################################################# X:FACTOR; Y:FACTOR
