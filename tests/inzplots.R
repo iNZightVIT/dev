@@ -33,7 +33,7 @@ upd()
 iNZightPlot(height, armspan, g1 = cellsource, g1.level = 1:2, data = d)
 iNZightPlot(height, data = d, structure = fs)
 iNZightPlot(gender, data = d)
-
+d <- d1
 upd()
 ipar <- inzpar(jitter = "y")
 iNZightPlot(height, age, data = d, inzpar = ipar)

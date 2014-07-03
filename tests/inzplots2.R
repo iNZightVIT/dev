@@ -78,3 +78,90 @@ iNZightPlot(awards, design = des1)
 iNZightPlot(getlunch, gender, data = d1)
 iNZightPlot(getlunch, gender, data = d1, freq = year)
 iNZightPlot(awards, both, design = des1)
+
+upd()
+iNZightPlot(height, data = d1)
+iNZightPlot(gender, data= d1)
+iNZightPlot(height, age, data =d1)
+iNZightPlot(height, gender, data=d1)
+iNZightPlot(gender, height, data=d1, g1 = getlunch)
+iNZightPlot(gender, getlunch, data=d1)
+
+
+upd()
+iNZightPlot(height, data = d1, colby = cellsource)
+iNZightPlot(gender, data= d1, colby = gender)
+iNZightPlot(height, age, data =d1, colby = gender)
+iNZightPlot(height, gender, data=d1, colby = gender)
+iNZightPlot(gender, height, data=d1, g1 = getlunch, colby=gender)
+iNZightPlot(gender, getlunch, data=d1, colby = gender)
+
+
+upd()
+iNZightPlot(height, data = d1, colby = age) -> dummy
+iNZightPlot(gender, data= d1, colby = age)
+iNZightPlot(height, age, data =d1, colby = age)
+iNZightPlot(height, gender, data=d1, colby = age)
+iNZightPlot(gender, height, data=d1, g1 = getlunch, colby=age)
+iNZightPlot(gender, getlunch, data=d1, colby = age)
+
+iNZightPlot(getlunch, travel, data = d1, g1 = cellsource)
+
+
+
+upd()
+iNZightPlot(height, data = d1, colby = cellsource, sizeby = year)
+iNZightPlot(gender, data= d1, colby = gender, sizeby = cellcost)
+iNZightPlot(height, age, data =d1, colby = gender, sizeby = cellcost)
+
+
+upd()
+iNZightPlot(height, data = d1, colby = age)
+iNZightPlot(gender, data= d1, colby = age)
+iNZightPlot(height, age, data =d1, colby = age)
+iNZightPlot(height, gender, data=d1, colby = age)
+iNZightPlot(gender, height, data=d1, g1 = getlunch, colby=age)
+iNZightPlot(gender, getlunch, data=d1, colby = age)
+
+
+
+
+
+
+upd()
+d <- d1
+iNZightPlot(height, armspan, data = d)
+iNZightPlot(height, armspan, sizeby = age, g1 = gender, data = d)
+iNZightPlot(height, armspan, g1 = age, sizeby = age, data = d)
+
+upd()
+iNZightPlot(height, armspan, data = d, rugs = "xy", LOE = TRUE)
+iNZightPlot(height, armspan, data = d, smooth = 0.5)
+iNZightPlot(height, armspan, data = d, smooth = 0.5, colby = gender, trend.by = TRUE)
+iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"))
+iNZightPlot(height, armspan, data = d, trend = "linear", colby = gender, trend.by = TRUE)
+iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"), bs.inference = TRUE)
+
+
+upd()
+iNZightPlot(height, armspan, data = d, rugs = "xy", LOE = TRUE,
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d, smooth = 0.5,
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d, smooth = 0.5, colby = gender, trend.by = TRUE,
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"),
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d, trend = "linear", colby = gender, trend.by = TRUE,
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"), bs.inference = TRUE,
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+
+
+
+upd()
+iNZightPlot(height, gender, data = d, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+
+upd()
+iNZightPlot(height, armspan, data = d1, freq = year)
+iNZightPlot(
