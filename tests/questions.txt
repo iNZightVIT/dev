@@ -20,19 +20,33 @@ QUESTIONS:
 
 
                    *** List of plots ***
-+-----------------------------------------------------------+
-| Data Type  | Numeric+NULL | Numeric+Numeric | Factor+NULL |
-+-----------------------------------------------------------+
-| Simple iid | Dotplot      | Scatterplot     | Barplot     |
-|            | Histogram    | Grid-/hex-plot  |             |
-+-----------------------------------------------------------+
-| Frequency  | Histogram    | Scatterplot     | Barplot     |
-|            |              | Hexplot         |             |
-+-----------------------------------------------------------+
-| Survey     | Histogram    | Scatterplot     | Barplot     |
-|            |              | Hexplot         |             |
-+-----------------------------------------------------------+
++---------------------------------------------------------------+
+| Data Type  | Numeric+NULL   | Numeric+Numeric | Factor+NULL   |
+|            | Numeric+Factor |                 | Factor+Factor |
++---------------------------------------------------------------+
+| Simple iid | Dotplot        | Scatterplot     | Barplot       |
+|            | Histogram      | Grid-/hex-plot  |               |
++---------------------------------------------------------------+
+| Frequency  | Histogram      | Scatterplot     | Barplot       |
+|            |                | Hexplot         |               |
++---------------------------------------------------------------+
+| Survey     | Histogram      | Scatterplot     | Barplot       |
+|            |                | Hexplot         |               |
++---------------------------------------------------------------+
 
 
 
 
+Arguments for plots:
+
+dot:     colby
+hist:    
+
+scatter: colby, sizeby
+grid:
+hex:     
+
+bar:     colby
+
+
+g1 and g2

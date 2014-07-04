@@ -82,16 +82,18 @@ iNZightPlot(awards, both, design = des1)
 upd()
 iNZightPlot(height, data = d1)
 iNZightPlot(gender, data= d1)
-iNZightPlot(height, age, data =d1)
-iNZightPlot(height, gender, data=d1)
+iNZightPlot(height, data =d1)
+iNZightPlot(height, age, data=d1)
 iNZightPlot(gender, height, data=d1, g1 = getlunch)
 iNZightPlot(gender, getlunch, data=d1)
 
 
 upd()
-iNZightPlot(height, data = d1, colby = cellsource)
-iNZightPlot(gender, data= d1, colby = gender)
-iNZightPlot(height, age, data =d1, colby = gender)
+iNZightPlot(height, armspan, data = d1, colby = cellsource)
+iNZightPlot(height, armspan, data = d1, colby = cellcost)
+iNZightPlot(height, armspan, data = d1, colby = age, g1 = age)
+iNZightPlot(gender, armspan, data= d1, colby = gender)
+iNZightPlot(height, armspan, age, data =d1, colby = gender)
 iNZightPlot(height, gender, data=d1, colby = gender)
 iNZightPlot(gender, height, data=d1, g1 = getlunch, colby=gender)
 iNZightPlot(gender, getlunch, data=d1, colby = gender)
@@ -164,4 +166,107 @@ iNZightPlot(height, gender, data = d, g1 = gender, g2 = getlunch, g2.level = "_M
 
 upd()
 iNZightPlot(height, armspan, data = d1, freq = year)
-iNZightPlot(
+
+
+
+
+#################### FULL SUITE OF TESTING:
+
+##### X NUMERIC, Y NUMERIC - SIMPLE, SMALL = SCATTERPLOT
+upd()
+iNZightPlot(height, armspan, data = d1)
+iNZightPlot(height, armspan, data = d1, colby = cellcost)
+iNZightPlot(height, armspan, data = d1, colby = cellsource)
+iNZightPlot(height, armspan, data = d1, sizeby = cellcost)
+iNZightPlot(height, armspan, data = d1, sizeby = cellcost, colby = rightfoot)
+
+upd()
+iNZightPlot(height, armspan, data = d1, LOE = TRUE)
+iNZightPlot(height, armspan, data = d1, trend = "linear")
+iNZightPlot(height, armspan, data = d1, smooth = 0.7)
+iNZightPlot(height, armspan, data = d1, quant.smooth = "default")
+iNZightPlot(height, armspan, data = d1, colby = cellsource, trend = "linear", trend.by = TRUE)
+iNZightPlot(height, armspan, data = d1, colby = cellcost, trend = "linear", trend.by = TRUE)
+
+iNZightPlot(height, armspan, data = d1, alpha = 0.5)
+iNZightPlot(height, armspan, data = d1, rugs = "xy")
+iNZightPlot(height, armspan, data = d1, fill.pt = "blue")
+
+## --- grouping 1
+upd()
+iNZightPlot(height, armspan, data = d1, g1 = gender)
+iNZightPlot(height, armspan, data = d1, colby = cellcost, g1 = gender)
+iNZightPlot(height, armspan, data = d1, colby = cellsource, g1 = gender)
+iNZightPlot(height, armspan, data = d1, sizeby = cellcost, g1 = gender)
+iNZightPlot(height, armspan, data = d1, sizeby = cellcost, colby = rightfoot, g1 = gender)
+
+iNZightPlot(height, armspan, data = d1, LOE = TRUE, g1 = gender)
+iNZightPlot(height, armspan, data = d1, trend = "linear", g1 = gender)
+iNZightPlot(height, armspan, data = d1, smooth = 0.7, g1 = gender)
+iNZightPlot(height, armspan, data = d1, quant.smooth = "default", g1 = gender)
+iNZightPlot(height, armspan, data = d1, colby = cellsource, trend = "linear", trend.by = TRUE, g1 = gender)
+iNZightPlot(height, armspan, data = d1, colby = cellcost, trend = "linear", trend.by = TRUE, g1 = gender)
+
+iNZightPlot(height, armspan, data = d1, alpha = 0.5, g1 = gender)
+iNZightPlot(height, armspan, data = d1, rugs = "xy", g1 = gender)
+iNZightPlot(height, armspan, data = d1, fill.pt = "orange", g1 = gender, col.pt = "magenta")
+
+## --- grouping 2
+upd()
+iNZightPlot(height, armspan, data = d1, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, colby = cellcost, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, colby = cellsource, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, sizeby = cellcost, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, sizeby = cellcost, colby = rightfoot, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+
+iNZightPlot(height, armspan, data = d1, LOE = TRUE, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, trend = "linear", g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, smooth = 0.7, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, quant.smooth = "default", g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, colby = cellsource, trend = "linear", trend.by = TRUE,
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, colby = cellcost, trend = "linear", trend.by = TRUE,
+            g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+
+iNZightPlot(height, armspan, data = d1, alpha = 0.5, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, rugs = "xy", g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+iNZightPlot(height, armspan, data = d1, fill.pt = "orange", g1 = gender, col.pt = "magenta",
+            g2 = getlunch, g2.level = "_MULTI")
+
+##### X NUMERIC, Y NUMERIC - SIMPLE, LARGE = GRIDPLOT
+upd()
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3)
+
+upd()
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, LOE = TRUE)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, trend = "linear")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, smooth = 0.7)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, quant.smooth = "default")
+
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, alpha = 0.5)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, scatter.grid.bins = 100)
+
+
+## --- grouping 1
+upd()
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, g1 = Region)
+
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, LOE = TRUE, g1 = Region)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, trend = "linear", g1 = Region)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, smooth = 0.7, g1 = Region)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, quant.smooth = "default", g1 = Region)
+
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, alpha = 0.5, g1 = Region)
+
+## --- grouping 2
+upd()
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, g1 = Year, g2 = Region, g2.level = "_MULTI")
+
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, LOE = TRUE, g1 = Year, g2 = Region, g2.level = "_MULTI")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, trend = "linear", g1 = Year, g2 = Region, g2.level = "_MULTI")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, smooth = 0.7, g1 = Year, g2 = Region, g2.level = "_MULTI")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, quant.smooth = "default",
+            g1 = Year, g2 = Region, g2.level = "_MULTI")
+
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, alpha = 0.5, g1 = Year, g2 = Region, g2.level = "_MULTI")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, rugs = "xy", g1 = Year, g2 = Region, g2.level = "_MULTI")
