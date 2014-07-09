@@ -270,3 +270,44 @@ iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, quant.smooth = "d
 
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, alpha = 0.5, g1 = Year, g2 = Region, g2.level = "_MULTI")
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, rugs = "xy", g1 = Year, g2 = Region, g2.level = "_MULTI")
+
+
+
+
+##### X NUMERIC, Y NUMERIC - SIMPLE, SURVEY = GRIDPLOT
+upd()
+iNZightPlot(BPXSY1, BPXSAR, design = des2)
+
+upd()
+iNZightPlot(BPXSY1, BPXSAR, design = des2, LOE = TRUE)
+iNZightPlot(RIDAGEYR, BPXSY1, design = des2, trend = c("linear", "quadratic", "cubic"))
+iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, quant.smooth = "default")
+
+iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, hex.bins = 50)
+
+
+## --- grouping 1
+upd()
+iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = agegp)
+
+iNZightPlot(BPXSY1, BPXSAR, design = des2, LOE = TRUE, g1 = agegp)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, trend = "linear", g1 = agegp)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7, g1 = agegp)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, quant.smooth = "default", g1 = agegp)
+
+iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5, g1 = agegp)
+
+## --- grouping 2
+upd()
+iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = Year, g2 = agegp, g2.level = "_MULTI")
+
+iNZightPlot(BPXSY1, BPXSAR, design = des2, LOE = TRUE, g1 = Year, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, trend = "linear", g1 = Year, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7, g1 = Year, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, quant.smooth = "default",
+            g1 = Year, g2 = agegp, g2.level = "_MULTI")
+
+iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5, g1 = Year, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, rugs = "xy", g1 = Year, g2 = agegp, g2.level = "_MULTI")
