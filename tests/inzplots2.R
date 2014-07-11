@@ -21,6 +21,7 @@ upd()
 iNZightPlot(y = height, x = armspan, data = d1)
 iNZightPlot(y = height, x = armspan, data = d1, g1 = gender)
 iNZightPlot(y = height, x = armspan, data = d1, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
+            #cex.lab = 1.4, cex.axis = 1.5)
 
 ## frequency data
 upd()
@@ -141,7 +142,12 @@ iNZightPlot(height, armspan, data = d, rugs = "xy", LOE = TRUE)
 iNZightPlot(height, armspan, data = d, smooth = 0.5)
 iNZightPlot(height, armspan, data = d, smooth = 0.5, colby = gender, trend.by = TRUE)
 iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"))
-iNZightPlot(height, armspan, data = d, trend = "linear", colby = gender, trend.by = TRUE)
+#pdf("example-trends.pdf", height = 8, width = 10)
+iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"), colby = getlunch,
+            trend.by = TRUE, trend.parallel = FALSE)
+iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"), colby = getlunch,
+            trend.by = TRUE, trend.parallel = TRUE)
+#dev.off()
 iNZightPlot(height, armspan, data = d, trend = c("linear", "cubic"), bs.inference = TRUE)
 
 
