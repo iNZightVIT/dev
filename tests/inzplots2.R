@@ -190,6 +190,7 @@ upd()
 iNZightPlot(height, armspan, data = d1, LOE = TRUE)
 iNZightPlot(height, armspan, data = d1, trend = "linear")
 iNZightPlot(height, armspan, data = d1, smooth = 0.7)
+iNZightPlot(height, armspan, data = d1, smooth = 0.7, colby = gender, trend.by = TRUE)
 iNZightPlot(height, armspan, data = d1, quant.smooth = "default")
 iNZightPlot(height, armspan, data = d1, colby = cellsource, trend = "linear", trend.by = TRUE)
 iNZightPlot(height, armspan, data = d1, colby = cellcost, trend = "linear", trend.by = TRUE)
@@ -246,9 +247,10 @@ iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3)
 upd()
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, LOE = TRUE)
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, trend = "linear")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, colby = Region,
+            trend = "linear", trend.by = TRUE)
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, smooth = 0.7)
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, quant.smooth = "default")
-
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, alpha = 0.5)
 iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, scatter.grid.bins = 100)
 
@@ -287,6 +289,7 @@ iNZightPlot(BPXSY1, BPXSAR, design = des2)
 upd()
 iNZightPlot(BPXSY1, BPXSAR, design = des2, LOE = TRUE)
 iNZightPlot(RIDAGEYR, BPXSY1, design = des2, trend = c("linear", "quadratic", "cubic"))
+iNZightPlot(RIDAGEYR, BPXSY1, design = des2, trend = "linear", colby = agegp, trend.by = TRUE)
 iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7)
 iNZightPlot(BPXSY1, BPXSAR, design = des2, quant.smooth = "default")
 
@@ -317,3 +320,35 @@ iNZightPlot(BPXSY1, BPXSAR, design = des2, quant.smooth = "default",
 
 iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5, g1 = Year, g2 = agegp, g2.level = "_MULTI")
 iNZightPlot(BPXSY1, BPXSAR, design = des2, rugs = "xy", g1 = Year, g2 = agegp, g2.level = "_MULTI")
+
+
+pdf("~/Downloads/trendColByNumericExample.pdf", height = 10, width = 8)
+
+upd()
+iNZightPlot(height, age, data = d1, colby = year)
+pushViewport(viewport(xscale = extendrange(range(d1$height, finite = TRUE)),
+                      yscale = extendrange(range(d1$age, finite = TRUE)), clip = "on"))
+
+fit1 <- lm(age ~ height, data = d1)
+fit2 <- lm(age ~ height + year, data = d1)
+
+summary(fit1)
+summary(fit2)
+
+xx <- c(80, 220)
+yy <- predict(fit1, newdata = data.frame(height = xx))
+grid.lines(xx, yy, default.units = "native", gp = gpar(col = "black", lwd = 2))
+
+ff <- seq(min(d1$year, na.rm = TRUE), max(d1$year, na.rm = TRUE), length = 4)
+yy2 <- predict(fit2, newdata = data.frame(height = xx, year = rep(ff, each = 2)))
+COLS <- rainbow(200, start = 1/6)[c(1, 66, 132, 200)]
+grid.polyline(rep(xx, 4), yy2, default.units = "native", id = rep(1:4, each = 2),
+           gp = gpar(col = COLS, lwd = 2))
+dev.off()
+
+
+age.pred <- predict(fit2)
+grid.points(fit2$model$height, age.pred, gp = gpar(cex = 0.4), pch = 19)
+
+
+plot(1:200, 1:200, pch = 19, cex = 2, col = rainbow(200, start = 1/6))
