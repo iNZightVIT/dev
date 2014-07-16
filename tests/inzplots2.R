@@ -340,6 +340,22 @@ iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, g1 = Year,
 
 
 
+upd()
+iNZightPlot(rightfoot, height, data = d1, trend = "linear")
+iNZightPlot(rightfoot, height, data = d1, trend = "linear", plottype = "hex")
+iNZightPlot(rightfoot, height, data = d1, trend = "linear", plottype = "grid")
+
+upd()
+iNZightPlot(BPXSY1, BPXSAR, design = des2, trend = "linear")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, trend = "linear", plottype = "scatter")
+iNZightPlot(BPXSY1, BPXSAR, data = d2, trend = "linear", plottype = "scatter")
+
+upd()
+iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7, plottype = "scatter")
+iNZightPlot(BPXSY1, BPXSAR, data = d2, smooth = 0.7, plottype = "scatter")
+
+
 
 
 ## ------- this is the dummy code for trend line by continuous variable
