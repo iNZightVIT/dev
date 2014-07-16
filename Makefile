@@ -33,9 +33,15 @@ gWidgets2:
 here:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
 
+hereNew:
+	cd ../; R CMD INSTALL iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight VIT
+
 # And the gWidgets2 libraries:
 ghere:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL gWidgets2 gWidgets2RGtk2
+
+ghereNew:
+	cd ../; R CMD INSTALL gWidgets2 gWidgets2RGtk2
 
 # Now depending on your system, you will need to use either of the following 
 replace:
