@@ -1,10 +1,6 @@
-system("cd ~/iNZight; R CMD INSTALL iNZight iNZightModules"); q()
+system("cd ~/iNZight; R CMD INSTALL iNZight iNZightPlots"); q()
 system("cd ~/iNZight; R CMD INSTALL iNZightPlots"); q()
-d <- read.csv("~/iNZight/data/Census at School-500.csv"); library(iNZightPlots)
-iNZightPlot(d$gender, d$travel, g1 = d$cellsource, g2 = d$getlunch, g2.level = "_MULTI");
-dev.flush(dev.flush())
-
-library(iNZight); iNZight(d)
+d <- read.csv("~/iNZight/data/Census at School-500.csv"); library(iNZight); iNZight(d)
 
 d <- read.csv("~/iNZight/iNZightVIT-WIN/data/NZIncomes03_11000.csv")
 library(iNZight)

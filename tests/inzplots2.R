@@ -282,7 +282,7 @@ iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, rugs = "xy", g1 =
 
 
 
-##### X NUMERIC, Y NUMERIC - SIMPLE, SURVEY = GRIDPLOT
+##### X NUMERIC, Y NUMERIC - SIMPLE, SURVEY = HEXPLOT
 upd()
 iNZightPlot(BPXSY1, BPXSAR, design = des2)
 
@@ -298,8 +298,7 @@ iNZightPlot(BPXSY1, BPXSAR, design = des2, hex.bins = 50)
 
 
 ## --- grouping 1
-upd()
-iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = agegp)
+upd(); iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = agegp)
 
 iNZightPlot(BPXSY1, BPXSAR, design = des2, LOE = TRUE, g1 = agegp)
 iNZightPlot(BPXSY1, BPXSAR, design = des2, trend = "linear", g1 = agegp)
@@ -310,18 +309,40 @@ iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5, g1 = agegp)
 
 ## --- grouping 2
 upd()
-iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = Year, g2 = agegp, g2.level = "_MULTI")
-
-iNZightPlot(BPXSY1, BPXSAR, design = des2, LOE = TRUE, g1 = Year, g2 = agegp, g2.level = "_MULTI")
-iNZightPlot(BPXSY1, BPXSAR, design = des2, trend = "linear", g1 = Year, g2 = agegp, g2.level = "_MULTI")
-iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7, g1 = Year, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = BPXPLS, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, LOE = TRUE, g1 = BPXPLS, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, trend = "linear", g1 = BPXPLS, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7, g1 = BPXPLS, g2 = agegp, g2.level = "_MULTI")
 iNZightPlot(BPXSY1, BPXSAR, design = des2, quant.smooth = "default",
-            g1 = Year, g2 = agegp, g2.level = "_MULTI")
+            g1 = BPXPLS, g2 = agegp, g2.level = "_MULTI")
 
-iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5, g1 = Year, g2 = agegp, g2.level = "_MULTI")
-iNZightPlot(BPXSY1, BPXSAR, design = des2, rugs = "xy", g1 = Year, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5, g1 = BPXPLS, g2 = agegp, g2.level = "_MULTI")
+iNZightPlot(BPXSY1, BPXSAR, design = des2, rugs = "xy", g1 = BPXPLS, g2 = agegp, g2.level = "_MULTI")
 
 
+
+upd();
+iNZightPlot(height, armspan, data = d1, plottype = "hexplot")
+iNZightPlot(height, armspan, data = d1, plottype = "grid", scatter.grid.bins = 100)
+iNZightPlot(height, armspan, data = d1, plottype = "bar")
+
+iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = agegp)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = agegp, matchplots = TRUE)
+iNZightPlot(BPXSY1, BPXSAR, design = des2, g1 = agegp, plottype = "grid")
+
+upd()
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, plottype = "hex", cex.pt = 2)
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, g1 = Region, plottype = "hex")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, g1 = Year, plottype = "hex")
+iNZightPlot(Life.Expectancy, log10(GDP.per.Capita), data = d3, g1 = Year,
+            g2 = Region, g2.level = "_MULTI")
+
+
+
+
+
+## ------- this is the dummy code for trend line by continuous variable
 pdf("~/Downloads/trendColByNumericExample.pdf", height = 10, width = 8)
 
 upd()
