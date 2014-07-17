@@ -54,6 +54,8 @@ iNZightPlot(y = BPXSAR, x = BPXDAR, design = des2)
 
 ############################################################ X:NUMERIC; Y:NULL
 upd()
+iNZightPlot(height, data = d1)
+iNZightPlot(height, data = d1, y = gender)
 iNZightPlot(meals, data = d4)
 iNZightPlot(meals, design = des1)
 iNZightPlot(height, data = d1, freq = year)
