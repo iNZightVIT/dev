@@ -391,3 +391,10 @@ grid.points(fit2$model$height, age.pred, gp = gpar(cex = 0.4), pch = 19)
 
 
 plot(1:200, 1:200, pch = 19, cex = 2, col = rainbow(200, start = 1/6))
+
+
+
+
+### =---------------- dot plots
+upd()
+iNZightPlot(height, data = d1)
