@@ -55,9 +55,10 @@ iNZightPlot(y = BPXSAR, x = BPXDAR, design = des2)
 ############################################################ X:NUMERIC; Y:NULL
 upd()
 iNZightPlot(height, data = d1)
-iNZightPlot(height, data = d1, y = gender)
 iNZightPlot(meals, data = d4)
-iNZightPlot(meals, design = des1)
+
+upd()
+iNZightPlot(meals, design = des1, hist.bins = 20)
 iNZightPlot(height, data = d1, freq = year)
 
 
@@ -67,9 +68,14 @@ iNZightPlot(height, gender, data = d1)
 iNZightPlot(height, gender, data = d1, freq = year)
 iNZightPlot(meals, awards, design = des1)
 
+
+upd()
 iNZightPlot(height, gender, data = d1, g1 = gender)
-iNZightPlot(height, gender, data = d1, freq = year, g1 = gender)
-iNZightPlot(meals, awards, design = des1, g1 = awards)
+iNZightPlot(height, gender, data = d1, freq = year, g1 = gender, hist.bins = 20)
+iNZightPlot(meals, awards, design = des1, g1 = awards, hist.bins = 20)
+
+upd()
+iNZightPlot(height, gender, data = d1, g1 = cellsource, g2 = getlunch, g2.level = "_MULTI")
 
 
 ############################################################# X:FACTOR; Y:FACTOR
