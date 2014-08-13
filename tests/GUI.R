@@ -1,6 +1,30 @@
+system("cd ~/iNZight; ~/R-3.0.2/bin/R CMD INSTALL iNZightPlots"); q()
+
+
 system("cd ~/iNZight; R CMD INSTALL iNZight iNZightPlots"); q()
+
+
 system("cd ~/iNZight; R CMD INSTALL iNZightPlots"); q()
-d <- read.csv("~/iNZight/data/Census at School-500.csv"); library(iNZight); iNZight(d)
+#d <- read.csv("~/iNZight/data/Census at School-500.csv"); library(iNZightPlots)
+d <- read.csv("~/Downloads/NHANES-1000.csv", header=T); library(iNZightPlots)
+iNZightPlot(d$Education,inference.type=c("conf"))
+
+iNZightPlot(d$RegularMarij, d$Smoke100, inference.type=c("conf"))
+
+iNZightPlot(d$RegularMarij, g1=d$Education,inference.type=c("comp", "conf"))
+
+
+iNZightPlot(d$cellsource,inference.type=c("comp", "conf"))
+
+
+tab <- t(table(d$RegularMarij, d$Education))
+phat <- tab / (N <- rowSums(tab))
+
+sqrt(phat[, 1] * (1 - phat[, 1])) / N
+sqrt(phat[, 2] * (1 - phat[, 2])) / N
+
+
+
 
 d <- read.csv("~/iNZight/iNZightVIT-WIN/data/NZIncomes03_11000.csv")
 library(iNZight)

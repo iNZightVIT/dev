@@ -58,7 +58,7 @@ iNZightPlot(height, data = d1)
 iNZightPlot(meals, data = d4)
 
 upd()
-iNZightPlot(meals, design = des1, hist.bins = 20)
+iNZightPlot(meals, design = des1)
 iNZightPlot(height, data = d1, freq = year)
 
 
@@ -84,6 +84,7 @@ iNZightPlot(getlunch, data = d1)
 iNZightPlot(getlunch, data = d1, freq = year)
 iNZightPlot(awards, design = des1)
 
+upd()
 iNZightPlot(getlunch, gender, data = d1)
 iNZightPlot(getlunch, gender, data = d1, freq = year)
 iNZightPlot(awards, both, design = des1)
@@ -94,6 +95,7 @@ iNZightPlot(gender, data= d1)
 iNZightPlot(height, data =d1)
 iNZightPlot(height, age, data=d1)
 iNZightPlot(gender, height, data=d1, g1 = getlunch)
+upd();
 iNZightPlot(gender, getlunch, data=d1)
 
 
