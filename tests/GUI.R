@@ -7,14 +7,26 @@ system("cd ~/iNZight; R CMD INSTALL iNZight iNZightPlots"); q()
 system("cd ~/iNZight; R CMD INSTALL iNZightPlots"); q()
 #d <- read.csv("~/iNZight/data/Census at School-500.csv"); library(iNZightPlots)
 d <- read.csv("~/Downloads/NHANES-1000.csv", header=T); library(iNZightPlots)
-iNZightPlot(d$Education,inference.type=c("conf"))
-
-iNZightPlot(d$RegularMarij, d$Smoke100, inference.type=c("conf"))
-
-iNZightPlot(d$RegularMarij, g1=d$Education,inference.type=c("comp", "conf"))
 
 
-iNZightPlot(d$cellsource,inference.type=c("comp", "conf"))
+# Tests
+ff <- function(x, y = NULL, g1 = NULL, g2 = NULL, g2.level = "_MULTI")
+    iNZightPlot(x, y, g1 = g1, g2 = g2, g2.level = g2.level, inference.type = c("comp", "conf"))
+
+ff(d$Education)
+ff(d$Education, d$Gender)
+ff(d$Education, d$AgeDecade)
+ff(d$Education, d$Gender, d$AgeDecade)
+ff(d$Education, d$AgeDecade, d$Gender)
+
+ff(d$RegularMarij)
+ff(d$RegularMarij, d$Smoke100)
+ff(d$RegularMarij, d$Smoke100, d$AgeDecade)
+ff(d$AgeFirstMarij, d$AgeDecade)
+
+
+
+
 
 
 tab <- t(table(d$RegularMarij, d$Education))
