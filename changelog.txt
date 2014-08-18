@@ -1,4 +1,11 @@
 ------------------------------------------------------------------------------------------------
+RELEASE VERSION 2.0.3
+- [fix] fix many bugs where plots would fail to draw when missing data due to subsetting
+- [fix] implemented better comparison interval calculation - now for a two-way table (barplot),
+        comparisons are independent binomials for each "group" of bars
+
+
+------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.2: 17/06/2014
 
 iNZight v2.0.2
