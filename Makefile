@@ -134,3 +134,12 @@ pullG:
 
 # How iNZighting! 
 
+repos:
+	cd www/R/src/contrib/; R CMD build ~/iNZight/iNZightTS ~/iNZight/iNZightRegression ~/iNZight/iNZightMR ~/iNZight/iNZightTools ~/iNZight/iNZightModules ~/iNZight/iNZightPlots ~/iNZight/iNZight ~/iNZight/VIT
+
+
+repos302:
+	cd www/R/src/contrib/3.0.2/; ~/R-3.0.2/bin/R CMD build ~/iNZight/iNZightTS ~/iNZight/iNZightRegression ~/iNZight/iNZightMR ~/iNZight/iNZightTools ~/iNZight/iNZightModules ~/iNZight/iNZightPlots ~/iNZight/iNZight ~/iNZight/VIT
+
+repos2153:
+	cd www/R/src/contrib/2.15.3/; ~/R-2.15.3/bin/R CMD build ~/iNZight/iNZightTS ~/iNZight/iNZightRegression ~/iNZight/iNZightMR ~/iNZight/iNZightTools ~/iNZight/iNZightModules ~/iNZight/iNZightPlots ~/iNZight/iNZight ~/iNZight/VIT
