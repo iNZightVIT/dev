@@ -7,23 +7,22 @@ system("cd ~/iNZight; R CMD INSTALL iNZight iNZightPlots"); q()
 system("cd ~/iNZight; R CMD INSTALL iNZightPlots"); q()
 #d <- read.csv("~/iNZight/data/Census at School-500.csv"); library(iNZightPlots)
 d <- read.csv("~/Downloads/NHANES-1000.csv", header=T); library(iNZightPlots)
-iNZightPlot(d$RegularMarij, d$AgeDecade)
-iNZightPlot(d$RegularMarij, d$AgeDecade, inference.type = c("comp", "conf"))
 
 
+# Tests
+ff <- function(x, y = NULL, g1 = NULL, g2 = NULL, g2.level = "_MULTI")
+    iNZightPlot(x, y, g1 = g1, g2 = g2, g2.level = g2.level, inference.type = c("comp", "conf"))
 
-iNZightPlot(d$RegularMarij, inference.type=c("comp", "conf"))
-iNZightPlot(d$RegularMarij, inference.type=c("conf"))
+ff(d$Education)
+ff(d$Education, d$Gender)
+ff(d$Education, d$AgeDecade)
+ff(d$Education, d$Gender, d$AgeDecade)
+ff(d$Education, d$AgeDecade, d$Gender)
 
-iNZightPlot(d$Education, inference.type=c("comp", "conf"))
-
-iNZightPlot(d$RegularMarij, d$Smoke100, inference.type=c("comp", "conf"))
-iNZightPlot(d$RegularMarij, d$Smoke100, inference.type=c("conf"))
-
-iNZightPlot(d$RegularMarij, g1=d$Education,inference.type=c("comp",\
-                                               "conf"))
-
-iNZightPlot(d$Education, d$RegularMarij, inference.type = c("conf"))
+ff(d$RegularMarij)
+ff(d$RegularMarij, d$Smoke100)
+ff(d$RegularMarij, d$Smoke100, d$AgeDecade)
+ff(d$AgeFirstMarij, d$AgeDecade)
 
 
 
@@ -31,7 +30,6 @@ tab <- table(d$RegularMarij)
 phat <- tab / sum(tab)
 tab
 
-iNZightPlots:::errorbarsize(iNZightPlots:::proportionCovs(tab))
 
 tab <- table(d$Education)
 phat <- tab / sum(tab)
