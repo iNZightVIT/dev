@@ -26,14 +26,70 @@ ff(d$AgeFirstMarij, d$AgeDecade)
 
 
 
+tab <- table(d$RegularMarij)
+phat <- tab / sum(tab)
+tab
+
+
+tab <- table(d$Education)
+phat <- tab / sum(tab)
+tab
+se <- 1.96 * sqrt(phat * (1 - phat) / sum(tab))
+co <- 1.96 * iNZightPlots:::errorbarsize(iNZightPlots:::proportionCovs(tab))
+
+iNZightMR:::moecalc(iNZightMR:::seMNprops(sum(tab), phat), est = phat)[c("compL", "compU")]  # same!
+phat - se
+phat + se
+
+phat - co
+phat + co
 
 
 
+iNZightPlot(d$RegularMarij, d$Education,inference.type=c("comp", "conf"))
 tab <- t(table(d$RegularMarij, d$Education))
 phat <- tab / (N <- rowSums(tab))
 
-sqrt(phat[, 1] * (1 - phat[, 1])) / N
-sqrt(phat[, 2] * (1 - phat[, 2])) / N
+1.96 * sqrt(sweep(phat * (1 - phat), 1, N, "/"))
+phat + 1.96 * t(apply(tab, 1, function(t)
+                      iNZightPlots:::errorbarsize(iNZightPlots:::proportionCovs(t))))
+phat - 1.96 * t(apply(tab, 1, function(t)
+                      iNZightPlots:::errorbarsize(iNZightPlots:::proportionCovs(t))))
+
+iNZightMR:::moecalc(iNZightMR:::seBinprops(N, phat[, 1]), est = phat[, 1])[c("ses", "compU", "compL")]
+iNZightMR:::moecalc(iNZightMR:::seBinprops(N, phat[, 2]), est = phat[, 2])[c("ses", "compU", "compL")]
+
+
+
+iNZightPlot(d$Education,d$RegularMarij,inference.type=c("comp", "conf"))
+tab <- t(table(d$Education, d$RegularMarij))
+phat <- tab / (N <- rowSums(tab))
+
+1.96 * sqrt(sweep(phat * (1 - phat), 1, N, "/"))
+
+t(apply(tab, 1, function(t) iNZightPlots:::errorbarsize(iNZightPlots:::proportionCovs(t))))
+
+
+do.call(cbind, lapply(1:ncol(tab), function(i)
+        iNZightMR:::moecalc(iNZightMR:::seBinprops(N, phat[, i]), est = phat[, i])$ses#[c("ses", "compU", "compL")]
+                      )) -> comp.size
+phat-1.96*comp.size
+phat+1.96*comp.size
+
+
+lapply(1:ncol(tab), function(i)
+       iNZightMR:::moecalc(iNZightMR:::seBinprops(N, phat[, i]), est = phat[, i])[c("compL", "compU")]
+       ) -> comp
+L <- do.call(cbind, lapply(comp, function(c) c$compL))
+U <- do.call(cbind, lapply(comp, function(c) c$compU))
+
+
+phat-1.96*comp.size
+L
+
+phat+1.96*comp.size
+U
+
 
 
 
