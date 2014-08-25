@@ -4,5 +4,5 @@
 *.out
 *.toc
 
-**/.gz
-**/PACKAGES
+**/*.gz
+**/PACKAGES*
