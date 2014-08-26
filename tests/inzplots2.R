@@ -406,3 +406,45 @@ plot(1:200, 1:200, pch = 19, cex = 2, col = rainbow(200, start = 1/6))
 ### =---------------- dot plots
 upd()
 iNZightPlot(height, data = d1)
+
+
+
+upd()
+iNZightPlot(d1$gender, d1$cellsource, layout.only = TRUE) -> pl
+pl$gen
+
+
+x <- factor(rep("income-1", 10), levels = paste("income", 1:7, sep = "-"))
+y <- factor(c("male", "female"))
+pl <- iNZightPlot(x, layout.only = TRUE)
+
+phat <- matrix(runif(7), nrow=1)
+widths <- rep(1, N <- length(phat))
+edges <- 0:1
+ynull <- TRUE
+out <- list(phat = phat, widths = widths, edges = edges,
+            nx = N,
+            xlim = c(0, N),
+            ylim = c(0, max(phat)))
+class(out) <- "inzbar"
+gen <- pl$gen
+
+pushViewport(viewport(layout.pos.row = 2, xscale = pl$xlim, yscale = pl$ylim,
+                      name = "VP:locate.these.points"))
+out1 <- out
+out1$phat <- matrix(rep(1, length(out1$phat)), nrow=1)
+gen$opts$bar.col <- "#000000"
+gen1 <- gen
+gen1$opts$bar.fill <- "#cccccc"
+
+gen$opts$bar.fill <- "#cc0000"
+plot(out1, gen1)
+plot(out, gen)
+
+out
+
+mid <- 1:7 - 0.5
+grid.lines()
+
+
+
