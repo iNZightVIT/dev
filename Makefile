@@ -199,3 +199,57 @@ source:
 	done
 srcPackageIndex:
 	cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; rm *.Rout
+
+
+MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
+MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib/
+
+mac215:
+	~/R-2.15.3/bin/R
+
+mac30:
+	~/R-3.0.2/bin/R
+
+
+version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
+ACTUALmac31:
+	cd $(DIR)/dev; R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP3)/3.1/
+
+mac31:
+	mkdir tmp
+	for pkg in $(all_packages) ; do \
+		make ACTUALmac31 PKG=$$pkg ; \
+	done
+	rm -rf tmp
+
+
+
+ACTUALmac30:
+	cd $(DIR)/dev; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP3)/3.0/
+
+mac30:
+	mkdir tmp
+	for pkg in $(all_packages) ; do \
+		make ACTUALmac30 PKG=$$pkg ; \
+	done
+	rm -rf tmp
+
+
+ACTUALmac215:
+	cd $(DIR)/dev; ~/R-2.15.3/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP2)/2.15/
+
+mac215:
+	mkdir tmp
+	for pkg in $(all_packages) ; do \
+		make ACTUALmac215 PKG=$$pkg ; \
+	done
+	rm -rf tmp
+
+
+macPackageIndex:
+	cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout

@@ -5,5 +5,6 @@
 *.toc
 
 **/*.gz
+**/*.tgz
 **/*.zip
 **/PACKAGES*
