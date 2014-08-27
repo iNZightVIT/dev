@@ -1,4 +1,24 @@
 updateDistribution <- function() {
+    # Set the CRAN to UoA for updating various packages:
+    uoaCRAN <- structure("http://cran.stat.auckland.ac.nz", names = "CRAN")
+    currCRAN <- getOption("repos")
+    if (currCRAN["CRAN"] != uoaCRAN) {
+        options(repos = uoaCRAN)
+        on.exit(options(repos = currCRAN))
+    }
+
+    options(repos = c(options()$repos, inzight = "http://docker.stat.auckland.ac.nz/R"))
+
+    update.packages(ask = FALSE)
+
+    cat("==========================================================\n\n")
+    cat("                    Updating complete.\n\n")
+    cat("==========================================================\n\n")
+
+    Sys.sleep(3)
+}
+
+updateDistribution_old <- function() {
   # Set the CRAN to UoA for updating various packages:
     uoaCRAN <- structure("http://cran.stat.auckland.ac.nz", names = "CRAN")
     currCRAN <- getOption("repos")
