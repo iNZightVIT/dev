@@ -1,0 +1,88 @@
+Package: gWidgets2
+Version: 1.0-8
+Depends: methods, digest
+License: GPL (>= 3)
+MD5sum: 979a9f573239b7e34dda744fa31aeb07
+NeedsCompilation: no
+
+Package: gWidgets2RGtk2
+Version: 1.0-5
+Depends: methods, memoise, RGtk2, gWidgets2
+Suggests: testthat, cairoDevice
+License: GPL-3
+MD5sum: c54d2bff8e0703a365703d504b9bb08e
+NeedsCompilation: no
+
+Package: iNZight
+Version: 2.0.3
+Depends: R (>= 2.15), objectProperties, gWidgets2, cairoDevice
+Imports: grid, RGtk2, RODBC, gdata, reshape2, gWidgets2RGtk2,
+       iNZightPlots, iNZightTools
+Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
+License: GPL-2
+MD5sum: 7705b129a6f2f90a372c7e7b252ca076
+NeedsCompilation: no
+
+Package: iNZightModules
+Version: 1.0.3
+Depends: R (>= 2.13)
+Imports: iNZightRegression, iNZightMR, iNZightTools, survey,
+       mgcv, rgl, barcode, gpairs
+License: GPL-2
+MD5sum: dce27b1674bd9eebc4ee97a26e888cc2
+NeedsCompilation: no
+
+Package: iNZightMR
+Version: 1.1
+Depends: R (>= 2.13)
+Imports: iNZightRegression
+Suggests: iNZight
+License: GPL-2
+MD5sum: 0b33e3eb812b67c792b526c6dd1fcd32
+NeedsCompilation: no
+
+Package: iNZightPlots
+Version: 1.0.4
+Depends: R(>= 2.13)
+Imports: grid, boot, s20x, survey, quantreg, SparseM
+Suggests: iNZight
+License: GPL-2
+MD5sum: 8f4a3da858101c54568d96498c5cb396
+NeedsCompilation: no
+
+Package: iNZightRegression
+Version: 1.1.2
+Depends: R (>= 2.13)
+Imports: grid, car
+Suggests: iNZight, s20x, iNZightPlots
+License: GPL-2
+MD5sum: 2de06aea306b834b57a45008a650265a
+NeedsCompilation: no
+
+Package: iNZightTools
+Version: 1.0.0
+Depends: survey
+Suggests: iNZight
+License: GPL-2
+MD5sum: bb9c8935d5c96cd60e3361407a4e9942
+NeedsCompilation: no
+
+Package: iNZightTS
+Version: 1.1.2
+Depends: R (>= 2.13)
+Imports: grid
+Suggests: iNZight, Acinonyx
+License: GPL-2
+MD5sum: 7f42e334f507119e15d126321778da2a
+NeedsCompilation: no
+
+Package: vit
+Version: 1.2
+Depends: R (>= 2.15), RGtk2
+Imports: methods, grid, gWidgets, gWidgetsRGtk2, plyr, RODBC
+Suggests: Acinonyx, png
+Enhances: iNZight
+License: GPL-2
+MD5sum: 38720ad028abfc47ac40acbb88ad6826
+NeedsCompilation: no
+
