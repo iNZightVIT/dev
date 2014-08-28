@@ -1,35 +1,35 @@
 Package: gWidgets2
-Version: 1.0-8
+Version: 1.0-9
 Depends: methods, digest
 License: GPL (>= 3)
-MD5sum: 979a9f573239b7e34dda744fa31aeb07
+MD5sum: f11afd7d078da34556072d239bcce89c
 NeedsCompilation: no
 
 Package: gWidgets2RGtk2
-Version: 1.0-5
+Version: 1.0-6
 Depends: methods, memoise, RGtk2, gWidgets2
 Suggests: testthat, cairoDevice
 License: GPL-3
-MD5sum: c54d2bff8e0703a365703d504b9bb08e
+MD5sum: f940211a16397ff8a715da098204fd72
 NeedsCompilation: no
 
 Package: iNZight
 Version: 2.0.3
 Depends: R (>= 2.15), objectProperties, gWidgets2, cairoDevice
 Imports: grid, RGtk2, RODBC, gdata, reshape2, gWidgets2RGtk2,
-       iNZightPlots, iNZightTools
+        iNZightPlots, iNZightTools
 Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
 License: GPL-2
-MD5sum: 7705b129a6f2f90a372c7e7b252ca076
+MD5sum: a0c70db99519e214cd3a8136bfcfa5dc
 NeedsCompilation: no
 
 Package: iNZightModules
 Version: 1.0.3
 Depends: R (>= 2.13)
-Imports: iNZightRegression, iNZightMR, iNZightTools, survey,
-       mgcv, rgl, barcode, gpairs
+Imports: iNZightRegression, iNZightMR, iNZightTools, survey, mgcv, rgl,
+        barcode, gpairs
 License: GPL-2
-MD5sum: dce27b1674bd9eebc4ee97a26e888cc2
+MD5sum: f1cc16c1f9abd0e8bc34b09f1cca5d9c
 NeedsCompilation: no
 
 Package: iNZightMR
@@ -38,7 +38,7 @@ Depends: R (>= 2.13)
 Imports: iNZightRegression
 Suggests: iNZight
 License: GPL-2
-MD5sum: 0b33e3eb812b67c792b526c6dd1fcd32
+MD5sum: 152b60fa489cb541901cbe34f8e972c4
 NeedsCompilation: no
 
 Package: iNZightPlots
@@ -47,7 +47,7 @@ Depends: R(>= 2.13)
 Imports: grid, boot, s20x, survey, quantreg, SparseM
 Suggests: iNZight
 License: GPL-2
-MD5sum: 8f4a3da858101c54568d96498c5cb396
+MD5sum: c00df0d662f31dbb20cd0e8fd888b019
 NeedsCompilation: no
 
 Package: iNZightRegression
@@ -56,7 +56,7 @@ Depends: R (>= 2.13)
 Imports: grid, car
 Suggests: iNZight, s20x, iNZightPlots
 License: GPL-2
-MD5sum: 2de06aea306b834b57a45008a650265a
+MD5sum: da7555a6d4d0d8f3db72b9945c3e0519
 NeedsCompilation: no
 
 Package: iNZightTools
@@ -64,7 +64,7 @@ Version: 1.0.0
 Depends: survey
 Suggests: iNZight
 License: GPL-2
-MD5sum: bb9c8935d5c96cd60e3361407a4e9942
+MD5sum: ddebf939ce1a3980e87d6b5a722fbc54
 NeedsCompilation: no
 
 Package: iNZightTS
@@ -73,16 +73,16 @@ Depends: R (>= 2.13)
 Imports: grid
 Suggests: iNZight, Acinonyx
 License: GPL-2
-MD5sum: 7f42e334f507119e15d126321778da2a
+MD5sum: 73897fbb8850744f35e145aaff409a46
 NeedsCompilation: no
 
 Package: vit
 Version: 1.2
-Depends: R (>= 2.15), RGtk2
-Imports: methods, grid, gWidgets, gWidgetsRGtk2, plyr, RODBC
+Depends: R (>= 2.13)
+Imports: methods, grid, gWidgets, RGtk2, gWidgetsRGtk2, plyr, RODBC
 Suggests: Acinonyx, png
 Enhances: iNZight
 License: GPL-2
-MD5sum: 38720ad028abfc47ac40acbb88ad6826
+MD5sum: 1d0a85f1abb2f7b07f822786baeafb1c
 NeedsCompilation: no
 

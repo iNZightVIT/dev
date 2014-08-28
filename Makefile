@@ -28,6 +28,9 @@ gWidgets2:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 # If you want to install to your local R library, then make here:
+here215:
+	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(inz_packages)
+
 here30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
 
@@ -35,6 +38,9 @@ here:
 	cd ../; R CMD INSTALL $(inz_packages)
 
 # And the gWidgets2 libraries:
+ghere215:
+	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(g_packages)
+
 ghere30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(g_packages)
 
@@ -188,9 +194,9 @@ winEverything:
 
 
 winPackageIndex:
-	cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout
-	cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout
-	cd $(WIN_REP)/3.1/; R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout
+	cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
+	cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
+	cd $(WIN_REP)/3.1/; R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
 
 src_lib = $(DIR)/dev/www/R/src/contrib
 source:
@@ -198,7 +204,10 @@ source:
 		cd $(src_lib) ; R CMD build --no-build-vignettes $(DIR)/$$pkg ; \
 	done
 srcPackageIndex:
-	cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; rm *.Rout
+	cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; rm *.Rout; rm .RData
+
+srcAll:
+	make source srcPackageIndex
 
 
 MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
@@ -250,6 +259,10 @@ mac215:
 
 
 macPackageIndex:
-	cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout; rm .RData
+	cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout; rm .RData
+	cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout; rm .RData
+
+
+macEverything:
+	make mac215 mac30 mac31 macPackageIndex; echo "\n\nSuccessfully created Mac binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
