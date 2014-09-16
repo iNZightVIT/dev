@@ -213,11 +213,11 @@ srcAll:
 MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
 MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib/
 
-mac215:
-	~/R-2.15.3/bin/R
+#mac215:
+#	~/R-2.15.3/bin/R
 
-mac30:
-	~/R-3.0.2/bin/R
+#mac30:
+#	~/R-3.0.2/bin/R
 
 
 version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
