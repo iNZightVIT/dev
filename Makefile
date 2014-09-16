@@ -139,14 +139,17 @@ winRelease:
 
 
 toWin215:	
+	rm $(WIN_REP)/2.15/*.zip
 	for pkg in $(all_packages) ; do \
 		mv $(DIR)/$$pkg/$$pkg*.zip $(WIN_REP)/2.15/ ; \
 	done
 toWin30:	
+	rm $(WIN_REP)/3.0/*.zip
 	for pkg in $(all_packages) ; do \
 		mv $(DIR)/$$pkg/$$pkg*.zip $(WIN_REP)/3.0/ ; \
 	done
 toWin31:	
+	rm $(WIN_REP)/3.1/*.zip
 	for pkg in $(all_packages) ; do \
 		mv $(DIR)/$$pkg/$$pkg*.zip $(WIN_REP)/3.1/ ; \
 	done
@@ -211,7 +214,8 @@ srcAll:
 
 
 MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
-MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib/
+MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib
+MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
 #mac215:
 #	~/R-2.15.3/bin/R
@@ -226,6 +230,7 @@ ACTUALmac31:
 	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP3)/3.1/
 
 mac31:
+	rm $(MAC_REP3)/3.1/*.tgz
 	mkdir tmp
 	for pkg in $(all_packages) ; do \
 		make ACTUALmac31 PKG=$$pkg ; \
@@ -239,6 +244,7 @@ ACTUALmac30:
 	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP3)/3.0/
 
 mac30:
+	rm $(MAC_REP3)/3.0/*.tgz
 	mkdir tmp
 	for pkg in $(all_packages) ; do \
 		make ACTUALmac30 PKG=$$pkg ; \
@@ -251,6 +257,7 @@ ACTUALmac215:
 	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP2)/2.15/
 
 mac215:
+	rm $(MAC_REP2)/2.15/*.tgz
 	mkdir tmp
 	for pkg in $(all_packages) ; do \
 		make ACTUALmac215 PKG=$$pkg ; \
@@ -258,11 +265,42 @@ mac215:
 	rm -rf tmp
 
 
+
+ACTUALmac30MAV:
+	cd $(DIR)/dev; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.0/
+
+mac30MAV:
+	rm $(MAC_REPMAV)/3.0/*.tgz
+	mkdir tmp
+	for pkg in $(all_packages) ; do \
+		make ACTUALmac30MAV PKG=$$pkg ; \
+	done
+	rm -rf tmp
+	cp $(DIR)/dev/rgtk/mav30/* $(MAC_REPMAV)/3.0/
+
+
+ACTUALmac31MAV:
+	cd $(DIR)/dev; R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.1/
+
+mac31MAV:
+	rm $(MAC_REPMAV)/3.1/*.tgz
+	mkdir tmp
+	for pkg in $(all_packages) ; do \
+		make ACTUALmac31MAV PKG=$$pkg ; \
+	done
+	rm -rf tmp
+	cp $(DIR)/dev/rgtk/mav31/* $(MAC_REPMAV)/3.1/
+
+
 macPackageIndex:
-	cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout; rm .RData
-	cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout; rm .RData
-	cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout; rm .RData
+	cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	cd $(MAC_REPMAV)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	cd $(MAC_REPMAV)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 
 
 macEverything:
-	make mac215 mac30 mac31 macPackageIndex; echo "\n\nSuccessfully created Mac binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
+	make mac215 mac30 mac31 mac31MAV macPackageIndex; echo "\n\nSuccessfully created Mac binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
