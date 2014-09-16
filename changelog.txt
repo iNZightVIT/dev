@@ -1,9 +1,25 @@
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.3
-- [fix] fix many bugs where plots would fail to draw when missing data due to subsetting
-- [fix] implemented better comparison interval calculation - now for a two-way table (barplot),
-        comparisons are independent binomials for each "group" of bars
 
+iNZight v2.0.3
+- [change] Add to Plot for barplots modified to be more consistent for that of dotplots
+
+iNZightPlots v1.0.4
+- [fix] fix many bugs where plots would fail to draw when missing data due to subsetting
+- [change] implemented better comparison interval calculation - now for a two-way table (barplot),
+           comparisons are independent binomials for each "group" of bars
+- [fix] categorical plots - y and g1 the same now draws something
+- [fix] lots of smaller bugs that were introduced by inclusion of iNZightMR
+
+iNZightTS v1.1.3
+- [change] added x-label to additional plots
+
+iNZightModules v1.0.4
+- [change] add x-label for more time series plots
+
+iNZightRegression v.1.1.3
+- [fix] for cross-compatibility of graphics devices, ensure rectangles drawn are transparent
+- [fix] fixes to some other errors that were not passing R CMD CHECK
 
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.2: 17/06/2014
