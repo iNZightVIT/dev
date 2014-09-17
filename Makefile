@@ -201,8 +201,13 @@ winPackageIndex:
 	cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
 	cd $(WIN_REP)/3.1/; R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
 
+
+
+
+
 src_lib = $(DIR)/dev/www/R/src/contrib
 source:
+	rm $(src_lib)/*.tar.gz
 	for pkg in $(all_packages) ; do \
 		cd $(src_lib) ; R CMD build --no-build-vignettes $(DIR)/$$pkg ; \
 	done
@@ -217,11 +222,6 @@ MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
 MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib
 MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
-#mac215:
-#	~/R-2.15.3/bin/R
-
-#mac30:
-#	~/R-3.0.2/bin/R
 
 
 version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
