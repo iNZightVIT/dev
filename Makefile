@@ -265,42 +265,26 @@ mac215:
 	rm -rf tmp
 
 
-
-ACTUALmac30MAV:
-	cd $(DIR)/dev; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
-	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.0/
-
-mac30MAV:
-	rm $(MAC_REPMAV)/3.0/*.tgz
-	mkdir tmp
-	for pkg in $(all_packages) ; do \
-		make ACTUALmac30MAV PKG=$$pkg ; \
-	done
-	rm -rf tmp
-	cp $(DIR)/dev/rgtk/mav30/* $(MAC_REPMAV)/3.0/
-
-
-ACTUALmac31MAV:
+ACTUALmacMAV:
 	cd $(DIR)/dev; R CMD INSTALL -l tmp $(DIR)/$(PKG);
 	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.1/
 
-mac31MAV:
+macMAV:
 	rm $(MAC_REPMAV)/3.1/*.tgz
 	mkdir tmp
 	for pkg in $(all_packages) ; do \
-		make ACTUALmac31MAV PKG=$$pkg ; \
+		make ACTUALmacMAV PKG=$$pkg ; \
 	done
 	rm -rf tmp
-	cp $(DIR)/dev/rgtk/mav31/* $(MAC_REPMAV)/3.1/
+	cp $(DIR)/dev/macpkg/* $(MAC_REPMAV)/3.1/
 
 
 macPackageIndex:
 	cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 	cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 	cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	cd $(MAC_REPMAV)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 	cd $(MAC_REPMAV)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 
 
 macEverything:
-	make mac215 mac30 mac31 mac31MAV macPackageIndex; echo "\n\nSuccessfully created Mac binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
+	make mac215 mac30 mac31 macMAV macPackageIndex; echo "\n\nSuccessfully created Mac binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
