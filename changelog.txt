@@ -21,6 +21,9 @@ iNZightRegression v.1.1.3
 - [fix] for cross-compatibility of graphics devices, ensure rectangles drawn are transparent
 - [fix] fixes to some other errors that were not passing R CMD CHECK
 
+vit v1.2.1
+- [change] allows comments in data files (using #)
+
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.2: 17/06/2014
 
