@@ -1,6 +1,6 @@
+library(utils)
 if (!"RCurl" %in% rownames(installed.packages()))
     install.packages("RCurl")
-
 library(RCurl)
 
 source_https <- function(url, ...) {
@@ -16,6 +16,5 @@ source_https <- function(url, ...) {
     })
 }
 
-## source_https("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/update.R")
-source_https("https://raw.githubusercontent.com/iNZightVIT/dev/master/update.R")
+source_https("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/update.R")
 updateDistribution()
