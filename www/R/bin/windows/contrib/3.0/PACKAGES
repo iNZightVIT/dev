@@ -18,14 +18,14 @@ Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
 License: GPL-2
 
 Package: iNZightModules
-Version: 1.0.3
+Version: 1.0.4
 Depends: R (>= 2.13)
 Imports: iNZightRegression, iNZightMR, iNZightTools, survey, mgcv, rgl,
         barcode, gpairs
 License: GPL-2
 
 Package: iNZightMR
-Version: 1.1
+Version: 1.1.1
 Depends: R (>= 2.13)
 Imports: iNZightRegression
 Suggests: iNZight
@@ -39,7 +39,7 @@ Suggests: iNZight
 License: GPL-2
 
 Package: iNZightRegression
-Version: 1.1.2
+Version: 1.1.3
 Depends: R (>= 2.13)
 Imports: grid, car
 Suggests: iNZight, s20x, iNZightPlots
@@ -52,14 +52,14 @@ Suggests: iNZight
 License: GPL-2
 
 Package: iNZightTS
-Version: 1.1.2
+Version: 1.1.3
 Depends: R (>= 2.13)
 Imports: grid
 Suggests: iNZight, Acinonyx
 License: GPL-2
 
 Package: vit
-Version: 1.2
+Version: 1.2.1
 Depends: R (>= 2.15), RGtk2
 Imports: methods, grid, gWidgets, gWidgetsRGtk2, plyr, RODBC
 Suggests: Acinonyx, png
