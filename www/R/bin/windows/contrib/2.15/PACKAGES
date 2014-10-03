@@ -25,7 +25,7 @@ Imports: iNZightRegression, iNZightMR, iNZightTools, survey, mgcv, rgl,
 License: GPL-2
 
 Package: iNZightMR
-Version: 1.1.1
+Version: 1.1.2
 Depends: R (>= 2.13)
 Imports: iNZightRegression
 Suggests: iNZight

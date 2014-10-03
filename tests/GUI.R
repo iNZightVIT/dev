@@ -149,3 +149,12 @@ iNZight(d <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE))
 iNZightPlot(d$height, d$armspan, colby = d$age, inpar = inzPlotDefaults())
 
 iNZightPlot(height, armspan, data = d, quant.smooth = 0.5, xlab = "hello")
+
+
+
+
+
+system("cd ~/iNZight; R CMD INSTALL iNZightMR"); q()
+d <- read.csv("~/iNZight/iNZightVIT-WIN/data/Census at School-500.csv")
+library(iNZight)
+iNZight(d)
