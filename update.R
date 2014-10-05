@@ -9,7 +9,10 @@ updateDistribution <- function() {
 
     options(repos = c(options()$repos, inzight = "http://docker.stat.auckland.ac.nz/R"))
 
-    update.packages(ask = FALSE)
+    update.packages(c("gWidgets2", "gWidgets2RGtk2", "vit", "iNZightVIT", "iNZightMR",
+                      "iNZightRegression", "iNZightModules", "iNZightTS", "iNZightTools",
+                      "iNZightPlots"), 
+                    ask = FALSE)
 
     cat("==========================================================\n\n")
     cat("                    Updating complete.\n\n")
