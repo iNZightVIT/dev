@@ -40,19 +40,16 @@ updateDistribution <- function() {
     }
 
     # Set the CRAN to UoA for updating various packages:
-    uoaCRAN <- structure("http://cran.stat.auckland.ac.nz", names = "CRAN")
-    currCRAN <- getOption("repos")
-    if (currCRAN["CRAN"] != uoaCRAN) {
-        options(repos = uoaCRAN)
-        on.exit(options(repos = currCRAN))
-    }
+    ## uoaCRAN <- structure("http://cran.stat.auckland.ac.nz", names = "CRAN")
+    ## currCRAN <- getOption("repos")
+    ## if (currCRAN["CRAN"] != uoaCRAN) {
+    ##     options(repos = uoaCRAN)
+    ##     on.exit(options(repos = currCRAN))
+    ## }
 
-    options(repos = c(options()$repos, inzight = "http://docker.stat.auckland.ac.nz/R"))
+    ## options(repos = c(options()$repos, inzight = "http://docker.stat.auckland.ac.nz/R"))
 
-    update.packages(c("gWidgets2", "gWidgets2RGtk2", "vit", "iNZightVIT", "iNZightMR",
-                      "iNZightRegression", "iNZightModules", "iNZightTS", "iNZightTools",
-                      "iNZightPlots"), 
-                    ask = FALSE)
+    update.packages(repos = "http://docker.stat.auckland.ac.nz/R", ask = FALSE)
 
     cat("==========================================================\n")
     cat("                    Updating complete.\n")
