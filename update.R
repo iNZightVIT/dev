@@ -6,10 +6,37 @@ updateDistribution <- function() {
     if (.Platform$OS == "windows") {
         ## Checking if the updater is using the new structure ...
         if (tail(strsplit(getwd(), "/")[[1]], 1) != "prog_files") {
-            cat("\n\n  You will need to download the latest version of iNZightVIT\n")
-            cat("  from https://www.stat.auckland.ac.nz/~wild/iNZight/win.php\n\n")
+            cat("    Updating scripts ...\n\n")
+            writeF <- function(url, file) {
+                text <- getURL(url, followlocation=TRUE,
+                               cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
+                unlink(file)
+                con <- file(file, open = "w")
+                writeLines(text, con)
+                close(con)
+            }
+            
+            # First, update the BAT file:
+            writeF("https://raw.githubusercontent.com/iNZightVIT/dev/master/UPDATE_iNZightVIT.bat",
+                   "UPDATE_iNZightVIT.bat")
+            
+            # and then remove old update script and add new one:
+            writeF("https://raw.githubusercontent.com/iNZightVIT/dev/master/win_update_Rprofile.R",
+                   "prog_files/.Rprofile")
+        
+            # cat("\n\n  You will need to download the latest version of iNZightVIT\n")
+            # cat("  from https://www.stat.auckland.ac.nz/~wild/iNZight/win.php\n\n")
+           
+            Sys.sleep(1)
+            cat(" Please run the updater again to complete the update ...\n")
+            cat("==========================================================\n\n")
+            
+            Sys.sleep(3)
             stop("iNZight has not been updated.", call. = FALSE)
-        } 
+        } else {
+          ## do a quick cleanup
+          unlink("updateiNZightVIT.R")
+        }
     }
 
     # Set the CRAN to UoA for updating various packages:
