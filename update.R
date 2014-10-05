@@ -51,6 +51,13 @@ updateDistribution <- function() {
 
     update.packages(repos = "http://docker.stat.auckland.ac.nz/R", ask = FALSE)
 
+    ## A list of packages we NEED to have installed (since older versions anyway...)
+    pkgs <- c("reshape2", "hexbin")
+    pkgs <- pkgs[!pkgs %in% rownames(installed.packages())]
+    if (length(pkgs) > 0)
+        install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
+    
+
     cat("==========================================================\n")
     cat("                    Updating complete.\n")
     cat("==========================================================\n\n")
