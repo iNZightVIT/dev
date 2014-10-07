@@ -38,13 +38,14 @@ updateDistribution <- function() {
           unlink("updateiNZightVIT.R")
         }
     } else {
-        try({
+        move <- function() {
             if (!is.na(Sys.getenv()["R_DIR"])) {
                 setwd(Sys.getenv()["R_DIR"])
                 if ("FutureLearn" %in% list.files())
                     system("mv FutureLearn data/")
             }
-        }, TRUE)
+        }
+        try(move(), TRUE)
     }
     
 
