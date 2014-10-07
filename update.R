@@ -37,7 +37,16 @@ updateDistribution <- function() {
           ## do a quick cleanup
           unlink("updateiNZightVIT.R")
         }
+    } else {
+        try({
+            if (!is.na(Sys.getenv()["R_DIR"])) {
+                setwd(Sys.getenv()["R_DIR"])
+                if ("FutureLearn" %in% list.files())
+                    system("mv FutureLearn data/")
+            }
+        }, TRUE)
     }
+    
 
     # Set the CRAN to UoA for updating various packages:
     ## uoaCRAN <- structure("http://cran.stat.auckland.ac.nz", names = "CRAN")

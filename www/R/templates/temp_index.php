@@ -117,7 +117,7 @@ $files = array();
 $dir = dir($path);
 while ($entry = $dir->read()) {
     if (($entry != '.') and (substr($entry, -4) != '.php') and 
-        ($entry != 'icons') and ($entry != 'templates')) {
+        ($entry != 'icons') and ($entry != 'templates') and ($entry != 'SITES')) {
         if (is_dir($entry)) {
             if (($entry != '..')){
                 $dirs[] = $entry;
