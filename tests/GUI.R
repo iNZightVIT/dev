@@ -1,4 +1,6 @@
-system("cd ~/iNZight; ~/R-3.0.2/bin/R CMD INSTALL iNZightPlots"); q()
+system("cd ~/iNZight; ~/R-3.0.2/bin/R CMD INSTALL iNZight"); q()
+library(iNZight); iNZight(read.csv("~/iNZight/data/CaS2011_5000.csv"))
+
 
 
 system("cd ~/iNZight; R CMD INSTALL iNZight iNZightPlots"); q()

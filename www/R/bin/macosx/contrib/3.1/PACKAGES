@@ -2,23 +2,23 @@ Package: gWidgets2
 Version: 1.0-9
 Depends: methods, digest
 License: GPL (>= 3)
-MD5sum: 8dc8a84ec74e5d989e3964b0af37a564
+MD5sum: 512201f64f608a5ef10b7048550735c9
 
 Package: gWidgets2RGtk2
 Version: 1.0-6
 Depends: methods, memoise, RGtk2, gWidgets2
 Suggests: testthat, cairoDevice
 License: GPL-3
-MD5sum: 5190bd9f2dffa4354fcb0bd82879c8dc
+MD5sum: 371d969c01b1b9a31280fc35e09d8dfa
 
 Package: iNZight
-Version: 2.0.3
+Version: 2.0.3-1
 Depends: R (>= 2.15), objectProperties, gWidgets2, cairoDevice
 Imports: grid, RGtk2, RODBC, gdata, reshape2, gWidgets2RGtk2,
         iNZightPlots, iNZightTools
 Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
 License: GPL-2
-MD5sum: 082a58fcb625c19bc577c149f9b79464
+MD5sum: e346a31c89fd8d1e167d0bdd773f4b12
 
 Package: iNZightModules
 Version: 1.0.4
@@ -26,7 +26,7 @@ Depends: R (>= 2.13)
 Imports: iNZightRegression, iNZightMR, iNZightTools, survey, mgcv, rgl,
         barcode, gpairs
 License: GPL-2
-MD5sum: 337e6c4958fe4f1a6edfec2de2a93e83
+MD5sum: fc3425e5df9d44dba17d65d316bc748c
 
 Package: iNZightMR
 Version: 1.1.2
@@ -34,7 +34,7 @@ Depends: R (>= 2.13)
 Imports: iNZightRegression
 Suggests: iNZight
 License: GPL-2
-MD5sum: fbd083f1976f26dfc29ccf0133be401c
+MD5sum: e6847b2b5d648f61f646c1344b6ac868
 
 Package: iNZightPlots
 Version: 1.0.4
@@ -42,7 +42,7 @@ Depends: R(>= 2.13)
 Imports: grid, boot, s20x, survey, quantreg, SparseM
 Suggests: iNZight
 License: GPL-2
-MD5sum: 5129d826d4f5c16d216334d57abf01f3
+MD5sum: d3b8a9574a8946f82cbb0952fdde52ab
 
 Package: iNZightRegression
 Version: 1.1.3
@@ -50,14 +50,14 @@ Depends: R (>= 2.13)
 Imports: grid, car
 Suggests: iNZight, s20x, iNZightPlots
 License: GPL-2
-MD5sum: 235690ac1c10fe5c21ada90926ec4407
+MD5sum: 465f254021ca42561206809353e5793d
 
 Package: iNZightTools
 Version: 1.0.0
 Depends: survey
 Suggests: iNZight
 License: GPL-2
-MD5sum: 1d5f9bc46fe497e1c27a633ac79f6e2f
+MD5sum: 398d6493cd6e782c0d54104fe77aadad
 
 Package: iNZightTS
 Version: 1.1.3
@@ -65,7 +65,7 @@ Depends: R (>= 2.13)
 Imports: grid
 Suggests: iNZight, Acinonyx
 License: GPL-2
-MD5sum: 8fa2c5ed8c627dd3baf3fa5abd219244
+MD5sum: 5dc7820a4a0bb95dc01b5ee9e1118fb0
 
 Package: vit
 Version: 1.2.1
@@ -74,5 +74,5 @@ Imports: methods, grid, gWidgets, gWidgetsRGtk2, plyr, RODBC
 Suggests: Acinonyx, png
 Enhances: iNZight
 License: GPL-2
-MD5sum: cbe1decb635c1a1c0b160c687e6a77bb
+MD5sum: 86cd94923e3564e2e0dcbf3cec54e477
 
