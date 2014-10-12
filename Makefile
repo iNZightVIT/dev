@@ -288,3 +288,26 @@ macPackageIndex:
 
 macEverything:
 	make mac215 mac30 mac31 macMAV macPackageIndex; echo "\n\nSuccessfully created Mac binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
+
+
+
+pkgToDocker:
+#	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/$(PKG)_*.tar.gz";
+#	cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz inzight@docker.stat.auckland.ac.nz:www/R/src/contrib/;
+#	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/$(PKG)_*.zip";
+#	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
+#	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.0/$(PKG)_*.zip";
+#	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.0/;
+#	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.1/$(PKG)_*.zip";
+#	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.1/;
+#	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
+#	cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.0/;
+#	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
+#	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.1/;
+#	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
+#	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
+	ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
+	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
+
+
+
