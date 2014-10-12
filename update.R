@@ -70,8 +70,11 @@ updateDistribution <- function() {
 
     cat("==========================================================\n")
     cat("                    Updating complete.\n")
+    if (.Platform$OS != "windows")
+        cat("                    Close R before running iNZight.\n")
     cat("==========================================================\n\n")
 
     Sys.sleep(3)
+    
     return(invisible(NULL))
 }
