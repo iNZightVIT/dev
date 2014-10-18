@@ -38,6 +38,30 @@ updateDistribution <- function() {
           unlink("updateiNZightVIT.R")
         }
     } else {
+        if (Sys.info()["sysname"] == "Darwin") {
+            ## It's a mac
+            osx.version <- try(system("sw_vers -productVersion", intern = TRUE), silent = TRUE)
+            if (!inherits(osx.version, "try-error")) {
+                if (osx.version == "10.10") {
+                    cat("==========================================================\n\n")
+                    
+                    cat("  It looks like you are running Mac OS X 10.10 Yosemite.\n\n")
+                    
+                    cat("  IMPORTANT: If iNZight doesn't load, try installing\n")
+                    cat("  XQuartz from:\n\n")
+                    cat("       http://xquartz.macosforge.org/\n\n")
+                    
+                    cat("  If this doesn't work, email us at:\n\n")
+                    
+                    cat("       inzight_support@stat.auckland.ac.nz\n\n")
+                    
+                    cat("  and we may be able to provide you with an alternative.\n\n")
+
+                    cat("==========================================================\n\n")
+                }
+            }
+        }
+        
         move <- function() {
             if (!is.na(Sys.getenv()["R_DIR"])) {
                 setwd(Sys.getenv()["R_DIR"])
@@ -69,9 +93,9 @@ updateDistribution <- function() {
     
 
     cat("==========================================================\n")
-    cat("                    Updating complete.\n")
+    cat("  Updating complete.\n")
     if (.Platform$OS != "windows")
-        cat("                    Close R before running iNZight.\n")
+        cat("  Close R before running iNZight.\n")
     cat("==========================================================\n\n")
 
     Sys.sleep(3)
