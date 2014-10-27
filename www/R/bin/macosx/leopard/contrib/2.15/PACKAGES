@@ -1,36 +1,36 @@
 Package: gWidgets2
-Version: 1.0-9
+Version: 1.0-8
 Depends: methods, digest
 License: GPL (>= 3)
 NeedsCompilation: no
-MD5sum: 888743d4ab335c679cc5b1548018df1f
+MD5sum: 39bea8e12fdc7c7faf43baa8a47213d3
 
 Package: gWidgets2RGtk2
-Version: 1.0-6
+Version: 1.0-5
 Depends: methods, memoise, RGtk2, gWidgets2
 Suggests: testthat, cairoDevice
 License: GPL-3
 NeedsCompilation: no
-MD5sum: c866df283c44a583f13f5af117489c83
+MD5sum: 5d5a42e173acf881bb52532f2847d13a
 
 Package: iNZight
-Version: 2.0.3-3
+Version: 2.0.3-4
 Depends: R (>= 2.15), objectProperties, gWidgets2, cairoDevice
 Imports: grid, RGtk2, RODBC, gdata, reshape2, gWidgets2RGtk2,
-        iNZightPlots, iNZightTools
+       iNZightPlots, iNZightTools
 Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
 License: GPL-2
 NeedsCompilation: no
-MD5sum: 1323ce56ef423a51b8289926a8285884
+MD5sum: 3bd55708723b50a3f9216f7e0ea102b5
 
 Package: iNZightModules
 Version: 1.0.4
 Depends: R (>= 2.13)
-Imports: iNZightRegression, iNZightMR, iNZightTools, survey, mgcv, rgl,
-        barcode, gpairs
+Imports: iNZightRegression, iNZightMR, iNZightTools, survey,
+       mgcv, rgl, barcode, gpairs
 License: GPL-2
 NeedsCompilation: no
-MD5sum: 09af087e128031e207441896217d576b
+MD5sum: 6d696ab86ddd9df13e78546906eca644
 
 Package: iNZightMR
 Version: 1.1.2-1
@@ -39,7 +39,7 @@ Imports: iNZightRegression, hexbin
 Suggests: iNZight
 License: GPL-2
 NeedsCompilation: no
-MD5sum: ae18daea37953ca3f1ad61cc5871dc4b
+MD5sum: cec933a19bdaeefa4c1d1cf4ccfee4dd
 
 Package: iNZightPlots
 Version: 1.0.4
@@ -48,7 +48,7 @@ Imports: grid, boot, s20x, survey, quantreg, SparseM
 Suggests: iNZight
 License: GPL-2
 NeedsCompilation: no
-MD5sum: 3290f411affc674047db4454737ed331
+MD5sum: bc83eb7ce001d4c3f9619652318a8d41
 
 Package: iNZightRegression
 Version: 1.1.3
@@ -57,7 +57,7 @@ Imports: grid, car
 Suggests: iNZight, s20x, iNZightPlots
 License: GPL-2
 NeedsCompilation: no
-MD5sum: 4911d8ff3db3b7afc5e9484bc23e3f3d
+MD5sum: 8a06823bf68b7df1cfbeb2915cfb85ec
 
 Package: iNZightTools
 Version: 1.0.0
@@ -65,7 +65,7 @@ Depends: survey
 Suggests: iNZight
 License: GPL-2
 NeedsCompilation: no
-MD5sum: ad4e9e7f0a40ce7f2e129e7e9a30d73f
+MD5sum: c053d93ee9082975f5d171c50aebc7df
 
 Package: iNZightTS
 Version: 1.1.3
@@ -74,7 +74,7 @@ Imports: grid
 Suggests: iNZight, Acinonyx
 License: GPL-2
 NeedsCompilation: no
-MD5sum: 7098eb6839f396a923d9db8100035985
+MD5sum: 61e3bec59090e82b05ca84656e370fe7
 
 Package: vit
 Version: 1.2.1
@@ -84,5 +84,5 @@ Suggests: Acinonyx, png
 Enhances: iNZight
 License: GPL-2
 NeedsCompilation: no
-MD5sum: 931b94fb27f559bff894600166ce1423
+MD5sum: fbed59426ffabde54ceee3edceb8d46c
 
