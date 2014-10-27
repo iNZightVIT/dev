@@ -1,5 +1,9 @@
 system("cd ~/iNZight; ~/R-3.0.2/bin/R CMD INSTALL iNZight"); q()
-library(iNZight); iNZight(read.csv("~/iNZight/data/CaS2011_5000.csv"))
+
+library(devtools)
+
+load_all("~/iNZight/iNZight")
+iNZight(read.csv("~/iNZight/data/CaS2011_5000.csv"))
 
 
 
