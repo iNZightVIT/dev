@@ -197,9 +197,12 @@ winEverything:
 
 
 winPackageIndex:
-	cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
-	cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
-	cd $(WIN_REP)/3.1/; R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm *.Rout; rm .RData
+	cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	cd $(WIN_REP)/3.1/; R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	-cd $(WIN_REP)/2.15/; rm *.Rout; rm .RData
+	-cd $(WIN_REP)/3.0/; rm *.Rout; rm .RData
+	-cd $(WIN_REP)/3.1/; rm *.Rout; rm .RData
 
 
 
@@ -212,7 +215,8 @@ source:
 		cd $(src_lib) ; R CMD build --no-build-vignettes $(DIR)/$$pkg ; \
 	done
 srcPackageIndex:
-	cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; rm *.Rout; rm .RData
+	cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; 
+	-cd $(src_lib); rm *.Rout; rm .RData
 
 srcAll:
 	make source srcPackageIndex

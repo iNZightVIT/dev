@@ -1,36 +1,52 @@
 Package: gWidgets2
-Version: 1.0-9
+Version: 1.0-8
 Depends: methods, digest
 License: GPL (>= 3)
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: 6fd8cd1ac59b2b396bfc051c7046ac93
+=======
+MD5sum: 39bea8e12fdc7c7faf43baa8a47213d3
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: gWidgets2RGtk2
-Version: 1.0-6
+Version: 1.0-5
 Depends: methods, memoise, RGtk2, gWidgets2
 Suggests: testthat, cairoDevice
 License: GPL-3
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: 75b4307f151de9787fe81f33476044b3
+=======
+MD5sum: 5d5a42e173acf881bb52532f2847d13a
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: iNZight
 Version: 2.0.3-4
 Depends: R (>= 2.15), objectProperties, gWidgets2, cairoDevice
 Imports: grid, RGtk2, RODBC, gdata, reshape2, gWidgets2RGtk2,
-        iNZightPlots, iNZightTools
+       iNZightPlots, iNZightTools
 Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: 84a4bdddf7856552b07eda1f5197591b
+=======
+MD5sum: 3bd55708723b50a3f9216f7e0ea102b5
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: iNZightModules
 Version: 1.0.4
 Depends: R (>= 2.13)
-Imports: iNZightRegression, iNZightMR, iNZightTools, survey, mgcv, rgl,
-        barcode, gpairs
+Imports: iNZightRegression, iNZightMR, iNZightTools, survey,
+       mgcv, rgl, barcode, gpairs
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: db1b4e1c6f96a2ee3397337bcc551cf9
+=======
+MD5sum: 6d696ab86ddd9df13e78546906eca644
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: iNZightMR
 Version: 1.1.2-1
@@ -39,7 +55,11 @@ Imports: iNZightRegression, hexbin
 Suggests: iNZight
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: 3d7d4819598c23bc24765add23fa3c5d
+=======
+MD5sum: cec933a19bdaeefa4c1d1cf4ccfee4dd
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: iNZightPlots
 Version: 1.0.4-1
@@ -48,7 +68,11 @@ Imports: grid, boot, s20x, survey, quantreg, SparseM
 Suggests: iNZight
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: 470e74cfb15888548e61925e0f9ef3c6
+=======
+MD5sum: bc83eb7ce001d4c3f9619652318a8d41
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: iNZightRegression
 Version: 1.1.3
@@ -57,7 +81,11 @@ Imports: grid, car
 Suggests: iNZight, s20x, iNZightPlots
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: de34dfd69f7ad302ab3616edb47dda6f
+=======
+MD5sum: 8a06823bf68b7df1cfbeb2915cfb85ec
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: iNZightTools
 Version: 1.0.0
@@ -65,7 +93,11 @@ Depends: survey
 Suggests: iNZight
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: b68a9c000256c86f4ad93e64d379c5f4
+=======
+MD5sum: c053d93ee9082975f5d171c50aebc7df
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: iNZightTS
 Version: 1.1.3
@@ -74,7 +106,11 @@ Imports: grid
 Suggests: iNZight, Acinonyx
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: 3861d2f65d8ca579d1bdf72257fd62d8
+=======
+MD5sum: 61e3bec59090e82b05ca84656e370fe7
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
 Package: vit
 Version: 1.2.1
@@ -84,5 +120,9 @@ Suggests: Acinonyx, png
 Enhances: iNZight
 License: GPL-2
 NeedsCompilation: no
+<<<<<<< HEAD
 MD5sum: 238a8eb42470a4583605c3eb3463a2cc
+=======
+MD5sum: fbed59426ffabde54ceee3edceb8d46c
+>>>>>>> e76f1301b5741b9d810824aba8848eb0135d3c7a
 
