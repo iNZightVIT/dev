@@ -1,10 +1,10 @@
 Package: gWidgets2
-Version: 1.0-8
+Version: 1.0-9
 Depends: methods, digest
 License: GPL (>= 3)
 
 Package: gWidgets2RGtk2
-Version: 1.0-5
+Version: 1.0-6
 Depends: methods, memoise, RGtk2, gWidgets2
 Suggests: testthat, cairoDevice
 License: GPL-3
@@ -13,15 +13,15 @@ Package: iNZight
 Version: 2.0.3-4
 Depends: R (>= 2.15), objectProperties, gWidgets2, cairoDevice
 Imports: grid, RGtk2, RODBC, gdata, reshape2, gWidgets2RGtk2,
-       iNZightPlots, iNZightTools
+        iNZightPlots, iNZightTools
 Suggests: rgl, gpairs, iNZightTS, iNZightMR, iNZightModules
 License: GPL-2
 
 Package: iNZightModules
 Version: 1.0.4
 Depends: R (>= 2.13)
-Imports: iNZightRegression, iNZightMR, iNZightTools, survey,
-       mgcv, rgl, barcode, gpairs
+Imports: iNZightRegression, iNZightMR, iNZightTools, survey, mgcv, rgl,
+        barcode, gpairs
 License: GPL-2
 
 Package: iNZightMR
