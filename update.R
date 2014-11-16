@@ -90,8 +90,11 @@ updateDistribution <- function() {
     pkgs <- pkgs[!pkgs %in% rownames(installed.packages())]
     if (length(pkgs) > 0)
         install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
-    
 
+    ## track updates:
+    #f <- try(url("http://docker.stat.auckland.ac.nz/R/tracker/index.php?track", open = "r"), TRUE)
+    
+    ## success message
     cat("==========================================================\n")
     cat("  Updating complete.\n")
     if (.Platform$OS != "windows")
