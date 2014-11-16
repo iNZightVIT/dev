@@ -7,3 +7,6 @@
 **/*.gz
 **/*.tgz
 **/*.zip
+
+**/PACKAGES*
+**/.RData
