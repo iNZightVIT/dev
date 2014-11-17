@@ -3,7 +3,9 @@ system("cd ~/iNZight; ~/R-3.0.2/bin/R CMD INSTALL iNZight"); q()
 library(devtools)
 
 load_all("~/iNZight/iNZight")
-iNZight(read.csv("~/iNZight/data/CaS2011_5000.csv"))
+iNZight(read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+
+
 
 
 
