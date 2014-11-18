@@ -72,32 +72,32 @@ rmMacG:
 
 # At the beginning/end of a session, it is a good idea to check the status of all of your repositories.
 statusall:
-	for pkg in $(inz_packages) ; do \
+	@for pkg in $(inz_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git status ; \
 	done
 
 # Once you have committed all changes, you need to pull any updates from github:
 pullall:
-	for pkg in $(inz_packages) ; do \
+	@for pkg in $(inz_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git pull ; \
 	done
 
 fetchall:
-	for pkg in $(inz_packages) ; do \
+	@for pkg in $(inz_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git fetch -p ; \
 	done
 
 masterall:
-	for pkg in $(inz_packages) ; do \
+	@for pkg in $(inz_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git checkout master ; \
 	done
 
 branchall:
-	for pkg in $(inz_packages) ; do \
+	@for pkg in $(inz_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git branch -a ; \
 	done
@@ -105,13 +105,13 @@ branchall:
 
 # and when you're done, push all of your work to github so it's kept up to date.
 pushall:
-	for pkg in $(inz_packages) ; do \
+	@for pkg in $(inz_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git push ; \
 	done
 
 pullG:
-	for pkg in $(g_packages) ; do \
+	@for pkg in $(g_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git pull ; \
 	done
@@ -314,4 +314,8 @@ pkgToDocker:
 	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
 
 
-
+newsFiles:
+	@for pkg in $(inz_packages) ; do \
+	  R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
+	done
+	@echo "NEWS files converted to HTML and moved to dev/changes ..."

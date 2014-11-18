@@ -1,3 +1,18 @@
+RELEASE VERSION 2.0.4
+
+iNZight v2.0.4
+- [new] The data set name is displayed above the data view
+- [new] The variable type is now displayed as a prefix to the variable names in the variable view  
+- [new] A new "Updates Available" shows up when new versions are released
+- [new] A new Help tab that includes Licence information, and a link to the FAQ and Support pages
+- [change] In the "Remove Additions" window, "Remove segmentation" has been renamed to 
+           "Remove colour by" for bar plots, and "Restore default labels" is added to remove
+           customised plot labels
+- [fix] Removes development text from Load Data window
+- [fix] Fixes a bug in the Locate Points feature when the scales are vastly different
+- [fix] Scroll bars added to Reorder Levels window
+- [fix] The menu has been moved above the plot tabs, so it no longer gets cut off
+
 ------------------------------------------------------------------------------------------------
 RELEASE VERSION 2.0.3
 
