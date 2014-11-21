@@ -319,3 +319,4 @@ newsFiles:
 	  R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
 	done
 	@echo "NEWS files converted to HTML and moved to dev/changes ..."
+	@cd changes; Rscript --vanilla addLinks.R;
