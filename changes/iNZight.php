@@ -3,6 +3,8 @@
 
 <h3>Changes in version 2.0.4</h3>
 
+<p>Release date: 18 November 2014
+</p>
 
 
 <h4>NEW FEATURES</h4>
@@ -66,6 +68,8 @@ gets cut off
 
 <h3>Changes in version 2.0.3</h3>
 
+<p>Release date: 17 September 2014
+</p>
 
 
 <h4>MAJOR CHANGES</h4>
@@ -107,6 +111,8 @@ NEWS file for these
 
 <h3>Changes in version 2.0.2</h3>
 
+<p>Release date: 17 June 2014
+</p>
 
 
 <h4>NEW FEATURES</h4>
@@ -159,6 +165,8 @@ for consistency.
 
 <h3>Changes in version 2.0.1</h3>
 
+<p>Release date: 27 March 2014
+</p>
 
 
 <h4>NEW FEATURES</h4>
@@ -215,6 +223,8 @@ frequency.
 
 <h3>Changes in version 2.0.0</h3>
 
+<p>Release date: 18 January 2014
+</p>
 
 
 <h4>MAJOR RELEASE</h4>
