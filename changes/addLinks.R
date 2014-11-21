@@ -9,5 +9,8 @@ invisible(lapply(files, function(ff) {
     from <- which(grepl("R Documentation</td>", temp)) + 1
     to <- which(grepl("</body>", temp)) - 1
     
-    writeLines(temp[from:to], ff)
+    writeLines(temp[from:to], paste0(file, ".php"))
+
+    writeLines(paste0('<meta http-equiv="refresh" content="0; url=../changelog.php?pkg=', file,'" />'),
+               ff)
 }))
