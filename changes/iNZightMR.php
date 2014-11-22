@@ -3,6 +3,8 @@
 
 <h3>Changes in version 1.1.2</h3>
 
+<p>Release date: 3 October 2014
+</p>
 
 
 <h4>BUG FIXES</h4>
@@ -19,6 +21,8 @@ iNZight
 
 <h3>Changes in version 1.1.1</h3>
 
+<p>Release date: 19 September 2014
+</p>
 
 
 <h4>MAJOR CHANGES</h4>
@@ -36,6 +40,8 @@ any bugs will likely not be updated until the release of iNZightPlots
 
 <h3>Changes in version 1.1</h3>
 
+<p>Release date: 18 January 2014
+</p>
 
 <ul>
 <li><p> No user-level changes, however released to coincide with major update

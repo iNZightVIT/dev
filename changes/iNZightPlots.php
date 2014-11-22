@@ -3,6 +3,8 @@
 
 <h3>Changes in Version 1.0.4</h3>
 
+<p>Release date: 17 September 2014
+</p>
 
 
 <h4>MAJOR CHANGES</h4>
@@ -68,13 +70,21 @@ are cleared so plotting can continue
 
 <h4>PATCH 1.0.4-1</h4>
 
-<p>Fixed a bug that stopped matrix of plots for some variables.
+<p>Date: 29 October 2014
 </p>
+
+<ul>
+<li><p> Fixed a bug that stopped matrix of plots for some variables.
+</p>
+</li></ul>
+
 
 
 
 <h3>Changes in Version 1.0.3</h3>
 
+<p>Release date: 17 June 2014
+</p>
 
 
 <h4>BUG FIXES</h4>
@@ -94,6 +104,8 @@ summary and inference information.
 
 <h3>Changes in Version 1.0.2</h3>
 
+<p>Release date: 4 April 2014
+</p>
 
 
 <h4>BUG FIXES</h4>
@@ -111,6 +123,8 @@ fixed.
 
 <h3>Changes in Version 1.0.1</h3>
 
+<p>Release date: 27 March 2014
+</p>
 
 
 <h4>MINOR CHANGES</h4>
@@ -162,6 +176,8 @@ has been fixed.
 
 <h3>MAJOR RELEASE VERSION 1.0.0</h3>
 
+<p>Release date: 18 January 2014
+</p>
 
 <ul>
 <li><p> New major release of iNZightPlots released, completely

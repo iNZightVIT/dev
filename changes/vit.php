@@ -3,6 +3,8 @@
 
 <h3>Changes in version 1.2.1</h3>
 
+<p>Release date: 18 September 2014
+</p>
 
 
 <h4>MINOR CHANGES</h4>
@@ -19,6 +21,8 @@ denoted by #'s
 
 <h3>Changes in version 1.2.0</h3>
 
+<p>Release date: 18 January 2014
+</p>
 
 
 <h4>MAJOR CHANGES</h4>

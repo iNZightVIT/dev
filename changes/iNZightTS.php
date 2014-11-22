@@ -3,6 +3,8 @@
 
 <h3>Changes in version 1.1.3</h3>
 
+<p>Release date: 17 September 2014
+</p>
 
 
 <h4>MINOR CHANGES</h4>
@@ -18,6 +20,8 @@
 
 <h3>Changes in version 1.1.2</h3>
 
+<p>Release date: 4 April 2014
+</p>
 
 
 <h4>MINOR CHANGES</h4>
@@ -44,6 +48,8 @@
 
 <h3>Changes in version 1.1.1</h3>
 
+<p>Release date: 27 March 2014
+</p>
 
 
 <h4>MINOR CHANGES</h4>
@@ -72,6 +78,8 @@ over-writing objects with a &quot;white&quot; background.
 
 <h3>Changes in version 1.1.0</h3>
 
+<p>Release date: 18 January 2014
+</p>
 
 
 <h4>CHANGES</h4>
