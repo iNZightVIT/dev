@@ -1,9 +1,11 @@
-system("cd ~/iNZight; ~/R-3.0.2/bin/R CMD INSTALL iNZight"); q()
-
+system("cd ~/iNZight; ~/R-3.0.2/bin/R CMD INSTALL iNZightModules"); q()
 library(devtools)
 
 load_all("~/iNZight/iNZight")
-iNZight(read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+
+load_all("~/iNZight/iNZightTS")
+load_all("~/iNZight/iNZightModules")
+iNZight(read.csv("~/iNZight/data/time-series/visitorsQ.csv", header = TRUE, comment.char = "#"))
 
 
 
