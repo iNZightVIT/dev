@@ -1,6 +1,24 @@
 
 <h2>Change Log for iNZightModules</h2>
 
+<h3>Changes in version 1.0.5</h3>
+
+<p>Release date: 27 November 2014
+</p>
+
+
+<h4>MINOR CHANGES</h4>
+
+
+<ul>
+<li><p> add scrollbars to Time Series window if it doesn't fit on
+the screen
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in version 1.0.4</h3>
 
 
