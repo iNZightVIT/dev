@@ -4,10 +4,8 @@
 $track = isset($_GET["track"]);
 
 // database info
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "inzightvit";
+
+include "con.php";
 
 $con = new mysqli($servername, $username, $password, $dbname);
 if ($con->connect_error) {
@@ -17,12 +15,18 @@ if ($con->connect_error) {
 if ($track) {
   // Grab their IP address
   $ipaddr = (string)$_SERVER["REMOTE_ADDR"];
+  $ipaddr = "188.105.247.193";
 
   // get information about them:
   $ipinfo  = json_decode(file_get_contents("http://ipinfo.io/{$ipaddr}/json"));
   $city    = $ipinfo->city;
   $region  = $ipinfo->region;
   $country = $ipinfo->country;
+
+  include "codes.php";
+  if (array_key_exists($country, $countries)) {
+    $country = ucwords(strtolower($countries[$country]));
+  }
   $loc     = $ipinfo->loc;  
 
   // version
