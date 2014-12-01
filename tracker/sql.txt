@@ -1,0 +1,22 @@
+DROP TABLE users;
+
+CREATE TABLE users (
+ip varchar(20) NOT NULL,
+start DATETIME NOT NULL,
+lastvisit TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+visits int NOT NULL DEFAULT 1,
+version varchar(10) NOT NULL,
+os varchar(25) NOT NULL,
+PRIMARY KEY (ip)
+);
+
+DESCRIBE users;
+
+INSERT INTO users (ip, start, version, os) VALUES ("192.163.548.23", "2014-11-02", "2.0.3", "linux");
+SELECT * FROM users;
+
+UPDATE users 
+SET version='2.0.4', visits=2 
+WHERE ip = "192.163.548.23";
+
+SELECT * FROM users;

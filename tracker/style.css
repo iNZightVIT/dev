@@ -1,0 +1,21 @@
+table, th, td {
+    border-collapse: collapse;
+    padding: 5px;
+}
+table {
+    border-bottom: solid 1px black;
+}
+
+
+tr.head {
+    border-bottom: solid 1px black;
+}
+
+tr:nth-of-type(even) {
+    background: #ccc;
+}
+
+th, td {
+    padding-left: 15px;
+    padding-right: 15px;
+}
