@@ -3,7 +3,10 @@ updateDistribution <- function() {
     cat("               Checking for updates ...\n")
     cat("==========================================================\n\n")
 
+    os = "linux"
+    
     if (.Platform$OS == "windows") {
+        os = "Windows"
         ## Checking if the updater is using the new structure ...
         if (tail(strsplit(getwd(), "/")[[1]], 1) != "prog_files") {
             cat("    Updating scripts ...\n\n")
@@ -39,9 +42,11 @@ updateDistribution <- function() {
         }
     } else {
         if (Sys.info()["sysname"] == "Darwin") {
+            os = "Mac"
             ## It's a mac
             osx.version <- try(system("sw_vers -productVersion", intern = TRUE), silent = TRUE)
             if (!inherits(osx.version, "try-error")) {
+                os = paste("Mac OS X", osx.version)
                 if (osx.version == "10.10") {
                     cat("==========================================================\n\n")
                     
@@ -92,7 +97,9 @@ updateDistribution <- function() {
         install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
 
     ## track updates:
-    #f <- try(url("http://docker.stat.auckland.ac.nz/R/tracker/index.php?track", open = "r"), TRUE)
+    version <- as.character(packageVersion("iNZight"))
+#    f <- try(url(paste0("http://docker.stat.auckland.ac.nz/R/tracker/index.php?track&v=",
+#                        version, "&os=", gsub(" ", "%20", os)), open = "r"), TRUE)
     
     ## success message
     cat("==========================================================\n")
@@ -100,6 +107,8 @@ updateDistribution <- function() {
     if (.Platform$OS != "windows")
         cat("  Close R before running iNZight.\n")
     cat("==========================================================\n\n")
+
+    readline(prompt = "Press enter to exit ..."); q("no")
 
     Sys.sleep(3)
     
