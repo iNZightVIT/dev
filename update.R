@@ -93,7 +93,7 @@ updateDistribution <- function() {
 
     try({  # don't want to crash it ...
     ## get the OS version:
-    if ("prog_files" %in% list.files()) {
+    if (.Platform$OS == "windows") {
         os = "Windows"
     } else {
         osx.version <- try(system("sw_vers -productVersion", intern = TRUE), silent = TRUE)
@@ -107,8 +107,8 @@ updateDistribution <- function() {
     ## have they updated before?
     hash.id <- "new"
     if (os == "Windows") {
-        if (file.exists("prog_files/id.txt")) {
-            hash.id <- readLines("prog_files/id.txt")
+        if (file.exists("id.txt")) {
+            hash.id <- readLines("id.txt")
         }
     } else {
         if (file.exists("Library/id.txt")) {
@@ -123,7 +123,7 @@ updateDistribution <- function() {
     if (hash.id == "new") {
         ## write the hash code to their installation:
         hash.id <- readLines(f)
-        writeLines(hash.id, paste0(ifelse(os == "Windows", "prog_files", "Library"), "/id.txt"))
+        writeLines(hash.id, paste0(ifelse(os == "Windows", "", "Library/"), "id.txt"))
     }
     }, TRUE)
     
