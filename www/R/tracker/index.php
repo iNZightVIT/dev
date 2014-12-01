@@ -5,9 +5,9 @@ $track = isset($_GET["track"]);
 
 // database info
 $servername = "localhost";
-$username = "inzight_repo";
-$password = "thisIswhereYougetiNZight2";
-$dbname = "inzight_package_repo";
+$username = "root";
+$password = "";
+$dbname = "inzightvit";
 
 $con = new mysqli($servername, $username, $password, $dbname);
 if ($con->connect_error) {
@@ -21,35 +21,24 @@ if ($track) {
   // version
   $version = $_GET["v"];
   $os      = $_GET["os"];
-  $hash    = $_GET["hash"];
-
-  if ($hash == "new") {
-    // generate a new hash code
-    $match = TRUE;
-    while($match) {
-      $hash = uniqid();
-      $match = $con->query("SELECT ID FROM users WHERE ID='$hash'")->num_row > 0;
-    }
-    echo $hash . "\n";  // echo it out so R can save it
-  }
-
+  
   // get date
   $now = new DateTime();
   $date = $now->format('Y-m-d H:i:s');
 
   // try to select the IP address from the database:
-  $sql = "SELECT ip, version, visits FROM users WHERE id='$hash'";
+  $sql = "SELECT ip, version, visits FROM users WHERE ip='$ipaddr' AND os='$os'";
   $result = $con->query($sql);
 
   if ($result->num_rows == 0) {
-    $sql = "INSERT INTO users (id, ip, start, version, os) VALUES ('$hash', '$ipaddr', '$date', '$version', '$os')";
+    $sql = "INSERT INTO users (ip, start, version, os) VALUES ('$ipaddr', '$date', '$version', '$os')";
     if ($con->query($sql) === TRUE) {
       die();
     }
   } else if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();
     $visits = $row["visits"] + 1;
-    $sql = "UPDATE users SET version='$version', visits='$visits' WHERE id='$hash'";
+    $sql = "UPDATE users SET version='$version', visits='$visits' WHERE ip='$ipaddr' AND os='$os'";
     if ($con->query($sql) == TRUE) {
       die();
     }
