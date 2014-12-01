@@ -27,37 +27,36 @@ if ($track) {
   $date = $now->format('Y-m-d H:i:s');
 
   // try to select the IP address from the database:
-  $sql = "SELECT ip, version, visits FROM users WHERE ip='$ipaddr'";
+  $sql = "SELECT ip, version, visits FROM users WHERE ip='$ipaddr' AND os='$os'";
   $result = $con->query($sql);
 
-  switch($result->num_rows) {
-    case 0:
-        $sql = "INSERT INTO users (ip, start, version, os) VALUES ('$ipaddr', '$date', '$version', '$os')";
-        if ($con->query($sql) === TRUE) {
-          die();
-        }
-        break;
-    case 1:
-        $row = $result->fetch_assoc();
-        $visits = $row["visits"] + 1;
-        $sql = "UPDATE users SET version='$version', visits='$visits' WHERE ip='$ipaddr'";
-        if ($con->query($sql) == TRUE) {
-          die();
-        } else {
-          echo $con->error;
-        }
-        break;
-    default:
-        die();
+  if ($result->num_rows == 0) {
+    $sql = "INSERT INTO users (ip, start, version, os) VALUES ('$ipaddr', '$date', '$version', '$os')";
+    if ($con->query($sql) === TRUE) {
+      die();
+    }
+  } else if ($result->num_rows == 1) {
+    $row = $result->fetch_assoc();
+    $visits = $row["visits"] + 1;
+    $sql = "UPDATE users SET version='$version', visits='$visits' WHERE ip='$ipaddr' AND os='$os'";
+    if ($con->query($sql) == TRUE) {
+      die();
+    }
   }
 
   die();
   
 } else { 
 
+  // the number of rows in the database
   $sql = "SELECT ip, version, os, start, lastvisit, visits FROM users ORDER BY lastvisit DESC";
   $result = $con->query($sql);
   $nrow = $result->num_rows;
+
+  // the number of unique IP addresses:
+  $sql = "SELECT COUNT(DISTINCT ip) as count FROM users";
+  $result2 = $con->query($sql);
+  $countrow = $result2->fetch_assoc();
 
 ?>
 
@@ -76,6 +75,7 @@ if ($track) {
       script.</p>
     
     <p>Number of unique users: <?php echo $nrow; ?></p>
+    <p>Number of unique IP addresses: <?php echo $countrow["count"]; ?></p>
     
     
     <?php 

@@ -98,8 +98,8 @@ updateDistribution <- function() {
 
     ## track updates:
     version <- as.character(packageVersion("iNZight"))
-#    f <- try(url(paste0("http://docker.stat.auckland.ac.nz/R/tracker/index.php?track&v=",
-#                        version, "&os=", gsub(" ", "%20", os)), open = "r"), TRUE)
+    f <- try(url(paste0("http://docker.stat.auckland.ac.nz/R/tracker/index.php?track&v=",
+                        version, "&os=", gsub(" ", "%20", os)), open = "r"), TRUE)
     
     ## success message
     cat("==========================================================\n")
