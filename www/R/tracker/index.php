@@ -18,10 +18,17 @@ if ($track) {
   // Grab their IP address
   $ipaddr = (string)$_SERVER["REMOTE_ADDR"];
 
+  // get information about them:
+  $ipinfo  = json_decode(file_get_contents("http://ipinfo.io/{$ipaddr}/json"));
+  $city    = $ipinfo->city;
+  $region  = $ipinfo->region;
+  $country = $ipinfo->country;
+  $loc     = $ipinfo->loc;  
+
   // version
-  $version = $_GET["v"];
-  $os      = $_GET["os"];
-  $hash    = $_GET["hash"];
+  $version = $con->real_escape_string($_GET["v"]);
+  $os      = $con->real_escape_string($_GET["os"]);
+  $hash    = $con->real_escape_string($_GET["hash"]);
 
   if ($hash == "new") {
     // generate a new hash code
@@ -42,14 +49,20 @@ if ($track) {
   $result = $con->query($sql);
 
   if ($result->num_rows == 0) {
-    $sql = "INSERT INTO users (id, ip, start, version, os) VALUES ('$hash', '$ipaddr', '$date', '$version', '$os')";
+    // INSERT A NEW USER:
+    $sql = "INSERT INTO users (id, ip, start, version, os, city, region, country, location) " . 
+           "VALUES ('$hash', '$ipaddr', '$date', '$version', '$os', '$city', '$region', '$country', '$loc')";
     if ($con->query($sql) === TRUE) {
       die();
     }
   } else if ($result->num_rows == 1) {
+    // UPDATE AN EXISTING USER:
     $row = $result->fetch_assoc();
     $visits = $row["visits"] + 1;
-    $sql = "UPDATE users SET version='$version', visits='$visits' WHERE id='$hash'";
+    $sql = "UPDATE users " .
+           "SET ip='$ipaddr', version='$version', visits='$visits', " . 
+           "    city='$city', region='$region', country='$country', location='$loc' " .
+           "WHERE id='$hash'";
     if ($con->query($sql) == TRUE) {
       die();
     }
@@ -60,14 +73,10 @@ if ($track) {
 } else { 
 
   // the number of rows in the database
-  $sql = "SELECT ip, version, os, start, lastvisit, visits FROM users ORDER BY lastvisit DESC";
+  $sql = "SELECT CONCAT(region, ' - ', country), version, os, start, lastvisit, visits " .
+         "FROM users ORDER BY lastvisit DESC";
   $result = $con->query($sql);
   $nrow = $result->num_rows;
-
-  // the number of unique IP addresses:
-  $sql = "SELECT COUNT(DISTINCT ip) as count FROM users";
-  $result2 = $con->query($sql);
-  $countrow = $result2->fetch_assoc();
 
 ?>
 
@@ -86,14 +95,13 @@ if ($track) {
       script.</p>
     
     <p>Number of unique users: <?php echo $nrow; ?></p>
-    <p>Number of unique IP addresses: <?php echo $countrow["count"]; ?></p>
     
     
     <?php 
     if ($nrow > 0) {
       echo "<table>";
       
-      echo "<tr class='head'><th>IP Address</th><th>Version</th><th>Operating System</th>" .
+      echo "<tr class='head'><th>Location</th><th>Version</th><th>Operating System</th>" .
 	   "<th>Start Date</th>" .
 	   "<th>Last Update</th><th>Number of visits</th></tr>";
       

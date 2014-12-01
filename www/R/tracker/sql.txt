@@ -21,3 +21,12 @@ SET version='2.0.4', visits=2
 WHERE ip = "192.163.548.23";
 
 SELECT * FROM users;
+
+
+
+// UPDATE:
+ALTER TABLE users
+ADD city varchar(255),
+ADD region varchar(255),
+ADD country varchar(255),
+ADD location varchar(100);
