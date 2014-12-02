@@ -98,8 +98,12 @@ if ($track) {
     <p>This page displays information related to the number of unique users running the update
       script.</p>
     
-    <p>Number of unique users: <?php echo $nrow; ?></p>
-    
+    <p>
+      Number of unique users: <?php echo $nrow; ?>
+    </p>
+    <p>
+      <a href="userMap.jpg">Map of location data</a>
+    </p>
     
     <?php 
     if ($nrow > 0) {
