@@ -15,7 +15,6 @@ if ($con->connect_error) {
 if ($track) {
   // Grab their IP address
   $ipaddr = (string)$_SERVER["REMOTE_ADDR"];
-  $ipaddr = "188.105.247.193";
 
   // get information about them:
   $ipinfo  = json_decode(file_get_contents("http://ipinfo.io/{$ipaddr}/json"));
