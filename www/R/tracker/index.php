@@ -77,14 +77,21 @@ if ($track) {
 
   // the number of rows in the database
 
-  $orderby  = (isset($_GET["s"]) === true) ? $con->real_escape_string($_GET["s"]) : "lastvisit";
-  $orderby .= (isset($_GET["rev"]) === true) ? "" : " DESC";
+  if (isset($_GET["s"]) === true) {
+    if ($_GET["s"] == "country") {
+      $orderby = "country, region";
+    }
+    else {
+      $orderby = $con->real_escape_string($_GET["s"]);
+    }
+  } else {
+    $orderby = "lastvisit";
+  }
+  $orderby .= (isset($_GET["rev"]) === true || isset($_GET["s"]) === false) ? " DESC" : "";
 
   $sql  = "SELECT region, country, version, os, start, lastvisit, visits";
   $sql .= (isset($_GET["ip"]) === true) ? ", ip " : " ";
   $sql .=  "FROM users ORDER BY $orderby";
-
-  echo $sql;
 
   $result = $con->query($sql);
   $nrow = $result->num_rows;
@@ -132,7 +139,7 @@ if ($track) {
       echo "<tr class='head'>";
       foreach($tabHeader as $lab => $val) {
         $labb = ($lab == "loc") ? "country" : $lab;
-        $rev  = (isset($_GET["rev"]) === true || $_GET["s"] != $lab) ? "" : "&rev";
+        $rev  = (isset($_GET["rev"]) === true || $_GET["s"] != $labb) ? "" : "&rev";
         echo "<th><a href='./?".$showip."s=".$labb.$rev."'>$val</a></th>";
       }
       echo "</tr>";
