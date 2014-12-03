@@ -76,10 +76,29 @@ if ($track) {
 } else { 
 
   // the number of rows in the database
-  $sql = "SELECT CONCAT(region, ' - ', country), version, os, start, lastvisit, visits " .
-         "FROM users ORDER BY lastvisit DESC";
+
+  $orderby  = (isset($_GET["s"]) === true) ? $con->real_escape_string($_GET["s"]) : "lastvisit";
+  $orderby .= (isset($_GET["rev"]) === true) ? "" : " DESC";
+
+  $sql  = "SELECT region, country, version, os, start, lastvisit, visits";
+  $sql .= (isset($_GET["ip"]) === true) ? ", ip " : " ";
+  $sql .=  "FROM users ORDER BY $orderby";
+
+  echo $sql;
+
   $result = $con->query($sql);
   $nrow = $result->num_rows;
+
+  $tabHeader = array("loc"         => "Location",
+                     "version"     => "Version",
+                     "os"          => "Operating System",
+                     "start"       => "Active Since",
+                     "lastvisit"   => "Last Update",
+                     "visits"      => "Number of updates");
+  if (isset($_GET["ip"]) === true) {
+    $tabHeader["ip"] = "IP Address";
+  }
+
 
 ?>
 
@@ -107,15 +126,30 @@ if ($track) {
     <?php 
     if ($nrow > 0) {
       echo "<table>";
-      
-      echo "<tr class='head'><th>Location</th><th>Version</th><th>Operating System</th>" .
-	   "<th>Start Date</th>" .
-	   "<th>Last Update</th><th>Number of visits</th></tr>";
+
+      $showip = (isset($_GET["ip"]) === true) ? "ip&" : "";
+
+      echo "<tr class='head'>";
+      foreach($tabHeader as $lab => $val) {
+        $labb = ($lab == "loc") ? "country" : $lab;
+        $rev  = (isset($_GET["rev"]) === true || $_GET["s"] != $lab) ? "" : "&rev";
+        echo "<th><a href='./?".$showip."s=".$labb.$rev."'>$val</a></th>";
+      }
+      echo "</tr>";
       
       while($row = $result->fetch_assoc()) {
 	echo "<tr>";
-	foreach($row as $col) {
-	  echo "<td>" . $col . "</td>";
+        
+        if (strlen($row["region"]) > 0) {
+          $row["loc"] = $row["region"] . " - " . $row["country"];
+        } else if (strlen($row["country"]) > 0) {
+          $row["loc"] = $row["country"];
+        } else {
+          $row["loc"] = "-";
+        }
+
+	foreach($tabHeader as $key => $val) {
+	  echo "<td>" . $row[$key] . "</td>";
 	}
 	echo "</tr>";
       }
