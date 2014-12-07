@@ -1,3 +1,5 @@
 map:
 	@Rscript --vanilla plotUsers.R
-	scp userMap.jpg inzight@docker.stat.auckland.ac.nz:www/R/tracker
+	@echo "Pushing to server..."
+	@scp userMap.jpg inzight@docker.stat.auckland.ac.nz:www/R/tracker
+	@echo " done.\n"
