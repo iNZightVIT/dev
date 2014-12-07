@@ -15,12 +15,12 @@ if ($_GET['r'] != "imfromiNZight") {
   die("There's nothing to show.");
 }
 
-$sql = "SELECT location, os FROM users";
+$sql = "SELECT location, country, os FROM users";
 $result = $con->query($sql);
 
-echo "Location,OS\n";
+echo "Location,country,OS\n";
 while($row = $result->fetch_assoc()) {
-  echo "\"" . $row["location"] . "\"" . "," . $row["os"] . "\n";
+  echo "\"" . $row["location"] . "\"" . "," . "\"" . $row["country"] . "\"" . "," . $row["os"] . "\n";
 }
 
 $con->close();
