@@ -66,6 +66,19 @@ gets cut off
 
 
 
+<h4>Patch 2.0.4-1</h4>
+
+<p>Date: 12-12-2014
+</p>
+
+<ul>
+<li><p> fixed up the plot device in Time Series on Linux machines
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in version 2.0.3</h3>
 
 <p>Release date: 17 September 2014
