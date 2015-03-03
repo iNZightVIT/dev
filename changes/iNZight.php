@@ -79,6 +79,19 @@ gets cut off
 
 
 
+<h4>Patch 2.0.4-3</h4>
+
+<p>Date: 10-02-2015
+</p>
+
+<ul>
+<li><p> fix a bug causing write-protected directories to crash
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in version 2.0.3</h3>
 
 <p>Release date: 17 September 2014

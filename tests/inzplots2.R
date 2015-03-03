@@ -1,4 +1,4 @@
-library(grid); library(survey); library(quantreg); library(hexbin)
+library(grid); library(survey); library(quantreg); library(hexbin); library(boot)
 upd <- function() {
     dd <- "~/iNZight/iNZightPlots/R"
     if (length(list.files(dd, pattern = "*~")) > 0)
@@ -70,7 +70,7 @@ iNZightPlot(meals, awards, design = des1)
 
 
 upd()
-iNZightPlot(height, gender, data = d1, g1 = gender)
+iNZightPlot(height, gender, data = d1, g1 = gender) 
 iNZightPlot(height, gender, data = d1, freq = year, g1 = gender, hist.bins = 20)
 iNZightPlot(meals, awards, design = des1, g1 = awards, hist.bins = 20)
 
@@ -103,11 +103,12 @@ upd()
 iNZightPlot(height, armspan, data = d1, colby = cellsource)
 iNZightPlot(height, armspan, data = d1, colby = cellcost)
 iNZightPlot(height, armspan, data = d1, colby = age, g1 = age)
+upd()
 iNZightPlot(gender, armspan, data= d1, colby = gender)
 iNZightPlot(height, armspan, age, data =d1, colby = gender)
-iNZightPlot(height, gender, data=d1, colby = gender)
-iNZightPlot(gender, height, data=d1, g1 = getlunch, colby=gender)
-iNZightPlot(gender, getlunch, data=d1, colby = gender)
+iNZightPlot(height, gender, data=d1, colby = getlunch)
+iNZightPlot(gender, height, data=d1, g1 = getlunch, colby=travel)
+iNZightPlot(gender, getlunch, data=d1)
 
 
 upd()
@@ -303,7 +304,8 @@ iNZightPlot(RIDAGEYR, BPXSY1, design = des2, trend = "linear", colby = agegp, tr
 iNZightPlot(BPXSY1, BPXSAR, design = des2, smooth = 0.7)
 iNZightPlot(BPXSY1, BPXSAR, design = des2, quant.smooth = "default")
 
-iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5)
+upd()
+iNZightPlot(BPXSY1, BPXSAR, design = des2, alpha = 0.5, rugs = "xy", plottype = "scatter", sizeby=BPXSY1)
 iNZightPlot(BPXSY1, BPXSAR, design = des2, hex.bins = 50)
 
 
@@ -367,9 +369,8 @@ iNZightPlot(BPXSY1, BPXSAR, data = d2, smooth = 0.7, plottype = "scatter")
 
 
 
-
 ## ------- this is the dummy code for trend line by continuous variable
-pdf("~/Downloads/trendColByNumericExample.pdf", height = 10, width = 8)
+#pdf("~/Downloads/trendColByNumericExample.pdf", height = 10, width = 8)
 
 upd()
 iNZightPlot(height, age, data = d1, colby = year)
@@ -391,60 +392,57 @@ yy2 <- predict(fit2, newdata = data.frame(height = xx, year = rep(ff, each = 2))
 COLS <- rainbow(200, start = 1/6)[c(1, 66, 132, 200)]
 grid.polyline(rep(xx, 4), yy2, default.units = "native", id = rep(1:4, each = 2),
            gp = gpar(col = COLS, lwd = 2))
-dev.off()
+#dev.off()
 
 
 age.pred <- predict(fit2)
 grid.points(fit2$model$height, age.pred, gp = gpar(cex = 0.4), pch = 19)
 
 
-plot(1:200, 1:200, pch = 19, cex = 2, col = rainbow(200, start = 1/6))
+#plot(1:200, 1:200, pch = 19, cex = 2, col = rainbow(200, start = 1/6))
 
 
 
 
-### =---------------- dot plots
+
+
+
+
+
 upd()
-iNZightPlot(height, data = d1)
-
+iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "mean")
+iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "mean")
 
 
 upd()
-iNZightPlot(d1$gender, d1$cellsource, layout.only = TRUE) -> pl
-pl$gen
+iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
+iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
+
+iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median")
+iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
 
 
-x <- factor(rep("income-1", 10), levels = paste("income", 1:7, sep = "-"))
-y <- factor(c("male", "female"))
-pl <- iNZightPlot(x, layout.only = TRUE)
+upd()
+iNZightPlot(height, getlunch, data = d1)
 
-phat <- matrix(runif(7), nrow=1)
-widths <- rep(1, N <- length(phat))
-edges <- 0:1
-ynull <- TRUE
-out <- list(phat = phat, widths = widths, edges = edges,
-            nx = N,
-            xlim = c(0, N),
-            ylim = c(0, max(phat)))
-class(out) <- "inzbar"
-gen <- pl$gen
+x <- d1$height
+y <- d1$getlunch
+isna <- is.na(x) | is.na(y)
+x <- x[!isna]
+y <- y[!isna]
 
-pushViewport(viewport(layout.pos.row = 2, xscale = pl$xlim, yscale = pl$ylim,
-                      name = "VP:locate.these.points"))
-out1 <- out
-out1$phat <- matrix(rep(1, length(out1$phat)), nrow=1)
-gen$opts$bar.col <- "#000000"
-gen1 <- gen
-gen1$opts$bar.fill <- "#cccccc"
+means <- tapply(x, y, mean)
 
-gen$opts$bar.fill <- "#cc0000"
-plot(out1, gen1)
-plot(out, gen)
+b <- boot(data.frame(x, y), strata = y, function(d, f) {
+    tapply(d[f, 1], d[f, 2], mean)
+}, R = 999)
+t(apply(b$t, 2, quantile, probs = c(0.025, 0.975)))
 
-out
 
-mid <- 1:7 - 0.5
-grid.lines()
+library(iNZightMR)
+ses <- moecalc(seCovs(cov(b$t)), est = means)
+cbind(ses$compL, ses$compU)
+
 
 
 

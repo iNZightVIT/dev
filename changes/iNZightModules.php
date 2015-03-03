@@ -1,6 +1,40 @@
 
 <h2>Change Log for iNZightModules</h2>
 
+<h3>Changes in version 1.0.7</h3>
+
+<p>Release date: 23 February 2015
+</p>
+
+
+<h4>BUG FIXES</h4>
+
+
+<ul>
+<li><p> remove RGL from NAMESPACE completely
+</p>
+</li></ul>
+
+
+
+
+<h3>Changes in version 1.0.6</h3>
+
+<p>Release date: 04 February 2015
+</p>
+
+
+<h4>BUG FIXES</h4>
+
+
+<ul>
+<li><p> fix an issue where RGL causes R on some Windows 8 machines to crash
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in version 1.0.5</h3>
 
 <p>Release date: 27 November 2014
