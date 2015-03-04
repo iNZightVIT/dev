@@ -1,23 +1,6 @@
 
 <h2>Change Log for iNZightTS</h2>
 
-<h3>Changes in version 1.1.6</h3>
-
-<p>Release date: 02 February 2015
-</p>
-
-
-<h4>BUG FIXES</h4>
-
-
-<ul>
-<li><p> reposition the axis label
-</p>
-</li></ul>
-
-
-
-
 <h3>Changes in version 1.1.5</h3>
 
 <p>Release date: 12 January 2015
