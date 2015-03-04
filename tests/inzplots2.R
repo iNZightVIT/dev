@@ -418,31 +418,25 @@ upd()
 iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
 iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
 
-iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median")
-iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
-
-
 upd()
-iNZightPlot(height, getlunch, data = d1)
+iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median")
+iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "median")
 
-x <- d1$height
-y <- d1$getlunch
-isna <- is.na(x) | is.na(y)
-x <- x[!isna]
-y <- y[!isna]
-
-means <- tapply(x, y, mean)
-
-b <- boot(data.frame(x, y), strata = y, function(d, f) {
-    tapply(d[f, 1], d[f, 2], mean)
-}, R = 999)
-t(apply(b$t, 2, quantile, probs = c(0.025, 0.975)))
+iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
+iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
 
 
-library(iNZightMR)
-ses <- moecalc(seCovs(cov(b$t)), est = means)
-cbind(ses$compL, ses$compU)
+## survey
+upd()
+iNZightPlot(meals, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "mean")
+iNZightPlot(meals, awards, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "mean")
 
 
 
 
+
+
+ddd <- des1
+ddd$variables <- data.frame(ddd$variables, y = factor("all"))
+
+confint(svyglm(meals ~ 1, ddd))[1, ]
