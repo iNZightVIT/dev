@@ -468,3 +468,9 @@ iNZightPlot(meals, awards, design = des1, hist.bins = 20, inference.type = c("co
 upd()
 iNZightPlot(travel, data = d1, inference.type = c("conf", "comp"))
 iNZightPlot(travel, gender, data = d1, inference.type = c("conf", "comp"))
+iNZightPlot(travel, getlunch, data = d1, inference.type = c("conf", "comp"))
+
+
+upd()
+iNZightPlot(height, getlunch, data = d1, inference.type = c("conf", "comp"), inference.par = "mean",
+            bs.inference = TRUE)
