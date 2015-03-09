@@ -92,6 +92,19 @@ gets cut off
 
 
 
+<h4>Patch 2.0.4-4</h4>
+
+<p>Date: 10-03-2015
+</p>
+
+<ul>
+<li><p> ping for an internet connection before trying to check for updates
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in version 2.0.3</h3>
 
 <p>Release date: 17 September 2014

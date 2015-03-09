@@ -215,8 +215,8 @@ source:
 		cd $(src_lib) ; R CMD build --no-build-vignettes $(DIR)/$$pkg ; \
 	done
 srcPackageIndex:
-	cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; 
-	-cd $(src_lib); rm *.Rout; rm .RData
+	@cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; 
+	-@cd $(src_lib); rm *.Rout; rm .RData
 
 srcAll:
 	make source srcPackageIndex
@@ -284,10 +284,10 @@ macMAV:
 
 
 macPackageIndex:
-	cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	cd $(MAC_REPMAV)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	-@cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	-@cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	-@cd $(MAC_REPMAV)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 
 
 macEverything:
@@ -320,3 +320,6 @@ newsFiles:
 	done
 	@echo "NEWS files converted to HTML and moved to dev/changes ..."
 	@cd changes; Rscript --vanilla addLinks.R;
+	@echo "Copying to server ..."
+	@scp changes/*.php tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/changes/
+	@ echo "Done.\n\n"
