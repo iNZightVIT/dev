@@ -1,9 +1,10 @@
-library(grid); library(survey); library(quantreg); library(hexbin); library(boot)
+library(grid); library(survey); library(quantreg); library(hexbin); library(boot); library(devtools)
 upd <- function() {
-    dd <- "~/iNZight/iNZightPlots/R"
-    if (length(list.files(dd, pattern = "*~")) > 0)
-        system(paste0("rm ", dd, "/*~"))
-    invisible(lapply(list.files(dd, full.names = TRUE), source))
+   # dd <- "~/iNZight/iNZightPlots/R"
+   # if (length(list.files(dd, pattern = "*~")) > 0)
+   #     system(paste0("rm ", dd, "/*~"))
+   # invisible(lapply(list.files(dd, full.names = TRUE), source))
+    load_all("~/iNZight/iNZightPlots")
 }
 data(api)
 d1 <- read.csv("~/iNZight/data/Census at School-500.csv")
@@ -407,36 +408,63 @@ grid.points(fit2$model$height, age.pred, gp = gpar(cex = 0.4), pch = 19)
 
 
 
+### --- dot plot inference information
 
+# NB: comparison intervals should only appear when there is more than one group to compare.
 
+# Mean (normal)
 upd()
 iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "mean")
-iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "mean")
+iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "mean") -> pl
 
-
+# Mean (bootstrap)
 upd()
 iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
 iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
 
+# Median (normal)
 upd()
 iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median")
 iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "median")
 
+# Median (bootstrap)
+upd()
 iNZightPlot(height, data = d1, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
 iNZightPlot(height, travel, data = d1, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
 
 
-## survey
+###### survey data
+
+## mean (normal)
 upd()
 iNZightPlot(meals, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "mean")
 iNZightPlot(meals, awards, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "mean")
 
 
+## mean (bootstrap)
+upd()
+iNZightPlot(meals, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
+iNZightPlot(meals, awards, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "mean", bs.inference = TRUE)
+
+
+## median (normal)
+upd()
+iNZightPlot(meals, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "median")
+iNZightPlot(meals, awards, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "median")
+
+## median (bootstrap)
+upd()
+iNZightPlot(meals, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
+iNZightPlot(meals, awards, design = des1, hist.bins = 20, inference.type = c("conf", "comp"), inference.par = "median", bs.inference = TRUE)
 
 
 
 
-ddd <- des1
-ddd$variables <- data.frame(ddd$variables, y = factor("all"))
 
-confint(svyglm(meals ~ 1, ddd))[1, ]
+
+
+###### FACTORRRRRsssss
+
+upd()
+iNZightPlot(travel, data = d1, inference.type = c("conf", "comp"))
+iNZightPlot(travel, gender, data = d1, inference.type = c("conf", "comp"))
