@@ -1,0 +1,42 @@
+# Build iNZight from scratch
+
+# Create an iNZight (or whatever) directory somewhere, and tell us what it's called:
+DIR = ~/iNZight
+
+# Inside that, you need to clone this repository: git clone git@github.com:iNZightVIT/dev.git
+
+# These are the iNZight packages we need to use/create:
+inz_packages = iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight vit
+# And the couple of gWidgets packages we use for their updated-ness:
+g_packages = gWidgets2 gWidgets2RGtk2
+# And everything together:
+all_packages = $(g_packages) $(inz_packages)
+
+
+# STEP 1: BUILD the development environment
+build:
+	@for pkg in $(inz_packages) iNZightVIT-WIN ; do \
+		cd $(DIR); git clone git@github.com:iNZightVIT/$$pkg ; \
+	done
+	@for pkg in $(g_packages) ; do \
+		cd $(DIR); git clone git@github.com:jverzani/$$pkg ; \
+	done
+
+# STEP 2: INSTALL the iNZight software on your local machine (this assumes you have R v 3.1.z and
+# the necessary GTK and blah set up - basically, install iNZight following website details for
+# linux)
+install:
+	@cd $(DIR); R CMD INSTALL $(all_packages); echo '\n\nSuccessfully installed all iNZight packages from github.\n\n'
+
+# For compatibility and all that, you will also need to install R versions 2.15(.3) and 3.0(.2) on
+# your machine - then tell me what they're called:
+R2 = ~/R-2.15.3/bin/R
+R3 = ~/R-3.0.2/bin/R
+
+oldRinstall:
+	@cd $(DIR); R2 CMD INSTALL $(all_packages); R3 CMD INSTALL $(all_packages); '\n\nSuccessfully installed all iNZight packages from github for old version of R.\n\n'
+
+
+# STEP 3: GET the Windows and Mac versions of iNZightVIT from github:
+getWin:
+	cd $(DIR); git clone git@github.com:iNZightVIT/iNZightVIT-WIN.git
