@@ -7,7 +7,7 @@ upd <- function() {
     load_all("~/iNZight/iNZightPlots")
 }
 data(api)
-d1 <- read.csv("~/iNZight/data/Census at School-500.csv")
+d1 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
 d2 <- read.csv("~/iNZight/data/nhanes-03-04.chris.csv", header = TRUE)
 d3 <- read.csv("~/iNZight/data/Gap Minder Data.csv")
 d4 <- apiclus2
@@ -479,3 +479,7 @@ iNZightPlot(travel, getlunch, data = d1, inference.type = c("conf", "comp"), bs.
 ########## Summary stuff:
 upd()
 getSummary(height, data = d1)
+
+
+upd()
+iNZightPlot(height, g2 = getlunch, g2.level = c("home"), data = d1)
