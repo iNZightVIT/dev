@@ -7,7 +7,7 @@ install_git("~/iNZight/iNZightPlots", branch = "new3")
 q()
 
 library(iNZight)
-iNZight(read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE))
+iNZight(read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 
 ## Reset to old versons
