@@ -481,5 +481,19 @@ upd()
 getSummary(height, data = d1)
 
 
+upd(); iNZightPlot(height, g1 = travel, data = d1)
+
+iNZightPlot(height, g1 = getlunch, g2 = travel, data = d1, g2.level = "_MULTI")
+
 upd()
-iNZightPlot(height, g2 = getlunch, g2.level = c("home"), data = d1)
+iNZightPlot(cellsource, data = d1,
+            g1 = getlunch,
+            g2 = travel, g2.level = "other", inference.info = c("conf", "comp"))
+
+upd()
+iNZightPlot(cellsource, gender, data = d1,
+            g1 = getlunch, inference.type = c("conf"),#, "comp"),
+            g2 = travel, g2.level = "other") -> EE
+
+upd()
+iNZightPlot(travel, gender, g1 = cellsource, g2 = getlunch, g1.level="pocket",data = d1, inference.type = "conf")

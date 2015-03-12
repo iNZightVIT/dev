@@ -4,6 +4,9 @@ library(devtools)
 install_git("~/iNZight/iNZight/", branch = "new2")
 
 install_git("~/iNZight/iNZightPlots", branch = "new3")
+
+
+
 q()
 
 library(iNZight)
