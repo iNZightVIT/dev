@@ -476,19 +476,25 @@ iNZightPlot(travel, getlunch, data = d1, inference.type = c("conf", "comp"), bs.
 
 
 
-########## Summary stuff:
-upd()
-getSummary(height, data = d1)
+
 
 
 upd(); iNZightPlot(height, g1 = travel, data = d1)
 
-iNZightPlot(height, g1 = getlunch, g2 = travel, data = d1, g2.level = "_MULTI")
+upd()
+iNZightPlot(height, gender, g1 = getlunch, g2 = travel, data = d1, g2.level = "_MULTI", 
+            inference.par = "mean", inference.type = c("comp", "conf"))
+         #   )
 
 upd()
 iNZightPlot(cellsource, data = d1,
-            g1 = getlunch,
-            g2 = travel, g2.level = "other", inference.info = c("conf", "comp"))
+            g1 = travel,
+            g2 = getlunch, g2.level = "_MULTI", inference.type = c("conf", "comp"), bs.inference = TRUE)
+
+upd()
+iNZightPlot(cellsource, gender, data = d1,
+            g1 = travel,
+            g2 = getlunch, g2.level = "_MULTI", inference.type = c("conf", "comp"), bs.inference = TRUE)
 
 upd()
 iNZightPlot(cellsource, gender, data = d1,
@@ -496,4 +502,34 @@ iNZightPlot(cellsource, gender, data = d1,
             g2 = travel, g2.level = "other") -> EE
 
 upd()
-iNZightPlot(travel, gender, g1 = cellsource, g2 = getlunch, g1.level="pocket",data = d1, inference.type = "conf")
+iNZightPlot(travel, gender, g1 = cellsource, g2 = getlunch, data = d1,
+            inference.type = c("comp", "conf"))
+
+
+
+
+########## Summary stuff:
+upd()
+getPlotSummary(height, data = d1)
+getPlotSummary(height, g1 = gender, data = d1)
+getPlotSummary(height, cellsource, g1 = gender, data = d1)
+
+getPlotSummary(height, g1 = gender, g1.level = "male", g2 = travel, data = d1)
+getPlotSummary(height, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1)
+getPlotSummary(height, g1 = gender, g1.level = "male", g2 = travel, g2.level = "_MULTI", data = d1)
+
+
+upd()
+getPlotSummary(height, travel, g1 = gender, data = d1)
+getPlotSummary(height, travel, g1 = gender, g1.level = "male", g2 = travel, data = d1)
+getPlotSummary(height, travel, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1)
+getPlotSummary(height, travel, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1)
+
+
+obj <- iNZightPlot(height, getlunch, data = d1)
+iNZightPlot(height, travel, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1)
+
+
+getPlotSummary(x = height,  y = armspan, data = d1)
+getPlotSummary(travel, data = d1)
+getPlotSummary(travel, gender, data = d1)
