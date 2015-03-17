@@ -539,7 +539,7 @@ getPlotSummary(cellsource, gender, g1 = travel, g2 = getlunch, g2.level = "_MULT
 
 
 upd()
-getPlotSummary(x = height,  y = armspan, data = d1, trend = c("linear", "quadratic", "cubic"))
+getPlotSummary(y = height,  x = armspan, data = d1, trend = c("linear", "quadratic", "cubic"))
 
 
 x <- d1$height
