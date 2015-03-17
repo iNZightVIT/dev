@@ -539,19 +539,4 @@ getPlotSummary(cellsource, gender, g1 = travel, g2 = getlunch, g2.level = "_MULT
 
 
 upd()
-getPlotSummary(y = height,  x = armspan, data = d1, trend = c("linear", "quadratic", "cubic"))
-
-
-x <- d1$height
-y <- d1$armspan
-
-miss <- is.na(x) | is.na(y)
-x <- x[!miss]
-y <- y[!miss]
-
-plot(x, y)
-xo <- order(x)
-yo <- order(y)
-
-cor(x, y)
-cor(x, y, method = "kendall")
+getPlotSummary(x = armspan, y = height, data = d1, trend = c("linear", "quadratic", "cubic"))
