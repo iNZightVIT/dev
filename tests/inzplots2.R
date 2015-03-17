@@ -520,16 +520,38 @@ getPlotSummary(height, g1 = gender, g1.level = "male", g2 = travel, g2.level = "
 
 
 upd()
-getPlotSummary(height, travel, g1 = gender, data = d1)
+getPlotSummary(height, cellsource, g1 = gender, data = d1)
 getPlotSummary(height, travel, g1 = gender, g1.level = "male", g2 = travel, data = d1)
 getPlotSummary(height, travel, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1)
 getPlotSummary(height, travel, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1)
 
 
-obj <- iNZightPlot(height, getlunch, data = d1)
-iNZightPlot(height, travel, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1)
-
-
-getPlotSummary(x = height,  y = armspan, data = d1)
+upd()
 getPlotSummary(travel, data = d1)
-getPlotSummary(travel, gender, data = d1)
+
+upd(); getPlotSummary(travel, gender, data = d1)
+getPlotSummary(cellsource, travel, data = d1)
+
+upd()
+getPlotSummary(cellsource, gender, g1 = travel, g2 = getlunch, g2.level = "_MULTI", data = d1)
+
+
+
+
+upd()
+getPlotSummary(x = height,  y = armspan, data = d1, trend = c("linear", "quadratic", "cubic"))
+
+
+x <- d1$height
+y <- d1$armspan
+
+miss <- is.na(x) | is.na(y)
+x <- x[!miss]
+y <- y[!miss]
+
+plot(x, y)
+xo <- order(x)
+yo <- order(y)
+
+cor(x, y)
+cor(x, y, method = "kendall")
