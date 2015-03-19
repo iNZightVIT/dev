@@ -540,3 +540,26 @@ getPlotSummary(cellsource, gender, g1 = travel, g2 = getlunch, g2.level = "_MULT
 
 upd()
 getPlotSummary(x = armspan, y = height, data = d1, trend = c("linear", "quadratic", "cubic"))
+
+
+
+
+##################### INFERENCE
+upd()
+inzpars <- inzpar(inference.type = "conf", inference.par = "mean")
+getPlotSummary(height, data = d1)
+
+upd()
+getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars)
+getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars)
+
+x <- d1$height
+y <- d1$travel
+
+fit <- lm(x ~ y)
+summary(fit)
+
+F <- summary(fit)$fstatistic
+format.pval(pf(F[1], F[2], F[3], lower.tail = FALSE), digits = 2)
+
+means <- predict(fit, newdata = data.frame(y = levels(y)))
