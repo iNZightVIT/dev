@@ -551,7 +551,20 @@ getPlotSummary(height, data = d1)
 
 upd()
 getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars)
+
+upd()
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars)
+
+getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars,
+               g1 = getlunch)
+
+upd()
+#iNZightPlot(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars,
+#            g1 = getlunch)
+
+
+
+
 
 x <- d1$height
 y <- d1$travel
