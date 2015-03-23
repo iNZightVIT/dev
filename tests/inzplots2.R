@@ -546,33 +546,22 @@ getPlotSummary(x = armspan, y = height, data = d1, trend = c("linear", "quadrati
 
 ##################### INFERENCE
 upd()
-inzpars <- inzpar(inference.type = "conf", inference.par = "mean")
+inzpars <- inzpar(inference.type = "conf", inference.par = c("mean", "median"))
 getPlotSummary(height, data = d1)
+iNZightPlot(height, data = d1, inzpars = inzpars, inference.par = "mean")
+iNZightPlot(height, travel, data = d1, inzpars = inzpars, inference.par = "mean")
+
 
 upd()
 getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars)
+getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars, bs.inference = TRUE)
 
 upd()
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars)
+getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars, bs.inference = TRUE)
+
 
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars,
-               g1 = getlunch)
-
-upd()
-#iNZightPlot(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars,
-#            g1 = getlunch)
+               g1 = getlunch, bs.inference = TRUE)
 
 
-
-
-
-x <- d1$height
-y <- d1$travel
-
-fit <- lm(x ~ y)
-summary(fit)
-
-F <- summary(fit)$fstatistic
-format.pval(pf(F[1], F[2], F[3], lower.tail = FALSE), digits = 2)
-
-means <- predict(fit, newdata = data.frame(y = levels(y)))
