@@ -546,7 +546,7 @@ getPlotSummary(x = armspan, y = height, data = d1, trend = c("linear", "quadrati
 
 ##################### INFERENCE
 upd()
-inzpars <- inzpar(inference.type = "conf", inference.par = c("mean", "median"))
+inzpars <- inzpar(inference.type = "conf", inference.par = c("mean", "median", "iqr"))
 getPlotSummary(height, data = d1)
 iNZightPlot(height, data = d1, inzpars = inzpars, inference.par = "mean")
 iNZightPlot(height, travel, data = d1, inzpars = inzpars, inference.par = "mean")
@@ -557,6 +557,8 @@ getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzp
 getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars, bs.inference = TRUE)
 
 upd()
+iNZightPlot(height, travel, data = d1, inzpars = inzpars, inference.par = "median", inference.type =
+                "conf", bs.inference = TRUE)
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars)
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars, bs.inference = TRUE)
 
