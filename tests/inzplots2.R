@@ -578,20 +578,36 @@ upd()
 getPlotSummary(armspan, height, data = d1, summary.type = "inference")
 getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type = "inference")
 
-fit <- lm(height ~ armspan + I(armspan^2), data = d1)
-summary(fit)
-cc <- summary(fit)$coef
-ci <- confint(fit)
+upd()
+getPlotSummary(armspan, height, data = d1, summary.type = "inference", bs.inference = TRUE)
+getPlotSummary(armspan, height, data = d1, trend = c("linear"), summary.type =
+                   "inference", bs.inference = TRUE)
 
-mat <- cbind(cc[, c(1, 4)], ci)
-mat <-
-    cbind(format(mat[, 1], digits = 4, justify = "right"),
-          format.pval(mat[, 2], justify = "right"),
-          format(mat[, 3], digits = 4, justify = "right"),
-          format(mat[, 4], digits = 4, justify = "right"))
-mat <- rbind(c("Estimate", "p-value", "Lower CI", "Upper CI"), mat)
-mat <- cbind(c("", "Intercept", "armspan"), mat)
-mat <- apply(mat, 2, function(x) format(x, justify = "right"))
-mat <- apply(mat, 1, function(x) paste0("   ", paste(x, collapse = "   ")))
 
-cat("\n\nLinear Trend\n\n", paste(mat, collapse = "\n"), "\n\n\n")
+upd()
+getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type =
+                   "inference", bs.inference = TRUE)
+
+upd()
+iNZightPlot(armspan, height, data = d1, g1 = getlunch, g2 = travel, g2.level = "_MULTI",
+            trend = c("linear", "quadratic", "cubic"), bs.inference = TRUE)
+
+upd()
+getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type =
+                   "inference", bs.inference = FALSE, g1 = getlunch, g2 = travel, g2.level =
+                       "_MULTI")
+
+getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type =
+                   "inference", bs.inference = FALSE, g1 = getlunch, g2 = travel, g2.level =
+                       "_MULTI")
+
+upd()
+getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type =
+                   "inference", bs.inference = TRUE, g1 = getlunch, g2 = travel, g2.level = "_MULTI")
+
+
+
+
+dx <- subset(d1, getlunch == "tuckshop" & travel == "bike")
+summary(fit <- lm(height ~ armspan + I(armspan^2), data = dx))$coef
+confint(fit)
