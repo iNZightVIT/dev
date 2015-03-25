@@ -573,9 +573,13 @@ getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", in
 upd()
 iNZightPlot(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"))
 getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"))
+
+upd()
+getPlotSummary(armspan, height, data = d1, summary.type = "inference")
 getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type = "inference")
 
-fit <- lm(height ~ armspan, data = d1)
+fit <- lm(height ~ armspan + I(armspan^2), data = d1)
+summary(fit)
 cc <- summary(fit)$coef
 ci <- confint(fit)
 
