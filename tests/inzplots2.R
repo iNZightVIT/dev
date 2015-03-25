@@ -557,8 +557,7 @@ getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzp
 getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars, bs.inference = TRUE)
 
 upd()
-iNZightPlot(height, travel, data = d1, inzpars = inzpars, inference.par = "median", inference.type =
-                "conf", bs.inference = TRUE)
+iNZightPlot(height, travel, data = d1, inzpars = inzpars, inference.par = "median", inference.type = "conf", bs.inference = TRUE)
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars)
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars, bs.inference = TRUE)
 
@@ -567,3 +566,28 @@ getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", in
                g1 = getlunch, bs.inference = TRUE)
 
 
+
+
+
+
+upd()
+iNZightPlot(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"))
+getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"))
+getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type = "inference")
+
+fit <- lm(height ~ armspan, data = d1)
+cc <- summary(fit)$coef
+ci <- confint(fit)
+
+mat <- cbind(cc[, c(1, 4)], ci)
+mat <-
+    cbind(format(mat[, 1], digits = 4, justify = "right"),
+          format.pval(mat[, 2], justify = "right"),
+          format(mat[, 3], digits = 4, justify = "right"),
+          format(mat[, 4], digits = 4, justify = "right"))
+mat <- rbind(c("Estimate", "p-value", "Lower CI", "Upper CI"), mat)
+mat <- cbind(c("", "Intercept", "armspan"), mat)
+mat <- apply(mat, 2, function(x) format(x, justify = "right"))
+mat <- apply(mat, 1, function(x) paste0("   ", paste(x, collapse = "   ")))
+
+cat("\n\nLinear Trend\n\n", paste(mat, collapse = "\n"), "\n\n\n")
