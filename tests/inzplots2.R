@@ -631,11 +631,17 @@ getPlotSummary(travel, getlunch, data = d1, summary.type = "inference", inferenc
 
 
 
+upd()
+getPlotSummary(cellsource, getlunch, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1,
+               summary.type = "inference", inference.type = "conf")
+getPlotSummary(cellsource, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1,
+               summary.type = "inference", inference.type = "conf")
+upd()
+getPlotSummary(cellsource, getlunch, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1,
+               summary.type = "inference", bs.inference = TRUE, inference.type = "conf")
+getPlotSummary(cellsource, g1 = gender, g2 = travel, g2.level = "_MULTI", data = d1,
+               summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
 
-tab <- t(table(d1$travel, d1$gender))
-tab
 
-dat <- do.call(rbind,
-               sapply(rownames(tab), function(t)
-                      cbind(sample(colnames(tab), sum(tab[t, ]), TRUE, tab[t, ]), t)))
-colnames(dat) <- c("x", "y")
+upd()
+getPlotSummary(cellsource, getlunch, data = d1, summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
