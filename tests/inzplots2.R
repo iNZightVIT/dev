@@ -558,6 +558,7 @@ getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzp
 
 upd()
 iNZightPlot(height, travel, data = d1, inzpars = inzpars, inference.par = "median", inference.type = "conf", bs.inference = TRUE)
+
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars)
 getPlotSummary(x = height, y = travel, data = d1, summary.type = "inference", inzpars = inzpars, bs.inference = TRUE)
 
@@ -585,8 +586,8 @@ getPlotSummary(armspan, height, data = d1, trend = c("linear"), summary.type =
 
 
 upd()
-getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"), summary.type =
-                   "inference", bs.inference = TRUE)
+getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cubic"),
+               summary.type = "inference", bs.inference = TRUE)
 
 upd()
 iNZightPlot(armspan, height, data = d1, g1 = getlunch, g2 = travel, g2.level = "_MULTI",
@@ -608,6 +609,33 @@ getPlotSummary(armspan, height, data = d1, trend = c("linear", "quadratic", "cub
 
 
 
-dx <- subset(d1, getlunch == "tuckshop" & travel == "bike")
-summary(fit <- lm(height ~ armspan + I(armspan^2), data = dx))$coef
-confint(fit)
+
+### factor inference
+upd()
+getPlotSummary(travel, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(gender, data = d1, summary.type = "inference", inference.type = "conf")
+
+upd()
+getPlotSummary(travel, gender, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(travel, getlunch, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(cellsource, getlunch, data = d1, summary.type = "inference", inference.type = "conf")
+
+
+upd()
+getPlotSummary(travel, data = d1, summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
+getPlotSummary(cellsource, data = d1, summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
+
+upd()
+getPlotSummary(travel, gender, data = d1, summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
+getPlotSummary(travel, getlunch, data = d1, summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
+
+
+
+
+tab <- t(table(d1$travel, d1$gender))
+tab
+
+dat <- do.call(rbind,
+               sapply(rownames(tab), function(t)
+                      cbind(sample(colnames(tab), sum(tab[t, ]), TRUE, tab[t, ]), t)))
+colnames(dat) <- c("x", "y")
