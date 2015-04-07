@@ -645,3 +645,7 @@ getPlotSummary(cellsource, g1 = gender, g2 = travel, g2.level = "_MULTI", data =
 
 upd()
 getPlotSummary(cellsource, getlunch, data = d1, summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
+
+
+
+
