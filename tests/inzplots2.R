@@ -43,6 +43,10 @@ iNZightPlot(y = api99, x = api00, design = des1, g1 = sch.wide, g2 = awards, g2.
 ## large simple
 upd()
 iNZightPlot(y = Life.Expectancy, x = log10(GDP.per.Capita), data = d3)
+iNZightPlot(y = Life.Expectancy, x = log10(GDP.per.Capita), data = d3, alpha = 0)
+
+iNZightPlot(y = Life.Expectancy, x = log10(GDP.per.Capita), data = d3, plottype = "hex", hex.bins = 20)
+
 
 ## large frequency
 upd()
@@ -645,6 +649,9 @@ getPlotSummary(cellsource, g1 = gender, g2 = travel, g2.level = "_MULTI", data =
 
 upd()
 getPlotSummary(cellsource, getlunch, data = d1, summary.type = "inference", inference.type = "conf", bs.inference = TRUE)
+
+
+
 
 
 
