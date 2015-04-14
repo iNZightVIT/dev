@@ -5,7 +5,9 @@ library(devtools)
 load_all("~/iNZight/iNZightPlots")
 load_all("~/iNZight/iNZightMaps")
 load_all("~/iNZight/iNZightModules")
+
 load_all("~/iNZight/iNZight")
+try(dispose(gui$win), TRUE)
 gui <- iNZGUI$new()
 gui$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
                                 header = TRUE, comment.char = "#"))
