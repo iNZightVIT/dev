@@ -20,6 +20,7 @@ des2 <- svydesign(ids=~1, weights=~WTINT2YR, data=d2)
 ## simple data
 upd()
 iNZightPlot(y = height, x = armspan, data = d1)
+iNZightPlot(y = height, x = armspan, data = d1, pch = 19)
 iNZightPlot(y = height, x = armspan, data = d1, g1 = gender)
 iNZightPlot(y = height, x = armspan, data = d1, g1 = gender, g2 = getlunch, g2.level = "_MULTI")
             #cex.lab = 1.4, cex.axis = 1.5)
@@ -59,7 +60,7 @@ iNZightPlot(y = BPXSAR, x = BPXDAR, design = des2)
 
 ############################################################ X:NUMERIC; Y:NULL
 upd()
-iNZightPlot(height, data = d1)
+iNZightPlot(height, data = d1, plottype = "hist")
 iNZightPlot(meals, data = d4)
 
 upd()
@@ -70,6 +71,10 @@ iNZightPlot(height, data = d1, freq = year)
 ############################################################ X:NUMERIC; Y:FACTOR
 upd()
 iNZightPlot(height, gender, data = d1)
+iNZightPlot(height, gender, data = d1, freq = year)
+iNZightPlot(meals, awards, design = des1)
+
+iNZightPlot(height, gender, data = d1, plottype = "hist")
 iNZightPlot(height, gender, data = d1, freq = year)
 iNZightPlot(meals, awards, design = des1)
 
