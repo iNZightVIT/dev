@@ -661,3 +661,19 @@ getPlotSummary(cellsource, getlunch, data = d1, summary.type = "inference", infe
 
 
 
+upd()
+iNZightPlot(height, data = d1, inference.par = "median", inference.type = "conf")
+iNZightPlot(height, getlunch, data = d1, inference.par = "median", inference.type = "conf") -> p
+
+upd()
+iNZightPlot(height, getlunch, g1 = travel, g2 = gender, g2.level = "_MULTI",
+            data = d1, inference.par = "median", inference.type = "conf") -> p
+
+
+upd()
+getPlotSummary(height, getlunch, g1 = travel, g2 = gender, g2.level = "_MULTI",
+               data = d1, inference.par = "mean", inference.type = "conf",
+               summary.type = "inference")
+
+
+p[[2]][[1]]$inference.info
