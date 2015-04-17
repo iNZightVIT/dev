@@ -670,10 +670,17 @@ iNZightPlot(height, getlunch, g1 = travel, g2 = gender, g2.level = "_MULTI",
             data = d1, inference.par = "median", inference.type = "conf") -> p
 
 
+p$varnames
+attributes(p)
+
+
 upd()
-getPlotSummary(height, getlunch, g1 = travel, g2 = gender, g2.level = "_MULTI",
-               data = d1, inference.par = "mean", inference.type = "conf",
-               summary.type = "inference")
+iNZightPlot(height, travel, data = d1, inference.par = "mean",
+            inference.type = c("conf", "comp")) -> p
 
 
-p[[2]][[1]]$inference.info
+do.call(cbind, lapply(names(p[[1]][[1]]$inference$mean), function(i) {
+                                     m <- p[[1]][[1]]$inference$mean[[i]][, 1:2]
+                                     colnames(m) <- paste(i, colnames(m), sep = ".")
+                                     m
+                                 }))
