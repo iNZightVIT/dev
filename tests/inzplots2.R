@@ -684,3 +684,19 @@ do.call(cbind, lapply(names(p[[1]][[1]]$inference$mean), function(i) {
                                      colnames(m) <- paste(i, colnames(m), sep = ".")
                                      m
                                  }))
+
+
+
+
+
+
+
+
+
+######## BARPLOT labels
+upd()
+iNZightPlot(travel, data = d1)
+iNZightPlot(travel, data = d1, colby = getlunch, inference.type = "conf")
+
+
+iNZightPlot(travel, gender, data = d1)
