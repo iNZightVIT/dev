@@ -700,3 +700,21 @@ iNZightPlot(travel, data = d1, colby = getlunch, inference.type = "conf")
 
 
 iNZightPlot(travel, gender, data = d1)
+
+
+upd()
+getPlotSummary(height, data = d1, plottype = "hist")
+
+
+dd <- read.csv("~/iNZight/data/FutureLearn/NHANES-1000.csv", header = TRUE, comment.char = "#")
+
+upd()
+iNZightPlot(Education, y = AgeDecade, data = dd)
+
+upd()
+iNZightPlot(Life.Expectancy, Children.per.Woman, data = d3,
+            colby = Region, g1 = Year, sizeby = Population, alpha = 0.6, cex.pt = 1.4)
+
+upd()
+iNZightPlot(Children.per.Woman, Region, data = d3,
+            inference.type = c("comp"), inference.par = "median")

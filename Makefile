@@ -128,13 +128,13 @@ pullG:
 ## Need to update the version numbers here:
 DIR = ~/iNZight
 DIRO = ~/iNZight/iNZightVIT-WIN
-DIRN = ~/iNZight/iNZightVIT_$(INZIGHT_VERSION)
+DIRN = ~/iNZight/iNZightVIT
 WIN_REP = ~/iNZight/dev/www/R/bin/windows/contrib
 
 winRelease:
 	cp -rv $(DIRO) $(DIRN)
 	cd $(DIRN); rm -rf .git
-	cd $(DIR); zip -r iNZightVIT_zipfile_$(INZIGHT_VERSION).zip iNZightVIT_$(INZIGHT_VERSION)
+	cd $(DIR); zip -r iNZightVIT_zipfile.zip iNZightVIT
 	rm -rf $(DIRN)
 
 
