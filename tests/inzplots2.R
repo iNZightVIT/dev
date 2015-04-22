@@ -718,3 +718,18 @@ iNZightPlot(Life.Expectancy, Children.per.Woman, data = d3,
 upd()
 iNZightPlot(Children.per.Woman, Region, data = d3,
             inference.type = c("comp"), inference.par = "median")
+
+
+
+
+
+upd()
+iNZightPlot(height, armspan, data = d1) -> p
+
+
+
+curSet = inzpar()
+
+modifyList(curSet, list(cex.pt = 2))
+
+library(iNZight); iNZight()

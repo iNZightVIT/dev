@@ -7,6 +7,7 @@ load_all("~/iNZight/iNZightPlots")
 load_all("~/iNZight/iNZight")
 try(dispose(KK$win), TRUE)
 KK <- iNZGUI$new()
+
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
                                header = TRUE, comment.char = "#"))
 

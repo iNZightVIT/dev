@@ -134,7 +134,7 @@ WIN_REP = ~/iNZight/dev/www/R/bin/windows/contrib
 winRelease:
 	cp -rv $(DIRO) $(DIRN)
 	cd $(DIRN); rm -rf .git
-	cd $(DIR); zip -r iNZightVIT_zipfile.zip iNZightVIT
+	cd $(DIR); zip -r iNZightVIT-v$(INZIGHT_VERSION)-zipfile.zip iNZightVIT
 	rm -rf $(DIRN)
 
 
