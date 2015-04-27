@@ -3,7 +3,9 @@ q()
 setwd("~/iNZight/iNZight")
 library(devtools)
 
+load_all("~/iNZight/iNZightMR")
 load_all("~/iNZight/iNZightPlots")
+
 load_all("~/iNZight/iNZight")
 try(dispose(KK$win), TRUE)
 KK <- iNZGUI$new()
