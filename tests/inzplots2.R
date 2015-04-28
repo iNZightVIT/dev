@@ -733,3 +733,17 @@ curSet = inzpar()
 modifyList(curSet, list(cex.pt = 2))
 
 library(iNZight); iNZight()
+
+
+
+upd()
+iNZightPlot(height, g1 = travel, data = d1)
+iNZightPlot(height, travel, data = d1)
+
+upd()
+iNZightPlot(height, data = d1, cex.dotpt = 0.5)
+
+upd()
+iNZightPlot(y=travel,x= getlunch, data = d1)
+
+iNZightPlot(Region, data = d3)
