@@ -742,5 +742,6 @@ iNZightPlot(height, travel, data = d1)
 
 upd()
 iNZightPlot(height, data = d1)
+
 iNZightPlot(height, data = d1, cex.dotpt = 0.8)
 iNZightPlot(height, data = d1, cex.dotpt = 0.5)
