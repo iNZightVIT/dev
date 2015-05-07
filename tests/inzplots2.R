@@ -747,3 +747,6 @@ upd()
 iNZightPlot(y=travel,x= getlunch, data = d1)
 
 iNZightPlot(Region, data = d3)
+
+upd()
+iNZightPlot(travel, height, data = d1)
