@@ -35,7 +35,7 @@ here30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
 
 here:
-	cd ../; R CMD INSTALL $(inz_packages)
+	cd ../; ~/R-3.1.2/bin/R CMD INSTALL $(inz_packages)
 
 # And the gWidgets2 libraries:
 ghere215:
@@ -45,7 +45,7 @@ ghere30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(g_packages)
 
 ghere:
-	cd ../; R CMD INSTALL $(g_packages)
+	cd ../; ~/R-3.1.2/bin/R CMD INSTALL $(g_packages)
 
 # do the following to move into the Windows all-in-one directory:
 replace:
@@ -199,7 +199,7 @@ winEverything:
 winPackageIndex:
 	cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
 	cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	cd $(WIN_REP)/3.1/; R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
 	-cd $(WIN_REP)/2.15/; rm *.Rout; rm .RData
 	-cd $(WIN_REP)/3.0/; rm *.Rout; rm .RData
 	-cd $(WIN_REP)/3.1/; rm *.Rout; rm .RData
@@ -212,10 +212,10 @@ src_lib = $(DIR)/dev/www/R/src/contrib
 source:
 	rm $(src_lib)/*.tar.gz
 	for pkg in $(all_packages) ; do \
-		cd $(src_lib) ; R CMD build --no-build-vignettes $(DIR)/$$pkg ; \
+		cd $(src_lib) ; ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$$pkg ; \
 	done
 srcPackageIndex:
-	@cd $(src_lib); R CMD BATCH $(DIR)/dev/writeIndices.R; 
+	@cd $(src_lib); ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R; 
 	-@cd $(src_lib); rm *.Rout; rm .RData
 
 srcAll:
@@ -230,7 +230,7 @@ MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
 version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
 ACTUALmac31:
-	cd $(DIR)/dev; R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
 	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP3)/3.1/
 
 mac31:
@@ -270,7 +270,7 @@ mac215:
 
 
 ACTUALmacMAV:
-	cd $(DIR)/dev; R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
 	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.1/
 
 macMAV:
@@ -286,8 +286,8 @@ macMAV:
 macPackageIndex:
 	-@cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	-@cd $(MAC_REP3)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	-@cd $(MAC_REPMAV)/3.1/; R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	-@cd $(MAC_REPMAV)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 
 
 macEverything:
@@ -316,7 +316,7 @@ pkgToDocker:
 
 newsFiles:
 	@for pkg in $(inz_packages) ; do \
-	  R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
+	  ~/R-3.1.2/bin/R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
 	done
 	@echo "NEWS files converted to HTML and moved to dev/changes ..."
 	@cd changes; Rscript --vanilla addLinks.R;
