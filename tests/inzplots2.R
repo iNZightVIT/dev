@@ -749,3 +749,11 @@ upd()
 iNZightPlot(travel, height, data = d1)
 iNZightPlot(height, data = d1, cex.dotpt = 0.8)
 iNZightPlot(height, data = d1, cex.dotpt = 0.5)
+
+
+
+######## LOCATE
+upd()
+iNZightPlot(armspan, height, data = d1, g1 = gender,
+            locate.id = c(10, 26, 120, 384, 73, 243, 114, 171), locate = getlunch)
+
