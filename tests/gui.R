@@ -30,23 +30,10 @@ KK$initializeGui(D <- read.csv("~/Downloads/NZ_earthquakes2010.csv",
 KK$initializeGui(D <- read.csv("~/Downloads/sampleLoan20072011.csv", header = TRUE))
 
 
-win <- gwindow()
-g <- ggroup(cont = win, horiz = FALSE)
-b <- gbutton("click me", cont = g)
+x <- D$armspan
+y <- D$height
 
-newt <- ggroup(horiz = FALSE, cont = g, expand = TRUE)
-tt <- gtable("", TRUE, cont = newt)
-visible(newt) <- FALSE
-visible(newt) <- TRUE
-
-
-
-addHandlerClicked(b, function(h, ...) {
-    blockHandlers(b)
-    svalue(b) <- "you did it!"
-    Sys.sleep(1)
-    svalue(b) <- "click me"
-    unblockHandlers(b)
-})
-
-dispose(win)
+mat <- cbind(x, y)
+d <- mahalanobis(mat, colMeans(mat, na.rm = TRUE), cov(mat, use = "complete.obs"))
+o <- order(d, decreasing = TRUE)
+mat[o[1:3], ]
