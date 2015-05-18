@@ -14,7 +14,7 @@ KK <- iNZGUI$new()
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
                                header = TRUE, comment.char = "#"))
 
-KK$initializeGui(D <- read.csv("~/iNZight/data/Gap Minder Data.csv",
+KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
                                header = TRUE, comment.char = "#"))
 
 
@@ -30,10 +30,8 @@ KK$initializeGui(D <- read.csv("~/Downloads/NZ_earthquakes2010.csv",
 KK$initializeGui(D <- read.csv("~/Downloads/sampleLoan20072011.csv", header = TRUE))
 
 
-x <- D$armspan
-y <- D$height
+w <- gwindow()
+g <- ggroup(cont = w)
+s <- gslider(c("one", "two"), cont = g, name = "hello")
 
-mat <- cbind(x, y)
-d <- mahalanobis(mat, colMeans(mat, na.rm = TRUE), cov(mat, use = "complete.obs"))
-o <- order(d, decreasing = TRUE)
-mat[o[1:3], ]
+g$remove_child(g$children[[1]])
