@@ -759,4 +759,5 @@ iNZightPlot(armspan, height, data = d1, g1 = gender,
 
 
 upd()
-iNZightPlot(armspan, height, data = d1, locate.extreme = 5, locate.col = "red")
+iNZightPlot(armspan, height, data = d1, locate.id = c(10, 171), locate = age,
+            highlight = 10)

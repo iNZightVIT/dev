@@ -18,6 +18,7 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
                                header = TRUE, comment.char = "#"))
 
 
+
 library(survey)
 data(api)
 KK$initializeGui(apiclus2)
