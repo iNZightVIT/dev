@@ -761,3 +761,10 @@ iNZightPlot(armspan, height, data = d1, g1 = gender,
 upd()
 iNZightPlot(armspan, height, data = d1, locate.id = c(10, 171), locate = age,
             highlight = 10)
+
+
+
+
+
+upd()
+iNZightPlot(height, data = d1)
