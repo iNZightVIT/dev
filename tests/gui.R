@@ -21,7 +21,8 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
 
 library(survey)
 data(api)
-KK$initializeGui(apiclus2)
+D <- as.data.frame(cbind(Cluster = factor(paste(apiclus2$dnum, apiclus2$cnum, sep = "-")), apiclus2))
+KK$initializeGui(D)
 
 
 KK$initializeGui(D <- read.csv("~/Downloads/NZ_earthquakes2010.csv",
@@ -31,8 +32,3 @@ KK$initializeGui(D <- read.csv("~/Downloads/NZ_earthquakes2010.csv",
 KK$initializeGui(D <- read.csv("~/Downloads/sampleLoan20072011.csv", header = TRUE))
 
 
-w <- gwindow()
-g <- ggroup(cont = w)
-s <- gslider(c("one", "two"), cont = g, name = "hello")
-
-g$remove_child(g$children[[1]])

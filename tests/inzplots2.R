@@ -11,6 +11,7 @@ d1 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment
 d2 <- read.csv("~/iNZight/data/nhanes-03-04.chris.csv", header = TRUE)
 d3 <- read.csv("~/iNZight/data/Gap Minder Data.csv")
 d4 <- apiclus2
+d5 <- read.csv("~/iNZight/data/Dolphins.csv", header = TRUE)
 
 des1 <- svydesign(ids=~dnum+snum, fpc=~fpc1+fpc2, data=d4)
 des2 <- svydesign(ids=~1, weights=~WTINT2YR, data=d2)
@@ -767,4 +768,12 @@ iNZightPlot(armspan, height, data = d1, locate.id = c(10, 171), locate = age,
 
 
 upd()
-iNZightPlot(height, data = d1)
+iNZightPlot(height, gender, data = d1, cex.dotpt = 0.4, locate.extreme = c(3, 2), locate.col = "red")
+iNZightPlot(height, gender, data = d1, cex.dotpt = 0.4, locate = gender, locate.extreme = c(3, 2), locate.col = "red")
+
+upd()
+iNZightPlot(height, data = d1, cex.dotpt = 0.4, locate = gender, locate.id = 1:5, locate.col = "red")
+
+upd()
+iNZightPlot(height, data = d1, cex.dotpt = 0.4)
+iNZightPlot(height, gender, data = d1, cex.dotpt = 0.4)
