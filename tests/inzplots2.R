@@ -777,3 +777,8 @@ iNZightPlot(height, data = d1, cex.dotpt = 0.4, locate = gender, locate.id = 1:5
 upd()
 iNZightPlot(height, data = d1, cex.dotpt = 0.4)
 iNZightPlot(height, gender, data = d1, cex.dotpt = 0.4)
+
+upd()
+iNZightPlot(height, data = d1, alpha = 0.5, pch = 15)
+
+iNZightPlot(height, armspan, data = d1, pch = 2)
