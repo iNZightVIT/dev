@@ -7,7 +7,7 @@
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inz_packages = iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight vit
 g_packages = gWidgets2 gWidgets2RGtk2
-all_packages = $(inz_packages)
+all_packages = $(g_packages) $(inz_packages)
 
 build:
 	for pkg in $(inz_packages) iNZightVIT-WIN ; do \
@@ -282,12 +282,25 @@ macMAV:
 	rm -rf tmp
 	cp $(DIR)/dev/macpkg/* $(MAC_REPMAV)/3.1/
 
+ACTUALmacMAV30:
+	cd $(DIR)/dev; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
+	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.0/
+
+macMAV30:
+	rm $(MAC_REPMAV)/3.0/*.tgz
+	mkdir tmp
+	for pkg in $(all_packages) ; do \
+		make ACTUALmacMAV30 PKG=$$pkg ; \
+	done
+	rm -rf tmp
+
 
 macPackageIndex:
 	-@cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 	-@cd $(MAC_REPMAV)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
+	-@cd $(MAC_REPMAV)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
 
 
 macEverything:
