@@ -1,6 +1,14 @@
 
 <h2>Change Log for iNZightModules</h2>
 
+<h3>Changes in version 1.1</h3>
+
+<p>Release date: 22 April 2015
+</p>
+<p>The version was updated to conincide with the release of iNZight v2.1
+</p>
+
+
 <h3>Changes in version 1.0.8</h3>
 
 <p>Release date: 18 March 2015

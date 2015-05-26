@@ -11,9 +11,7 @@ PKG_FILES := DESCRIPTION NAMESPACE $(R_FILES) $(MAN_FILES) $(INST_FILES)
 build: $(PKG_NAME)_$(PKG_VERSION).tar.gz
 
 $(PKG_NAME)_$(PKG_VERSION).tar.gz: $(PKG_FILES)
-	sed -i "s/$(PKG_VERSION)/$(PKG_VERSION)/" DESCRIPTION
 	~/R-3.0.2/bin/R CMD build ./
-	sed -i "s/$(PKG_VERSION).*/$(PKG_VERSION)/" DESCRIPTION
 
 check: $(PKG_NAME)_$(PKG_VERSION).tar.gz
 	~/R-3.0.2/bin/R CMD check $<

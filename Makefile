@@ -7,7 +7,7 @@
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inz_packages = iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight vit
 g_packages = gWidgets2 gWidgets2RGtk2
-all_packages = $(g_packages) $(inz_packages)
+all_packages = $(inz_packages)
 
 build:
 	for pkg in $(inz_packages) iNZightVIT-WIN ; do \
@@ -321,5 +321,5 @@ newsFiles:
 	@echo "NEWS files converted to HTML and moved to dev/changes ..."
 	@cd changes; Rscript --vanilla addLinks.R;
 	@echo "Copying to server ..."
-	@scp changes/*.php tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/changes/
+	@scp changes/*.php tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/newSite/iNZight/support/changelog/changes/
 	@ echo "Done.\n\n"
