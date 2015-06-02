@@ -6,6 +6,11 @@ library(devtools)
 load_all("~/iNZight/iNZightMR")
 
 
+
+load_all("~/iNZight/gWidgets2RGtk2")
+
+
+
 try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots")
 load_all("~/iNZight/iNZight")
@@ -32,3 +37,6 @@ KK$initializeGui(D <- read.csv("~/Downloads/NZ_earthquakes2010.csv",
 KK$initializeGui(D <- read.csv("~/Downloads/sampleLoan20072011.csv", header = TRUE))
 
 
+
+load_all("~/iNZight/iNZightPlots")
+iNZightPlot(height, data = D, locate.extreme = c(3, 1), locate.col = "red", highlight = 114)
