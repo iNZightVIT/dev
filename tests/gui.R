@@ -24,7 +24,6 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
 
 
 
-
 library(survey)
 data(api)
 D <- as.data.frame(cbind(Cluster = factor(paste(apiclus2$dnum, apiclus2$cnum, sep = "-")), apiclus2))
