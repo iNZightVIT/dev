@@ -48,23 +48,29 @@ if ($track) {
   $date = $now->format('Y-m-d H:i:s');
 
   // try to select the IP address from the database:
-  $sql = "SELECT ip, version, visits FROM users WHERE id='$hash'";
+  $sql = "SELECT ip, version, updates, times_used FROM users WHERE id='$hash'";
   $result = $con->query($sql);
 
   if ($result->num_rows == 0) {
     // INSERT A NEW USER:
-    $sql = "INSERT INTO users (id, ip, start, version, os, city, region, country, location) " . 
-           "VALUES ('$hash', '$ipaddr', '$date', '$version', '$os', '$city', '$region', '$country', '$loc')";
+    $sql = "INSERT INTO users (id, ip, start, version, os, city, region, country, location, times_used) " . 
+           "VALUES ('$hash', '$ipaddr', '$date', '$version', '$os', '$city', '$region', '$country', '$loc', 1)";
     if ($con->query($sql) === TRUE) {
       die();
     }
   } else if ($result->num_rows == 1) {
     // UPDATE AN EXISTING USER:
     $row = $result->fetch_assoc();
-    $visits = $row["visits"] + 1;
+    // only update if version changes:
+    $prev_version = $row["version"];
+    $nupdates = $row["updates"] + ($prev_version != $version);
+
+    $times = $row["times_used"] + 1;
+
     $sql = "UPDATE users " .
-           "SET ip='$ipaddr', version='$version', visits='$visits', " . 
-           "    city='$city', region='$region', country='$country', location='$loc' " .
+           "SET ip='$ipaddr', version='$version', updates='$nupdates', " . 
+           "    city='$city', region='$region', country='$country', location='$loc', " .
+	   "    times_used='$times' " .
            "WHERE id='$hash'";
     if ($con->query($sql) == TRUE) {
       die();
@@ -73,7 +79,7 @@ if ($track) {
 
   die();
   
-} else { 
+} else {  
 
   // the number of rows in the database
 
@@ -89,7 +95,7 @@ if ($track) {
   }
   $orderby .= (isset($_GET["rev"]) === true || isset($_GET["s"]) === false) ? " DESC" : "";
 
-  $sql  = "SELECT region, country, version, os, start, lastvisit, visits";
+  $sql  = "SELECT region, country, version, os, start, lastvisit, updates, times_used";
   $sql .= (isset($_GET["ip"]) === true) ? ", ip " : " ";
   $sql .=  "FROM users ORDER BY $orderby";
 
@@ -101,7 +107,8 @@ if ($track) {
                      "os"          => "Operating System",
                      "start"       => "Active Since",
                      "lastvisit"   => "Last Update",
-                     "visits"      => "Number of updates");
+                     "updates"     => "# Updates",
+		     "times_used"  => "# Uses");
   if (isset($_GET["ip"]) === true) {
     $tabHeader["ip"] = "IP Address";
   }
