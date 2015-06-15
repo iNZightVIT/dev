@@ -782,3 +782,41 @@ upd()
 iNZightPlot(height, data = d1, alpha = 0.5, pch = 15)
 
 iNZightPlot(height, armspan, data = d1, pch = 2)
+
+
+
+
+###############
+upd()
+iNZightPlot(Children.per.Woman, Region, data = d3, inference.type = "conf", inference.par = "median")
+iNZightPlot(Region, Children.per.Woman, data = d3, inference.type = "conf", inference.par = "mean")
+
+iNZightPlot(Children.per.Woman, Region, data = d3, inference.type = "conf", inference.par = "median", bs.inference = TRUE)
+iNZightPlot(Region, Children.per.Woman, data = d3, inference.type = "conf", inference.par = "mean", bs.inference = TRUE)
+
+
+
+
+
+upd()
+pl <- iNZightPlot(Children.per.Woman, Region, data = d3, g2 = Year, g2.level = 4, locate = 1:nrow(d3), locate.extreme = c(500, 200))
+
+pl <- iNZightPlot(Children.per.Woman, Region, data = d3, g2 = Year, g2.level = 4, locate = 1:nrow(d3), locate.extreme = c(1, 1), plottype = "dot")
+
+cp <- pl[1:(length(pl) - 3)]
+
+cpi <- c(sapply(cp, function(p) sapply(p, function(q) sapply(q$toplot, function(r) r$extreme.ids))))
+cpi
+
+iNZightPlot(Children.per.Woman, Region, data = d3, g2 = Year, g2.level = 4, locate = Country, locate.id = cpi)
+iNZightPlot(Children.per.Woman, Region, data = d3, g2 = Year, g2.level = 4, locate = Country, locate.id = 909)
+
+
+
+upd()
+pl <- iNZightPlot(height, getlunch, g1=gender, data = d1, locate = 1:nrow(d1), locate.extreme = c(1, 0))
+
+cp <- pl[1:(length(pl) - 3)]
+
+cpi <- c(sapply(cp, function(p) sapply(p, function(q) sapply(q$toplot, function(r) r$extreme.ids))))
+cpi

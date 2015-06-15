@@ -10,7 +10,7 @@ load_all("~/iNZight/iNZightMR")
 load_all("~/iNZight/gWidgets2RGtk2")
 
 
-system("cp /home/tell029/R/x86_64-pc-linux-gnu-library/3.1/id.txt ~/iNZight/dev/tests/old_id.txt")
+#system("cp /home/tell029/R/x86_64-pc-linux-gnu-library/3.1/id.txt ~/iNZight/dev/tests/old_id.txt")
 
 try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots")
