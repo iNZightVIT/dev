@@ -814,9 +814,9 @@ iNZightPlot(Children.per.Woman, Region, data = d3, g2 = Year, g2.level = 4, loca
 
 
 upd()
-pl <- iNZightPlot(height, getlunch, g1=gender, data = d1, locate = 1:nrow(d1), locate.extreme = c(1, 0))
+pl <- iNZightPlot(height, armspan, g1=gender, data = d1, locate = 1:nrow(d1), locate.extreme = 1)
 
 cp <- pl[1:(length(pl) - 3)]
 
-cpi <- c(sapply(cp, function(p) sapply(p, function(q) sapply(q$toplot, function(r) r$extreme.ids))))
+cpi <- c(sapply(cp, function(p) sapply(p, function(q) q)))#sapply(q, function(r) r))))
 cpi
