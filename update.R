@@ -90,44 +90,6 @@ updateDistribution <- function() {
     pkgs <- pkgs[!pkgs %in% rownames(installed.packages())]
     if (length(pkgs) > 0)
         install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
-
-    ## No longer use the updater to track ...
-    ##
-    ## try({  # don't want to crash it ...
-    ##     ## get the OS version:
-    ##     if (.Platform$OS == "windows") {
-    ##         os = "Windows"
-    ##     } else {
-    ##         osx.version <- try(system("sw_vers -productVersion", intern = TRUE), silent = TRUE)
-    ##         if (!inherits(osx.version, "try-error")) {
-    ##             os = paste("Mac OS X", osx.version)
-    ##         } else {
-    ##             os = "Mac OS X"
-    ##         }
-    ##     }
-        
-    ##     ## have they updated before?
-    ##     hash.id <- "new"
-    ##     if (os == "Windows") {
-    ##         if (file.exists("id.txt")) {
-    ##             hash.id <- readLines("id.txt")
-    ##         }
-    ##     } else {
-    ##         if (file.exists("Library/id.txt")) {
-    ##             hash.id <- readLines("Library/id.txt")
-    ##         }
-    ##     }
-        
-    ##     version <- as.character(packageVersion("iNZight"))
-    ##     f <- try(url(paste0("http://docker.stat.auckland.ac.nz/R/tracker/index.php?track&v=",
-    ##                         version, "&os=", gsub(" ", "%20", os), "&hash=", hash.id), open = "r"), TRUE)
-        
-    ##     if (hash.id == "new") {
-    ##         ## write the hash code to their installation:
-    ##         hash.id <- readLines(f)
-    ##         writeLines(hash.id, paste0(ifelse(os == "Windows", "", "Library/"), "id.txt"))
-    ##     }
-    ## }, TRUE)
     
     ## success message
     cat("==========================================================\n")

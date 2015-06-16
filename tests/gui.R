@@ -25,23 +25,27 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
 
 
 
-library(survey)
-data(api)
-D <- as.data.frame(cbind(Cluster = factor(paste(apiclus2$dnum, apiclus2$cnum, sep = "-")), apiclus2))
-KK$initializeGui(D)
-
-
-KK$initializeGui(D <- read.csv("~/Downloads/NZ_earthquakes2010.csv",
-                               header = TRUE, comment.char = "#"))
-
-
-KK$initializeGui(D <- read.csv("~/Downloads/sampleLoan20072011.csv", header = TRUE))
+curMenu <- svalue(KK$menubar)
+curMenu[["Plot"]] <- list(
+    gaction("New", handler = function(h, ...) gmessage("ok")),
+    gaction("Close", handler = function(h, ...) gmessage("done."))
+    )
+svalue(KK$menubar) <- curMenu
 
 
 
-load_all("~/iNZight/iNZightPlots")
-iNZightPlot(height, data = D, locate.extreme = c(3, 1), locate.col = "red", highlight = 114)
+########## Test
 
+w <- gwindow()
+gtop <- ggroup(FALSE, cont = w)
+menugrp <- ggroup(cont = gtop)
+men <- list("File" = list(gaction("Open", handler = function(h, ...) gmessage("open."))))
+q <- gmenu(men, cont = menugrp)
 
+men2 <- c(svalue(q),
+          list("Plot" = list(gaction("Close", handler = function(h, ...) dispose(w)))))
+svalue(q) <- men2
 
-
+men3 <- c(svalue(q)[[1]],
+          list("Plot" = list(gaction("Open", handler = function(h, ...) dispose(w)))))
+svalue(q) <- men3
