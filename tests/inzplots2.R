@@ -820,3 +820,20 @@ cp <- pl[1:(length(pl) - 3)]
 
 cpi <- c(sapply(cp, function(p) sapply(p, function(q) q)))#sapply(q, function(r) r))))
 cpi
+
+
+
+upd()
+exploreAllSummaries(d1)
+s <- getPlotSummary(height, data = d1)
+
+lapply(colnames(d1), function(x) {
+    getPlotSummary(d1[, x], varnames = list(x = x))
+})
+
+x="cellsource"
+getPlotSummary(d1[, x], varnames = list(x=x))
+
+
+upd()
+getPlotSummary(cellcost, data = d1)
