@@ -18,11 +18,6 @@ load_all("~/iNZight/iNZight")
 KK <- iNZGUI$new()
 
 
-KK$initializeGui(apiclus2)
-
-dstrat<-svydesign(id=~1,strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
-
-
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
                                header = TRUE, comment.char = "#"))
 
@@ -30,5 +25,5 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
                                header = TRUE, comment.char = "#"))
 
 
-iNZightPlot(api99, api00, data = apistrat, trend = "linear")
-iNZightPlot(api99, api00, design = dstrat, trend= "linear")
+iNZightPlot(api99, api00, data = apistrat, trend = "linear") -> pl
+pl

@@ -81,7 +81,7 @@ iNZightPlot(meals, awards, design = des1)
 
 
 upd()
-iNZightPlot(height, gender, data = d1, g1 = gender) 
+iNZightPlot(height, gender, data = d1, g1 = gender, cex.dotpt = 0.6)
 iNZightPlot(height, gender, data = d1, freq = year, g1 = gender, hist.bins = 20)
 iNZightPlot(meals, awards, design = des1, g1 = awards, hist.bins = 20)
 
@@ -837,3 +837,9 @@ getPlotSummary(d1[, x], varnames = list(x=x))
 
 upd()
 getPlotSummary(cellcost, data = d1)
+
+
+upd()
+iNZightPlot(height, armspan, data = d1,
+            xlim = c(120, 180),
+            ylim = c(100, 200))
