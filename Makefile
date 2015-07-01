@@ -129,7 +129,11 @@ pullG:
 DIR = ~/iNZight
 DIRO = ~/iNZight/iNZightVIT-WIN
 DIRN = ~/iNZight/iNZightVIT
+src_lib = $(DIR)/dev/www/R/src/contrib
 WIN_REP = ~/iNZight/dev/www/R/bin/windows/contrib
+MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
+MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib
+MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
 winRelease:
 	cp -rv $(DIRO) $(DIRN)
@@ -137,176 +141,154 @@ winRelease:
 	cd $(DIR); zip -r iNZightVIT-v$(INZIGHT_VERSION)-zipfile.zip iNZightVIT
 	rm -rf $(DIRN)
 
-
-toWin215:	
-	rm $(WIN_REP)/2.15/*.zip
-	for pkg in $(all_packages) ; do \
-		mv $(DIR)/$$pkg/$$pkg*.zip $(WIN_REP)/2.15/ ; \
-	done
-toWin30:	
-	rm $(WIN_REP)/3.0/*.zip
-	for pkg in $(all_packages) ; do \
-		mv $(DIR)/$$pkg/$$pkg*.zip $(WIN_REP)/3.0/ ; \
-	done
-toWin31:	
-	rm $(WIN_REP)/3.1/*.zip
-	for pkg in $(all_packages) ; do \
-		mv $(DIR)/$$pkg/$$pkg*.zip $(WIN_REP)/3.1/ ; \
-	done
-
-win215:
-	for pkg in $(all_packages) ; do \
-		cd $(DIR)/$$pkg ; \
-		rm -rf tmp/ ; \
-		cp ../dev/makes/Make_2153 ./Makefile ; \
-		make win ; \
-		rm *.tar.gz ; \
-		rm Make* ; \
-		cd .. ; \
-	done
-	make toWin215
-
-win30:
-	for pkg in $(all_packages) ; do \
-		cd $(DIR)/$$pkg ; \
-		rm -rf tmp/ ; \
-		cp ../dev/makes/Make_302 ./Makefile ; \
-		make win ; \
-		rm *.tar.gz ; \
-		rm Make* ; \
-		cd .. ; \
-	done
-	make toWin30
-
-win31:
-	for pkg in $(all_packages) ; do \
-		cd $(DIR)/$$pkg ; \
-		rm -rf tmp/ ; \
-		cp ../dev/makes/Make_311 ./Makefile ; \
-		make win ; \
-		rm *.tar.gz ; \
-		rm Make* ; \
-		cd .. ; \
-	done
-	make toWin31
-
-
-winEverything:
-	make win215 win30 win31 winPackageIndex; echo "\n\nSuccessfully created windows binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
-
-
-
-winPackageIndex:
-	cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	-cd $(WIN_REP)/2.15/; rm *.Rout; rm .RData
-	-cd $(WIN_REP)/3.0/; rm *.Rout; rm .RData
-	-cd $(WIN_REP)/3.1/; rm *.Rout; rm .RData
-
-
-
-
-
-src_lib = $(DIR)/dev/www/R/src/contrib
-source:
-	rm $(src_lib)/*.tar.gz
-	for pkg in $(all_packages) ; do \
-		cd $(src_lib) ; ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$$pkg ; \
-	done
-srcPackageIndex:
+## User will define wpkg=iNZightPlots, eg
+pkg_v = $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
+repositoryFiles:
+	@echo === Building repository files for: $(wpkg) v$(pkg_v)
+	@echo
+	@echo " == SOURCE"
+	@echo
+	@echo " Building source file ..."
+	-@rm -f $(src_lib)/$(wpkg)_*.tar.gz
+	@cd $(src_lib) ; \
+	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
+	@echo " ... done."
+	@echo 
+	@echo " Building repository package indices for Windows ..."
 	@cd $(src_lib); ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R; 
-	-@cd $(src_lib); rm *.Rout; rm .RData
-
-srcAll:
-	make source srcPackageIndex
-
-
-MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
-MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib
-MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
-
+	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
+	@echo " ... done."
+	@echo
+	@echo
+	@echo " == WINDOWS"
+	@echo
+	@echo "  = R v2.15.3"
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_2153 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
+	@echo " ... done."
+	@echo
+	@echo "  = R v3.0.2"
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_302 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/3.0/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.0/
+	@echo " ... done."
+	@echo
+	@echo "  = R v3.1.2"
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_312 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/3.1/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.1/
+	@echo " ... done."
+	@echo 
+	@echo " Building repository package indices for Windows ..."
+	@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	-@cd $(WIN_REP)/2.15/; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.0/; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.1/; rm -f *.Rout; rm -f .RData
+	@echo " ... done."
+	@echo ; echo
+	@mkdir -p $(DIR)/dev/tmp
+	@echo " == MAC (leopard)"
+	@echo
+	@echo "  = R v2.15.3"
+	@echo
+	@echo " Building binaries ... "
+	@echo
+	@cd $(DIR)/dev ; \
+	  ~/R-2.15.3/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
+	@cd $(DIR)/dev/tmp ; \
+	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
+	@echo
+	@echo " ... replaceing old binaries ..."
+	-@rm -f $(MAC_REP2)/2.15/$(wpkg)_*.tgz
+	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP2)/2.15/
+	@echo " ... done."
+	@echo
+	@echo " == MAC"
+	@echo
+	@echo "  = R v3.0.2"
+	@echo
+	@echo " Building binaries ... "
+	@echo
+	@cd $(DIR)/dev ; \
+	  ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
+	@cd $(DIR)/dev/tmp ; \
+	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
+	@echo
+	@echo " ... replaceing old binaries ..."
+	-@rm -f $(MAC_REP3)/3.0/$(wpkg)_*.tgz
+	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.0/
+	@echo " ... done."
+	@echo
+	@echo "  = R v3.1.2"
+	@echo
+	@echo " Building binaries ... "
+	@echo
+	@cd $(DIR)/dev ; \
+	  ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
+	@cd $(DIR)/dev/tmp ; \
+	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
+	@echo
+	@echo " ... replaceing old binaries ..."
+	-@rm -f $(MAC_REP3)/3.1/$(wpkg)_*.tgz
+	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.1/
+	@echo " ... done."
+	@echo
+	@echo " == MAC (mavericks)"
+	@echo
+	@echo "  = R v3.1.2"
+	@echo
+	@echo " Building binaries ... "
+	@echo
+	@cd $(DIR)/dev ; \
+	  ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
+	@cd $(DIR)/dev/tmp ; \
+	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
+	@echo
+	@echo " ... replaceing old binaries ..."
+	-@rm -f $(MAC_REPMAV)/3.1/$(wpkg)_*.tgz
+	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REPMAV)/3.1/
+	@echo " ... done."
+	@echo
+	-@rm -rf $(DIR)/dev/tmp
+	@echo " Building repository package indices for Mac ..."
+	-@cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
+	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
+	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
+	-@cd $(MAC_REPMAV)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
+	@echo " ... done."
+	@echo
+	@echo Finished updating repository with $(wpkg) v$(pkg_v).
+	@echo Have a nice day.; echo
 
 
 version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
-ACTUALmac31:
-	cd $(DIR)/dev; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
-	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP3)/3.1/
-
-mac31:
-	rm $(MAC_REP3)/3.1/*.tgz
-	mkdir tmp
-	for pkg in $(all_packages) ; do \
-		make ACTUALmac31 PKG=$$pkg ; \
-	done
-	rm -rf tmp
-
-
-
-ACTUALmac30:
-	cd $(DIR)/dev; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
-	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP3)/3.0/
-
-mac30:
-	rm $(MAC_REP3)/3.0/*.tgz
-	mkdir tmp
-	for pkg in $(all_packages) ; do \
-		make ACTUALmac30 PKG=$$pkg ; \
-	done
-	rm -rf tmp
-
-
-ACTUALmac215:
-	cd $(DIR)/dev; ~/R-2.15.3/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
-	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REP2)/2.15/
-
-mac215:
-	rm $(MAC_REP2)/2.15/*.tgz
-	mkdir tmp
-	for pkg in $(all_packages) ; do \
-		make ACTUALmac215 PKG=$$pkg ; \
-	done
-	rm -rf tmp
-
-
-ACTUALmacMAV:
-	cd $(DIR)/dev; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
-	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.1/
-
-macMAV:
-	rm $(MAC_REPMAV)/3.1/*.tgz
-	mkdir tmp
-	for pkg in $(all_packages) ; do \
-		make ACTUALmacMAV PKG=$$pkg ; \
-	done
-	rm -rf tmp
-	cp $(DIR)/dev/macpkg/* $(MAC_REPMAV)/3.1/
-
-ACTUALmacMAV30:
-	cd $(DIR)/dev; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(PKG);
-	cd $(DIR)/dev/tmp; tar cvzf $(PKG)_$(version).tgz $(PKG); mv $(PKG)_$(version).tgz $(MAC_REPMAV)/3.0/
-
-macMAV30:
-	rm $(MAC_REPMAV)/3.0/*.tgz
-	mkdir tmp
-	for pkg in $(all_packages) ; do \
-		make ACTUALmacMAV30 PKG=$$pkg ; \
-	done
-	rm -rf tmp
-
-
-macPackageIndex:
-	-@cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	-@cd $(MAC_REPMAV)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-	-@cd $(MAC_REPMAV)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm *.Rout
-
-
-macEverything:
-	make mac215 mac30 mac31 macMAV macPackageIndex; echo "\n\nSuccessfully created Mac binaries for R 2.15, 3.0.2 and 3.1.1 and moved to dev.repository.\n\n"
-
-
 
 pkgToDocker:
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/$(PKG)_*.tar.gz";
@@ -336,3 +318,22 @@ newsFiles:
 	@echo "Copying to server ..."
 	@scp changes/*.php tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/support/changelog/changes/
 	@ echo "Done.\n\n"
+
+
+
+help:
+	@echo
+	@echo "To build binaries for packages, run:"
+	@echo "   make repositoryFiles wpkg=NAME_OF_PACKAGE"
+	@echo
+	@echo "To push these to the repository, run:"
+	@echo "   make pkgToDocker PKG=NAME_OF_PACKAGE"
+	@echo
+	@echo "To update the NEWS files on the website, run:"
+	@echo "   make newFiles"
+	@echo
+	@echo "To make a ZIP archive of iNZightVIT for Windows:"
+	@echo "   1. make sure the iNZightVIT-WIN repository is up-to-date with git pull,"
+	@echo "   2. Run:"
+	@echo "      make winRelease"
+	@echo

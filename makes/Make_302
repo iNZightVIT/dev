@@ -11,37 +11,37 @@ PKG_FILES := DESCRIPTION NAMESPACE $(R_FILES) $(MAN_FILES) $(INST_FILES)
 build: $(PKG_NAME)_$(PKG_VERSION).tar.gz
 
 $(PKG_NAME)_$(PKG_VERSION).tar.gz: $(PKG_FILES)
-	~/R-3.0.2/bin/R CMD build ./
+	@~/R-3.0.2/bin/R CMD build ./
 
 check: $(PKG_NAME)_$(PKG_VERSION).tar.gz
-	~/R-3.0.2/bin/R CMD check $<
+	@~/R-3.0.2/bin/R CMD check $<
 
 install: $(PKG_NAME)_$(PKG_VERSION).tar.gz
-	~/R-3.0.2/bin/R CMD INSTALL $<
+	@~/R-3.0.2/bin/R CMD INSTALL $<
 
 run: $(PKG_NAME)_$(PKG_VERSION).tar.gz
-	~/R-3.0.2/bin/R CMD INSTALL $<
-	~/R-3.0.2/bin/R
+	@~/R-3.0.2/bin/R CMD INSTALL $<
+	@~/R-3.0.2/bin/R
 
 release: $(PKG_NAME).zip $(PKG_NAME).tar.gz
 
 win: $(PKG_NAME)_$(PKG_VERSION).zip
 
 $(PKG_NAME).tar.gz: $(PKG_NAME)_$(PKG_VERSION).tar.gz
-	cp $< $@
+	@cp $< $@
 
 $(PKG_NAME).zip: $(PKG_NAME)_$(PKG_VERSION).zip
-	cp $< $@
+	@cp $< $@
 
 $(PKG_NAME)_$(PKG_VERSION).zip: $(PKG_NAME)_$(PKG_VERSION).tar.gz
-	mkdir tmp
-	~/R-3.0.2/bin/R CMD INSTALL -l tmp $<
-	cd tmp ; zip --quiet -r $@ $(PKG_NAME) ; mv $@ ../
-	-rm -rf tmp
+	@mkdir tmp
+	@~/R-3.0.2/bin/R CMD INSTALL -l tmp $<
+	@cd tmp ; zip --quiet -r $@ $(PKG_NAME) ; mv $@ ../
+	@-rm -rf tmp
 
 clean:
-	-rm $(PKG_NAME)*.tar.gz
-	-rm -rf $(PKG_NAME).Rcheck
-	-rm $(PKG_NAME)*.zip
+	-@rm -f $(PKG_NAME)*.tar.gz
+	-@rm -rf $(PKG_NAME).Rcheck
+	-@rm -f $(PKG_NAME)*.zip
 
 
