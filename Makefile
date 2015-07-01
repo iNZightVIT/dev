@@ -288,6 +288,13 @@ repositoryFiles:
 	@echo Have a nice day.; echo
 
 
+inzightRepository:
+	@for pkg in $(inz_packages) ; do \
+	  make repositoryFiles wpkg=$$pkg ; \
+	done
+
+
+
 version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
 
 pkgToDocker:
@@ -307,6 +314,11 @@ pkgToDocker:
 	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
 	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
+
+inzToDocker:
+	@for pkg in $(inz_packages) ; do \
+	  make pkgToDocker PKG=$$pkg ; \
+	done
 
 
 newsFiles:
