@@ -840,6 +840,5 @@ getPlotSummary(cellcost, data = d1)
 
 
 upd()
-iNZightPlot(height, armspan, data = d1,
-            xlim = c(120, 180),
-            ylim = c(100, 200))
+iNZightPlot(height, data = d1,
+            xlim = c(130, 180))
