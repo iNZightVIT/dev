@@ -1,4 +1,5 @@
 library(barcode)
+
 library(gpairs)
 
 d <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
