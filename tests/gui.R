@@ -17,25 +17,35 @@ load_all("~/iNZight/iNZightPlots")
 load_all("~/iNZight/iNZight")
 KK <- iNZGUI$new()
 
+KK$initializeGui(D <- read.csv("~/iNZight/data/survey/apiclus2.csv",
+                               header = TRUE, comment.char = "#"))
+
+enabled(KK$plotToolbar$menu$menu_list[["Dataset"]][[3]])
+KK$plotToolbar$menu$block
 
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
                                header = TRUE, comment.char = "#"))
 
-KK$initializeGui(D2 <- read.csv("~/iNZightg/data/FutureLearn/Gapminder.csv",
+KK$initializeGui(D2 <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
                                header = TRUE, comment.char = "#"))
 
 
-iNZightPlot(api99, api00, data = apistrat, trend = "linear") -> pl
-pl
 
 
 
+w <- gwindow()
+gt <- ggroup(horiz = FALSE, cont = w)
+mg <- ggroup(cont = gt)
+m <- gmenu(list("A" = list(
+                    gaction(label = "Test", handler = function(h, ...) gmessage("click")),
+                    gaction(label = "Test", handler = function(h, ...) gmessage("click"))),
+                "B" = list(
+                    gaction(label = "Test", handler = function(h, ...) gmessage("click")),
+                    gaction(label = "Test", handler = function(h, ...) gmessage("click")))
+                ),
+           cont = mg)
 
-load_all("~/iNZight/iNZightPlots")
-iNZightPlot(getlunch, data = D,  inference.type = c("comp", "conf"))
-iNZightPlot(getlunch, gender, data = D, zoombars = c(1, 3),  inference.type = c("comp", "conf"))
 
-load_all("~/iNZight/iNZightPlots")
-iNZightPlot(Country, data = D2)
+as.list(m)
 
-
+enabled(m$menu_list$A[[1]]) <- FALSE
