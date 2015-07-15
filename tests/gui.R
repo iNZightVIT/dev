@@ -17,6 +17,9 @@ load_all("~/iNZight/iNZightPlots")
 load_all("~/iNZight/iNZight")
 KK <- iNZGUI$new()
 
+KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
+                               header = TRUE, comment.char = "#"))
+
 
 KK$initializeGui(D <- read.csv("~/iNZight/data/survey/apiclus2.csv",
                                header = TRUE, comment.char = "#"))
@@ -31,22 +34,21 @@ KK$initializeGui(D2 <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
                                header = TRUE, comment.char = "#"))
 
 
+names(as.list(KK$ctrlWidget))
+names(as.list(KK$ctrlWidget$ctrlGp))
+names(as.list(KK$ctrlWidget$V1box))
+KK$ctrlWidget$V1box$set_value(KK$ctrlWidget$V1box$get_items()[1])
+KK$ctrlWidget$V2box$set_value(KK$ctrlWidget$V2box$get_items()[1])
 
 
+svalue(KK$ctrlWidget$V1box) <- "height"
 
+
+try(dispose(w), TRUE)
+#load_all("~/iNZight/iNZight")
 w <- gwindow()
-gt <- ggroup(horiz = FALSE, cont = w)
-mg <- ggroup(cont = gt)
-m <- gmenu(list("A" = list(
-                    gaction(label = "Test", handler = function(h, ...) gmessage("click")),
-                    gaction(label = "Test", handler = function(h, ...) gmessage("click"))),
-                "B" = list(
-                    gaction(label = "Test", handler = function(h, ...) gmessage("click")),
-                    gaction(label = "Test", handler = function(h, ...) gmessage("click")))
-                ),
-           cont = mg)
+g <- ggroup(FALSE, cont = w)
+m <- gcombobox(c("one", "two", "three"), cont = g)
 
-
-as.list(m)
-
-enabled(m$menu_list$A[[1]]) <- FALSE
+names(as.list(m))
+m$set_items(c("one", "two", "MORE"))
