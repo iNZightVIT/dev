@@ -147,72 +147,16 @@ repositoryFiles:
 	@echo === Building repository files for: $(wpkg) v$(pkg_v)
 	@echo
 	@echo " == SOURCE"
-	@echo
-	@echo " Building source file ..."
-	-@rm -f $(src_lib)/$(wpkg)_*.tar.gz
-	@cd $(src_lib) ; \
-	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
-	@echo " ... done."
-	@echo 
-	@echo " Building repository package indices for Windows ..."
-	@cd $(src_lib); ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R; 
-	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
-	@echo " ... done."
-	@echo
-	@echo
+	make repoSource
 	@echo " == WINDOWS"
 	@echo
 	@echo "  = R v2.15.3"
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_2153 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
-	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
-	@echo " ... done."
-	@echo
+	make repoWin215
 	@echo "  = R v3.0.2"
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_302 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
-	-@rm -f $(WIN_REP)/3.0/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.0/
-	@echo " ... done."
-	@echo
+	make repoWin302
 	@echo "  = R v3.1.2"
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_312 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
-	-@rm -f $(WIN_REP)/3.1/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.1/
-	@echo " ... done."
-	@echo 
-	@echo " Building repository package indices for Windows ..."
-	@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	-@cd $(WIN_REP)/2.15/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.0/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.1/; rm -f *.Rout; rm -f .RData
-	@echo " ... done."
-	@echo ; echo
+	make repoWin312
+	make repoWinIndex
 	@mkdir -p $(DIR)/dev/tmp
 	@echo " == MAC (leopard)"
 	@echo
@@ -287,6 +231,77 @@ repositoryFiles:
 	@echo Finished updating repository with $(wpkg) v$(pkg_v).
 	@echo Have a nice day.; echo
 
+repoSource:
+	@echo
+	@echo " Building source file ..."
+	-@rm -f $(src_lib)/$(wpkg)_*.tar.gz
+	@cd $(src_lib) ; \
+	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
+	@echo " ... done."
+	@echo 
+	@echo " Building repository package indices ..."
+	@cd $(src_lib); ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R; 
+	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
+	@echo " ... done."
+	@echo
+	@echo
+
+repoWin215:
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_2153 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
+	@echo " ... done."
+	@echo
+
+repoWin302:
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_302 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/3.0/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.0/
+	@echo " ... done."
+	@echo
+
+repoWin312:
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_312 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/3.1/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.1/
+	@echo " ... done."
+	@echo
+
+repoWinIndex:
+	@echo " Building repository package indices for Windows ..."
+	@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	-@cd $(WIN_REP)/2.15/; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.0/; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.1/; rm -f *.Rout; rm -f .RData
+	@echo " ... done."
+	@echo ; echo
+
 
 inzightRepository:
 	@for pkg in $(inz_packages) ; do \
@@ -299,21 +314,21 @@ version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f
 
 pkgToDocker:
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/$(PKG)_*.tar.gz";
-	cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz inzight@docker.stat.auckland.ac.nz:www/R/src/contrib/;
+	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz inzight@docker.stat.auckland.ac.nz:www/R/src/contrib/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/$(PKG)_*.zip";
-	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
+	-cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.0/$(PKG)_*.zip";
-	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.0/;
+	-cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.0/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.1/$(PKG)_*.zip";
-	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.1/;
+	-cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.1/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
-	cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.0/;
+	-cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.0/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
-	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.1/;
+	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.1/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
-	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
+	-cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
-	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
+	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
 
 inzToDocker:
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/*.tar.gz";
