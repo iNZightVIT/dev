@@ -6,7 +6,7 @@
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inz_packages = iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight vit
-g_packages = gWidgets2 gWidgets2RGtk2
+g_packages = gWidgets2 gWidgets2RGtk2 
 all_packages = $(g_packages) $(inz_packages)
 
 build:
@@ -25,6 +25,12 @@ all:
 # You will need to install these once, and any time John updates the development version (unless it gets
 # uploaded to cran, then just forget this bit)
 gWidgets2:
+	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
+
+all312:
+	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(inz_packages)
+
+extra312:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 # If you want to install to your local R library, then make here:
@@ -56,7 +62,9 @@ replace:
 
 replaceG:
 	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(g_packages)
-	mv ../tmp/gWidgets* ../iNZightVIT-WIN/prog_files/library/
+	for pkg in $(g_packages) ; do \
+		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
+	done
 
 # If on mac, make sure you get the iNZightVIT-MAC repository first
 getMac:
