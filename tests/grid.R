@@ -1,4 +1,6 @@
 library(iNZightPlots)
+##library(cairoDevice)
+devtools::install_github("lawremi/cairoDevice")
 library(cairoDevice)
 library(gWidgets2RGtk2)
 library(grid)
@@ -15,7 +17,7 @@ dev.gwidgets2 <- function() {
 }
 
 
-iNZightPlot(rnorm(100), rnorm(100), colby = runif(100, 10, 30))
+#iNZightPlot(rnorm(100), rnorm(100), colby = runif(100, 10, 30))
 
 
 
@@ -60,7 +62,7 @@ test <- function(n=200) {
 
 
 dev.new()
-test(10)
+test(1000)
 
 Cairo()
-test(10)
+test(1000)
