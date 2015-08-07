@@ -1,24 +1,6 @@
 
 <h2>Change Log for iNZight</h2>
 
-<h3>Changes in version 2.2.0-1</h3>
-
-<p>Release date: 01 July 2015
-</p>
-
-
-<h4>PATCHES</h4>
-
-
-<ul>
-<li><p> iNZightPlots package: fix colour of segmented bar plots to
-match the legend
-</p>
-</li></ul>
-
-
-
-
 <h3>Changes in version 2.2</h3>
 
 <p>Release date: 16 June 2015
@@ -59,6 +41,30 @@ scatter plot.
 
 <ul>
 <li><p> the &quot;Row Operations&quot; menu has been renamed &quot;Data&quot;
+</p>
+</li></ul>
+
+
+
+
+<h4>PATCH 2.2.0-1 (01 July 2015)</h4>
+
+
+<ul>
+<li><p> iNZightPlots package: fix colour of segmented bar plots to
+match the legend
+</p>
+</li></ul>
+
+
+
+
+<h4>PATCH 2.2.0-2 (27 July 2015)</h4>
+
+
+<ul>
+<li><p> Fix mapping of confidence intervals (instead of comparison
+intervals) to Year 12 intervals in dot plots.
 </p>
 </li></ul>
 

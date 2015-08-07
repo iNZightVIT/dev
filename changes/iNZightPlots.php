@@ -1,9 +1,9 @@
 
 <h2>NEWS file for the iNZightPlots package</h2>
 
-<h3>Changes in Version XYZ</h3>
+<h3>Changes in Version 2.0.5</h3>
 
-<p>RELEASE DATE: TBA
+<p>RELEASE DATE: 27 July 2015
 </p>
 
 
@@ -28,6 +28,10 @@ specify the range of values shown on the plot
 </li>
 <li><p> weighting variable used when drawing a scatter plot of
 survey data
+</p>
+</li>
+<li> <p><code>conf</code> now corresponds to Year 12 intervals in dot plot
+inferences (previously, <code>comp</code> corresponded to this interval)
 </p>
 </li></ul>
 

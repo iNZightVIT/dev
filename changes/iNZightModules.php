@@ -1,12 +1,38 @@
 
 <h2>Change Log for iNZightModules</h2>
 
+<h3>Changes in version 1.2</h3>
+
+<p>Release date: TBA
+</p>
+
+
+<h4>NEW FEATURES</h4>
+
+
+<ul>
+<li><p> Added the iNZightMaps module for analysing geological data
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in version 1.1</h3>
 
 <p>Release date: 22 April 2015
 </p>
-<p>The version was updated to conincide with the release of iNZight v2.1
+
+
+<h4>UPDATE</h4>
+
+
+<ul>
+<li><p> The version was updated to conincide with the release of iNZight v2.1
 </p>
+</li></ul>
+
+
 
 
 <h3>Changes in version 1.0.8</h3>
