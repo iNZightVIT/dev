@@ -6,7 +6,7 @@
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inz_packages = iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight vit
-g_packages = gWidgets2 gWidgets2RGtk2
+g_packages = gWidgets2 gWidgets2RGtk2 
 all_packages = $(g_packages) $(inz_packages)
 
 build:
@@ -25,6 +25,12 @@ all:
 # You will need to install these once, and any time John updates the development version (unless it gets
 # uploaded to cran, then just forget this bit)
 gWidgets2:
+	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
+
+all312:
+	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(inz_packages)
+
+extra312:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 # If you want to install to your local R library, then make here:
@@ -56,7 +62,9 @@ replace:
 
 replaceG:
 	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(g_packages)
-	mv ../tmp/gWidgets* ../iNZightVIT-WIN/prog_files/library/
+	for pkg in $(g_packages) ; do \
+		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
+	done
 
 # If on mac, make sure you get the iNZightVIT-MAC repository first
 getMac:
@@ -160,72 +168,16 @@ repositoryFiles:
 	@echo === Building repository files for: $(wpkg) v$(pkg_v)
 	@echo
 	@echo " == SOURCE"
-	@echo
-	@echo " Building source file ..."
-	-@rm -f $(src_lib)/$(wpkg)_*.tar.gz
-	@cd $(src_lib) ; \
-	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
-	@echo " ... done."
-	@echo 
-	@echo " Building repository package indices for Windows ..."
-	@cd $(src_lib); ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R; 
-	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
-	@echo " ... done."
-	@echo
-	@echo
+	make repoSource
 	@echo " == WINDOWS"
 	@echo
 	@echo "  = R v2.15.3"
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_2153 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
-	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
-	@echo " ... done."
-	@echo
+	make repoWin215
 	@echo "  = R v3.0.2"
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_302 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
-	-@rm -f $(WIN_REP)/3.0/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.0/
-	@echo " ... done."
-	@echo
+	make repoWin302
 	@echo "  = R v3.1.2"
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_312 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
-	-@rm -f $(WIN_REP)/3.1/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.1/
-	@echo " ... done."
-	@echo 
-	@echo " Building repository package indices for Windows ..."
-	@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	-@cd $(WIN_REP)/2.15/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.0/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.1/; rm -f *.Rout; rm -f .RData
-	@echo " ... done."
-	@echo ; echo
+	make repoWin312
+	make repoWinIndex
 	@mkdir -p $(DIR)/dev/tmp
 	@echo " == MAC (leopard)"
 	@echo
@@ -300,7 +252,53 @@ repositoryFiles:
 	@echo Finished updating repository with $(wpkg) v$(pkg_v).
 	@echo Have a nice day.; echo
 
+repoSource:
+	@echo
+	@echo " Building source file ..."
+	-@rm -f $(src_lib)/$(wpkg)_*.tar.gz
+	@cd $(src_lib) ; \
+	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
+	@echo " ... done."
+	@echo 
+	@echo " Building repository package indices ..."
+	@cd $(src_lib); ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R; 
+	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
+	@echo " ... done."
+	@echo
+	@echo
+
+repoWin215:
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_2153 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
+	@echo " ... done."
+	@echo
+
+repoWin302:
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_302 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo 
+	@echo " ... replacing old binaries ..." 
+	-@rm -f $(WIN_REP)/3.0/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.0/
+	@echo " ... done."
+	@echo
+
 repoWin312:
+	@echo
 	@cd $(DIR)/$(wpkg) ; \
 	  rm -rf tmp ; \
 	  cp ../dev/makes/Make_312 ./Makefile ; \
@@ -312,7 +310,9 @@ repoWin312:
 	-@rm -f $(WIN_REP)/3.1/$(wpkg)_*.zip 2>/dev/null
 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.1/
 	@echo " ... done."
-	@echo 
+	@echo
+
+repoWinIndex:
 	@echo " Building repository package indices for Windows ..."
 	@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
 	@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
@@ -321,7 +321,7 @@ repoWin312:
 	-@cd $(WIN_REP)/3.0/; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.1/; rm -f *.Rout; rm -f .RData
 	@echo " ... done."
-
+	@echo ; echo
 
 
 inzightRepository:

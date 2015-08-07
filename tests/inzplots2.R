@@ -842,3 +842,7 @@ getPlotSummary(cellcost, data = d1)
 upd()
 iNZightPlot(height, data = d1,
             xlim = c(130, 180))
+
+
+upd()
+iNZightPlot(height, armspan, data = d1, colby = age)
