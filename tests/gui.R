@@ -2,21 +2,14 @@ q()
 
 setwd("~/iNZight/iNZight")
 library(devtools)
-
 load_all("~/iNZight/iNZightMR")
-
-
-
-#load_all("~/iNZight/gWidgets2RGtk2")
-#library(survey); data(api)
-#system("cp /home/tell029/R/x86_64-pc-linux-gnu-library/3.1/id.txt ~/iNZight/dev/tests/old_id.txt")
 
 try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots")
 load_all("~/iNZight/iNZight")
 KK <- iNZGUI$new()
 
-#KK$initializeGui()
+KK$initializeGui()
 
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
                                header = TRUE, comment.char = "#"))
@@ -45,11 +38,3 @@ KK$ctrlWidget$V2box$set_value(KK$ctrlWidget$V2box$get_items()[1])
 svalue(KK$ctrlWidget$V1box) <- "height"
 
 
-try(dispose(w), TRUE)
-#load_all("~/iNZight/iNZight")
-w <- gwindow()
-g <- ggroup(FALSE, cont = w)
-m <- gcombobox(c("one", "two", "three"), cont = g)
-
-names(as.list(m))
-m$set_items(c("one", "two", "MORE"))
