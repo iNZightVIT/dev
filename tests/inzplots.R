@@ -8,7 +8,7 @@ upd <- function() {
 }
 data(api)
 d1 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
-d2 <- read.csv("~/iNZight/data/nhanes-03-04.chris.csv", header = TRUE)
+d2 <- read.csv("~/iNZight/data/survey/NHANES_2009_2012.Wtd.csv", header = TRUE)
 d3 <- read.csv("~/iNZight/data/Gap Minder Data.csv")
 d4 <- apiclus2
 d5 <- read.csv("~/iNZight/data/Dolphins.csv", header = TRUE)
@@ -846,3 +846,24 @@ iNZightPlot(height, data = d1,
 
 upd()
 iNZightPlot(height, armspan, data = d1, colby = age)
+
+
+
+
+
+
+
+######## SURVEY stuff
+## des1 -> d4 -> apliclus2
+
+upd()
+
+desdes <- svydesign(ids=~snum+dnum, weights=~pw, nest=TRUE,data = d4)
+
+iNZightPlot(api99, api00, design = desdes)
+
+iNZightPlot(api99, api00, data = d4, trend = "linear")
+iNZightPlot(api99, api00, design = desdes, trend = "linear")
+
+getPlotSummary(api99, api00, data = d4, trend = "linear")
+getPlotSummary(api99, api00, design = desdes, trend = "linear")
