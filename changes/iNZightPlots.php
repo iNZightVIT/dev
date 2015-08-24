@@ -1,6 +1,44 @@
 
 <h2>NEWS file for the iNZightPlots package</h2>
 
+<h3>Changes in Version 2.1</h3>
+
+<p>RELEASE DATE: 04 August 2015
+</p>
+
+
+<h4>NEW FEATURES</h4>
+
+
+<ul>
+<li><p> allow zooming of plots with the new <code>zoom</code>
+argument. Works for both univariate and bivariate plots, and a
+related funcionality for 'zooming in' on bars in a barplot. 
+</p>
+</li></ul>
+
+
+
+
+<h3>Changes in Version 2.0.6</h3>
+
+<p>RELEASE DATE: 03 August 2015
+</p>
+
+
+<h4>BUG FIXES</h4>
+
+
+<ul>
+<li><p> fix an issue where requesting summary of 'dotplots' resulted
+in creating a new device, which resulted in errors on the Shiny
+server.
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in Version 2.0.5</h3>
 
 <p>RELEASE DATE: 27 July 2015
