@@ -43,6 +43,8 @@ iNZightPlot(stype, both, design = dstrat, inference.type = "conf")
 iNZightPlot(yr.rnd, both, design = dclus1, inference.type = "conf")
 iNZightPlot(yr.rnd, both, design = dclus2, inference.type = "conf")
 
+svymean(~yr.rnd, dstrat)
+svyciprop(~yr.rnd, dstrat)
 
 
 

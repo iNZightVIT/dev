@@ -1,0 +1,1 @@
+as.numeric((1:length(gender)) %in% c(sample(which(gender == "female"), 30), sample(which(gender == "male"), 30)))
