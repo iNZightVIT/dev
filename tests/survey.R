@@ -47,6 +47,41 @@ svymean(~yr.rnd, dstrat)
 svyciprop(~yr.rnd, dstrat)
 
 
+load_all("~/iNZight/iNZightPlots")
+getPlotSummary(api99, data = apistrat)
+getPlotSummary(api99, design = dstrat)
+getPlotSummary(both, design = dstrat)
+getPlotSummary(api99, design = dclus1)
+getPlotSummary(api99, design = dclus2)
+
+
+svyquantile(~api99, dstrat, c(0.25, 0.5, 0.75))
+svymean(~api99, dstrat)
+sqrt(svyvar(~api99, dstrat)[["api99"]])
+svytotal(~api99, dstrat)
+svyby(~api99, ~both, dclus2, svytotal)[, -1]
+svyby(~api99, ~both, dclus2, svyquantile, quantile = c(0.25, 0.5, 0.75), keep.var= FALSE)
+
+
+
+load_all("~/iNZight/iNZightPlots")
+getPlotSummary(yr.rnd, data = apistrat)
+getPlotSummary(yr.rnd, design = dstrat)
+getPlotSummary(yr.rnd, both, design = dstrat)
+
+
+svytotal(~both, design = dstrat)
+
+
+load_all("~/iNZight/iNZightPlots")
+getPlotSummary(api99, api00, g1=both, data = apistrat, trend = c("linear", "quadratic", "cubic"))
+getPlotSummary(api99, api00,  g1=both, design = dstrat, trend = c("linear", "quadratic", "cubic"))
+getPlotSummary(api99, api00, design = dclus1, trend = c("linear", "quadratic", "cubic"))
+getPlotSummary(api99, api00, design = dclus2, trend = c("linear", "quadratic", "cubic"))
+
+
+
+
 
 load_all("~/iNZight/iNZight")
 
