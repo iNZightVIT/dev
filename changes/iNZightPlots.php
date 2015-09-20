@@ -20,6 +20,17 @@ related funcionality for 'zooming in' on bars in a barplot.
 
 
 
+<h4>PATCH 2.1-1: 28 August 2015</h4>
+
+
+<ul>
+<li><p> fix a bug that occurs when all survey weights are equal
+</p>
+</li></ul>
+
+
+
+
 <h3>Changes in Version 2.0.6</h3>
 
 <p>RELEASE DATE: 03 August 2015
