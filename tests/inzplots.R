@@ -867,3 +867,15 @@ iNZightPlot(api99, api00, design = desdes, trend = "linear")
 
 getPlotSummary(api99, api00, data = d4, trend = "linear")
 getPlotSummary(api99, api00, design = desdes, trend = "linear")
+
+
+
+
+
+upd()
+getPlotSummary(height, data = d1)
+getPlotSummary(height, gender, data = d1)
+
+desdes <- svydesign(ids=~snum+dnum, weights=~pw, nest=TRUE,data = d4)
+getPlotSummary(api00, design = desdes)
+getPlotSummary(api00, both, design = desdes)
