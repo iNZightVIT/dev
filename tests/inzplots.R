@@ -879,3 +879,19 @@ getPlotSummary(height, gender, data = d1)
 desdes <- svydesign(ids=~snum+dnum, weights=~pw, nest=TRUE,data = d4)
 getPlotSummary(api00, design = desdes)
 getPlotSummary(api00, both, design = desdes)
+
+
+
+
+
+upd()
+pdf("~/Desktop/test.jpg")
+iNZightPlot(height, gender, data = d1, internal.labels = FALSE)
+dev.off()
+
+
+
+
+upd()
+iNZightPlot(height, getlunch, data = d1, inference.type = "comp", inference.par = "mean")
+iNZightPlot(height, getlunch, data = d1, inference.type = "comp", inference.par = "median")
