@@ -895,3 +895,52 @@ dev.off()
 upd()
 iNZightPlot(height, getlunch, data = d1, inference.type = "comp", inference.par = "mean")
 iNZightPlot(height, getlunch, data = d1, inference.type = "comp", inference.par = "median")
+
+
+
+
+ddd <- read.csv("~/iNZight/data/FutureLearn/NHANES-2000.csv")
+
+upd()
+iNZightPlot(BMI_WHO, DirectChol, AgeDecade, data = ddd)
+iNZightPlot(BMI_WHO, DirectChol, AgeDecade, data = ddd, inference.par = "mean", inference.type = c("comp", "conf"))
+
+
+#install.packages(c("iNZightPlots", "iNZightMR"), repos = "http://docker.stat.auckland.ac.nz/R")
+
+                                        #dd <- read.csv(file.choose())
+dd <- read.csv("OOOOOOOO.csv")
+iNZightPlot(BMI_WHO, DirectChol, data = dd, inference.par = "mean", inference.type = c("comp", "conf"))
+
+x <- ddd$DirectChol; y <- ddd$BMI_WHO
+
+# https://github.com/iNZightVIT/iNZightPlots/blob/master/R/inzdotplot.R#L525
+
+## using no intercept instead
+library(iNZightMR)
+
+fit <- lm(x ~ y - 1)
+est <- predict(fit, newdata = data.frame(y = levels(y)))
+mfit <- moecalc(fit, factorname = "y", est = est, base = FALSE)
+cbind(with(mfit, cbind(lower = compL, upper = compU)), mean = est)
+
+fit <- lm(x ~ y - 1)
+ses <- seIndepSes(summary(fit)$coef[, 2])
+print(ses)
+mfit2 <- moecalc(ses, est = summary(fit)$coef[, 1], base = FALSE)
+cbind(with(mfit2, cbind(lower = compL, upper = compU)), mean = est)
+
+
+upd()
+iNZightPlot(BMI_WHO, DirectChol, data = dd, inference.par = "mean", inference.type = c("comp", "conf"))
+
+
+ddd <- read.csv("~/iNZight/data/FutureLearn/NHANES-2000.csv")
+
+upd()
+iNZightPlot(BMI_WHO, DirectChol, data = ddd)
+
+
+png()
+iNZightPlot(BMI_WHO, DirectChol, data = ddd)
+dev.off()
