@@ -28,10 +28,10 @@ gWidgets2:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 all312:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(inz_packages)
+	cd ../; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(inz_packages)
 
 extra312:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
+	cd ../; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 # If you want to install to your local R library, then make here:
 here215:
@@ -40,7 +40,7 @@ here215:
 here30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
 
-here:
+here31:
 	cd ../; ~/R-3.1.2/bin/R CMD INSTALL $(inz_packages)
 
 here32:
@@ -53,7 +53,7 @@ ghere215:
 ghere30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(g_packages)
 
-ghere:
+ghere31:
 	cd ../; ~/R-3.1.2/bin/R CMD INSTALL $(g_packages)
 
 ghere32:

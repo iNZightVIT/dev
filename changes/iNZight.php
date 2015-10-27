@@ -55,6 +55,18 @@ dependency pacakges. See their change logs for details.
 
 
 
+<h4>PATCH 2.4.1 - 21/10/2015</h4>
+
+
+<ul>
+<li><p> Remove dependency on <code>RODBC</code> package; this causes
+issues on Mac attempting to manually install.
+</p>
+</li></ul>
+
+
+
+
 </div>  <div class='versionSection'><h3>Changes in version 2.3</h3>
 
 <p>Release date: 4 August, 2015

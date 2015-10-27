@@ -12,6 +12,7 @@ d2 <- read.csv("~/iNZight/data/survey/NHANES_2009_2012.Wtd.csv", header = TRUE)
 d3 <- read.csv("~/iNZight/data/Gap Minder Data.csv")
 d4 <- apiclus2
 d5 <- read.csv("~/iNZight/data/Dolphins.csv", header = TRUE)
+d6 <- read.csv("~/iNZight/data/FutureLearn/NHANES-1000.csv", header = TRUE, comment.char = "#")
 
 des1 <- svydesign(ids=~dnum+snum, fpc=~fpc1+fpc2, data=d4)
 des2 <- svydesign(ids=~1, weights=~WTINT2YR, data=d2)
@@ -944,3 +945,11 @@ iNZightPlot(BMI_WHO, DirectChol, data = ddd)
 png()
 iNZightPlot(BMI_WHO, DirectChol, data = ddd)
 dev.off()
+
+
+
+
+
+upd()
+iNZightPlot(Pulse, data = d6, colby = AgeDecade)
+getPlotSummary(Pulse, data = d6, colby = AgeDecade)
