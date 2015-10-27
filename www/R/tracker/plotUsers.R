@@ -1,3 +1,4 @@
+suppressPackageStartupMessages(library(lubridate))
 
 cat("Fetching data...")
 
@@ -8,6 +9,7 @@ cat(" done.\n")
 cat("Loading libraries...")
 suppressPackageStartupMessages(library(ggplot2))
 cat(" done.\n")
+
 
 cat("Processing data...")
 file <- file[!is.na(file$country) & file$country != "", ]  # get rid of missing
@@ -26,7 +28,7 @@ ggplot() + geom_map(data = userloc, aes(map_id = Var1, fill = Freq), map = world
     coord_equal() +
     labs(x = sprintf("\n\nMap generated on %s", date()), y = "") +
     scale_fill_gradient(low = "#DDFFDD", high ="#005500") +
-    ggtitle("iNZight Users\n") +
+    ggtitle("iNZight Users (last 2 months)\n") +
     theme(plot.title = element_text(lineheight = 0.8, face = "bold", size = rel(2)))
 o <- dev.off()
 cat(" done.\n")
