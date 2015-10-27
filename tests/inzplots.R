@@ -932,7 +932,7 @@ cbind(with(mfit2, cbind(lower = compL, upper = compU)), mean = est)
 
 
 upd()
-iNZightPlot(BMI_WHO, DirectChol, data = dd, inference.par = "mean", inference.type = c("comp", "conf"))
+iNZightPlot(BMI_WHO, DirectChol, g1=AgeDecade, data = ddd, inference.par = "mean", inference.type = c("comp", "conf"))
 
 
 ddd <- read.csv("~/iNZight/data/FutureLearn/NHANES-2000.csv")
