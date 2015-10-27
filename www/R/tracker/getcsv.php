@@ -15,7 +15,8 @@ if ($_GET['r'] != "imfromiNZight") {
   die("There's nothing to show.");
 }
 
-$sql = "SELECT location, country, os, DATE(lastvisit) AS date FROM users WHERE lastvisit >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)";
+//$sql = "SELECT location, country, os, DATE(lastvisit) AS date FROM users WHERE lastvisit >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)";
+$sql = "SELECT location, country, os, DATE(lastvisit) AS date FROM users WHERE lastvisit >= '2015-10-19'";
 $result = $con->query($sql);
 
 echo "Location,country,OS,date\n";

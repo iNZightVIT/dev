@@ -28,7 +28,7 @@ ggplot() + geom_map(data = userloc, aes(map_id = Var1, fill = Freq), map = world
     coord_equal() +
     labs(x = sprintf("\n\nMap generated on %s", date()), y = "") +
     scale_fill_gradient(low = "#DDFFDD", high ="#005500") +
-    ggtitle("iNZight Users (last 2 months)\n") +
+    ggtitle("iNZight Users (since 19 Oct. 2015)\n") +
     theme(plot.title = element_text(lineheight = 0.8, face = "bold", size = rel(2)))
 o <- dev.off()
 cat(" done.\n")
