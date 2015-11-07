@@ -36,5 +36,3 @@ KK$ctrlWidget$V2box$set_value(KK$ctrlWidget$V2box$get_items()[1])
 
 
 svalue(KK$ctrlWidget$V1box) <- "height"
-
-

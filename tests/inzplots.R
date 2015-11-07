@@ -951,5 +951,9 @@ dev.off()
 
 
 upd()
-iNZightPlot(Pulse, data = d6, colby = AgeDecade)
+iNZightPlot(height, data = d1)
+
+
+
+
 getPlotSummary(Pulse, data = d6, colby = AgeDecade)
