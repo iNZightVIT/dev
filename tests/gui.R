@@ -11,6 +11,11 @@ KK <- iNZGUI$new()
 
 #KK$initializeGui()
 
+load_all("~/iNZight/iNZightMaps")
+data(nzquakes)
+KK$initializeGui(nzquakes)
+
+
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
                                header = TRUE, comment.char = "#"))
 
