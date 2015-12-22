@@ -2,7 +2,10 @@ q()
 
 setwd("~/iNZight/iNZight")
 library(devtools)
-load_all("~/iNZight/iNZightMR")
+#load_all("~/iNZight/iNZightMR")
+
+document()
+load_all()
 
 try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots")
