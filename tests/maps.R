@@ -6,7 +6,7 @@ quakes <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE)
 map.obj <- iNZightMap(~Latitude, ~Longitude, data = quakes)
 
 devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
-plot(map.obj, sizeby = Magnitude, colby = Felt)
+plot(map.obj, sizeby = ~Magnitude, colby = ~Felt)
 
 ?iNZightMap
 
@@ -32,6 +32,27 @@ document("~/iNZight/iNZightMaps")
 load_all("~/iNZight/iNZightMaps")
 data(nzquakes)
 obj <- iNZightMap(lat=~Latitude, lon=~Longitude, data = nzquakes)
-plot(obj, g1=Felt,colby = Felt, sizeby = Magnitude, opacity = ~Depth, type = "satellite")
-?iNZightMap
+plot(obj, colby = Felt, sizeby = Magnitude, opacity = ~Depth, type = "satellite")
 
+
+
+
+######## shape files
+q()
+library(maptools)
+library(grid)
+
+devtools::load_all("~/iNZight/iNZightMaps")
+
+data <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header = TRUE)
+shade.map('~/iNZight/iNZightMaps/data/world/TM_WORLD_BORDERS-0.3.shp',
+          data = data, region = 'Country', colby = 'ChildrenPerWoman',
+          transform = 'linear', display = 'terrain.colors', offset = 0)
+
+
+
+library(iNZightPlots)
+
+devtools::load_all("~/iNZight/iNZightMaps")
+iNZightPlot(ChildrenPerWoman, Country, data = data, plottype = "map",
+            plot.features = list(maptype = "shape"))

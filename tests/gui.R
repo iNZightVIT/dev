@@ -3,13 +3,35 @@ q()
 setwd("~/iNZight/iNZight")
 library(devtools)
 
-document()
+#document()
 
 try(dispose(KK$win), TRUE)
 load_all(export_all = FALSE)
 
 KK <- iNZGUI$new()
+KK$initializeGui(D <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE, comment.char = "#"))
+
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+
+
+
+
+
+q()
+
+setwd("~/iNZight/iNZightModules")
+library(iNZight)
+library(iNZightMaps)
+data(nzquakes)
+
+try(dispose(KK$win), TRUE)
+source("~/iNZight/iNZightModules/R/iNZightMaps.R")
+KK <- iNZGUI$new()
+KK$initializeGui(nzquakes)
+
+###
+
+
 
 
 load_all("~/iNZight/iNZightMaps")
