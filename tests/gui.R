@@ -20,11 +20,12 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header
 q()
 
 setwd("~/iNZight/iNZightModules")
-library(iNZight)
-library(iNZightMaps)
+devtools::load_all("~/iNZight/iNZightMaps")
 data(nzquakes)
 
 try(dispose(KK$win), TRUE)
+devtools::load_all("~/iNZight/iNZightMaps")
+devtools::load_all("~/iNZight/iNZight", export_all = FALSE)
 source("~/iNZight/iNZightModules/R/iNZightMaps.R")
 KK <- iNZGUI$new()
 KK$initializeGui(nzquakes)
@@ -34,7 +35,7 @@ KK$initializeGui(nzquakes)
 
 
 
-load_all("~/iNZight/iNZightMaps")
+devtools::load_all("~/iNZight/iNZightMaps")
 data(nzquakes)
 KK$initializeGui(nzquakes)
 
