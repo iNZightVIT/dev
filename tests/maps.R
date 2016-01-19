@@ -16,9 +16,13 @@ plot(map.obj, sizeby = Magnitude, colby = Felt)
 library(cairoDevice)
 Cairo()
 library(iNZightMaps)
+
 NZQuakes = read.csv("~/iNZight/data/QuakesNZ2000.csv", header = T)
-obj <- iNZightMap(~Latitude, ~Longitude, NZQuakes)
+obj <- iNZightMap(~Latitude, ~Longitude, qq)
 plot(obj)
+
+
+qq <- read.csv("~/Downloads/GeoNet_CMT_solutions.csv", header = T)
 
 
 #############################
@@ -31,43 +35,56 @@ library(devtools)
 document("~/iNZight/iNZightMaps")
 load_all("~/iNZight/iNZightMaps")
 data(nzquakes)
+nzquakes <- read.csv("~/Downloads/GeoNet_CMT_solutions.csv", header = T)
+nzquakes <- nzquakes[!is.na(nzquakes$Longitude), ]
 obj <- iNZightMap(lat=~Latitude, lon=~Longitude, data = nzquakes)
-plot(obj, colby = Order)#, sizeby = Magnitude, opacity = ~Depth, type = "satellite")
+nzquakes2 <- nzquakes
+nzquakes2$Longitude <- (nzquakes2$Longitude + 100) - 180
+obj2 <- iNZightMap(lat=~Latitude, lon=~Longitude, data = nzquakes2)
+
+plot(obj)#, colby = Order)#, sizeby = Magnitude, opacity = ~Depth, type = "satellite")
+plot(obj2)#, colby = Order)#, sizeby = Magnitude, opacity = ~Depth, type = "satellite")
 
 
-
+test <- data(nzquakes)
 
 ######## shape files
 q()
 library(maptools)
-library(grid)
 
-devtools::load_all("~/iNZight/iNZightMaps")
-
-data <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header = TRUE)
-shade.map('~/iNZight/iNZightMaps/data/world/TM_WORLD_BORDERS-0.3.shp',
-          data = data, region = 'Country', colby = 'ChildrenPerWoman',
-          transform = 'linear', display = 'terrain.colors', offset = 0)
-
-
-
-library(iNZightPlots)
+devtools::load_all("~/iNZight/iNZightPlots")
 data <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header=T)
-devtools::load_all("~/iNZight/iNZightMaps")
 
-shapeobj <- shape.extract(shp <- readShapePoly("~/iNZight/iNZightMaps/data/world/TM_WORLD_BORDERS-0.3.shp"),
-                          "ChildrenPerWoman", "exp", "hue", data = data, na.fill = "black",
-                          offset = 0,col = "green4", region = "Country")
-myshape <- data.frame(x = shapeobj$polygon[, 1],
-                      y = shapeobj$polygon[, 2],
-                      id = as.numeric(rownames(shapeobj$polygon)))
 
 devtools::load_all("~/iNZight/iNZightMaps")
-iNZightPlot(ChildrenPerWoman, Country, data = data, plottype = "map",
-            plot.features =
-                list(maptype = "shape", shape.obj = myshape, temp.col = shapeobj$color))
+d <- data
+shape.obj <- shape.extract(shp <- readShapePoly("~/iNZight/iNZightMaps/data/world/ne_110m_admin_0_countries.shp"))
+iNZightPlot(ChildrenPerWoman, Country, data = d, plottype = "shapemap", 
+            plot.features = list(shape.object = shape.obj, transform = "normal",
+                col.method = "terrain.colors", col.offset=0))
+
+world <- "~/iNZight/iNZightMaps/data/world/ne_110m_admin_0_countries.shp"
+devtools::load_all("~/iNZight/iNZightMaps")
+obj <- iNZightShapeMap(location = world, region = country, data)## data is optional, will check for non-matches
+
+#obj <- renameRegions(obj, list("US" = "United States of America"))  ## US (in shape) -> United States of America
+
+devtools::load_all("~/iNZight/iNZightMaps")
+obj <- iNZightShapeMap(location = world, region = country, data)
+plot(obj, variable = ~ChildrenPerWoman, region = ~Country, data = d, 
+     col.fun = "terrain.colors", transform = "linear", col.offset = 0.2, col = "blue")
+                       
 
 
 
 
-head(myshape)
+## data.t = data.trans(d$Exports,transform = 'linear')
+## data.o = order.match(data.t,shp[[4]],d$Country)
+## color = col.fun(data.o,color.index = shape.obj$col.index,display = 'hue',col = 'blue',offset = 0.2)
+## shape.obj = color.bind(color,shape.obj)
+
+
+
+
+
+
