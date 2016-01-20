@@ -19,11 +19,12 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header
 
 q()
 
+devtools::load_all("~/iNZight/iNZightPlots")
 setwd("~/iNZight/iNZightModules")
 devtools::load_all("~/iNZight/iNZightMaps")
 data(nzquakes)
 
-try(dispose(KK$win), TRUE)
+try(dispose(KK$win), TRUE); rm("iNZightMapMod")
 devtools::load_all("~/iNZight/iNZightMaps")
 devtools::load_all("~/iNZight/iNZight", export_all = FALSE)
 source("~/iNZight/iNZightModules/R/iNZightMaps.R")
