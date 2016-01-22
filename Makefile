@@ -5,7 +5,7 @@
 # make build
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
-inz_packages = iNZightTS iNZightRegression iNZightMR iNZightTools iNZightModules iNZightPlots iNZight vit
+inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules  iNZight vit
 g_packages = gWidgets2 gWidgets2RGtk2 
 all_packages = $(g_packages) $(inz_packages)
 
