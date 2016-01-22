@@ -5,13 +5,38 @@ library(devtools)
 
 #document()
 
+
 try(dispose(KK$win), TRUE)
+load_all("~/iNZight/iNZightTS", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
+load_all(export_all = FALSE)
+
+KK <- iNZGUI$new()
+KK$initializeGui(D <- read.csv("~/iNZight/data/time-series/visitorsQ.csv", header = TRUE, comment.char = "#"))
+
+
+
+
+
+try(dispose(KK$win), TRUE)
+load_all("~/iNZight/iNZightMR", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 
 KK <- iNZGUI$new()
 KK$initializeGui(D <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE, comment.char = "#"))
 
+
+
+devtools::load_all("~/iNZight/iNZightMaps")
+data(nzquakes)
+KK$initializeGui(nzquakes)
+
 KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+
+KK$initializeGui(D <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE, comment.char = "#"))
+
+
 
 
 
@@ -19,15 +44,15 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header
 
 q()
 
-devtools::load_all("~/iNZight/iNZightPlots")
-setwd("~/iNZight/iNZightModules")
+#devtools::load_all("~/iNZight/iNZightPlots")
+#setwd("~/iNZight/iNZightModules")
 devtools::load_all("~/iNZight/iNZightMaps")
 data(nzquakes)
 
-try(dispose(KK$win), TRUE); rm("iNZightMapMod")
+try(dispose(KK$win), TRUE)#; try(rm("iNZightMapMod"), TRUE)
 devtools::load_all("~/iNZight/iNZightMaps")
 devtools::load_all("~/iNZight/iNZight", export_all = FALSE)
-source("~/iNZight/iNZightModules/R/iNZightMaps.R")
+#source("~/iNZight/iNZightModules/R/iNZightMaps.R")
 KK <- iNZGUI$new()
 KK$initializeGui(nzquakes)
 
