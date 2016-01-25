@@ -4,13 +4,21 @@ library(devtools)
 pkg <- "~/iNZight/iNZightModules"
 document(pkg)
 check_doc(pkg)
-check(pkg)
+## check(pkg)  ### -- no longer works
  
 
 q()
 library(devtools)
 
 pkg <- "~/iNZight/iNZight"
+document(pkg)
+check_doc(pkg)
+check(pkg)
+
+q()
+library(devtools)
+
+pkg <- "~/iNZight/iNZightMaps"
 document(pkg)
 check_doc(pkg)
 check(pkg)
