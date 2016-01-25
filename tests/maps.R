@@ -5,8 +5,8 @@ quakes <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE)
 
 map.obj <- iNZightMap(~Latitude, ~Longitude, data = quakes)
 
-devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
-plot(map.obj, sizeby = Magnitude, colby = Felt)
+#devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+plot(map.obj, sizeby = Magnitude, g1 = Felt, g1.level = "_MULTI")
 
 ?iNZightMap
 

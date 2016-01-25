@@ -5,6 +5,22 @@ library(devtools)
 
 #document()
 
+try(dispose(KK$win), TRUE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
+load_all(export_all = FALSE)
+
+KK <- iNZGUI$new()
+KK$initializeGui(D <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE, comment.char = "#"))
+
+
+
+
+
+
+
+
+
+
 
 try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightTS", export_all = FALSE)
