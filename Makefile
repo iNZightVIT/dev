@@ -1,12 +1,12 @@
 # This file allows quick building/updating of packages in the iNZight directory.
 
-# If you haven't got any of the packages (i.e., only this one) then 
+# If you haven't got any of the packages (i.e., only this one) then
 # first place this dev/ directory in a folder (perhaps iNZight/?) and:
 # make build
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules  iNZight vit
-g_packages = gWidgets2 gWidgets2RGtk2 
+g_packages = gWidgets2 gWidgets2RGtk2
 all_packages = $(g_packages) $(inz_packages)
 
 build:
@@ -19,13 +19,13 @@ build:
 	cd ../; mkdir tmp; mv VIT vit
 
 # Now you can install them into a temporary directory: make all
-all:	
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(inz_packages)
+all:
+	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(inz_packages)
 
 # You will need to install these once, and any time John updates the development version (unless it gets
 # uploaded to cran, then just forget this bit)
 gWidgets2:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(g_packages)
+	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 all312:
 	cd ../; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(inz_packages)
@@ -34,8 +34,8 @@ extra312:
 	cd ../; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 # If you want to install to your local R library, then make here:
-here215:
-	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(inz_packages)
+#here215:
+#	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(inz_packages)
 
 here30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
@@ -47,8 +47,8 @@ here32:
 	cd ../; ~/R-3.2.2/bin/R CMD INSTALL $(inz_packages)
 
 # And the gWidgets2 libraries:
-ghere215:
-	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(g_packages)
+#ghere215:
+#	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(g_packages)
 
 ghere30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(g_packages)
@@ -130,7 +130,7 @@ pullG:
 		cd ../$$pkg; git pull ; \
 	done
 
-# How iNZighting! 
+# How iNZighting!
 
 
 
@@ -177,8 +177,8 @@ repositoryFiles:
 	make repoSource
 	@echo " == WINDOWS"
 	@echo
-	@echo "  = R v2.15.3"
-	make repoWin215
+#	@echo "  = R v2.15.3"
+#	make repoWin215
 	@echo "  = R v3.0.2"
 	make repoWin302
 	@echo "  = R v3.1.2"
@@ -187,10 +187,10 @@ repositoryFiles:
 	make repoWin322
 	make repoWinIndex
 	@mkdir -p $(DIR)/dev/tmp
-	@echo " == MAC (leopard)"
-	@echo
-	@echo "  = R v2.15.3"
-	make repoMac215
+#	@echo " == MAC (leopard)"
+#	@echo
+#	@echo "  = R v2.15.3"
+#	make repoMac215
 	@echo " == MAC"
 	@echo
 	@echo "  = R v3.0.2"
@@ -216,28 +216,28 @@ repoSource:
 	@cd $(src_lib) ; \
 	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
 	@echo " ... done."
-	@echo 
+	@echo
 	@echo " Building repository package indices ..."
-	@cd $(src_lib); ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R; 
+	@cd $(src_lib); ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R;
 	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
 	@echo " ... done."
 	@echo
 	@echo
 
-repoWin215:
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_2153 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
-	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
-	@echo " ... done."
-	@echo
+# repoWin215:
+# 	@echo
+# 	@cd $(DIR)/$(wpkg) ; \
+# 	  rm -rf tmp ; \
+# 	  cp ../dev/makes/Make_2153 ./Makefile ; \
+# 	  echo " Building binaries ... "; echo ; \
+# 	  make win ; \
+# 	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+# 	@echo
+# 	@echo " ... replacing old binaries ..."
+# 	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
+# 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
+# 	@echo " ... done."
+# 	@echo
 
 repoWin302:
 	@echo
@@ -247,8 +247,8 @@ repoWin302:
 	  echo " Building binaries ... "; echo ; \
 	  make win ; \
 	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
+	@echo
+	@echo " ... replacing old binaries ..."
 	-@rm -f $(WIN_REP)/3.0/$(wpkg)_*.zip 2>/dev/null
 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.0/
 	@echo " ... done."
@@ -262,8 +262,8 @@ repoWin312:
 	  echo " Building binaries ... "; echo ; \
 	  make win ; \
 	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
+	@echo
+	@echo " ... replacing old binaries ..."
 	-@rm -f $(WIN_REP)/3.1/$(wpkg)_*.zip 2>/dev/null
 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.1/
 	@echo " ... done."
@@ -277,27 +277,27 @@ repoWin322:
 	  echo " Building binaries ... "; echo ; \
 	  make win ; \
 	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo 
-	@echo " ... replacing old binaries ..." 
+	@echo
+	@echo " ... replacing old binaries ..."
 	-@rm -f $(WIN_REP)/3.2/$(wpkg)_*.zip 2>/dev/null
 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.2
 	@echo " ... done."
 	@echo
 
-repoMac215:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-2.15.3/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REP2)/2.15/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP2)/2.15/
-	@echo " ... done."
-	@echo
+# repoMac215:
+# 	@echo
+# 	@echo " Building binaries ... "
+# 	@echo
+# 	@cd $(DIR)/dev ; \
+# 	  ~/R-2.15.3/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
+# 	@cd $(DIR)/dev/tmp ; \
+# 	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
+# 	@echo
+# 	@echo " ... replaceing old binaries ..."
+# 	-@rm -f $(MAC_REP2)/2.15/$(wpkg)_*.tgz
+# 	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP2)/2.15/
+# 	@echo " ... done."
+# 	@echo
 
 repoMac30:
 	@echo
@@ -411,8 +411,8 @@ version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f
 pkgToDocker:
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/$(PKG)_*.tar.gz";
 	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz inzight@docker.stat.auckland.ac.nz:www/R/src/contrib/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/$(PKG)_*.zip";
-	-cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
+#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/$(PKG)_*.zip";
+#	-cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.0/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.0/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.1/$(PKG)_*.zip";
@@ -425,8 +425,8 @@ pkgToDocker:
 	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.1/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.2/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
-	-cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
+#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
+#	-cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
 	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
@@ -435,8 +435,8 @@ pkgToDocker:
 inzToDocker:
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/*.tar.gz";
 	cd $(src_lib); scp PACKAGES PACKAGES.gz *.tar.gz inzight@docker.stat.auckland.ac.nz:www/R/src/contrib/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/*.zip";
-	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz *.zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
+#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/*.zip";
+#	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz *.zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.0/*.zip";
 	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz *.zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.0/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.1/*.zip";
@@ -447,8 +447,8 @@ inzToDocker:
 	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.1/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.2/*.tgz";
 	cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.2/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/*.tgz";
-	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
+#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/*.tgz";
+#	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.1/*.tgz";
 	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
 	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.2/*.tgz";

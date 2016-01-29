@@ -28,14 +28,12 @@ TRUE
 ### --- MAPS MODULE
 
 try(dispose(KK$win), TRUE)
-#load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 
 KK <- iNZGUI$new()
 KK$initializeGui(D <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE, comment.char = "#"))
-
-KK$initializeGui()
 
 TRUE
 
@@ -54,7 +52,7 @@ TRUE
 
 ### --- MULTIPLE RESPONSE MODULE
 try(dispose(KK$win), TRUE)
-load_all("~/iNZight/iNZightMR", export_all = FALSE)
+#load_all("~/iNZight/iNZightMR", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
 #load_all(export_all = FALSE)
 
@@ -62,9 +60,6 @@ KK <- iNZGUI$new()
 KK$initializeGui(D <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE, comment.char = "#"))
 
 TRUE
-
-
-
 
 
 
