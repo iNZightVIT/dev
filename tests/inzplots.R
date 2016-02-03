@@ -963,3 +963,13 @@ getPlotSummary(Pulse, data = d6, colby = AgeDecade)
 
 upd()
 iNZightPlot(height, colby = gender, data = d1, col = c("red", "blue"))
+
+
+
+
+
+
+
+### SIZING
+upd()
+iNZightPlot(age, height, data = d1, sizeby = height, g1 = armspan)

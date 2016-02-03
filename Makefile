@@ -409,50 +409,50 @@ inzightRepository:
 version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
 
 pkgToDocker:
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/$(PKG)_*.tar.gz";
-	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz inzight@docker.stat.auckland.ac.nz:www/R/src/contrib/;
-#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/$(PKG)_*.zip";
-#	-cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.0/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.0/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.1/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.1/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.2/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.2/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.0/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.1/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.2/;
-#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
-#	-cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
-	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
-	-cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/src/contrib/$(PKG)_*.tar.gz";
+	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/src/contrib/;
+#	-ssh inzight@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/2.15/$(PKG)_*.zip";
+#	-cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/2.15/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.0/$(PKG)_*.zip";
+	-cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.0/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.1/$(PKG)_*.zip";
+	-cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.1/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.2/$(PKG)_*.zip";
+	-cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
+	-cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.0/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
+	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.1/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
+	-cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.2/;
+#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
+#	-cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/leopard/contrib/2.15/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
+	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.1/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
+	-cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.2/;
 
 inzToDocker:
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/src/contrib/*.tar.gz";
-	cd $(src_lib); scp PACKAGES PACKAGES.gz *.tar.gz inzight@docker.stat.auckland.ac.nz:www/R/src/contrib/;
-#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/2.15/*.zip";
-#	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz *.zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/2.15/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.0/*.zip";
-	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz *.zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.0/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/windows/contrib/3.1/*.zip";
-	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz *.zip inzight@docker.stat.auckland.ac.nz:www/R/bin/windows/contrib/3.1/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.0/*.tgz";
-	cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.0/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.1/*.tgz";
-	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.1/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/contrib/3.2/*.tgz";
-	cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/contrib/3.2/;
-#	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/leopard/contrib/2.15/*.tgz";
-#	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/leopard/contrib/2.15/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.1/*.tgz";
-	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.1/;
-	-ssh inzight@docker.stat.auckland.ac.nz "rm www/R/bin/macosx/mavericks/contrib/3.2/*.tgz";
-	cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz *.tgz inzight@docker.stat.auckland.ac.nz:www/R/bin/macosx/mavericks/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/src/contrib/*.tar.gz";
+	cd $(src_lib); scp PACKAGES PACKAGES.gz *.tar.gz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/src/contrib/;
+#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/2.15/*.zip";
+#	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/2.15/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.0/*.zip";
+	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.0/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.1/*.zip";
+	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.1/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.0/*.tgz";
+	cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.0/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.1/*.tgz";
+	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.1/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.2/*.tgz";
+	cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.2/;
+#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/leopard/contrib/2.15/*.tgz";
+#	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/leopard/contrib/2.15/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.1/*.tgz";
+	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.1/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/*.tgz";
+	cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.2/;
 
 
 newsFiles:
