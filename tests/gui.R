@@ -7,18 +7,19 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
-load_all("~/iNZight/iNZightModules", export_all = FALSE)
+## load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui() ## D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 TRUE
 
 
 
-
+census.at.school.500 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
+use_data(census.at.school.500)
 
 
 
@@ -29,12 +30,13 @@ TRUE
 ### --- MAPS MODULE
 
 try(dispose(KK$win), TRUE)
-load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+#load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
-load_all(export_all = FALSE)
+#load_all(export_all = FALSE)
+data(gapminder)
 
 KK <- iNZGUI$new()
-KK$initializeGui(D <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(gapminder)
 
 TRUE
 
@@ -62,6 +64,9 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE,
 
 TRUE
 
+setwd("~/iNZight/iNZightMR")
+census.at.school.5000 <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE, comment.char = "#")
+devtools::use_data(census.at.school.5000)
 
 
 
@@ -84,7 +89,9 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/time-series/visitorsQ.csv", heade
 TRUE
 
 
-
+setwd("~/iNZight/iNZightTS")
+visitorsQ <- read.csv("~/iNZight/data/time-series/visitorsQ.csv", header = TRUE, comment.char = "#")
+devtools::use_data(visitorsQ)
 
 
 

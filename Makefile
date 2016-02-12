@@ -162,7 +162,11 @@ MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
 MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib
 MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
+
 winRelease:
+	cd $(DIRO); makensis INSTALL_SCRIPT.nsi
+
+winReleaseOld:
 	cp -rv $(DIRO) $(DIRN)
 	cd $(DIRN); rm -rf .git
 	cd $(DIR); zip -r iNZightVIT-v$(INZIGHT_VERSION)-zipfile.zip iNZightVIT
@@ -453,6 +457,12 @@ inzToDocker:
 	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/*.tgz";
 	cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.2/;
+
+
+
+winUpload:
+	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/iNZightVIT-installer_latest.exe
+
 
 
 newsFiles:

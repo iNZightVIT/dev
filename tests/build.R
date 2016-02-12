@@ -24,6 +24,27 @@ check_doc(pkg)
 check(pkg)
 
 
+q()
+library(devtools)
+
+pkg <- "~/iNZight/iNZightMR"
+document(pkg)
+check_doc(pkg)
+check(pkg)
+
+
+
+q()
+library(devtools)
+
+pkg <- "~/iNZight/iNZightTS"
+document(pkg)
+check_doc(pkg)
+check(pkg)
+
+
+
+
 
 ## OLD NAMESPACE:
 

@@ -88,3 +88,39 @@ plot(obj, variable = ~ChildrenPerWoman, region = ~Country, data = d,
 
 
 
+##library(iNZightMaps)
+setwd("~/iNZight/iNZightMaps")
+devtools::load_all("~/iNZight/iNZightMaps")
+
+gminder <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header=T)
+
+shp <- iNZightShapeMap(data = gminder, location = "world", data.region = "Country")
+
+plot(shp, variable = ~ChildrenPerWoman, na.fill = "white", name = "r")
+
+sClickOnZoom(ratio = 0.2)
+
+srezoom(0.9)
+
+
+world <- readRDS("data/world.rds")
+class(world) <- "shape.object"
+
+
+
+
+## save shapefiles
+devtools::use_data(world, internal = TRUE)
+
+
+
+
+
+devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+quakes <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE)
+
+map.obj <- iNZightMap(~Latitude, ~Longitude, data = quakes)
+plot(map.obj)
+
+ClickOnZoom(ratio = 0.3)
+rezoom(0.1)
