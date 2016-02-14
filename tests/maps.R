@@ -96,7 +96,9 @@ gminder <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header=T)
 
 shp <- iNZightShapeMap(data = gminder, location = "world", data.region = "Country")
 
-plot(shp, variable = ~ChildrenPerWoman, na.fill = "white", name = "r")
+plot(shp, variable = ~ChildrenPerWoman, g1 = "Leap.Year", name="v")
+plot(shp, variable = ~ChildrenPerWoman, g1 = "ChildrenPerWoman", name="v")
+#plot(shp, variable = ~ChildrenPerWoman, g1="Region")
 
 sClickOnZoom(ratio = 0.2)
 
@@ -106,6 +108,7 @@ srezoom(0.9)
 world <- readRDS("data/world.rds")
 class(world) <- "shape.object"
 
+iNZightPlots::iNZightPlot(ChildrenPerWoman, data = gminder, g1 = Leap.Year)
 
 
 

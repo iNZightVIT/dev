@@ -5,7 +5,7 @@
 # make build
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
-inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules  iNZight vit
+inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules iNZight vit
 g_packages = gWidgets2 gWidgets2RGtk2
 all_packages = $(g_packages) $(inz_packages)
 
@@ -164,7 +164,7 @@ MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
 
 winRelease:
-	cd $(DIRO); makensis INSTALL_SCRIPT.nsi
+	cd $(DIRO); rm -rf prog_files/library/iNZightMaps; makensis INSTALL_SCRIPT.nsi
 
 winReleaseOld:
 	cp -rv $(DIRO) $(DIRN)
