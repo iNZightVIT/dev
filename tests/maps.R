@@ -125,8 +125,15 @@ devtools::use_data(world, internal = TRUE)
 devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 quakes <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE)
 
+
+devtools::load_all("~/iNZight/iNZightPlots", export_all = FALSE)
+devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 map.obj <- iNZightMap(~Latitude, ~Longitude, data = quakes)
-plot(map.obj)
+plot(map.obj, g1 = Depth, opacity = ~Depth, alpha = 1)
+
+
+
+(quakes$Depth - min(quakes$Depth)) / diff(range(quakes$Depth))
 
 ClickOnZoom(ratio = 0.3)
 rezoom(0.1)
