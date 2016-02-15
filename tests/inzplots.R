@@ -972,4 +972,11 @@ iNZightPlot(height, colby = gender, data = d1, col = c("red", "blue"))
 
 ### SIZING
 upd()
-iNZightPlot(age, height, data = d1, sizeby = height, g1 = armspan)
+dev.new()
+iNZightPlot(age, height, data = d1, sizeby = height, resize.method = "b")
+
+
+
+
+x = 1:nrow(d1)
+iNZightPlot(d1$height, x, sizeby = x, resize.method = "a")

@@ -96,9 +96,12 @@ gminder <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header=T)
 
 shp <- iNZightShapeMap(data = gminder, location = "world", data.region = "Country")
 
-plot(shp, variable = ~ChildrenPerWoman, g1 = "Leap.Year", name="v")
-plot(shp, variable = ~ChildrenPerWoman, g1 = "ChildrenPerWoman", name="v")
-#plot(shp, variable = ~ChildrenPerWoman, g1="Region")
+plot(shp, variable = ~ChildrenPerWoman, g1 = "Region", name="v", na.fill = "#dddddd", varnames=list(g1="ChildRate"))
+plot(shp, variable = ~ChildrenPerWoman, g1 = "ChildrenPerWoman", name="v", na.fill = "#dddddd")
+
+devtools::load_all("~/iNZight/iNZightMaps")
+plot(shp, variable = ~ChildrenPerWoman, name = "b")
+
 
 sClickOnZoom(ratio = 0.2)
 

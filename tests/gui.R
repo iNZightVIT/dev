@@ -7,19 +7,20 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
-## load_all("~/iNZight/iNZightModules", export_all = FALSE)
+load_all("~/iNZight/iNZightPlots", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui() ## D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 TRUE
 
 
 
-census.at.school.500 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
-use_data(census.at.school.500)
+#census.at.school.500 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
+#use_data(census.at.school.500)
 
 
 
@@ -41,7 +42,20 @@ KK$initializeGui(gapminder)
 TRUE
 
 
-
+w <- gwindow()
+g <- ggroup(cont=w)
+gbutton("button", cont=g)
+img <- gimage("zoom-in", cont = g)
+old_cursor <- getToolkitWidget(img)$getWindow()$getCursor()
+cross <- gdkCursorNew("GDK_HAND1")
+addHandler(img, "enter-notify-event", handler=function(h,...) {
+           getToolkitWidget(img)$getWindow()$setCursor(cross)
+           TRUE
+           })
+addHandler(img, "leave-notify-event", handler=function(h,...) {
+           getToolkitWidget(img)$getWindow()$setCursor(old_cursor)
+           TRUE
+           })
 
 
 
