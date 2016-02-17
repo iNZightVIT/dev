@@ -980,3 +980,14 @@ iNZightPlot(age, height, data = d1, sizeby = height, resize.method = "b")
 
 x = 1:nrow(d1)
 iNZightPlot(d1$height, x, sizeby = x, resize.method = "a")
+
+
+
+upd()
+iNZightPlot(height, g1 = gender, data = d1, plottype = "hist")
+
+
+
+
+
+

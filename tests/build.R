@@ -43,6 +43,14 @@ check_doc(pkg)
 check(pkg)
 
 
+q()
+library(devtools)
+
+pkg <- "~/iNZight/iNZightTools"
+document(pkg)
+check_doc(pkg)
+check(pkg)
+
 
 
 
