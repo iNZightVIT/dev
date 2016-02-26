@@ -984,10 +984,10 @@ iNZightPlot(d1$height, x, sizeby = x, resize.method = "a")
 
 
 upd()
-iNZightPlot(height, g1 = gender, data = d1, plottype = "hist")
+iNZightPlot(height, colby = age, data = d1)
+iNZightPlot(height, colby = age, data = d1, col.fun = heat.colors)
 
 
 
-
-
-
+iNZightPlot(height, armspan, colby = travel, data = d1)
+iNZightPlot(height, armspan, colby = travel, data = d1, col.fun = myfun)
