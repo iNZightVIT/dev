@@ -990,4 +990,4 @@ iNZightPlot(height, colby = age, data = d1, col.fun = heat.colors)
 
 
 iNZightPlot(height, armspan, colby = travel, data = d1)
-iNZightPlot(height, armspan, colby = travel, data = d1, col.fun = myfun)
+iNZightPlot(height, armspan, colby = rightfoot, data = d1, col.fun = heat.colors, bg = "grey20", col.missing = "black")
