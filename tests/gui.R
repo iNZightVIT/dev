@@ -14,7 +14,7 @@ load_all(export_all = FALSE)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui()#D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 TRUE
 
@@ -24,9 +24,7 @@ TRUE
 
 
 
-
-
-
+TRUE
 
 ### --- MAPS MODULE
 
