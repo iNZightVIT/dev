@@ -8,7 +8,7 @@ library(devtools)
 ## Load - generic
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
-#load_all("~/iNZight/iNZightPlots", export_all = FALSE)
+load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 #load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 
@@ -21,8 +21,9 @@ TRUE
 
 #census.at.school.500 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
 #use_data(census.at.school.500)
-
-
+yes
+L <- list("hi" = "hello", "bye")
+names(L)
 
 TRUE
 
@@ -31,7 +32,7 @@ TRUE
 try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
-#load_all(export_all = FALSE)
+load_all(export_all = FALSE)
 data(gapminder)
 
 KK <- iNZGUI$new()
@@ -44,6 +45,11 @@ w <- gwindow()
 g <- ggroup(cont=w)
 gbutton("button", cont=g)
 img <- gimage("zoom-in", cont = g)
+
+btn <- gbutton("", cont=g)
+btn$set_icon(system.file("~/iNZight/iNZight/inst/images/graph-plus-transp.gif"))
+
+
 old_cursor <- getToolkitWidget(img)$getWindow()$getCursor()
 cross <- gdkCursorNew("GDK_HAND1")
 addHandler(img, "enter-notify-event", handler=function(h,...) {
