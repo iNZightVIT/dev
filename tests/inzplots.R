@@ -996,14 +996,16 @@ iNZightPlot(height, armspan, colby = rightfoot, data = d1, col.fun = heat.colors
 
 
 upd()
-iNZightPlot(height, armspan, data = d1, bg="grey20")
+iNZightPlot(height, armspan, data = d1, bg="cornsilk")
 iNZightPlot(height, armspan, data = d1, bg = "grey20", col.grid = rgb(1,1,1,0.2))
-iNZightPlot(height, armspan, data = d1)
+
+upd()
+iNZightPlot(height, armspan, data = d1, g1 = travel)
 iNZightPlot(height, armspan, data = d1, bg = rgb(0.9,0.95,1))
 
 upd()
 iNZightPlot(height, armspan, data = d1, plottype = "hex", col.pt = "#252525")
-iNZightPlot(height, armspan, data = d1, plottype = "grid", col.pt = "#252525")
+iNZightPlot(height, armspan, data = d1, plottype = "grid", col.pt = "#252525", cex = 2)
 
 
 library(cairoDevice)
@@ -1011,3 +1013,4 @@ library(cairoDevice)
 #Cairo(width = 9, height = 5, surface = "png", filename = "~/Desktop/test.png")
 #iNZightPlot(height, armspan, data = d1)
 #dev.off()
+

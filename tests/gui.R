@@ -19,11 +19,6 @@ KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header
 TRUE
 
 
-#census.at.school.500 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
-#use_data(census.at.school.500)
-yes
-L <- list("hi" = "hello", "bye")
-names(L)
 
 TRUE
 
@@ -42,10 +37,19 @@ TRUE
 
 
 w <- gwindow()
-g <- ggroup(cont=w)
-gbutton("button", cont=g)
-img <- gimage("zoom-in", cont = g)
+g <- gvbox(cont=w)
+gbutton("Switch", cont=g)
 
+tbl <- glayout(cont = g)
+
+tbl[1, 1:2] <- glabel("hello")
+
+tbl[2, 1] <- LAB <- glabel("this")
+tbl[2, 2] <- VAL <- gcombobox(1:2)
+
+visible(VAL) <- FALSE
+
+###
 btn <- gbutton("", cont=g)
 btn$set_icon(system.file("~/iNZight/iNZight/inst/images/graph-plus-transp.gif"))
 
