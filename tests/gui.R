@@ -14,7 +14,7 @@ load_all(export_all = FALSE)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui() ##D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 TRUE
 
@@ -38,25 +38,28 @@ TRUE
 
 w <- gwindow()
 g <- gvbox(cont=w)
-b <- iNZight:::gimagebutton("go", cont=g)
-b$set_icon("close")
-
-s <- gslider(cont=g, expand=FALSE, )
-b2 <- gbutton("goodbye", cont=g)
-
-
-
-
-gbutton("Switch", cont=g)
-
 tbl <- glayout(cont = g)
 
 tbl[1, 1:2] <- glabel("hello")
-
 tbl[2, 1] <- LAB <- glabel("this")
-tbl[2, 2] <- VAL <- gcombobox(1:2)
+tbl[2, 2] <- VAL <- gcombobox(1:2, editable=TRUE,name="mybox")
 
-visible(VAL) <- FALSE
+VAL$parent
+
+
+names(as.list(tbl))
+tbl$set_items(glabel("hello"), 2, 2)
+
+editable(VAL) <- FALSE
+VAL$poss_items <- c("one", "two", "three")
+names(as.list(VAL))
+
+
+tbl$remove_child(VAL)
+tbl[2, 2] <- VAL2
+
+tbl$remove_child(VAL2)
+tbl[2, 2] <- VAL2
 
 ###
 btn <- gbutton("", cont=g)
