@@ -38,6 +38,15 @@ TRUE
 
 w <- gwindow()
 g <- gvbox(cont=w)
+b <- iNZight:::gimagebutton("go", cont=g)
+b$set_icon("close")
+
+s <- gslider(cont=g, expand=FALSE, )
+b2 <- gbutton("goodbye", cont=g)
+
+
+
+
 gbutton("Switch", cont=g)
 
 tbl <- glayout(cont = g)
