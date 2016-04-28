@@ -963,3 +963,54 @@ getPlotSummary(Pulse, data = d6, colby = AgeDecade)
 
 upd()
 iNZightPlot(height, colby = gender, data = d1, col = c("red", "blue"))
+
+
+
+
+
+
+
+### SIZING
+upd()
+dev.new()
+iNZightPlot(age, height, data = d1, sizeby = height, resize.method = "b")
+
+
+
+
+x = 1:nrow(d1)
+iNZightPlot(d1$height, x, sizeby = x, resize.method = "a")
+
+
+
+upd()
+iNZightPlot(height, colby = age, data = d1)
+iNZightPlot(height, colby = age, data = d1, col.fun = heat.colors)
+
+
+
+iNZightPlot(height, armspan, colby = travel, data = d1)
+iNZightPlot(height, armspan, colby = rightfoot, data = d1, col.fun = heat.colors, bg = "grey20", col.missing = "black")
+
+
+
+
+upd()
+iNZightPlot(height, armspan, data = d1, bg="cornsilk")
+iNZightPlot(height, armspan, data = d1, bg = "grey20", col.grid = rgb(1,1,1,0.2))
+
+upd()
+iNZightPlot(height, armspan, data = d1, g1 = travel)
+iNZightPlot(height, armspan, data = d1, bg = rgb(0.9,0.95,1))
+
+upd()
+iNZightPlot(height, armspan, data = d1, plottype = "hex", col.pt = "#252525")
+iNZightPlot(height, armspan, data = d1, plottype = "grid", col.pt = "#252525", cex = 2)
+
+
+library(cairoDevice)
+
+#Cairo(width = 9, height = 5, surface = "png", filename = "~/Desktop/test.png")
+#iNZightPlot(height, armspan, data = d1)
+#dev.off()
+

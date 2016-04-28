@@ -1,44 +1,146 @@
 q()
 
+
+## Set-up
 setwd("~/iNZight/iNZight")
 library(devtools)
 
-document()
+## Load - generic
+try(dispose(KK$win), TRUE)
+#load_all("~/iNZight/iNZightTools", export_all = FALSE)
+load_all("~/iNZight/iNZightPlots", export_all = FALSE)
+#load_all("~/iNZight/iNZightModules", export_all = FALSE)
+load_all(export_all = FALSE)
+
+## Run - generic
+KK <- iNZGUI$new()
+KK$initializeGui() ##D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+
+TRUE
+
+
+
+TRUE
+
+### --- MAPS MODULE
 
 try(dispose(KK$win), TRUE)
+load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
+load_all(export_all = FALSE)
+data(gapminder)
+
+KK <- iNZGUI$new()
+KK$initializeGui(gapminder)
+
+TRUE
+
+
+w <- gwindow()
+g <- gvbox(cont=w)
+tbl <- glayout(cont = g)
+
+tbl[1, 1:2] <- glabel("hello")
+tbl[2, 1] <- LAB <- glabel("this")
+tbl[2, 2] <- VAL <- gcombobox(1:2, editable=TRUE,name="mybox")
+
+VAL$parent
+
+
+names(as.list(tbl))
+tbl$set_items(glabel("hello"), 2, 2)
+
+editable(VAL) <- FALSE
+VAL$poss_items <- c("one", "two", "three")
+names(as.list(VAL))
+
+
+tbl$remove_child(VAL)
+tbl[2, 2] <- VAL2
+
+tbl$remove_child(VAL2)
+tbl[2, 2] <- VAL2
+
+###
+btn <- gbutton("", cont=g)
+btn$set_icon(system.file("~/iNZight/iNZight/inst/images/graph-plus-transp.gif"))
+
+
+old_cursor <- getToolkitWidget(img)$getWindow()$getCursor()
+cross <- gdkCursorNew("GDK_HAND1")
+addHandler(img, "enter-notify-event", handler=function(h,...) {
+           getToolkitWidget(img)$getWindow()$setCursor(cross)
+           TRUE
+           })
+addHandler(img, "leave-notify-event", handler=function(h,...) {
+           getToolkitWidget(img)$getWindow()$setCursor(old_cursor)
+           TRUE
+           })
+
+
+
+
+
+
+
+
+
+
+
+### --- MULTIPLE RESPONSE MODULE
+try(dispose(KK$win), TRUE)
+#load_all("~/iNZight/iNZightMR", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
+#load_all(export_all = FALSE)
+
+KK <- iNZGUI$new()
+KK$initializeGui(D <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE, comment.char = "#"))
+
+TRUE
+
+setwd("~/iNZight/iNZightMR")
+census.at.school.5000 <- read.csv("~/iNZight/data/CaS2011_5000.csv", header = TRUE, comment.char = "#")
+devtools::use_data(census.at.school.5000)
+
+
+
+
+
+
+
+
+
+
+### --- TIME SERIES MODULE
+try(dispose(KK$win), TRUE)
+load_all("~/iNZight/iNZightTS", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 
 KK <- iNZGUI$new()
-KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(D <- read.csv("~/iNZight/data/time-series/visitorsQ.csv", header = TRUE, comment.char = "#"))
+
+TRUE
 
 
-load_all("~/iNZight/iNZightMaps")
-data(nzquakes)
-KK$initializeGui(nzquakes)
+setwd("~/iNZight/iNZightTS")
+visitorsQ <- read.csv("~/iNZight/data/time-series/visitorsQ.csv", header = TRUE, comment.char = "#")
+devtools::use_data(visitorsQ)
 
 
-KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
-                               header = TRUE, comment.char = "#"))
 
 
-KK$initializeGui(D <- read.csv("~/iNZight/data/survey/apiclus2.csv",
-                               header = TRUE, comment.char = "#"))
-
-enabled(KK$plotToolbar$menu$menu_list[["Dataset"]][[3]])
-KK$plotToolbar$menu$block
-
-KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv",
-                               header = TRUE, comment.char = "#"))
-
-KK$initializeGui(D2 <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv",
-                               header = TRUE, comment.char = "#"))
 
 
-names(as.list(KK$ctrlWidget))
-names(as.list(KK$ctrlWidget$ctrlGp))
-names(as.list(KK$ctrlWidget$V1box))
-KK$ctrlWidget$V1box$set_value(KK$ctrlWidget$V1box$get_items()[1])
-KK$ctrlWidget$V2box$set_value(KK$ctrlWidget$V2box$get_items()[1])
 
 
-svalue(KK$ctrlWidget$V1box) <- "height"
+
+
+
+### additional data sets
+
+KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(D <- read.csv("~/iNZight/data/survey/apiclus2.csv", header = TRUE, comment.char = "#"))
+
+
+
