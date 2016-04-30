@@ -1,4 +1,4 @@
-library(grid); library(survey); library(quantreg); library(hexbin); library(boot); library(devtools)
+library(grid); library(survey); library(quantreg); library(hexbin); library(hextri); library(boot); library(devtools); library(colorspace); library(dichromat)
 upd <- function() {
    # dd <- "~/iNZight/iNZightPlots/R"
    # if (length(list.files(dd, pattern = "*~")) > 0)
@@ -1013,4 +1013,12 @@ library(cairoDevice)
 #Cairo(width = 9, height = 5, surface = "png", filename = "~/Desktop/test.png")
 #iNZightPlot(height, armspan, data = d1)
 #dev.off()
+
+
+
+
+upd()
+data("gapminder", package = "iNZight")
+iNZightPlot(ChildrenPerWoman, Infantmortality, data = gapminder, g1 = Leap.Year,
+            plottype = "hex", hex.style = "size", colby = Region, hex.bins = 10)
 

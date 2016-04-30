@@ -46,6 +46,9 @@ here31:
 here32:
 	cd ../; ~/R-3.2.2/bin/R CMD INSTALL $(inz_packages)
 
+herelatest:
+	cd ../; R CMD INSTALL $(inz_packages)
+
 # And the gWidgets2 libraries:
 #ghere215:
 #	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(g_packages)
@@ -58,6 +61,9 @@ ghere31:
 
 ghere32:
 	cd ../; ~/R-3.2.2/bin/R CMD INSTALL $(g_packages)
+
+gherelatest:
+	cd ../; R CMD INSTALL $(g_packages)
 
 # do the following to move into the Windows all-in-one directory:
 replace:

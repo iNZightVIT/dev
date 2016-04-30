@@ -5,6 +5,8 @@ q()
 setwd("~/iNZight/iNZight")
 library(devtools)
 
+document()
+
 ## Load - generic
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
@@ -14,7 +16,7 @@ load_all(export_all = FALSE)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui() ##D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 TRUE
 
