@@ -1,4 +1,4 @@
-library(grid); library(survey); library(quantreg); library(hexbin); library(boot); library(devtools)
+library(grid); library(survey); library(quantreg); library(hexbin); library(boot); library(devtools); library(hextri)
 upd <- function() {
    # dd <- "~/iNZight/iNZightPlots/R"
    # if (length(list.files(dd, pattern = "*~")) > 0)
@@ -1014,3 +1014,10 @@ library(cairoDevice)
 #iNZightPlot(height, armspan, data = d1)
 #dev.off()
 
+
+
+upd()
+iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(age))
+iNZightPlot(armspan, height, data = d1, plottype = "hex", colby = convert.to.factor(d1$age))
+iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(height))
+iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(d1$height), plottype = "hex")

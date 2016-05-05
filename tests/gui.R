@@ -4,6 +4,7 @@ q()
 ## Set-up
 setwd("~/iNZight/iNZight")
 library(devtools)
+data(gapminder, package = "iNZight")
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
@@ -14,11 +15,11 @@ load_all(export_all = FALSE)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(gapminder)#D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 TRUE
-
-
+ [1] 2 1 1 1 3 1 2 4 2 3 3 3 3 4 1 3 1 1 3 3
+[1] "[7 - 11]"  "(11 - 12]" "(12 - 14]" "(14 - 19]"
 
 TRUE
 
