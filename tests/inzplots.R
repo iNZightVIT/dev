@@ -1021,3 +1021,21 @@ iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(age))
 iNZightPlot(armspan, height, data = d1, plottype = "hex", colby = convert.to.factor(d1$age))
 iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(height))
 iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(d1$height), plottype = "hex")
+
+
+
+upd()
+iNZightPlot(armspan, height, data = d1, symbolby = gender, colby = gender)
+iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, symbolby = cellsource, colby = cellsource, sizeby = armspan)
+iNZightPlot(armspan, height, data = d1, colby = travel)
+
+iNZightPlot(armspan, height, data = d1, colby = travel, symbolby = gender)
+iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, colby = getlunch, symbolby = cellsource, sizeby = armspan)
+
+upd()
+iNZightPlot(armspan, height, data = d1, col.pt = darken("blue", 0.6))
+
+
+
+library(iNZightMaps)
+data(

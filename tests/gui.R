@@ -15,7 +15,7 @@ load_all(export_all = FALSE)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(gapminder)#D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(D <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#"))
 
 TRUE
 
@@ -35,10 +35,11 @@ KK$initializeGui(gapminder)
 
 TRUE
 
-
+try(dispose(w))
 w <- gwindow()
 g <- gvbox(cont=w)
-tbl <- glayout(cont = g)
+b <- gbutton(stock.id = "close",cont=g)
+
 
 tbl[1, 1:2] <- glabel("hello")
 tbl[2, 1] <- LAB <- glabel("this")
