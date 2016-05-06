@@ -4,6 +4,7 @@ q()
 ## Set-up
 setwd("~/iNZight/iNZight")
 library(devtools)
+data(gapminder, package = "iNZight")
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
@@ -18,7 +19,6 @@ KK <- iNZGUI$new()
 KK$initializeGui(census.at.school.500)
 
 TRUE
-
 
 
 TRUE
@@ -36,10 +36,11 @@ KK$initializeGui(gapminder)
 
 TRUE
 
-
+try(dispose(w))
 w <- gwindow()
 g <- gvbox(cont=w)
-tbl <- glayout(cont = g)
+b <- gbutton(stock.id = "close",cont=g)
+
 
 tbl[1, 1:2] <- glabel("hello")
 tbl[2, 1] <- LAB <- glabel("this")
@@ -142,6 +143,3 @@ devtools::use_data(visitorsQ)
 
 KK$initializeGui(D <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header = TRUE, comment.char = "#"))
 KK$initializeGui(D <- read.csv("~/iNZight/data/survey/apiclus2.csv", header = TRUE, comment.char = "#"))
-
-
-
