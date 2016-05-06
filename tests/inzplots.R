@@ -1034,7 +1034,8 @@ iNZightPlot(armspan, height, data = d1, colby = travel, symbolby = gender)
 iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, colby = getlunch, symbolby = cellsource, sizeby = armspan)
 
 upd()
-iNZightPlot(armspan, height, data = d1, col.pt = darken("blue", 0.6))
+data("census.at.school.500", package="iNZight")
+iNZightPlot(armspan, height, data = census.at.school.500)
 
 
 
