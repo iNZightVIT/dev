@@ -12,6 +12,24 @@ plot(map.obj, sizeby = Magnitude, g1 = Felt, g1.level = "_MULTI")
 
 
 
+library(devtools)
+
+load_all("~/iNZight/iNZightPlots")
+load_all("~/iNZight/iNZightMaps")
+data("gapminder", package = "iNZight")
+
+mobj <- iNZightShapeMap(location = "world", shp.region = "country",
+                        data.region = "Country", data = gapminder)
+plot(mobj, variable = ~ChildrenPerWoman, g1="Leap.Year",
+     zoom = 0.05, zoom.center = c(174.7633, -39.8485))
+
+
+
+TRUE
+
+
+
+
 
 library(cairoDevice)
 Cairo()
@@ -53,12 +71,10 @@ q()
 library(maptools)
 
 devtools::load_all("~/iNZight/iNZightPlots")
-data <- read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header=T)
-
-
+#data <- #read.csv("~/iNZight/data/FutureLearn/Gapminder.csv", header=T)
 devtools::load_all("~/iNZight/iNZightMaps")
-d <- data
-shape.obj <- shape.extract(shp <- readShapePoly("~/iNZight/iNZightMaps/data/world/ne_110m_admin_0_countries.shp"))
+#d <- data
+#shape.obj <- shape.extract(shp <- readShapePoly("~/iNZight/iNZightMaps/data/world/ne_110m_admin_0_countries.shp"))
 iNZightPlot(ChildrenPerWoman, Country, data = d, plottype = "shapemap", 
             plot.features = list(shape.object = shape.obj, transform = "normal",
                 col.method = "terrain.colors", col.offset=0))
