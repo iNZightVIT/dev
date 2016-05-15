@@ -1035,7 +1035,7 @@ iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, colby = getlunch, symbolb
 
 upd()
 data("census.at.school.500", package="iNZight")
-iNZightPlot(armspan, height, data = census.at.school.500)
+iNZightPlot(armspan, height, data = census.at.school.500, colby = height)
 
 
 

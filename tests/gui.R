@@ -40,8 +40,9 @@ TRUE
 try(dispose(w))
 w <- gwindow()
 g <- gvbox(cont=w)
-b <- gbutton(stock.id = "close",cont=g)
-
+t <- gedit("Text", cont=g)
+addHandlerChanged(t, function(h, ...) gmessage(svalue(h$obj)))
+addHandlerBlur(t, function(h, ...) gmessage(svalue(h$obj)))
 
 tbl[1, 1:2] <- glabel("hello")
 tbl[2, 1] <- LAB <- glabel("this")
