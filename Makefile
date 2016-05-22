@@ -80,10 +80,15 @@ replaceG:
 
 # If on mac, make sure you get the iNZightVIT-MAC repository first
 getMac:
-	cd ../; git clone git@github.com:iNZightVIT/iNZightVIT-MAC
+	cd ../; git clone git@github.com:iNZightVIT/iNZightVIT-osx-installer.git
 
 # and then this should update the packages.
-replaceMac:
+MACINSTLIB = ~/iNZight/iNZightVIT-osx-installer/Files/iNZightVIT/.library
+macinstaller:
+	cd $(MACINSTLIB); rm -rf $(inz_packages);
+	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(inz_packages); mv tmp/* $(MACINSTLIB)
+
+replaceMacOld:
 	cd ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/; rm -rf vit iNZight iNZightPlots iNZightModules iNZightRegression iNZightTools iNZightMR iNZightTS
 	mv ../tmp/* ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/
 

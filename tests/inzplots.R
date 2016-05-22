@@ -1034,8 +1034,6 @@ iNZightPlot(armspan, height, data = d1, colby = travel, symbolby = gender)
 iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, colby = getlunch, symbolby = cellsource, sizeby = armspan)
 
 upd()
-data("census.at.school.500", package="iNZight")
-iNZightPlot(armspan, height, data = census.at.school.500)
-
-
-
+data("gapminder", package="iNZight")
+iNZightPlot(ChildrenPerWoman, Infantmortality, data = gapminder, colby = Region, fill.pt = "fill",
+            plot.features = list(order.first = which(gapminder$Region == "South Asia")))
