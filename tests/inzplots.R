@@ -493,7 +493,7 @@ iNZightPlot(travel, getlunch, data = d1, inference.type = c("conf", "comp"), bs.
 upd(); iNZightPlot(height, g1 = travel, data = d1)
 
 upd()
-iNZightPlot(height, gender, g1 = getlunch, g2 = travel, data = d1, g2.level = "_MULTI", 
+iNZightPlot(height, gender, g1 = getlunch, g2 = travel, data = d1, g2.level = "_MULTI",
             inference.par = "mean", inference.type = c("comp", "conf"))
          #   )
 
@@ -1033,7 +1033,15 @@ iNZightPlot(armspan, height, data = d1, colby = travel)
 iNZightPlot(armspan, height, data = d1, colby = travel, symbolby = gender)
 iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, colby = getlunch, symbolby = cellsource, sizeby = armspan)
 
+
+
+
 upd()
 data("gapminder", package="iNZight")
 iNZightPlot(ChildrenPerWoman, Infantmortality, data = gapminder, colby = Region, fill.pt = "fill",
             plot.features = list(order.first = which(gapminder$Region == "South Asia")))
+
+
+
+data("census.at.school.500", package="iNZight")
+iNZightPlot(armspan, height, data = census.at.school.500, colby = height)
