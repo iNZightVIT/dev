@@ -1042,6 +1042,9 @@ iNZightPlot(ChildrenPerWoman, Infantmortality, data = gapminder, colby = Region,
             plot.features = list(order.first = which(gapminder$Region == "South Asia")))
 
 
-
+upd()
 data("census.at.school.500", package="iNZight")
-iNZightPlot(armspan, height, data = census.at.school.500, colby = height)
+##iNZightPlot(armspan, height, data = census.at.school.500, colby = height)
+
+pl <- iNZightPlot(height, data = census.at.school.500, plottype = "hist")
+length(pl[[1]][[1]]$toplot[[1]][[1]])
