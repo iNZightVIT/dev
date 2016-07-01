@@ -12,14 +12,17 @@ try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 #load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
-##data(census.at.school.500, package = 'iNZight')
-data(gapminder, package = "iNZight")
+data(census.at.school.500, package = 'iNZight')
+##data(gapminder, package = "iNZight")
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(gapminder) #census.at.school.500)
+KK$initializeGui(census.at.school.500)
+##KK$initializeGui(gapminder)
 
 TRUE
+
+# TO DO: histogram colour by
 
 
 TRUE
