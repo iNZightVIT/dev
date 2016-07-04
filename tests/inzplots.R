@@ -1048,3 +1048,10 @@ data("census.at.school.500", package="iNZight")
 
 pl <- iNZightPlot(height, data = census.at.school.500, plottype = "hist")
 length(pl[[1]][[1]]$toplot[[1]][[1]])
+
+
+
+
+upd()
+data("census.at.school.500", package="iNZight")
+iNZightPlot(height, age, data = census.at.school.500, plottype = "hex", colby = convert.to.factor(age))

@@ -34,10 +34,11 @@ load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
 #load_all(export_all = FALSE)
-data(nzquakes)
+data(gapminder)
 
 KK <- iNZGUI$new()
-KK$initializeGui(nzquakes)
+##KK$initializeGui(nzquakes)
+KK$initializeGui(gapminder)
 
 TRUE
 
