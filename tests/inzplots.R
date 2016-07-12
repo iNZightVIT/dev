@@ -1054,4 +1054,11 @@ length(pl[[1]][[1]]$toplot[[1]][[1]])
 
 upd()
 data("census.at.school.500", package="iNZight")
-iNZightPlot(height, age, data = census.at.school.500, plottype = "hex", colby = convert.to.factor(age))
+iNZightPlot(height, data = census.at.school.500)
+
+pdf(file = "~/Desktop/test.pdf", onefile = FALSE, useDingbats = FALSE)
+iNZightPlot(height, data = census.at.school.500)
+dev.off()
+
+
+dev.size("in")
