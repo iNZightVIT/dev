@@ -1055,3 +1055,19 @@ length(pl[[1]][[1]]$toplot[[1]][[1]])
 upd()
 data("census.at.school.500", package="iNZight")
 iNZightPlot(height, age, data = census.at.school.500, plottype = "hex", colby = convert.to.factor(age))
+
+data("gapminder", package="iNZight")
+
+library(viridis)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = viridis, pch = 19)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = magma, pch = 19)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = plasma, pch = 19)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = inferno, pch = 19)
