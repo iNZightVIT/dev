@@ -517,15 +517,13 @@ pkgToDocker:
 inzToDocker:
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/src/contrib/*.tar.gz";
 	cd $(src_lib); scp PACKAGES PACKAGES.gz *.tar.gz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/src/contrib/;
-#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/2.15/*.zip";
-#	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/2.15/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.0/*.zip";
 	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.0/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.1/*.zip";
 	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.1/;
--ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.2/*.zip";
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.2/*.zip";
 	cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.2/;
--ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.3/*.zip";
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.3/*.zip";
 	cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.3/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.0/*.tgz";
 	cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.0/;
@@ -535,8 +533,6 @@ inzToDocker:
 	cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.2/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.3/*.tgz";
 	cd $(MAC_REP3)/3.3/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.3/;
-#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/leopard/contrib/2.15/*.tgz";
-#	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/leopard/contrib/2.15/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.1/*.tgz";
 	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/*.tgz";

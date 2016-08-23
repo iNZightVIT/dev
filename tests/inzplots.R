@@ -1,11 +1,5 @@
 library(grid); library(survey); library(quantreg); library(hexbin); library(hextri); library(boot); library(devtools); library(colorspace); library(dichromat)
-upd <- function() {
-   # dd <- "~/iNZight/iNZightPlots/R"
-   # if (length(list.files(dd, pattern = "*~")) > 0)
-   #     system(paste0("rm ", dd, "/*~"))
-   # invisible(lapply(list.files(dd, full.names = TRUE), source))
-    load_all("~/iNZight/iNZightPlots")
-}
+upd <- function() load_all("~/iNZight/iNZightPlots")
 data(api)
 d1 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
 d2 <- read.csv("~/iNZight/data/survey/NHANES_2009_2012.Wtd.csv", header = TRUE)
@@ -1036,29 +1030,72 @@ iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, colby = getlunch, symbolb
 
 
 
-upd()
-data("gapminder", package="iNZight")
-iNZightPlot(ChildrenPerWoman, Infantmortality, data = gapminder, colby = Region, fill.pt = "fill",
-            plot.features = list(order.first = which(gapminder$Region == "South Asia")))
 
-
-upd()
-data("census.at.school.500", package="iNZight")
-##iNZightPlot(armspan, height, data = census.at.school.500, colby = height)
-
-pl <- iNZightPlot(height, data = census.at.school.500, plottype = "hist")
-length(pl[[1]][[1]]$toplot[[1]][[1]])
-
-
-
+#install.packages("viridis", repos="http://cran.stat.auckland.ac.nz")
+library(viridis)
+data(gapminder, package="iNZight")
 
 upd()
-data("census.at.school.500", package="iNZight")
-iNZightPlot(height, data = census.at.school.500)
 
-pdf(file = "~/Desktop/test.pdf", onefile = FALSE, useDingbats = FALSE)
-iNZightPlot(height, data = census.at.school.500)
+pdf(file = "~/Desktop/exampleplots.pdf", width = 12, height = 8)
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            pch = 19, main = "iNZight - default")
+
+upd()
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            col.fun = viridis, pch = 19, main = "Viridis - default")
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            col.fun = magma, pch = 19, main = "Viridis - magma")
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            col.fun = plasma, pch = 19, main = "Viridis - plasma")
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            col.fun = inferno, pch = 19, main = "Viridis - inferno")
+
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            pch = 19, main = "iNZight - default (deutan colourblind)",
+            col.fun = function(n) dichromat(hcl((1:n) / n * 320 + 60, c = 100, l = 50)))
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            pch = 19, main = "Viridis - default (deutan colourblind)",
+            col.fun = function(n) dichromat(viridis(n)))
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            pch = 19, main = "Viridis - magma (deutan colourblind)",
+            col.fun = function(n) dichromat(magma(n)))
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            pch = 19, main = "Viridis - plasma (deutan colourblind)",
+            col.fun = function(n) dichromat(plasma(n)))
+
+iNZightPlot(log(GDPpercapita), ChildrenPerWoman, data = gapminder, colby = Infantmortality,
+            pch = 19, main = "Viridis - inferno (deutan colourblind)",
+            col.fun = function(n) dichromat(inferno(n)))
+
 dev.off()
 
 
-dev.size("in")
+
+
+data("gapminder", package = 'iNZight')
+
+upd()
+iNZightPlot(ChildrenPerWoman, Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = viridis::viridis, col.method = "rank")
+
+gm2 <- gapminder[!is.na(gapminder$ChildrenPerWoman) & !is.na(gapminder$GDPpercapita), ]
+
+iNZightPlot(ChildrenPerWoman, log(GDPpercapita), data = gm2,
+            colby = GDPpercapita, col.fun = viridis::viridis, col.method = "rank", pch = 19, alpha = 0.7)
+
+
+grid.newpage()
+pushViewport(viewport(0.5, 0.5, 0.8, 0.8))
+grid.rect()
+
+grid.xaxis(at = seq(0, 1, length.out = 5),
+           label = paste0(seq(0, 100, length.out = 5), "%"))
