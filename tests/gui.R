@@ -13,12 +13,16 @@ load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 #load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
+##data(gapminder, package = "iNZight")
 
 ## Run - generic
 KK <- iNZGUI$new()
 KK$initializeGui(census.at.school.500)
+##KK$initializeGui(gapminder)
 
 TRUE
+
+# TO DO: histogram colour by
 
 
 TRUE
@@ -29,10 +33,11 @@ try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
-load_all(export_all = FALSE)
+#load_all(export_all = FALSE)
 data(gapminder)
 
 KK <- iNZGUI$new()
+##KK$initializeGui(nzquakes)
 KK$initializeGui(gapminder)
 
 TRUE
@@ -40,15 +45,25 @@ TRUE
 try(dispose(w))
 w <- gwindow()
 g <- gvbox(cont=w)
-t <- gedit("Text", cont=g)
-addHandlerChanged(t, function(h, ...) gmessage(svalue(h$obj)))
-addHandlerBlur(t, function(h, ...) gmessage(svalue(h$obj)))
-
+tbl <- glayout(cont=g)
+#t <- gcombobox(c("Red", "Blue", "magenta"), editable = TRUE)
+#t$widget$setSizeRequest(105, -1)
+#tbl[1,1] <- t
 tbl[1, 1:2] <- glabel("hello")
 tbl[2, 1] <- LAB <- glabel("this")
 tbl[2, 2] <- VAL <- gcombobox(1:2, editable=TRUE,name="mybox")
 
-VAL$parent
+tbl[2,2]
+
+VAL$parent$child_positions
+
+wi <- which(sapply(VAL$parent$child_positions, function(x) identical(VAL, x$child)))
+VAL$parent$children[[wi]]
+
+
+VAL$parent[2,2]
+
+
 
 
 names(as.list(tbl))
