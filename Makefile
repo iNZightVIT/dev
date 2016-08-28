@@ -10,13 +10,13 @@ g_packages = gWidgets2 gWidgets2RGtk2
 all_packages = $(g_packages) $(inz_packages)
 
 build:
-	for pkg in $(inz_packages) iNZightVIT-WIN ; do \
-		cd ../; git clone git@github.com:iNZightVIT/$$pkg ; \
+	for pkg in $(inz_packages) ; do \
+		cd ~/iNZight; git clone git@github.com:iNZightVIT/$$pkg ; \
 	done
 	for pkg in $(g_packages) ; do \
-		cd ../; git clone git@github.com:jverzani/$$pkg ; \
+		cd ~/iNZight; git clone git@github.com:jverzani/$$pkg ; \
 	done
-	cd ../; mkdir tmp; mv VIT vit
+	cd ~/iNZight; mkdir tmp; mv VIT vit
 
 # Now you can install them into a temporary directory: make all
 all:
