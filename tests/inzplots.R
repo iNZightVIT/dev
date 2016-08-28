@@ -1093,9 +1093,10 @@ iNZightPlot(ChildrenPerWoman, log(GDPpercapita), data = gm2,
             colby = GDPpercapita, col.fun = viridis::viridis, col.method = "rank", pch = 19, alpha = 0.7)
 
 
-grid.newpage()
-pushViewport(viewport(0.5, 0.5, 0.8, 0.8))
-grid.rect()
 
-grid.xaxis(at = seq(0, 1, length.out = 5),
-           label = paste0(seq(0, 100, length.out = 5), "%"))
+data("census.at.school.500", package = "iNZight")
+
+upd()
+iNZightPlot(height, armspan, data = census.at.school.500, plottype = "hex", bg = "red")
+iNZightPlot(height, armspan, data = census.at.school.500, plottype = "hex", bg = "#00ff00")
+iNZightPlot(height, armspan, data = census.at.school.500, plottype = "hex", bg = "#333333")
