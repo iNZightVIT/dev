@@ -21,10 +21,10 @@ EOF
 
 echo "Installing iNZight packages ..."
 cd $inst_dir && R --slave -e \
-   install.packages(c('iNZightRegression', 'iNZightPlots', \
+  "install.packages(c('iNZightRegression', 'iNZightPlots', \
                       'iNZightTS', 'iNZightMR', 'vit', 'iNZightTools', \
                       'FutureLearnData', 'iNZightModules', 'iNZight'), \
-                    dependencies = TRUE)
+                    dependencies = TRUE)"
 
 echo "Creating additional files ..."
 cat << EOF >> $inst_dir/.Rprofile
