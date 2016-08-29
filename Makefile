@@ -244,12 +244,15 @@ repoSource:
 	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
 	@echo " ... done."
 	@echo
+	make repoSrcIndex
+	@echo
+	@echo
+
+repoSrcIndex:
 	@echo " Building repository package indices ..."
 	@cd $(src_lib); ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R;
 	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
 	@echo " ... done."
-	@echo
-	@echo
 
 # repoWin215:
 # 	@echo
