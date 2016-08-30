@@ -5,18 +5,18 @@
 # make build
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
-inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules iNZight vit
+inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules iNZight vit FutureLearnData
 g_packages = gWidgets2 gWidgets2RGtk2
 all_packages = $(g_packages) $(inz_packages)
 
 build:
-	for pkg in $(inz_packages) iNZightVIT-WIN ; do \
-		cd ../; git clone git@github.com:iNZightVIT/$$pkg ; \
+	for pkg in $(inz_packages) ; do \
+		cd ~/iNZight; git clone git@github.com:iNZightVIT/$$pkg ; \
 	done
 	for pkg in $(g_packages) ; do \
-		cd ../; git clone git@github.com:jverzani/$$pkg ; \
+		cd ~/iNZight; git clone git@github.com:jverzani/$$pkg ; \
 	done
-	cd ../; mkdir tmp; mv VIT vit
+	cd ~/iNZight; mkdir tmp; mv VIT vit
 
 # Now you can install them into a temporary directory: make all
 all:
@@ -46,6 +46,9 @@ here31:
 here32:
 	cd ../; ~/R-3.2.2/bin/R CMD INSTALL $(inz_packages)
 
+here33:
+	cd ../; ~/R-3.3.1/bin/R CMD INSTALL $(inz_packages)
+
 herelatest:
 	cd ../; R CMD INSTALL $(inz_packages)
 
@@ -61,6 +64,9 @@ ghere31:
 
 ghere32:
 	cd ../; ~/R-3.2.2/bin/R CMD INSTALL $(g_packages)
+
+ghere33:
+	cd ../; ~/R-3.3.1/bin/R CMD INSTALL $(g_packages)
 
 gherelatest:
 	cd ../; R CMD INSTALL $(g_packages)
@@ -200,6 +206,8 @@ repositoryFiles:
 	make repoWin312
 	@echo "  = R v3.2.2"
 	make repoWin322
+	@echo "  = R v3.3.1"
+	make repoWin331
 	make repoWinIndex
 	@mkdir -p $(DIR)/dev/tmp
 #	@echo " == MAC (leopard)"
@@ -214,10 +222,14 @@ repositoryFiles:
 	make repoMac31
 	@echo "  = R v3.2.2"
 	make repoMac32
+	@echo "  = R v3.3.1"
+	make repoMac33
 	@echo " == MAC (mavericks)"
 	make repoMacMav31
 	@echo "  = R v3.2.2"
 	make repoMacMav32
+	@echo "  = R v3.3.1"
+	make repoMacMav33
 	-@rm -rf $(DIR)/dev/tmp
 	make repoMacIndex
 	@echo
@@ -232,12 +244,15 @@ repoSource:
 	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
 	@echo " ... done."
 	@echo
+	make repoSrcIndex
+	@echo
+	@echo
+
+repoSrcIndex:
 	@echo " Building repository package indices ..."
 	@cd $(src_lib); ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R;
 	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
 	@echo " ... done."
-	@echo
-	@echo
 
 # repoWin215:
 # 	@echo
@@ -296,6 +311,21 @@ repoWin322:
 	@echo " ... replacing old binaries ..."
 	-@rm -f $(WIN_REP)/3.2/$(wpkg)_*.zip 2>/dev/null
 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.2
+	@echo " ... done."
+	@echo
+
+repoWin331:
+	@echo
+	@cd $(DIR)/$(wpkg) ; \
+	  rm -rf tmp ; \
+	  cp ../dev/makes/Make_331 ./Makefile ; \
+	  echo " Building binaries ... "; echo ; \
+	  make win ; \
+	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
+	@echo
+	@echo " ... replacing old binaries ..."
+	-@rm -f $(WIN_REP)/3.3/$(wpkg)_*.zip 2>/dev/null
+	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.3
 	@echo " ... done."
 	@echo
 
@@ -359,6 +389,21 @@ repoMac32:
 	@echo " ... done."
 	@echo
 
+repoMac33:
+	@echo
+	@echo " Building binaries ... "
+	@echo
+	@cd $(DIR)/dev ; \
+	  ~/R-3.3.1/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
+	@cd $(DIR)/dev/tmp ; \
+	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
+	@echo
+	@echo " ... replaceing old binaries ..."
+	-@rm -f $(MAC_REP3)/3.3/$(wpkg)_*.tgz
+	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.3/
+	@echo " ... done."
+	@echo
+
 repoMacMav31:
 	@echo
 	@echo "  = R v3.1.2"
@@ -391,16 +436,33 @@ repoMacMav32:
 	@echo " ... done."
 	@echo
 
+repoMacMav33:
+	@echo
+	@echo " Building binaries ... "
+	@echo
+	@cd $(DIR)/dev ; \
+	  ~/R-3.3.1/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
+	@cd $(DIR)/dev/tmp ; \
+	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
+	@echo
+	@echo " ... replaceing old binaries ..."
+	-@rm -f $(MAC_REPMAV)/3.3/$(wpkg)_*.tgz
+	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REPMAV)/3.3/
+	@echo " ... done."
+	@echo
+
 repoWinIndex:
 	@echo " Building repository package indices for Windows ..."
 	@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
 	@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
 	@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
 	@cd $(WIN_REP)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
+	@cd $(WIN_REP)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
 	-@cd $(WIN_REP)/2.15/; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.0/; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.1/; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.2/; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.3/; rm -f *.Rout; rm -f .RData
 	@echo " ... done."
 	@echo ; echo
 
@@ -410,8 +472,10 @@ repoMacIndex:
 	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
+	-@cd $(MAC_REP3)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REPMAV)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REPMAV)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
+	-@cd $(MAC_REPMAV)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	@echo " ... done."
 
 
@@ -434,45 +498,55 @@ pkgToDocker:
 	-cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.2/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.3/$(PKG)_*.zip";
+	-cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.3/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.0/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.3/$(PKG)_*.tgz";
+	-cd $(MAC_REP3)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.3/;
 #	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
 #	-cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/leopard/contrib/2.15/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
 	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
 	-cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.3/$(PKG)_*.tgz";
+	-cd $(MAC_REPMAV)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.3/;
 
 inzToDocker:
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/src/contrib/*.tar.gz";
 	cd $(src_lib); scp PACKAGES PACKAGES.gz *.tar.gz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/src/contrib/;
-#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/2.15/*.zip";
-#	cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/2.15/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.0/*.zip";
 	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.0/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.1/*.zip";
 	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.1/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.2/*.zip";
+	cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.3/*.zip";
+	cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz *.zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.3/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.0/*.tgz";
 	cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.0/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.1/*.tgz";
 	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.2/*.tgz";
 	cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.2/;
-#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/leopard/contrib/2.15/*.tgz";
-#	cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/leopard/contrib/2.15/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.3/*.tgz";
+	cd $(MAC_REP3)/3.3/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.3/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.1/*.tgz";
 	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/*.tgz";
 	cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.2/;
+	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.3/*.tgz";
+	cd $(MAC_REPMAV)/3.3/; scp PACKAGES PACKAGES.gz *.tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.3/;
 
 
 
 winUpload:
-	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/iNZightVIT-installer_latest.exe
+	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/
 
 
 
