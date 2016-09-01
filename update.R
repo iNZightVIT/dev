@@ -13,6 +13,9 @@ updateDistribution <- function() {
         sprintf("https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-%s.R", OS),
         ".Rprofile"
       )
+
+      gwidgets2::gmessage("Update script updated - please run the Updater again.")
+      return(invisible(NULL))
   }
 
   if (utils::package.version("iNZight") < 3) {
