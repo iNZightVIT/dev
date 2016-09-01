@@ -1097,6 +1097,21 @@ iNZightPlot(ChildrenPerWoman, log(GDPpercapita), data = gm2,
 data("census.at.school.500", package = "iNZight")
 
 upd()
-iNZightPlot(height, armspan, data = census.at.school.500, plottype = "hex", bg = "red")
-iNZightPlot(height, armspan, data = census.at.school.500, plottype = "hex", bg = "#00ff00")
-iNZightPlot(height, armspan, data = census.at.school.500, plottype = "hex", bg = "#333333")
+iNZightPlot(height, age, data = census.at.school.500, plottype = "hex", colby = convert.to.factor(age))
+
+data("gapminder", package="iNZight")
+
+library(viridis)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = viridis, pch = 19)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = magma, pch = 19)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = plasma, pch = 19)
+
+iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
+            colby = ChildrenPerWoman, col.fun = inferno, pch = 19)
+
