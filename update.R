@@ -1,12 +1,12 @@
 updateDistribution <- function() {
 
-  if (!exists(OS)) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
+  if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
 
   LATEST <- switch(OS,
                    "windows" = 1.0,
                    "osx" = 1.0)
 
-  if (!exists(VERSION)) VERSION <- 0
+  if (!exists("VERSION")) VERSION <- 0
 
   cat(sprintf("You currently have version %s of the updater. The latest version is %s.\n\n", VERSION, LATEST))
 
