@@ -23,9 +23,6 @@ all312:
 
 
 # If you want to install to your local R library, then make here:
-#here215:
-#	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(inz_packages)
-
 here30:
 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
 
@@ -367,16 +364,11 @@ repoMacMav33:
 
 repoWinIndex:
 	@echo " Building repository package indices for Windows ..."
-	@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	@cd $(WIN_REP)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R
-	-@cd $(WIN_REP)/2.15/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.0/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.1/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.2/; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.3/; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
+	-@cd $(WIN_REP)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
 	@echo " ... done."
 	@echo ; echo
 
@@ -404,8 +396,6 @@ version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f
 pkgToDocker:
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/src/contrib/$(PKG)_*.tar.gz";
 	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/src/contrib/;
-#	-ssh inzight@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/2.15/$(PKG)_*.zip";
-#	-cd $(WIN_REP)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip inzight@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/2.15/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.0/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/windows/contrib/3.0/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/windows/contrib/3.1/$(PKG)_*.zip";
@@ -422,8 +412,6 @@ pkgToDocker:
 	-cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.2/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/contrib/3.3/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/contrib/3.3/;
-#	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/leopard/contrib/2.15/$(PKG)_*.tgz";
-#	-cd $(MAC_REP2)/2.15/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/leopard/contrib/2.15/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
 	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz scienceit@docker.stat.auckland.ac.nz:/srv/www/R/bin/macosx/mavericks/contrib/3.1/;
 	-ssh scienceit@docker.stat.auckland.ac.nz "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
@@ -461,6 +449,7 @@ inzToDocker:
 
 winUpload:
 	scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
+	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads; ln -s Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe"
 
 ssh:
 	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight; bash --login"
@@ -469,7 +458,7 @@ ssh:
 
 newsFiles:
 	@for pkg in $(inz_packages) ; do \
-	  ~/R-3.1.2/bin/R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
+	  ~/R-3.2.2/R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
 	done
 	@echo "NEWS files converted to HTML and moved to dev/changes ..."
 	@cd changes; Rscript --vanilla addLinks.R;
