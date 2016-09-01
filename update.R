@@ -18,7 +18,7 @@ updateDistribution <- function() {
       return(invisible(NULL))
   }
 
-  if (utils::package.version("iNZight") < 3) {
+  if (utils::packageVersion("iNZight") < 3) {
       gWidgets2::gmessage(paste("iNZight 3 is now available for download from",
                                 "\n\nhttps://www.stat.auckland.ac.nz/~wild/iNZight/",
                                 "\n\nThere have been a lot of big changes, so you'll need",
