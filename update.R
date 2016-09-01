@@ -2,15 +2,20 @@ updateDistribution <- function() {
 
   if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
 
+  ## UPDATE VERSION NUMBERS AS REQUIRED
   LATEST <- switch(OS,
                    "windows" = 1.0,
-                   "osx" = 1.0)
+                   "osx" = 1.1)
 
   if (!exists("VERSION")) VERSION <- 0
+  if (VERSION < LATEST) {
+      utils::download.file(
+        sprintf("https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-%s.R", OS),
+        ".Rprofile"
+      )
+  }
 
-  cat(sprintf("You currently have version %s of the updater. The latest version is %s.\n\n", VERSION, LATEST))
-
-  if (package.version("iNZight") < 3) {
+  if (utils::package.version("iNZight") < 3) {
       gWidgets2::gmessage(paste("iNZight 3 is now available for download from",
                                 "\n\nhttps://www.stat.auckland.ac.nz/~wild/iNZight/",
                                 "\n\nThere have been a lot of big changes, so you'll need",
@@ -27,12 +32,12 @@ updateDistribution <- function() {
   pkgs <- c("")
 
   ## --- Update iNZight packages:
-  update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
+  utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
 
   ## A list of packages we NEED to have installed (since older versions anyway...)
-  pkgs <- pkgs[!pkgs %in% rownames(installed.packages())]
+  pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
   if (length(pkgs) > 0)
-      install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
+      utils::install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
 
   ## success message
   cat("==========================================================\n")
