@@ -127,6 +127,7 @@ MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
 
 winRelease:
+	cp updateProfile-windows.R $(DIRO)/prog_files/.Rprofile
 	cd $(DIRO); rm -rf prog_files/library/iNZightMaps; makensis INSTALL_SCRIPT.nsi
 
 winReleaseZIP:
@@ -173,6 +174,9 @@ repositoryFiles:
 	-@rm -rf $(DIR)/dev/tmp
 	make repoMacIndex
 	@echo
+	@echo Setting file permissions ...
+	@find www/R -type f -exec chmod 666 {} +
+	@find www/R -type d -exec chmod 775 {} +
 	@echo Finished updating repository with $(wpkg) v$(pkg_v).
 	@echo Have a nice day.; echo
 
@@ -448,8 +452,8 @@ inzToDocker:
 
 
 winUpload:
-	scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
-	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads; ln -s Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe"
+	@echo Uploading installer and creating symlink ...
+	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe && ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads; ln -sf Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe"
 
 ssh:
 	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight; bash --login"
