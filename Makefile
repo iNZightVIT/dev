@@ -6,15 +6,11 @@
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules iNZight vit FutureLearnData
-g_packages = gWidgets2 gWidgets2RGtk2
-all_packages = $(g_packages) $(inz_packages)
+all_packages = $(inz_packages)
 
 build:
 	for pkg in $(inz_packages) ; do \
 		cd ~/iNZight; git clone git@github.com:iNZightVIT/$$pkg ; \
-	done
-	for pkg in $(g_packages) ; do \
-		cd ~/iNZight; git clone git@github.com:jverzani/$$pkg ; \
 	done
 	cd ~/iNZight; mkdir tmp; mv VIT vit
 
@@ -22,16 +18,9 @@ build:
 all:
 	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(inz_packages)
 
-# You will need to install these once, and any time John updates the development version (unless it gets
-# uploaded to cran, then just forget this bit)
-gWidgets2:
-	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(g_packages)
-
 all312:
 	cd ../; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(inz_packages)
 
-extra312:
-	cd ../; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(g_packages)
 
 # If you want to install to your local R library, then make here:
 #here215:
@@ -52,35 +41,10 @@ here33:
 herelatest:
 	cd ../; R CMD INSTALL $(inz_packages)
 
-# And the gWidgets2 libraries:
-#ghere215:
-#	cd ../; ~/R-2.15.3/bin/R CMD INSTALL $(g_packages)
-
-ghere30:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(g_packages)
-
-ghere31:
-	cd ../; ~/R-3.1.2/bin/R CMD INSTALL $(g_packages)
-
-ghere32:
-	cd ../; ~/R-3.2.2/bin/R CMD INSTALL $(g_packages)
-
-ghere33:
-	cd ../; ~/R-3.3.1/bin/R CMD INSTALL $(g_packages)
-
-gherelatest:
-	cd ../; R CMD INSTALL $(g_packages)
-
 # do the following to move into the Windows all-in-one directory:
 replace:
 	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(inz_packages)
 	for pkg in $(inz_packages) ; do \
-		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
-	done
-
-replaceG:
-	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(g_packages)
-	for pkg in $(g_packages) ; do \
 		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
 	done
 
@@ -93,13 +57,6 @@ MACINSTLIB = ~/iNZight/iNZightVIT-osx-installer/Files/iNZightVIT/.library
 macinstaller:
 	cd $(MACINSTLIB); rm -rf $(inz_packages);
 	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(inz_packages); mv tmp/* $(MACINSTLIB)
-
-replaceMacOld:
-	cd ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/; rm -rf vit iNZight iNZightPlots iNZightModules iNZightRegression iNZightTools iNZightMR iNZightTS
-	mv ../tmp/* ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/
-
-rmMacG:
-	cd ../iNZightVIT-MAC/Library/Frameworks/R.framework/Resources/library/; rm -rf gWidgets2 gWidgets2RGtk2
 
 # At the beginning/end of a session, it is a good idea to check the status of all of your repositories.
 statusall:
@@ -141,12 +98,6 @@ pushall:
 		cd ../$$pkg; git push ; \
 	done
 
-pullG:
-	@for pkg in $(g_packages) ; do \
-		echo "\n\n ==================================== "$$pkg"\n" ; \
-		cd ../$$pkg; git pull ; \
-	done
-
 # How iNZighting!
 
 
@@ -167,8 +118,6 @@ showVersions:
 ## Now commands for building the releases ...
 
 
-
-
 ## Need to update the version numbers here:
 DIR = ~/iNZight
 DIRO = ~/iNZight/iNZightVIT-WIN
@@ -183,7 +132,7 @@ MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 winRelease:
 	cd $(DIRO); rm -rf prog_files/library/iNZightMaps; makensis INSTALL_SCRIPT.nsi
 
-winReleaseOld:
+winReleaseZIP:
 	cp -rv $(DIRO) $(DIRN)
 	cd $(DIRN); rm -rf .git
 	cd $(DIR); zip -r iNZightVIT-v$(INZIGHT_VERSION)-zipfile.zip iNZightVIT
@@ -198,8 +147,6 @@ repositoryFiles:
 	make repoSource
 	@echo " == WINDOWS"
 	@echo
-#	@echo "  = R v2.15.3"
-#	make repoWin215
 	@echo "  = R v3.0.2"
 	make repoWin302
 	@echo "  = R v3.1.2"
@@ -210,10 +157,6 @@ repositoryFiles:
 	make repoWin331
 	make repoWinIndex
 	@mkdir -p $(DIR)/dev/tmp
-#	@echo " == MAC (leopard)"
-#	@echo
-#	@echo "  = R v2.15.3"
-#	make repoMac215
 	@echo " == MAC"
 	@echo
 	@echo "  = R v3.0.2"
@@ -254,20 +197,6 @@ repoSrcIndex:
 	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
 	@echo " ... done."
 
-# repoWin215:
-# 	@echo
-# 	@cd $(DIR)/$(wpkg) ; \
-# 	  rm -rf tmp ; \
-# 	  cp ../dev/makes/Make_2153 ./Makefile ; \
-# 	  echo " Building binaries ... "; echo ; \
-# 	  make win ; \
-# 	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-# 	@echo
-# 	@echo " ... replacing old binaries ..."
-# 	-@rm -f $(WIN_REP)/2.15/$(wpkg)_*.zip 2>/dev/null
-# 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/2.15/
-# 	@echo " ... done."
-# 	@echo
 
 repoWin302:
 	@echo
@@ -328,21 +257,6 @@ repoWin331:
 	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.3
 	@echo " ... done."
 	@echo
-
-# repoMac215:
-# 	@echo
-# 	@echo " Building binaries ... "
-# 	@echo
-# 	@cd $(DIR)/dev ; \
-# 	  ~/R-2.15.3/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-# 	@cd $(DIR)/dev/tmp ; \
-# 	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-# 	@echo
-# 	@echo " ... replaceing old binaries ..."
-# 	-@rm -f $(MAC_REP2)/2.15/$(wpkg)_*.tgz
-# 	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP2)/2.15/
-# 	@echo " ... done."
-# 	@echo
 
 repoMac30:
 	@echo
