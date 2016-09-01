@@ -14,7 +14,7 @@ updateDistribution <- function() {
         ".Rprofile"
       )
 
-      gwidgets2::gmessage("Update script updated - please run the Updater again.")
+      gWidgets2::gmessage("Update script updated - please run the Updater again.")
       return(invisible(NULL))
   }
 
