@@ -11,5 +11,5 @@ if (!file.exists(lib)) lib <- NULL
 
 library(utils)
 
-source("https://www.stat.auckland.ac.nz/~wild/downloads/iNZight/update.R")
+source("https://raw.githubusercontent.com/iNZightVIT/dev/master/update.R")
 updateDistribution(lib = lib)
