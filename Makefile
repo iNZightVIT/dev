@@ -471,8 +471,15 @@ newsFiles:
 	@cd changes; Rscript --vanilla addLinks.R;
 	@echo "Copying to server ..."
 	@scp changes/*.php tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/support/changelog/changes/
-	@ echo "Done.\n\n"
+	@echo "Done.\n\n"
 
+changeLog:
+	@echo Copying NEWS files to www repository ...
+	@for pkg in $(inz_packages) ; do \
+	  cp $(DIR)/$$pkg/NEWS.Md $(DIR)/inzight-www/iNZight/support/changelog/changes/$$pkg.Md ; \
+	done
+	@echo Done
+	@echo
 
 
 help:
