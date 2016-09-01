@@ -29,4 +29,4 @@ cd ..
 
 ----------------------------
 
-If you have any issues with these instructions, please email `tell029@auckland.ac.nz`.
+If you have any issues with these instructions, please email `tom.elliott@auckland.ac.nz`.

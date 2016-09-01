@@ -14,16 +14,17 @@ updateDistribution <- function() {
         ".Rprofile"
       )
 
-      gWidgets2::gmessage("Update script updated - please run the Updater again.")
+      tcltk::tkmessageBox(title = "Rerun Updater", message = "Update script updated - please run the Updater again.",
+                          type = "ok", icon = "info")
       return(invisible(NULL))
   }
 
-  if (utils::package.version("iNZight") < 3) {
-      gWidgets2::gmessage(paste("iNZight 3 is now available for download from",
-                                "\n\nhttps://www.stat.auckland.ac.nz/~wild/iNZight/",
-                                "\n\nThere have been a lot of big changes, so you'll need",
-                                "to redownload iNZight to get it."),
-                          title = "iNZight 3.0 Released!")
+  if (utils::packageVersion("iNZight") < 3) {
+      tcltk::tkmessageBox(message = paste("iNZight 3 is now available for download from",
+                                          "\n\nhttps://www.stat.auckland.ac.nz/~wild/iNZight/",
+                                          "\n\nThere have been a lot of big changes, so you'll need",
+                                          "to redownload iNZight to get it."),
+                          title = "iNZight 3.0 Released!", icon = "info", type = "ok")
       return(invisible(NULL))
   }
 
@@ -46,8 +47,9 @@ updateDistribution <- function() {
   cat("==========================================================\n")
   cat("               Updating complete!!\n")
   cat("==========================================================\n\n")
-
-  gWidgets2::gmessage("iNZight has finished updating!", title = "Update Complete")
+  
+  tcltk::tkmessageBox(title = "Update Complete", message = "iNZight is now up to date!", 
+                      icon = "info", type = "ok")
 
   q("no")
 
