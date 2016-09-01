@@ -12,4 +12,3 @@ if (!file.exists(lib)) lib <- NULL
 library(utils)
 
 source("https://raw.githubusercontent.com/iNZightVIT/dev/master/update.R")
-updateDistribution(lib = lib)

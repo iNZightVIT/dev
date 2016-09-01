@@ -1,4 +1,4 @@
-updateDistribution <- function(lib = NULL) {
+updateDistribution <- function() {
 
     if (package.version("iNZight") < 3) {
         gWidgets2::gmessage(paste("iNZight 3 is now available for download from",
@@ -8,7 +8,7 @@ updateDistribution <- function(lib = NULL) {
                             title = "iNZight 3.0 Released!")
         return(invisible(NULL))
     }
-    
+
     cat("==========================================================\n")
     cat("               Checking for updates ...\n")
     cat("==========================================================\n\n")
@@ -17,21 +17,25 @@ updateDistribution <- function(lib = NULL) {
     pkgs <- c("")
 
     ## --- Update iNZight packages:
-    update.packages(lib.loc = lib, repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
+    update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
 
     ## A list of packages we NEED to have installed (since older versions anyway...)
     pkgs <- pkgs[!pkgs %in% rownames(installed.packages())]
     if (length(pkgs) > 0)
         install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
-    
+
     ## success message
     cat("==========================================================\n")
     cat("               Updating complete!!\n")
     cat("==========================================================\n\n")
 
     gWidgets2::gmessage("iNZight has finished updating!", title = "Update Complete")
-    
+
     q("no")
-        
+
     return(invisible(NULL))
 }
+
+
+
+updateDistribution()
