@@ -19,7 +19,7 @@ data(census.at.school.500, package = 'iNZight')
 KK <- iNZGUI$new()
 ##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
-KK$initializeGui(as.data.frame(Titanic[,1,2,]))
+KK$initializeGui(data.frame(gender = factor(c("male", "female")), count = c(40, 50)))
 
 TRUE
 
