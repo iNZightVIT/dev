@@ -456,7 +456,7 @@ inzToDocker:
 
 winUpload:
 	@echo Uploading installer and creating symlink ...
-	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe && ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads; ln -sf Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe"
+	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
 
 ssh:
 	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight; bash --login"
