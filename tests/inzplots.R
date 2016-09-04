@@ -1,3 +1,4 @@
+setwd("~/iNZight/dev/tests")
 library(grid); library(survey); library(quantreg); library(hexbin); library(hextri); library(boot); library(devtools); library(colorspace); library(dichromat)
 upd <- function() load_all("~/iNZight/iNZightPlots")
 data(api)
@@ -1018,7 +1019,6 @@ iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(height))
 iNZightPlot(armspan, height, data = d1, colby = convert.to.factor(d1$height), plottype = "hex")
 
 
-
 upd()
 iNZightPlot(armspan, height, data = d1, symbolby = gender, colby = gender)
 iNZightPlot(rightfoot, height, data = d1, alpha = 0.5, symbolby = cellsource, colby = cellsource, sizeby = armspan)
@@ -1117,7 +1117,7 @@ iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
 
 
 
-
 upd()
-iNZightPlot(height, armspan, g1 = gender, g2 = travel, g2.level = "_MULTI", data = census.at.school.500)
-
+data("census.at.school.500", package = "iNZight"); d1 <- census.at.school.500
+iNZightPlot(height, armspan, g1 = gender, data = d1)
+iNZightPlot(height, armspan, g1 = gender, data = d1, colby = age, alpha=0.6, g2=cellsource, g2.level='_MULTI', bg="#333333", col.sub=c("wheat", "lightblue"))
