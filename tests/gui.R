@@ -17,8 +17,9 @@ data(census.at.school.500, package = 'iNZight')
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(census.at.school.500)
+##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
+KK$initializeGui(data.frame(gender = factor(c("male", "female")), count = c(40, 50)))
 
 TRUE
 
