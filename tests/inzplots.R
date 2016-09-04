@@ -1115,3 +1115,9 @@ iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
 iNZightPlot(log(GDPpercapita), Infantmortality, data = gapminder,
             colby = ChildrenPerWoman, col.fun = inferno, pch = 19)
 
+
+
+
+upd()
+iNZightPlot(height, armspan, g1 = gender, g2 = travel, g2.level = "_MULTI", data = census.at.school.500)
+
