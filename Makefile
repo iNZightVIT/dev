@@ -368,7 +368,6 @@ repoMacMav33:
 
 repoWinIndex:
 	@echo " Building repository package indices for Windows ..."
-	-@cd $(WIN_REP)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
@@ -378,7 +377,6 @@ repoWinIndex:
 
 repoMacIndex:
 	@echo " Building repository package indices for Mac ..."
-	-@cd $(MAC_REP2)/2.15/; ~/R-2.15.3/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
@@ -403,27 +401,27 @@ repourl = $(addr):$(repodir)
 pkgToDocker:
 	-ssh $(addr) "rm $(repodir)/src/contrib/$(PKG)_*.tar.gz";
 	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz $(repourl)/src/contrib/;
-	-ssh $(addr) "rm $(repo)/bin/windows/contrib/3.0/$(PKG)_*.zip";
+	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.0/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.0/;
-	-ssh $(addr) "rm $(repo/bin/windows/contrib/3.1/$(PKG)_*.zip";
+	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.1/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.1/;
-	-ssh $(addr) "rm $(repo/bin/windows/contrib/3.2/$(PKG)_*.zip";
+	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.2/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.2/;
-	-ssh $(addr) "rm $(repo/bin/windows/contrib/3.3/$(PKG)_*.zip";
+	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.3/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.3/;
-	-ssh $(addr) "rm $(repo/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
+	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.0/;
-	-ssh $(addr) "rm $(repo/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
+	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.1/;
-	-ssh $(addr) "rm $(repo/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
+	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.2/;
-	-ssh $(addr) "rm $(repo/bin/macosx/contrib/3.3/$(PKG)_*.tgz";
+	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.3/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.3/;
-	-ssh $(addr) "rm $(repo/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
+	-ssh $(addr) "rm $(repodir)/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
 	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/mavericks/contrib/3.1/;
-	-ssh $(addr) "rm $(repo/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
+	-ssh $(addr) "rm $(repodir)/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
 	-cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/mavericks/contrib/3.2/;
-	-ssh $(addr) "rm $(repo/bin/macosx/mavericks/contrib/3.3/$(PKG)_*.tgz";
+	-ssh $(addr) "rm $(repodir)/bin/macosx/mavericks/contrib/3.3/$(PKG)_*.tgz";
 	-cd $(MAC_REPMAV)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/mavericks/contrib/3.3/;
 
 inzToDocker:
