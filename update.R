@@ -1,6 +1,6 @@
 updateDistribution <- function() {
 
-  if (utils::packageVersion("iNZight") < 4) {
+  if (utils::packageVersion("iNZight") < 3) {
       conf <-
           tcltk::tk_messageBox(message = paste("iNZight 3 is now available for download from our website.",
                                                "\n\nThere have been a lot of big changes, so you'll need",
