@@ -1,5 +1,18 @@
 updateDistribution <- function() {
 
+  if (utils::packageVersion("iNZight") < 4) {
+      conf <-
+          tcltk::tk_messageBox(message = paste("iNZight 3 is now available for download from our website.",
+                                               "\n\nThere have been a lot of big changes, so you'll need",
+                                               "to install iNZight again to get them.",
+                                               "\n\nDo you want to go to the website now?"),
+                               title = "iNZight 3.0 Released!", icon = "info", type = "okcancel")
+      if (conf == "ok")
+          utils::browseURL("https://www.stat.auckland.ac.nz/~wild/iNZight/getinzight.php")
+      q("no")
+      return(invisible(NULL))
+  }
+
   if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
 
   ## UPDATE VERSION NUMBERS AS REQUIRED
@@ -16,15 +29,6 @@ updateDistribution <- function() {
 
       tcltk::tkmessageBox(title = "Rerun Updater", message = "Update script updated - please run the Updater again.",
                           type = "ok", icon = "info")
-      return(invisible(NULL))
-  }
-
-  if (utils::packageVersion("iNZight") < 3) {
-      tcltk::tkmessageBox(message = paste("iNZight 3 is now available for download from",
-                                          "\n\nhttps://www.stat.auckland.ac.nz/~wild/iNZight/",
-                                          "\n\nThere have been a lot of big changes, so you'll need",
-                                          "to redownload iNZight to get it."),
-                          title = "iNZight 3.0 Released!", icon = "info", type = "ok")
       return(invisible(NULL))
   }
 
@@ -47,8 +51,8 @@ updateDistribution <- function() {
   cat("==========================================================\n")
   cat("               Updating complete!!\n")
   cat("==========================================================\n\n")
-  
-  tcltk::tkmessageBox(title = "Update Complete", message = "iNZight is now up to date!", 
+
+  tcltk::tkmessageBox(title = "Update Complete", message = "iNZight is now up to date!",
                       icon = "info", type = "ok")
 
   q("no")
