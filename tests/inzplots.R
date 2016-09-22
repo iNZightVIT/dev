@@ -1121,3 +1121,12 @@ upd()
 data("census.at.school.500", package = "iNZight"); d1 <- census.at.school.500
 iNZightPlot(height, armspan, g1 = gender, data = d1)
 iNZightPlot(height, armspan, g1 = gender, data = d1, colby = age, alpha=0.6, g2=cellsource, g2.level='_MULTI', bg="#333333", col.sub=c("wheat", "lightblue"))
+
+
+
+
+library(FutureLearnData)
+data(nhanes2009_2012)
+
+upd()
+iNZightPlot(AgeDecade, Education, data = nhanes2009_2012)
