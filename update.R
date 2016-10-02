@@ -38,6 +38,9 @@ updateDistribution <- function() {
 
   ## List any packages added to iNZight after the release
   pkgs <- c("")
+  if (OX == "win") {
+      pkgs <- c(pkgs, "RODBC")  
+  }
 
   ## --- Update iNZight packages:
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
