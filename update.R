@@ -37,7 +37,7 @@ updateDistribution <- function() {
   cat("==========================================================\n\n")
 
   ## List any packages added to iNZight after the release
-  pkgs <- c("")
+  pkgs <- c("RColorBrewer")
   if (OS == "windows") {
       pkgs <- c(pkgs, "RODBC")  
   }
