@@ -49,6 +49,8 @@ updateDistribution <- function() {
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
   if (length(pkgs) > 0)
       utils::install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
+  if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
+      utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz")
 
   ## success message
   cat("==========================================================\n")
