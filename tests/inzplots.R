@@ -1130,3 +1130,9 @@ data(nhanes2009_2012)
 
 upd()
 iNZightPlot(AgeDecade, Education, data = nhanes2009_2012)
+
+
+
+data(gapminder, package="iNZight")
+upd()
+iNZightPlot(Infantmortality, data = gapminder, plottype = "hist", bar.fill="blue")
