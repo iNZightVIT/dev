@@ -1,14 +1,17 @@
 ###library(iNZightMaps)
 devtools::document("~/iNZight/iNZightMaps")
 devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
-quakes <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE)
+##quakes <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE)
+quakes <- read.csv("~/Downloads/earthquakes.csv", header = TRUE)
+schools <- read.csv("~/Downloads/ukschools.csv", header = TRUE)
 
-map.obj <- iNZightMap(~Latitude, ~Longitude, data = quakes)
+map.obj <- iNZightMap(~latitude, ~longitude, data = quakes)
+map.obj2 <- iNZightMap(~Latitude, ~Longitude, data = schools)
 
-#devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
-plot(map.obj, sizeby = Magnitude, g1 = Felt, g1.level = "_MULTI")
+devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+plot(map.obj)
+plot(map.obj2)
 
-?iNZightMap
 
 
 
