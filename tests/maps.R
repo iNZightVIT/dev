@@ -2,13 +2,13 @@
 devtools::document("~/iNZight/iNZightMaps")
 devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 
+data(nzquakes)
 
-map.obj <- iNZightMap(~Latitude, ~Longitude, data = quakes)
+map.obj <- iNZightMap(~latitude, ~longitude, data = nzquakes)
 
-#devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
-plot(map.obj, sizeby = Magnitude, g1 = Felt, g1.level = "_MULTI")
+devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+plot(map.obj)
 
-?iNZightMap
 
 
 
