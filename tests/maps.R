@@ -1,16 +1,13 @@
 ###library(iNZightMaps)
 devtools::document("~/iNZight/iNZightMaps")
 devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
-##quakes <- read.csv("~/iNZight/data/QuakesNZ2000.csv", header = TRUE)
-quakes <- read.csv("~/Downloads/earthquakes.csv", header = TRUE)
-schools <- read.csv("~/Downloads/ukschools.csv", header = TRUE)
 
-map.obj <- iNZightMap(~latitude, ~longitude, data = quakes)
-map.obj2 <- iNZightMap(~Latitude, ~Longitude, data = schools)
+data(nzquakes)
+
+map.obj <- iNZightMap(~latitude, ~longitude, data = nzquakes)
 
 devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 plot(map.obj)
-plot(map.obj2)
 
 
 
@@ -156,3 +153,20 @@ plot(map.obj, g1 = Depth, opacity = ~Depth, alpha = 1)
 
 ClickOnZoom(ratio = 0.3)
 rezoom(0.1)
+
+
+
+################ BUG FIX
+ukschools <- read.csv("~/Downloads/UK Schools.csv", header = TRUE)
+data("nzquakes")
+nzquakes$Longitude <- nzquakes$Longitude + 3
+nzquakes$Longitude[nzquakes$Longitude > 180] <- -180 + (nzquakes$Longitude[nzquakes$Longitude > 180] - 180)
+
+rm("map")
+devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+uk.map <- iNZightMap(~Latitude, ~Longitude, data = ukschools)
+plot(uk.map)
+
+
+quakes.map <- iNZightMap(~Latitude, ~Longitude, data = nzquakes)
+plot(quakes.map)
