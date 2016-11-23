@@ -1161,3 +1161,9 @@ getPlotSummary(height, getlunch, data = d1, summary.type = "inference", inferenc
 
 unlist(t.test(d1$height, d1$armspan, var.equal = TRUE))
 t.test(d1$height, d1$armspan, paired = TRUE)
+
+
+
+
+upd()
+iNZightPlot(height, colby = gender, data = d1, hide.legend=TRUE)
