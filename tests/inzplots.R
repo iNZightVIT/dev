@@ -1142,18 +1142,20 @@ iNZightPlot(Infantmortality, data = gapminder, plottype = "hist", bar.fill="blue
 
 ######################################### New testing
 
+
 data("census.at.school.500", package = "iNZight")
 d1 <- census.at.school.500
 
 upd()
-iNZightPlot(height, data = d1)
-inzpars <- inzpar(inference.type = "conf", inference.par = c("mean", "median", "iqr"))
+getPlotSummary(height, data = d1, summary.type = "inference", inference.type = "conf")
+
 
 upd()
-getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars)
+getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf",
+               hypothesis.var.equal = FALSE) 
 
-getPlotSummary(x = height, gender, data = d1, summary.type = "inference", inzpars = inzpars)
-getPlotSummary(x = height, travel, data = d1, summary.type = "inference", inzpars = inzpars)
 
-t.test(d1$height)
-unclass(t.test(d1$height))
+upd()
+getPlotSummary(height, getlunch, data = d1, summary.type = "inference", inference.type = "conf")
+
+
