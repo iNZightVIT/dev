@@ -1,6 +1,7 @@
 setwd("~/iNZight/dev/tests")
 library(grid); library(survey); library(quantreg); library(hexbin); library(hextri); library(boot); library(devtools); library(colorspace); library(dichromat)
 upd <- function() load_all("~/iNZight/iNZightPlots")
+
 data(api)
 d1 <- read.csv("~/iNZight/data/Census at School-500.csv", header = TRUE, comment.char = "#")
 d2 <- read.csv("~/iNZight/data/survey/NHANES_2009_2012.Wtd.csv", header = TRUE)
@@ -1136,3 +1137,23 @@ iNZightPlot(AgeDecade, Education, data = nhanes2009_2012)
 data(gapminder, package="iNZight")
 upd()
 iNZightPlot(Infantmortality, data = gapminder, plottype = "hist", bar.fill="blue")
+
+
+
+######################################### New testing
+
+data("census.at.school.500", package = "iNZight")
+d1 <- census.at.school.500
+
+upd()
+iNZightPlot(height, data = d1)
+inzpars <- inzpar(inference.type = "conf", inference.par = c("mean", "median", "iqr"))
+
+upd()
+getPlotSummary(x = height, data = d1, summary.type = "inference", inzpars = inzpars)
+
+getPlotSummary(x = height, gender, data = d1, summary.type = "inference", inzpars = inzpars)
+getPlotSummary(x = height, travel, data = d1, summary.type = "inference", inzpars = inzpars)
+
+t.test(d1$height)
+unclass(t.test(d1$height))
