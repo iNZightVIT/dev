@@ -4,7 +4,6 @@ q()
 ## Set-up
 setwd("~/iNZight/iNZight")
 library(devtools)
-data(gapminder, package = "iNZight")
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
@@ -18,8 +17,8 @@ data(census.at.school.500, package = 'iNZight')
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui()
-##KK$initializeGui(census.at.school.500)
+##KK$initializeGui()
+KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 TRUE
