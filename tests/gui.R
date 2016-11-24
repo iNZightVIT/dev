@@ -4,14 +4,14 @@ q()
 ## Set-up
 setwd("~/iNZight/iNZight")
 library(devtools)
-data(gapminder, package = "iNZight")
+
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
-load_all("~/iNZight/iNZightTS", export_all = FALSE)
+#load_all("~/iNZight/iNZightTS", export_all = FALSE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-load_all("~/iNZight/iNZightModules", export_all = FALSE)
+#load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
 ##data(gapminder, package = "iNZight")
@@ -21,6 +21,25 @@ KK <- iNZGUI$new()
 KK$initializeGui()
 ##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
+
+
+
+win <- KK$win
+
+wBoots <- gwindow("Performing Bootstrap ...",
+                  parent = win, width=350, height=120)
+ggBoots <- ggroup(container = wBoots)
+addSpace(ggBoots, 5)
+hBoots <- gvbox(container = ggBoots, spacing = 10)
+addSpace(hBoots, 5)
+iBoots <- gimage(stock.id = "info", cont = hBoots, size = "dialog")
+fBoots <- gvbox(container = ggBoots, spacing = 10)
+fBoots$set_borderwidth(10)
+gBoots <- glabel("Please wait while iNZight\nperforms bootstrap simulations.", anchor = c(-1, 0), cont = fBoots)
+font(gBoots) <- list(size = 14, weight = "bold")
+gBoots2 <- glabel("Depending on the size of the data,\nthis could take a while.", anchor = c(-1, 0), cont = fBoots)
+
+
 
 TRUE
 
