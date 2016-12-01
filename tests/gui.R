@@ -25,22 +25,15 @@ KK$initializeGui(census.at.school.500)
 
 
 
+
+KK$getActiveDoc()$getSettings()$g1
+
+fit <- lm(height ~ gender*travel + armspan * gender * travel, data=census.at.school.500)
+pred <- predict(fit, newdata = census.at.school.500)
+plot(census.at.school.500$armspan, pred)
+
+
 win <- KK$win
-
-wBoots <- gwindow("Performing Bootstrap ...",
-                  parent = win, width=350, height=120)
-ggBoots <- ggroup(container = wBoots)
-addSpace(ggBoots, 5)
-hBoots <- gvbox(container = ggBoots, spacing = 10)
-addSpace(hBoots, 5)
-iBoots <- gimage(stock.id = "info", cont = hBoots, size = "dialog")
-fBoots <- gvbox(container = ggBoots, spacing = 10)
-fBoots$set_borderwidth(10)
-gBoots <- glabel("Please wait while iNZight\nperforms bootstrap simulations.", anchor = c(-1, 0), cont = fBoots)
-font(gBoots) <- list(size = 14, weight = "bold")
-gBoots2 <- glabel("Depending on the size of the data,\nthis could take a while.", anchor = c(-1, 0), cont = fBoots)
-
-
 
 TRUE
 
@@ -74,8 +67,14 @@ tbl <- glayout(cont=g)
 tbl[1, 1:2] <- glabel("hello")
 tbl[2, 1] <- LAB <- glabel("this")
 tbl[2, 2] <- VAL <- gcombobox(1:2, editable=TRUE,name="mybox")
+tbl[2, 3] <- gedit("hello", editable=TRUE)
 
-tbl[2,2]
+tbl[2,]
+visible(tbl[2,1:3]) <- TRUE
+
+lapply(tbl[2,1:3], function(h) visible(h) <- FALSE)
+lapply(tbl[2,1:3], function(h) visible(h) <- TRUE)
+
 
 VAL$parent$child_positions
 
