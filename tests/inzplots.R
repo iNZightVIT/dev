@@ -1174,3 +1174,10 @@ getPlotSummary(height, data = d1, summary.type = "inference", inference.type = "
 
 t.test(d2$height ~ d2$time)
 t.test(d2$height ~ d2$time, paired = TRUE)
+
+
+
+upd()
+getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.var.equal = TRUE)
+
+getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.var.equal = FALSE)
