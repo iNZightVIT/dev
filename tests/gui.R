@@ -26,20 +26,12 @@ KK$initializeGui(census.at.school.500)
 
 
 win <- KK$win
-
 wBoots <- gwindow("Performing Bootstrap ...",
                   parent = win, width=350, height=120)
-ggBoots <- ggroup(container = wBoots)
-addSpace(ggBoots, 5)
-hBoots <- gvbox(container = ggBoots, spacing = 10)
-addSpace(hBoots, 5)
-iBoots <- gimage(stock.id = "info", cont = hBoots, size = "dialog")
-fBoots <- gvbox(container = ggBoots, spacing = 10)
-fBoots$set_borderwidth(10)
-gBoots <- glabel("Please wait while iNZight\nperforms bootstrap simulations.", anchor = c(-1, 0), cont = fBoots)
-font(gBoots) <- list(size = 14, weight = "bold")
-gBoots2 <- glabel("Depending on the size of the data,\nthis could take a while.", anchor = c(-1, 0), cont = fBoots)
+ggBoots <- gvbox(container = wBoots)
+ggBoots$set_borderwidth(15)
 
+glabel("hello", container = ggBoots, anchor = c(-1, 0))
 
 
 TRUE
