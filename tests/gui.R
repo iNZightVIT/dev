@@ -26,12 +26,14 @@ KK$initializeGui(census.at.school.500)
 
 
 
-KK$getActiveDoc()$getSettings()$g1
+win <- KK$win
+wBoots <- gwindow("Performing Bootstrap ...",
+                  parent = win, width=350, height=120)
+ggBoots <- gvbox(container = wBoots)
+ggBoots$set_borderwidth(15)
 
-fit <- lm(height ~ gender*travel + armspan * gender * travel, data=census.at.school.500)
-pred <- predict(fit, newdata = census.at.school.500)
-plot(census.at.school.500$armspan, pred)
 
+glabel("hello", container = ggBoots, anchor = c(-1, 0))
 
 win <- KK$win
 
