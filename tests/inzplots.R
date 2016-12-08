@@ -1159,25 +1159,23 @@ upd()
 getPlotSummary(height, getlunch, data = d1, summary.type = "inference", inference.type = "conf")
 
 
-d2 <- d1[!is.na(d1$height), ]
-d2 <- d2[1:400, ]
-d2$time <- as.factor(as.numeric(1:400 <= 200))
-levels(d2$time) <- c("before", "after")
-
-
 upd()
 getPlotSummary(height, time, data = d2, summary.type = "inference", inference.type = "conf")
-getPlotSummary(height, data = d2, summary.type = "inference", inference.type = "conf", paired = TRUE)
 
 upd()
 getPlotSummary(height, data = d1, summary.type = "inference", inference.type = "conf")
-
-t.test(d2$height ~ d2$time)
-t.test(d2$height ~ d2$time, paired = TRUE)
 
 
 
 upd()
 getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.var.equal = TRUE)
 
-getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.var.equal = FALSE)
+getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.var.equal = FALSE,
+               hypothesis = NULL)
+
+
+upd()
+getPlotSummary(height, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.test = "anova")
+getPlotSummary(height, travel, data = d1, summary.type = "inference", inference.type = "conf")
