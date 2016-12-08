@@ -25,14 +25,17 @@ KK$initializeGui(census.at.school.500)
 
 
 
+
 win <- KK$win
 wBoots <- gwindow("Performing Bootstrap ...",
                   parent = win, width=350, height=120)
 ggBoots <- gvbox(container = wBoots)
 ggBoots$set_borderwidth(15)
 
+
 glabel("hello", container = ggBoots, anchor = c(-1, 0))
 
+win <- KK$win
 
 TRUE
 
@@ -66,8 +69,14 @@ tbl <- glayout(cont=g)
 tbl[1, 1:2] <- glabel("hello")
 tbl[2, 1] <- LAB <- glabel("this")
 tbl[2, 2] <- VAL <- gcombobox(1:2, editable=TRUE,name="mybox")
+tbl[2, 3] <- gedit("hello", editable=TRUE)
 
-tbl[2,2]
+tbl[2,]
+visible(tbl[2,1:3]) <- TRUE
+
+lapply(tbl[2,1:3], function(h) visible(h) <- FALSE)
+lapply(tbl[2,1:3], function(h) visible(h) <- TRUE)
+
 
 VAL$parent$child_positions
 
