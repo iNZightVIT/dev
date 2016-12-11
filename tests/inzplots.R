@@ -1179,3 +1179,15 @@ getPlotSummary(height, data = d1, summary.type = "inference", inference.type = "
 getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf")
 getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.test = "anova")
 getPlotSummary(height, travel, data = d1, summary.type = "inference", inference.type = "conf")
+
+
+upd()
+getPlotSummary(travel, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(travel, getlunch, data = d1, summary.type = "inference", inference.type = "conf")
+
+iNZightPlot(travel, getlunch, data = d1)
+
+
+upd()
+getPlotSummary(armspan, height, data = d1, summary.type = "inference", inference.type = "conf",
+               trend = c("linear", "quadratic", "cubic"))

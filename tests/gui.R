@@ -12,7 +12,7 @@ try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-#load_all("~/iNZight/iNZightModules", export_all = FALSE)
+#load_all("~/NZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
 ##data(gapminder, package = "iNZight")
@@ -23,7 +23,16 @@ KK <- iNZGUI$new()
 KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
+NULL
+tt <- function(set) {
+    with(set, loess(y ~ x, span = 0.7, degree = 1, family="gaussian", na.action = "na.exclude"))
+}
 
+pred <- predict(tt(KK$getActiveDoc()$getSettings()), newdata = census.at.school.500$armspan)
+length(pred)
+
+head(census.at.school.500$height - pred)
+head(residuals(tt(KK$getActiveDoc()$getSettings()), type = ?))
 
 
 win <- KK$win
