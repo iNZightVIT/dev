@@ -1191,3 +1191,46 @@ iNZightPlot(travel, getlunch, data = d1)
 upd()
 getPlotSummary(armspan, height, data = d1, summary.type = "inference", inference.type = "conf",
                trend = c("linear", "quadratic", "cubic"))
+
+
+
+
+d1$travel.reord <- factor(d1$travel, levels = c("bike", "bus", "motor", "train", "walk", "other"))
+
+upd()
+getPlotSummary(height, travel, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(height, travel.reord, data = d1, summary.type = "inference", inference.type = "conf")
+
+getPlotSummary(travel.reord, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(travel.reord, gender, data = d1, summary.type = "inference", inference.type = "conf")
+
+fit <- lm(height ~ travel.reord, data = d1)
+predict(fit, newdata = data.frame(travel.reord = factor(levels(d1$travel.reord),
+                                                        levels = levels(d1$travel.reord))))
+
+
+s20x::multipleComp(fit)
+TukeyHSD(aov(fit))[[1]]
+         
+## 95% Confidence Intervals (adjusted for multiple comparisons)
+
+##               bike        bus      motor     other    train
+##      bus   -15.260                                         
+##              2.067                                         
+##    motor   -10.710    -0.7342                              
+##              5.809     9.0268                              
+##    other   -13.061    -4.7620    -8.6245                   
+##             14.722    19.6160    15.1860                   
+##    train   -28.409   -20.3470   -24.2540   -31.406         
+##              3.352     8.4826     4.0972     4.688         
+##     walk   -15.055    -5.3407    -8.8340   -19.406   -8.271
+##              2.304     5.7827     0.9834     4.994   20.578
+
+## P-values
+
+##            bike    bus   motor   other   train
+##      bus   0.25                               
+##    motor   0.96   0.15                        
+##    other   1.00   0.50    0.97                
+##    train   0.21   0.85    0.32    0.28        
+##     walk   0.29   1.00    0.20    0.54    0.83
