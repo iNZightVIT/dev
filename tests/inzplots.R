@@ -1175,10 +1175,8 @@ getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.
 
 
 upd()
-getPlotSummary(height, data = d1, summary.type = "inference", inference.type = "conf")
-getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf")
-getPlotSummary(height, gender, data = d1, summary.type = "inference", inference.type = "conf", hypothesis.test = "anova")
 getPlotSummary(height, travel, data = d1, summary.type = "inference", inference.type = "conf")
+getPlotSummary(travel, height, data = d1, summary.type = "inference", inference.type = "conf")
 
 
 upd()
