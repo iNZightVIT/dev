@@ -136,8 +136,16 @@ winReleaseZIP:
 	cd $(DIR); zip -r iNZightVIT-v$(INZIGHT_VERSION)-zipfile.zip iNZightVIT
 	rm -rf $(DIRN)
 
+PATCH_PKGS ?= $(inz_packages)
 winPatch:
+	-@cd $(DIRO); rm *.zip
+	@cd $(DIRO)/prog_files; zip -r iNZightVIT_v$(INZIGHT_VERSION)-patch.zip library/iNZight library/iNZightPlots library/iNZightMR library/iNZightModules library/iNZightTS library/iNZightRegression library/iNZightTools library/vit; mv *.zip ../
+	@scp $(DIRO)/iNZightVIT_v$(INZIGHT_VERSION)-patch.zip tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows
+
+winPatchAll:
+	-@cd $(DIRO); rm *.zip
 	@cd $(DIRO)/prog_files; zip -r iNZightVIT_v$(INZIGHT_VERSION)-patch.zip library; mv *.zip ../
+	@scp $(DIRO)/iNZightVIT_v$(INZIGHT_VERSION)-patch.zip tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows
 
 ## User will define wpkg=iNZightPlots, eg
 pkg_v = $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
