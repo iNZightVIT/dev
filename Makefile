@@ -136,6 +136,9 @@ winReleaseZIP:
 	cd $(DIR); zip -r iNZightVIT-v$(INZIGHT_VERSION)-zipfile.zip iNZightVIT
 	rm -rf $(DIRN)
 
+winPatch:
+	@cd $(DIRO)/prog_files; zip -r iNZightVIT_v$(INZIGHT_VERSION)-patch.zip library; mv *.zip ../
+
 ## User will define wpkg=iNZightPlots, eg
 pkg_v = $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
 repositoryFiles:
