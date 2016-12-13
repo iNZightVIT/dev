@@ -94,23 +94,38 @@ iNZight(apiclus2)
 dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
 dclus2 <- svydesign(id = ~dnum + snum, fpc = ~fpc1 + fpc2, data = apiclus2)
 
-library(iNZightPlots)
+load_all("~/iNZight/iNZightPlots")
 pl <- iNZightPlot(api99, api00, des = dclus1, g1 = awards)
 
 summary(svyglm(api00 ~ api99, des = pl$all$Yes$svy))
 
 getPlotSummary(api99, api00, des = dclus1, g1 = awards, trend = "linear", summary.type = "inference", inference.type = "conf")
 
-des2 <- subset(dclus1, awards == "Yes")
-des3 <- subset(des2, meals > 40)
+des2 <- subset(dstrat, awards == "No")
+des3 <- subset(dstrat, awards == "Yes")
 
 summary(svyglm(api00 ~ api99, des = des2))
 summary(svyglm(api00 ~ api99, des = des3))
 
 
+## From here:
+library(survey)
+library(devtools)
+data(api)
+dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
+dstrat <- svydesign(id=~1,strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
+
+load_all("~/iNZight/iNZightPlots")
+iNZightPlot(api99, api00, data = apistrat)
+iNZightPlot(api99, api00, des = dstrat)
 
 
-devtools::load_all("~/iNZight/iNZightPlots")
-iNZightPlot(api99, api00, des = dclus1)
-iNZightPlot(api99, api00, des = dclus1, g1 = awards)
-iNZightPlot(api99, api00, des = dclus1, g1 = awards, g2 = sch.wide, g2.level = "_MULTI")
+pl <- iNZightPlot(api99, api00, des = dstrat, g1 = awards)
+
+summary(svyglm(y ~ x, pl$all[[1]]$svy))
+summary(svyglm(y ~ x, pl$all[[2]]$svy))
+
+
+load_all("~/iNZight/iNZightPlots")
+iNZightPlot(api99, awards, des = dstrat, hist.bins = 20)
+iNZightPlot(api99, des = dstrat, hist.bins = 20, g1 = awards)
