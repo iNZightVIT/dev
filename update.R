@@ -17,7 +17,7 @@ updateDistribution <- function() {
 
   ## UPDATE VERSION NUMBERS AS REQUIRED
   LATEST <- switch(OS,
-                   "windows" = 1.0,
+                   "windows" = 1.1,
                    "osx" = 1.0)
 
   if (!exists("VERSION")) VERSION <- 0
