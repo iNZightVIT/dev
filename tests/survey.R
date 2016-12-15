@@ -1,6 +1,58 @@
 library(survey)
 library(devtools)
+
+upd <- function() load_all("~/iNZight/iNZightPlots")
+
+### Start again! Working through http://r-survey.r-forge.r-project.org/survey/example-design.html
+
+## 1. Survey designs
+upd()
 data(api)
+dstrat <- svydesign(id = ~1, strat = ~stype, data = apistrat, fpc = ~fpc)
+dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
+dclus2 <- svydesign(id = ~dnum + snum, fpc = ~fpc1 + fpc2, data = apiclus2)
+
+## 2. Replicate weights
+rclus1<-as.svrepdesign(dclus1)
+
+## 3. simple summaries
+svymean(~api00, dclus1)
+svyvar(~api00, dclus1)
+svyquantile(~api00, dclus1, c(0.25, 0.5, 0.75))
+getPlotSummary(api00, des = dclus1)
+
+
+## 4. Subsets
+svytotal(~enroll, subset(dclus1, sch.wide == "Yes" & comp.imp == "Yes"))
+getPlotSummary(enroll, des = dclus1, g1 = sch.wide, g1.level = "Yes", g2 = comp.imp, g2.level = "Yes")
+svyby(~api99, ~stype, dclus1, svymean)
+svyby(~api99, ~stype, dclus1, svytotal)
+svyby(~api99, ~stype, dclus1, svyvar)
+getPlotSummary(api99, stype, des = dclus1)
+getPlotSummary(api99, g1 = stype, des = dclus1)
+
+
+upd()
+summary(svyglm(api00 ~ ell, design = dclus2))
+getPlotSummary(ell, api00, design = dclus2, trend = "linear", summary.type = "inference")
+
+summary(svyglm(api00 ~ ell, design = subset(dclus2, stype == "E")))
+getPlotSummary(ell, api00, design = dclus2, trend = "linear", summary.type = "inference", g1 = stype, g1.level = "E")
+
+upd()
+svyttest(api00 ~ sch.wide, dclus1)
+svyby(~api00, ~sch.wide, dclus1, svymean, vartype = "ci")
+
+upd()
+getPlotSummary(api00, design = dclus1, summary.type = "inference", inference.type = "conf")
+
+svyttest(api00 ~ sch.wide, dclus1)
+getPlotSummary(api00, sch.wide, design = dclus1, summary.type = "inference", inference.type = "conf")
+
+summary(svyglm(api00 ~ stype, dclus1))
+getPlotSummary(api00, stype, design = dclus1, summary.type = "inference", inference.type = "conf")
+
+
 
 ## Variables:
 ### stype: Elementary / Middle / High School
