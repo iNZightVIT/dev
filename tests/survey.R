@@ -164,18 +164,101 @@ getPlotSummary(awards, g1 = stype, design = dclus1, g1.level = "M")
 test3(subset(dclus1, stype == "M"))
 
 upd()
-getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI")
-getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "E", g2.level = "_MULTI")
-test2(subset(dclus1, stype == "E" & sch.wide == "No"))
-test2(subset(dclus1, stype == "E" & sch.wide == "Yes"))
-getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "H", g2.level = "_MULTI")
-test2(subset(dclus1, stype == "H" & sch.wide == "No"))
-test2(subset(dclus1, stype == "H" & sch.wide == "Yes"))
-getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "M", g2.level = "_MULTI")
-test2(subset(dclus1, stype == "M" & sch.wide == "No"))
-test2(subset(dclus1, stype == "M" & sch.wide == "Yes"))
+getPlotSummary(awards, g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI")
+getPlotSummary(awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "E", g2.level = "_MULTI")
+test3(subset(dclus1, stype == "E" & sch.wide == "No"))
+test3(subset(dclus1, stype == "E" & sch.wide == "Yes"))
+getPlotSummary(awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "H", g2.level = "_MULTI")
+test3(subset(dclus1, stype == "H" & sch.wide == "No"))
+test3(subset(dclus1, stype == "H" & sch.wide == "Yes"))
+getPlotSummary(awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "M", g2.level = "_MULTI")
+test3(subset(dclus1, stype == "M" & sch.wide == "No"))
+test3(subset(dclus1, stype == "M" & sch.wide == "Yes"))
 
 
+
+#### X: CAT
+##-- Y: CAT
+
+upd()
+des <- dclus1
+test4 <- function(des)
+    list(count = svytable(~convert.to.factor(meals)+awards, des),
+         percent = svyby(~awards, ~convert.to.factor(meals), des, svymean)[, 2:3] * 100,
+         se = SE(svyby(~awards, ~convert.to.factor(meals), des, svymean)) * 100)
+        
+upd()
+iNZightPlot(awards, convert.to.factor(meals), design = dclus1)
+getPlotSummary(awards, convert.to.factor(meals), design = dclus1)
+test4(dclus1)
+
+upd()
+getPlotSummary(awards, stype, g1 = meals, design = dclus1)
+getPlotSummary(awards, convert.to.factor(meals), g1 = stype, design = dclus1, g1.level = "E")
+test4(subset(dclus1, stype == "E"))
+getPlotSummary(awards, convert.to.factor(meals), g1 = stype, design = dclus1, g1.level = "H")
+test4(subset(dclus1, stype == "H"))
+getPlotSummary(awards, convert.to.factor(meals), g1 = stype, design = dclus1, g1.level = "M")
+test4(subset(dclus1, stype == "M"))
+
+upd()
+iNZightPlot(awards, convert.to.factor(meals), g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI")
+getPlotSummary(awards, convert.to.factor(meals), g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI")
+getPlotSummary(awards, convert.to.factor(meals), g1 = stype, g2 = sch.wide, design = dclus1,
+               g1.level = "E", g2.level = "_MULTI")
+test4(subset(dclus1, stype == "E" & sch.wide == "No"))
+test4(subset(dclus1, stype == "E" & sch.wide == "Yes"))
+getPlotSummary(awards, convert.to.factor(meals), g1 = stype, g2 = sch.wide, design = dclus1,
+               g1.level = "H", g2.level = "_MULTI")
+test4(subset(dclus1, stype == "H" & sch.wide == "No"))
+test4(subset(dclus1, stype == "H" & sch.wide == "Yes"))
+getPlotSummary(awards, convert.to.factor(meals), g1 = stype, g2 = sch.wide, design = dclus1,
+               g1.level = "M", g2.level = "_MULTI")
+test4(subset(dclus1, stype == "M" & sch.wide == "No"))
+test4(subset(dclus1, stype == "M" & sch.wide == "Yes"))
+
+
+
+
+#### X: CAT
+##-- Y: CAT
+
+upd()
+des <- dclus1
+test4 <- function(des)
+    list(linear = signif(coef(svyglm(meals ~ api00, des)), 4),
+         quadratic = signif(coef(svyglm(meals ~ api00 + I(api00^2), des)), 4),
+         cubiv = signif(coef(svyglm(meals ~ api00 + I(api00^2) + I(api00^3), des)), 4))
+TRENDS <- c("linear", "quadratic", "cubic")
+
+upd()
+iNZightPlot(api00, meals, design = dclus1, trend = TRENDS)
+getPlotSummary(api00, meals, design = dclus1, trend = TRENDS)
+test4(dclus1)
+
+upd()
+getPlotSummary(api00, meals, g1 = stype, design = dclus1, g1.level = "E", trend = TRENDS)
+test4(subset(dclus1, stype == "E"))
+getPlotSummary(api00, meals, g1 = stype, design = dclus1, g1.level = "H", trend = TRENDS)
+test4(subset(dclus1, stype == "H"))
+getPlotSummary(api00, meals, g1 = stype, design = dclus1, g1.level = "M", trend = TRENDS)
+test4(subset(dclus1, stype == "M"))
+
+upd()
+iNZightPlot(api00, meals, g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI", trend = TRENDS)
+getPlotSummary(api00, meals, g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI", trend = TRENDS)
+getPlotSummary(api00, meals, g1 = stype, g2 = sch.wide, design = dclus1,
+               g1.level = "E", g2.level = "_MULTI", trend = TRENDS)
+test4(subset(dclus1, stype == "E" & sch.wide == "No"))
+test4(subset(dclus1, stype == "E" & sch.wide == "Yes"))
+getPlotSummary(api00, meals, g1 = stype, g2 = sch.wide, design = dclus1,
+               g1.level = "H", g2.level = "_MULTI", trend = TRENDS)
+test4(subset(dclus1, stype == "H" & sch.wide == "No"))
+test4(subset(dclus1, stype == "H" & sch.wide == "Yes"))
+getPlotSummary(api00, meals, g1 = stype, g2 = sch.wide, design = dclus1,
+               g1.level = "M", g2.level = "_MULTI", trend = TRENDS)
+test4(subset(dclus1, stype == "M" & sch.wide == "No"))
+test4(subset(dclus1, stype == "M" & sch.wide == "Yes"))
 
 
 
