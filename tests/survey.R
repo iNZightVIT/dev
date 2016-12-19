@@ -12,6 +12,7 @@ dstrat <- svydesign(id = ~1, strat = ~stype, data = apistrat, fpc = ~fpc)
 dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
 dclus2 <- svydesign(id = ~dnum + snum, fpc = ~fpc1 + fpc2, data = apiclus2)
 
+write.csv(apiclus1, "~/Desktop/apiclus1.csv", quote=FALSE, row.names=FALSE)
 
 ## 3. simple summaries
 upd()
