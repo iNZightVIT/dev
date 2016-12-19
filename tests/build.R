@@ -3,7 +3,6 @@ library(devtools)
 
 pkg <- "~/iNZight/iNZightModules"
 document(pkg)
-check_doc(pkg)
 ## check(pkg)  ### -- no longer works
  
 

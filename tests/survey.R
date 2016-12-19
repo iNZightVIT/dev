@@ -12,14 +12,15 @@ dstrat <- svydesign(id = ~1, strat = ~stype, data = apistrat, fpc = ~fpc)
 dclus1 <- svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
 dclus2 <- svydesign(id = ~dnum + snum, fpc = ~fpc1 + fpc2, data = apiclus2)
 
-## 2. Replicate weights
-rclus1<-as.svrepdesign(dclus1)
 
 ## 3. simple summaries
+upd()
 svymean(~api00, dclus1)
 svyvar(~api00, dclus1)
-svyquantile(~api00, dclus1, c(0.25, 0.5, 0.75))
+t(SE(svyquantile(~api00, dclus1, c(0.25, 0.5, 0.75), se = TRUE)))
+upd()
 getPlotSummary(api00, des = dclus1)
+getPlotSummary(api00, stype, des = dclus1)
 
 
 ## 4. Subsets
@@ -42,15 +43,143 @@ getPlotSummary(ell, api00, design = dclus2, trend = "linear", summary.type = "in
 upd()
 svyttest(api00 ~ sch.wide, dclus1)
 svyby(~api00, ~sch.wide, dclus1, svymean, vartype = "ci")
+getPlotSummary(api00, sch.wide, design = dclus1, summary.type = "inference", inference.type = "conf")
 
 upd()
 getPlotSummary(api00, design = dclus1, summary.type = "inference", inference.type = "conf")
 
-svyttest(api00 ~ sch.wide, dclus1)
+svyttest(api00 ~ sch.wide, dclus1
 getPlotSummary(api00, sch.wide, design = dclus1, summary.type = "inference", inference.type = "conf")
 
 summary(svyglm(api00 ~ stype, dclus1))
 getPlotSummary(api00, stype, design = dclus1, summary.type = "inference", inference.type = "conf")
+
+
+
+#### X: NUM
+##-- Y: NULL
+
+upd()
+test1 <- function(des)
+    structure(cbind(rbind(svyquantile(~api00, des, c(0.25, 0.5, 0.75)),
+                          SE(svyquantile(~api00, des, c(0.25, 0.5, 0.75), se = TRUE))),
+                    mean = rbind(svymean(~api00, des), SE(svymean(~api00, des))),
+                    var = rbind(svyvar(~api00, des), SE(svyvar(~api00, des)))),
+              .Dimnames = list(c("estimate", "se"), c("25%", "50%", "75%", "mean", "var")))
+
+upd()
+getPlotSummary(api00, data = apipop)
+getPlotSummary(api00, design = dclus1)
+test1(dclus1)
+
+
+
+getPlotSummary(api00, g1 = stype, design = dclus1)
+getPlotSummary(api00, g1 = stype, design = dclus1, g1.level = "E")
+test1(subset(dclus1, stype == "E"))
+getPlotSummary(api00, g1 = stype, design = dclus1, g1.level = "H")
+test1(subset(dclus1, stype == "H"))
+getPlotSummary(api00, g1 = stype, design = dclus1, g1.level = "M")
+test1(subset(dclus1, stype == "M"))
+
+upd()
+getPlotSummary(api00, g1 = stype, g2 = awards, design = dclus1, g2.level = "_MULTI")
+getPlotSummary(api00, g1 = stype, g2 = awards, design = dclus1, g1.level = "E", g2.level = "_MULTI")
+test1(subset(dclus1, stype == "E" & awards == "No"))
+test1(subset(dclus1, stype == "E" & awards == "Yes"))
+getPlotSummary(api00, g1 = stype, g2 = awards, design = dclus1, g1.level = "H", g2.level = "_MULTI")
+test1(subset(dclus1, stype == "H" & awards == "No"))
+test1(subset(dclus1, stype == "H" & awards == "Yes"))
+getPlotSummary(api00, g1 = stype, g2 = awards, design = dclus1, g1.level = "M", g2.level = "_MULTI")
+test1(subset(dclus1, stype == "M" & awards == "No"))
+test1(subset(dclus1, stype == "M" & awards == "Yes"))
+
+
+
+#### X: NUM
+##-- Y: CAT
+
+upd()
+test2 <- function(des)
+    suppressWarnings({
+        list(estimate =
+                 cbind(svyby(~api00, ~awards, des, svyquantile, quantiles = c(0.25, 0.5, 0.75), ci = TRUE)[,2:4],
+                       mean = coef(svyby(~api00, ~awards, des, svymean)),
+                       var = coef(svyby(~api00, ~awards, des, svyvar))),
+             se =
+                 cbind(SE(svyby(~api00, ~awards, des, svyquantile, quantiles = c(0.25, 0.5, 0.75), ci = TRUE)),
+                       mean = SE(svyby(~api00, ~awards, des, svymean)),
+                       var = SE(svyby(~api00, ~awards, des, svyvar))))
+    })
+
+
+upd()
+getPlotSummary(api00, awards, design = dclus1)
+test2(dclus1)
+
+
+getPlotSummary(api00, awards, g1 = stype, design = dclus1)
+getPlotSummary(api00, awards, g1 = stype, design = dclus1, g1.level = "E")
+test2(subset(dclus1, stype == "E"))
+getPlotSummary(api00, awards, stype, g1 = stype, design = dclus1, g1.level = "H")
+test2(subset(dclus1, stype == "H"))
+getPlotSummary(api00, awards, stype, g1 = stype, design = dclus1, g1.level = "M")
+test2(subset(dclus1, stype == "M"))
+
+upd()
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI")
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "E", g2.level = "_MULTI")
+test2(subset(dclus1, stype == "E" & sch.wide == "No"))
+test2(subset(dclus1, stype == "E" & sch.wide == "Yes"))
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "H", g2.level = "_MULTI")
+test2(subset(dclus1, stype == "H" & sch.wide == "No"))
+test2(subset(dclus1, stype == "H" & sch.wide == "Yes"))
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "M", g2.level = "_MULTI")
+test2(subset(dclus1, stype == "M" & sch.wide == "No"))
+test2(subset(dclus1, stype == "M" & sch.wide == "Yes"))
+
+
+
+#### X: CAT
+##-- Y: NULL
+
+upd()
+test3 <- function(des)
+    rbind(svytable(~awards, des),
+          coef(svymean(~awards, des)) * 100,
+          SE(svymean(~awards, des)) * 100)
+        
+upd()
+table(apipop$awards)
+iNZightPlot(awards, design = dclus1)
+getPlotSummary(awards, design = dclus1)
+test3(dclus1)
+
+getPlotSummary(awards, g1 = stype, design = dclus1)
+getPlotSummary(awards, g1 = stype, design = dclus1, g1.level = "E")
+test3(subset(dclus1, stype == "E"))
+getPlotSummary(awards, g1 = stype, design = dclus1, g1.level = "H")
+test3(subset(dclus1, stype == "H"))
+getPlotSummary(awards, g1 = stype, design = dclus1, g1.level = "M")
+test3(subset(dclus1, stype == "M"))
+
+upd()
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g2.level = "_MULTI")
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "E", g2.level = "_MULTI")
+test2(subset(dclus1, stype == "E" & sch.wide == "No"))
+test2(subset(dclus1, stype == "E" & sch.wide == "Yes"))
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "H", g2.level = "_MULTI")
+test2(subset(dclus1, stype == "H" & sch.wide == "No"))
+test2(subset(dclus1, stype == "H" & sch.wide == "Yes"))
+getPlotSummary(api00, awards, g1 = stype, g2 = sch.wide, design = dclus1, g1.level = "M", g2.level = "_MULTI")
+test2(subset(dclus1, stype == "M" & sch.wide == "No"))
+test2(subset(dclus1, stype == "M" & sch.wide == "Yes"))
+
+
+
+
+
+
 
 
 
