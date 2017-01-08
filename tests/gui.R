@@ -160,6 +160,8 @@ devtools::use_data(census.at.school.5000)
 
 
 
+setwd("~/iNZight/iNZight")
+library(devtools)
 
 
 ### --- TIME SERIES MODULE
@@ -167,9 +169,10 @@ try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightTS", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
+data("visitorsQ", package = "iNZightTS")
 
 KK <- iNZGUI$new()
-KK$initializeGui(D <- read.csv("~/iNZight/data/time-series/visitorsQ.csv", header = TRUE, comment.char = "#"))
+KK$initializeGui(visitorsQ)
 
 TRUE
 
