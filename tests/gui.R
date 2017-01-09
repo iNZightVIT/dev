@@ -9,21 +9,47 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
-load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-load_all("~/iNZight/iNZightTools", export_all = FALSE)
+#load_all("~/iNZight/iNZightRegression", export_all = FALSE)
+#load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 #load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-load_all("~/iNZight/iNZightModules", export_all = FALSE)
+#load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
-##data(census.at.school.500, package = 'iNZight')
+data(census.at.school.500, package = 'iNZight')
 ##data(gapminder, package = "iNZight")
-data(api, package="survey")
+##data(api, package="survey")
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(apiclus2)
+KK$initializeGui()
+##KK$initializeGui(apiclus2)
 ##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
+
+
+NULL
+try(dispose(w), TRUE)
+w <- gwindow()
+g <- gvbox(cont=w)
+g$set_borderwidth(10)
+t <- gtable(census.at.school.500, container = g)
+addPopupMenu(t, list(numeric = gaction("Numeric", handler = function(h, ...) NULL),
+                     categorical = gaction("Categorical", handler = function(h, ...) NULL)),
+             action = NULL)
+
+
+
+
+
+NULL
+fileWin <- gfile("select", type="open", filter=list("Readable Files" = list(patterns = "*.rds")))
+fileWin
+
+
+
+
+
+
 
 NULL
 tt <- function(set) {
