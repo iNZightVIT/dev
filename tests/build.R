@@ -47,10 +47,16 @@ library(devtools)
 
 pkg <- "~/iNZight/iNZightTools"
 document(pkg)
-check_doc(pkg)
-check(pkg)
+#check(pkg)
+load_all(pkg)
 
+?iNZread
 
+iNZread("something")
+
+o <- "something"
+class(o) <- "csv"
+iNZread(o)
 
 
 ## OLD NAMESPACE:
