@@ -47,7 +47,7 @@ library(devtools)
 
 pkg <- "~/iNZight/iNZightTools"
 document(pkg)
-#check(pkg)
+check(pkg)
 load_all(pkg)
 
 ?iNZread
