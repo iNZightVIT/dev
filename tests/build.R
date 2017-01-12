@@ -50,14 +50,6 @@ document(pkg)
 check(pkg)
 load_all(pkg)
 
-?iNZread
-
-iNZread("something")
-
-o <- "something"
-class(o) <- "csv"
-iNZread(o)
-
 
 ## OLD NAMESPACE:
 
