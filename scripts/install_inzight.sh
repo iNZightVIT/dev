@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 
 echo -n "Where do you want to install iNZightVIT? (default ~): "
 read dir
 dir=${dir:=~}
+dir=${dir/#\~/$HOME}
+
 echo Installing to $dir/iNZightVIT
 
 inst_dir=$dir/iNZightVIT
@@ -18,13 +20,14 @@ options(repos = c("http://r.docker.stat.auckland.ac.nz/R",
 
 EOF
 
+cpu_count=$(getconf _NPROCESSORS_ONLN)
 
 echo "Installing iNZight packages ..."
 cd $inst_dir && R --slave -e \
   "install.packages(c('iNZightRegression', 'iNZightPlots', \
                       'iNZightTS', 'iNZightMR', 'vit', 'iNZightTools', \
                       'FutureLearnData', 'iNZightModules', 'iNZight'), \
-                    dependencies = TRUE)"
+                    dependencies = TRUE, Ncpus=$cpu_count)"
 
 echo "Creating additional files ..."
 cat << EOF >> $inst_dir/.Rprofile
