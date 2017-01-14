@@ -33,13 +33,23 @@ w <- gwindow()
 g <- gvbox(cont=w)
 g$set_borderwidth(10)
 t <- gtable(census.at.school.500, container = g)
-addPopupMenu(t, list(numeric = gaction("Numeric", handler = function(h, ...) NULL),
-                     categorical = gaction("Categorical", handler = function(h, ...) NULL)),
-             action = NULL)
+sapply(t$get_view_columns(), function(view.col) {
+    view.col$setClickable(FALSE)
+})
 
-
-
-
+## addPopupMenu(t, list(numeric = gaction("Numeric", handler = function(h, ...) NULL),
+##                      categorical = gaction("Categorical", handler = function(h, ...) NULL)))
+popup <- function(col_index) {
+    list(sort_increasing = gaction(
+             "Sort", 
+             handler = function(h, ...) {
+                 DF <- get_model()
+                 ind <- order(DF[, col_index], decreasing = FALSE)
+                 DF$setFrame(DF[][ind, ])
+             })
+         )
+}
+t$add_popup(popup)
 
 NULL
 fileWin <- gfile("select", type="open", filter=list("Readable Files" = list(patterns = "*.rds")))
