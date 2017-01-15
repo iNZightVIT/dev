@@ -9,6 +9,7 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
+load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
@@ -27,29 +28,25 @@ KK$initializeGui()
 ##KK$initializeGui(gapminder)
 
 
+
 NULL
 try(dispose(w), TRUE)
 w <- gwindow()
 g <- gvbox(cont=w)
 g$set_borderwidth(10)
-t <- gtable(census.at.school.500, container = g)
-sapply(t$get_view_columns(), function(view.col) {
-    view.col$setClickable(FALSE)
-})
+t <- gdf(census.at.school.500, container = g)
 
-## addPopupMenu(t, list(numeric = gaction("Numeric", handler = function(h, ...) NULL),
-##                      categorical = gaction("Categorical", handler = function(h, ...) NULL)))
+
+invisible(t$remove_popup_menu())
 popup <- function(col_index) {
-    list(sort_increasing = gaction(
-             "Sort", 
-             handler = function(h, ...) {
-                 DF <- get_model()
-                 ind <- order(DF[, col_index], decreasing = FALSE)
-                 DF$setFrame(DF[][ind, ])
-             })
-         )
+    j <- get_column_index(col_index)
+    #x <- get_column_value(j)
+    #print(j)
+    #print(x)
+    list(gradio(c(" numeric", " categorical"),
+                handler = function(h) NULL))
 }
-t$add_popup(popup)
+invisible(t$add_popup(popup))
 
 NULL
 fileWin <- gfile("select", type="open", filter=list("Readable Files" = list(patterns = "*.rds")))
