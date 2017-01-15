@@ -9,9 +9,9 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
-load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
+#load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-#load_all("~/iNZight/iNZightTools", export_all = FALSE)
+load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 #load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 #load_all("~/iNZight/iNZightModules", export_all = FALSE)
@@ -28,25 +28,30 @@ KK$initializeGui()
 ##KK$initializeGui(gapminder)
 
 
-
-NULL
+## NULL
 try(dispose(w), TRUE)
 w <- gwindow()
 g <- gvbox(cont=w)
 g$set_borderwidth(10)
 t <- gdf(census.at.school.500, container = g)
-
-
 invisible(t$remove_popup_menu())
 popup <- function(col_index) {
-    j <- get_column_index(col_index)
-    #x <- get_column_value(j)
-    #print(j)
-    #print(x)
-    list(gradio(c(" numeric", " categorical"),
-                handler = function(h) NULL))
+    j <- t$get_column_index(col_index)
+    x <- t$get_column_value(j)
+    types <- c("numeric", "categorical")
+    tmp <- function(x) UseMethod("tmp")
+    tmp.default <- function(x) ""
+    tmp.numeric <- function(x) "numeric"
+    tmp.factor <- function(x) "categorical"
+    list(gradio(types,
+                selected = match(tmp(x), types),
+                handler = function(h) {  
+                }))
 }
 invisible(t$add_popup(popup))
+
+g$remove_child(g$children[[1]])
+dispose(w)
 
 NULL
 fileWin <- gfile("select", type="open", filter=list("Readable Files" = list(patterns = "*.rds")))
