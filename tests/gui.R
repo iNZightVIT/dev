@@ -27,35 +27,7 @@ KK$initializeGui()
 ##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
-
-## NULL
-try(dispose(w), TRUE)
-w <- gwindow()
-g <- gvbox(cont=w)
-g$set_borderwidth(10)
-t <- gdf(census.at.school.500, container = g)
-invisible(t$remove_popup_menu())
-popup <- function(col_index) {
-    j <- t$get_column_index(col_index)
-    x <- t$get_column_value(j)
-    types <- c("numeric", "categorical")
-    tmp <- function(x) UseMethod("tmp")
-    tmp.default <- function(x) ""
-    tmp.numeric <- function(x) "numeric"
-    tmp.factor <- function(x) "categorical"
-    list(gradio(types,
-                selected = match(tmp(x), types),
-                handler = function(h) {  
-                }))
-}
-invisible(t$add_popup(popup))
-
-g$remove_child(g$children[[1]])
-dispose(w)
-
 NULL
-fileWin <- gfile("select", type="open", filter=list("Readable Files" = list(patterns = "*.rds")))
-fileWin
 
 
 
