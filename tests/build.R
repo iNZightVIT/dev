@@ -51,6 +51,7 @@ check(pkg)
 load_all(pkg)
 
 
+
 ## OLD NAMESPACE:
 
 ## export(modelFitting, plot3D, scatterPlotMatrix, allUniPlots, allBivarPlots,
