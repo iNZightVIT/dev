@@ -175,12 +175,11 @@ devtools::use_data(census.at.school.5000)
 setwd("~/iNZight/iNZight")
 library(devtools)
 
-
 ### --- TIME SERIES MODULE
 try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightTS", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
-load_all(export_all = FALSE)
+if (! "package:iNZight" %in% search()) load_all(export_all = FALSE)
 data("visitorsQ", package = "iNZightTS")
 
 KK <- iNZGUI$new()
