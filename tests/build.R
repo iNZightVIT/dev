@@ -38,7 +38,7 @@ library(devtools)
 
 pkg <- "~/iNZight/iNZightTS"
 document(pkg)
-check_doc(pkg)
+load_all(pkg)
 check(pkg)
 
 
