@@ -160,7 +160,7 @@ winPatchAll:
 	@scp $(DIRO)/iNZightVIT_v$(INZIGHT_VERSION)-patch.zip tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows
 
 ## User will define wpkg=iNZightPlots, eg
-pkg_v = $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
+pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
 repositoryFiles:
 	@echo === Building repository files for: $(wpkg) v$(pkg_v)
 	@echo
@@ -416,7 +416,7 @@ inzightRepository:
 	done
 
 
-version = $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
+version ?= $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
 addr = scienceit@docker.stat.auckland.ac.nz
 repodir ?= /srv/www/R
 repourl = $(addr):$(repodir)
