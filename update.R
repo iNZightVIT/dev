@@ -50,7 +50,7 @@ updateDistribution <- function() {
       tryCatch(utils::install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz"),
                error = function(e) {
                    cat("Something went wrong trying to install additional dependencies.",
-                       "\nTry the updater again, and if the problem continues,"
+                       "\nTry the updater again, and if the problem continues,",
                        "\n  contact inzight_support@stat.auckland.ac.nz\n\n")
                    cat("The following messages were received: \n", e)
                },
