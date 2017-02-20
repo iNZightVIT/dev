@@ -54,7 +54,7 @@ updateDistribution <- function() {
                        "\n  contact inzight_support@stat.auckland.ac.nz\n\n")
                    cat("The following messages were received: \n", e)
                },
-               finally = cat("Additional dependencies installed.\n))
+               finally = cat("Additional dependencies installed.\n"))
   if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
       utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz")
 
