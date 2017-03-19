@@ -38,9 +38,8 @@ updateDistribution <- function() {
 
   ## List any packages added to iNZight after the release
   pkgs <- c("RColorBrewer")
-  if (OS == "windows") {
-      pkgs <- c(pkgs, "RODBC")  
-  }
+  if (OS == "windows") pkgs <- c(pkgs, "RODBC")  
+  if (OS == "osx") pkgs <- c(pkgs, "Acinonyx")
 
   ## --- Update iNZight packages:
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
@@ -48,7 +47,14 @@ updateDistribution <- function() {
   ## A list of packages we NEED to have installed (since older versions anyway...)
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
   if (length(pkgs) > 0)
-      utils::install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz")
+      tryCatch(utils::install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz"),
+               error = function(e) {
+                   cat("Something went wrong trying to install additional dependencies.",
+                       "\nTry the updater again, and if the problem continues,",
+                       "\n  contact inzight_support@stat.auckland.ac.nz\n\n")
+                   cat("The following messages were received: \n", e)
+               },
+               finally = cat("Additional dependencies installed.\n"))
   if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
       utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz")
 
