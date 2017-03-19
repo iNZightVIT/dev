@@ -13,7 +13,7 @@ try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
 load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
-#load_all("~/iNZight/iNZightPlots", export_all = FALSE)
+load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 #load_all("~/iNZight/iNZightModules", export_all = FALSE)
 load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
@@ -22,9 +22,9 @@ data(census.at.school.500, package = 'iNZight')
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui()
+##KK$initializeGui()
 ##KK$initializeGui(apiclus2)
-##KK$initializeGui(census.at.school.500)
+KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 NULL
