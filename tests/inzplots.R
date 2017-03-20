@@ -1194,3 +1194,11 @@ getPlotSummary(armspan, height, data = d1, summary.type = "inference", inference
                trend = c("linear", "quadratic", "cubic"))
 
 
+
+
+
+#################3
+data("census.at.school.500", package = "iNZight")
+
+upd()
+iNZightPlot(height, armspan, data = census.at.school.500)
