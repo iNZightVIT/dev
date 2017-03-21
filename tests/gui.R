@@ -193,8 +193,18 @@ devtools::use_data(visitorsQ)
 
 
 
-
-
+try(dispose(w))
+w <- gwindow()
+g <- ggroup(cont=w)
+a <- gaction("play", icon = "gtk-media-play",
+             handler = function(h, ...) {
+                 svalue(b) <- "stop"
+                 b$set_icon("gtk-media-stop")
+                 Sys.sleep(1)
+                 svalue(b) <- "play"
+                 b$set_icon("gtk-media-play")
+             })
+b <- gbutton(action = a, cont=g)
 
 
 
