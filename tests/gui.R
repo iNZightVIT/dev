@@ -11,7 +11,7 @@ library(devtools)
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-#load_all("~/iNZight/iNZightTools", export_all = FALSE)
+load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
@@ -30,8 +30,8 @@ KK$initializeGui(census.at.school.500)
 NULL
 
 
-font(KK$plotWidget$plotNb["Model Output"]) <- list(size=10, family="monospace")
 
+gt <- gtable(structure(data.frame(c("one", "two"), stringsAsFactors = FALSE), names = "Available Variables"))
 
 
 NULL
