@@ -37,8 +37,10 @@ updateDistribution <- function() {
   cat("==========================================================\n\n")
 
   ## List any packages added to iNZight after the release
-  pkgs <- c("RColorBrewer")
-  if (OS == "windows") pkgs <- c(pkgs, "RODBC")  
+  pkgs <- c("RColorBrewer",
+            "gridSVG", "jsonlite", "xtable",
+            "readr", "readxl")
+  if (OS == "windows") pkgs <- c(pkgs, "RODBC")
   if (OS == "osx") pkgs <- c(pkgs, "Acinonyx")
 
   ## --- Update iNZight packages:
@@ -56,7 +58,7 @@ updateDistribution <- function() {
                },
                finally = cat("Additional dependencies installed.\n"))
   if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
-      utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz")
+      utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz/R")
 
   ## success message
   cat("==========================================================\n")
