@@ -46,10 +46,14 @@ updateDistribution <- function() {
   ## --- Update iNZight packages:
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
 
+  libz <- .libPaths()
+  libz <- libz[!grepl("modules", libz)]
+  instlib <- libz[1]
+
   ## A list of packages we NEED to have installed (since older versions anyway...)
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
   if (length(pkgs) > 0)
-      tryCatch(utils::install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz"),
+      tryCatch(utils::install.packages(pkgs, repos = "http://cran.stat.auckland.ac.nz", lib = instlib),
                error = function(e) {
                    cat("Something went wrong trying to install additional dependencies.",
                        "\nTry the updater again, and if the problem continues,",

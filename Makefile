@@ -27,8 +27,8 @@ extra:
 
 
 # If you want to install to your local R library, then make here:
-here30:
-	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
+# here30:
+# 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
 
 here31:
 	cd ../; ~/R-3.1.2/bin/R CMD INSTALL $(inz_packages)
@@ -168,8 +168,8 @@ repositoryFiles:
 	make repoSource
 	@echo " == WINDOWS"
 	@echo
-	@echo "  = R v3.0.2"
-	make repoWin302
+	# @echo "  = R v3.0.2"
+	# make repoWin302
 	@echo "  = R v3.1.2"
 	make repoWin312
 	@echo "  = R v3.2.2"
@@ -180,8 +180,8 @@ repositoryFiles:
 	@mkdir -p $(DIR)/dev/tmp
 	@echo " == MAC"
 	@echo
-	@echo "  = R v3.0.2"
-	make repoMac30
+	# @echo "  = R v3.0.2"
+	# make repoMac30
 	@echo "  = R v3.1.2"
 	make repoMac31
 	@echo "  = R v3.2.2"
@@ -391,7 +391,7 @@ repoMacMav33:
 
 repoWinIndex:
 	@echo " Building repository package indices for Windows ..."
-	-@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
+	# -@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
 	-@cd $(WIN_REP)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
@@ -400,7 +400,7 @@ repoWinIndex:
 
 repoMacIndex:
 	@echo " Building repository package indices for Mac ..."
-	-@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
+	# -@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
 	-@cd $(MAC_REP3)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
@@ -424,16 +424,16 @@ repourl = $(addr):$(repodir)
 pkgToDocker:
 	-ssh $(addr) "rm $(repodir)/src/contrib/$(PKG)_*.tar.gz";
 	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz $(repourl)/src/contrib/;
-	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.0/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.0/;
+	# -ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.0/$(PKG)_*.zip";
+	# -cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.0/;
 	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.1/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.1/;
 	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.2/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.2/;
 	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.3/$(PKG)_*.zip";
 	-cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.3/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.0/;
+	# -ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.0/$(PKG)_*.tgz";
+	# -cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.0/;
 	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
 	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.1/;
 	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
@@ -450,16 +450,16 @@ pkgToDocker:
 inzToDocker:
 	-ssh $(addr) "rm /srv/www/R/src/contrib/*.tar.gz";
 	cd $(src_lib); scp PACKAGES PACKAGES.gz *.tar.gz $(repourl)/src/contrib/;
-	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.0/*.zip";
-	cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.0/;
+	# -ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.0/*.zip";
+	# cd $(WIN_REP)/3.0/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.0/;
 	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.1/*.zip";
 	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.1/;
 	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.2/*.zip";
 	cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.2/;
 	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.3/*.zip";
 	cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.3/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.0/*.tgz";
-	cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/contrib/3.0/;
+	# -ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.0/*.tgz";
+	# cd $(MAC_REP3)/3.0/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/contrib/3.0/;
 	-ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.1/*.tgz";
 	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/contrib/3.1/;
 	-ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.2/*.tgz";
