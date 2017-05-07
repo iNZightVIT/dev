@@ -15,7 +15,8 @@ load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 #load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
-if (! "package:iNZight" %in% search()) load_all(export_all = FALSE)
+##if (! "package:iNZight" %in% search())
+load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
 ##data(gapminder, package = "iNZight")
 ##data(api, package="survey")
@@ -28,6 +29,20 @@ KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 NULL
+
+
+### Window resize ...
+try(dispose(w))
+w <- gwindow("A Window", width = 600, height = 500)
+g <- ggraphics(container = w)
+d <- rbind(size(w))
+plot(d)
+
+w$add_handler("check-resize", function(h, ...) {
+    d <<- rbind(d, size(h$obj))
+    plot(d, type = "l")
+})
+
 
 
 iNZightRegression::plotlm6(KK$activeModule$fits[[1]]$fit, showBootstraps=TRUE, which = 7)
