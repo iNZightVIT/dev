@@ -10,10 +10,10 @@ library(devtools)
 ## Load - generic
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
-load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-load_all("~/iNZight/iNZightTools", export_all = FALSE)
+#load_all("~/iNZight/iNZightRegression", export_all = FALSE)
+#load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
-#load_all("~/iNZight/iNZightPlots", export_all = FALSE)
+load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
 ##if (! "package:iNZight" %in% search())
 load_all(export_all = FALSE)
@@ -29,6 +29,19 @@ KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 NULL
+
+
+dispose(w)
+w <- gbasicdialog("Installing packages", do.buttons = FALSE)
+gg <- gvbox(container = w)
+addSpace(gg, 10)
+ggg <- ggroup(spacing = 15, container = gg)
+addSpace(ggg, 0)
+gimage(stock.id = "gtk-info", size="dialog", cont=ggg)
+glabel("Please wait while packages are installed...", container = ggg,
+       anchor = c(-1, 1))
+addSpace(ggg, 10)
+addSpace(gg, 10)
 
 
 ### Window resize ...
