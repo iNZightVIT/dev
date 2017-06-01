@@ -30,18 +30,19 @@ KK$initializeGui(census.at.school.500)
 
 NULL
 
+vars <- colnames(KK$getActiveData())
+dispose(gw)
+gw <- gbasicdialog("Select additional variables", do.buttons = FALSE)
+gg <- gvbox(container = gw)
+lab <- glabel("Select additional variables to export", container = gg)
+font(lab) <- list(size = 12, weight = "bold")
+tab <- gtable(vars, container = gg, multiple = TRUE)
+#gbutton("OK", container = gg, handler = function(h, ...) {
+#    vars <<- svalue(tab)
+#    dispose(gw)
+#})
+size(gw) <- c(280, 300)
 
-dispose(w)
-w <- gbasicdialog("Installing packages", do.buttons = FALSE)
-gg <- gvbox(container = w)
-addSpace(gg, 10)
-ggg <- ggroup(spacing = 15, container = gg)
-addSpace(ggg, 0)
-gimage(stock.id = "gtk-info", size="dialog", cont=ggg)
-glabel("Please wait while packages are installed...", container = ggg,
-       anchor = c(-1, 1))
-addSpace(ggg, 10)
-addSpace(gg, 10)
 
 
 ### Window resize ...
