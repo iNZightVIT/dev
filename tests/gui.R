@@ -102,12 +102,13 @@ try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
-#load_all(export_all = FALSE)
+load_all(export_all = FALSE)
 data(gapminder)
+data(nzquakes)
 
 KK <- iNZGUI$new()
-##KK$initializeGui(nzquakes)
-KK$initializeGui(gapminder)
+KK$initializeGui(nzquakes)
+##KK$initializeGui(gapminder)
 
 TRUE
 
