@@ -31,7 +31,7 @@ cd ..
 ## Dependency Structure
 
 This graph shows the interaction between various iNZight R packages.
-![Diagram](iNZight_dependencies.svg)
+![Diagram](https://github.com/iNZightVIT/dev/iNZight_dependencies.svg)
 * __Imports__ = solid line
 * __Suggests__ = dashed line
 * __Enhances__ = dotted line
