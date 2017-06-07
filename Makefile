@@ -9,6 +9,24 @@ inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools 
 extra := gWidgets2RGtk2 countrycode
 all_packages = $(inz_packages)
 
+CD_INZ := cd ~/iNZight;
+
+# R versions
+R31 := ~/R-3.1.2/bin/R
+R32 := ~/R-3.2.2/bin/R
+R33 := ~/R-3.3.1/bin/R
+R34 := ~/R-3.4.0/bin/R
+
+period := .
+empty :=
+V  := 3.4
+VS = $(subst $(period),$(empty),$(V))
+RV = ${R${VS}}
+
+WINV := 3.2
+WINVS := $(subst $(period),$(empty),$(WINV))
+RWIN = ${R${WINVS}}
+
 build:
 	for pkg in $(inz_packages) ; do \
 		cd ~/iNZight; git clone git@github.com:iNZightVIT/$$pkg ; \
@@ -17,36 +35,18 @@ build:
 
 # Now you can install them into a temporary directory: make all
 all:
-	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(inz_packages)
-
-all312:
-	cd ../; ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(inz_packages)
+	cd ../; $(RWIN) CMD INSTALL -l tmp $(inz_packages)
 
 extra:
-	cd ../; ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(extra)
+	cd ../; $(RWIN) CMD INSTALL -l tmp $(extra)
 
 
 # If you want to install to your local R library, then make here:
-# here30:
-# 	cd ../; ~/R-3.0.2/bin/R CMD INSTALL $(inz_packages)
-
-here31:
-	cd ../; ~/R-3.1.2/bin/R CMD INSTALL $(inz_packages)
-
-here32:
-	cd ../; ~/R-3.2.2/bin/R CMD INSTALL $(inz_packages)
-
-here33:
-	cd ../; ~/R-3.3.1/bin/R CMD INSTALL $(inz_packages)
-
-here34:
-	cd ../; ~/R-3.4.0/bin/R CMD INSTALL $(inz_packages)
-
-herelatest:
-	cd ../; R CMD INSTALL $(inz_packages)
+here:
+	$(CD_INZ) $(RV) CMD INSTALL $(inz_packages)
 
 extrahere:
-	cd ../; R CMD INSTALL $(extra)
+	$(CD_INZ) $(RV) CMD INSTALL $(extra)
 
 # do the following to move into the Windows all-in-one directory:
 replace:
@@ -54,6 +54,7 @@ replace:
 	for pkg in $(inz_packages) ; do \
 		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
 	done
+
 extrareplace:
 	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(extra)
 	for pkg in $(extra) ; do \
@@ -164,307 +165,17 @@ winPatchAll:
 
 ## User will define wpkg=iNZightPlots, eg
 pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
+RVs = 3.2 3.3 3.4
 repositoryFiles:
-	@echo === Building repository files for: $(wpkg) v$(pkg_v)
-	@echo
-	@echo " == SOURCE"
-	make repoSource
-	@echo " == WINDOWS"
-	@echo
-	# @echo "  = R v3.0.2"
-	# make repoWin302
-	@echo "  = R v3.1.2"
-	make repoWin312
-	@echo "  = R v3.2.2"
-	make repoWin322
-	@echo "  = R v3.3.1"
-	make repoWin331
-	@echo "  = R v3.4.0"
-	make repoWin340
-	make repoWinIndex
-	@mkdir -p $(DIR)/dev/tmp
-	@echo " == MAC"
-	@echo
-	# @echo "  = R v3.0.2"
-	# make repoMac30
-	@echo "  = R v3.1.2"
-	make repoMac31
-	@echo "  = R v3.2.2"
-	make repoMac32
-	@echo "  = R v3.3.1"
-	make repoMac33
-	@echo "  = R v3.4.0"
-	make repoMac34
-	@echo " == MAC (mavericks)"
-	make repoMacMav31
-	@echo "  = R v3.2.2"
-	make repoMacMav32
-	@echo "  = R v3.3.1"
-	make repoMacMav33
-	@echo "  = R v3.4.0"
-	make repoMacMav34
-	-@rm -rf $(DIR)/dev/tmp
-	make repoMacIndex
-	@echo
-	@echo Setting file permissions ...
-	@find www/R -type f -exec chmod 666 {} +
+	@echo "==== Building $(wpkg) v$(pkg_v)"
+	@for rv in $(RVs); do \
+		echo " *** R version $$rv" ;\
+		$(MAKE) -C www PKG=$$wpkg V=$$rv ;\
+	done
+	@echo "  ** Setting file permissions ..."
+	@find www/R -type f -exec chmod 664 {} +
 	@find www/R -type d -exec chmod 775 {} +
-	@echo Finished updating repository with $(wpkg) v$(pkg_v).
-	@echo Have a nice day.; echo
-
-repoSource:
-	@echo
-	@echo " Building source file ..."
-	-@rm -f $(src_lib)/$(wpkg)_*.tar.gz
-	@cd $(src_lib) ; \
-	  ~/R-3.1.2/bin/R CMD build --no-build-vignettes $(DIR)/$(wpkg)
-	@echo " ... done."
-	@echo
-	make repoSrcIndex
-	@echo
-	@echo
-
-repoSrcIndex:
-	@echo " Building repository package indices ..."
-	@cd $(src_lib); ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeIndices.R;
-	-@cd $(src_lib); rm -f *.Rout; rm -f .RData
-	@echo " ... done."
-
-
-repoWin302:
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_302 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo
-	@echo " ... replacing old binaries ..."
-	-@rm -f $(WIN_REP)/3.0/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.0/
-	@echo " ... done."
-	@echo
-
-repoWin312:
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_312 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo
-	@echo " ... replacing old binaries ..."
-	-@rm -f $(WIN_REP)/3.1/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.1/
-	@echo " ... done."
-	@echo
-
-repoWin322:
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_322 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo
-	@echo " ... replacing old binaries ..."
-	-@rm -f $(WIN_REP)/3.2/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.2
-	@echo " ... done."
-	@echo
-
-repoWin331:
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_331 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo
-	@echo " ... replacing old binaries ..."
-	-@rm -f $(WIN_REP)/3.3/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.3
-	@echo " ... done."
-	@echo
-
-repoWin340:
-	@echo
-	@cd $(DIR)/$(wpkg) ; \
-	  rm -rf tmp ; \
-	  cp ../dev/makes/Make_340 ./Makefile ; \
-	  echo " Building binaries ... "; echo ; \
-	  make win ; \
-	  rm $(wpkg)_$(pkg_v).tar.gz ; rm Makefile
-	@echo
-	@echo " ... replacing old binaries ..."
-	-@rm -f $(WIN_REP)/3.4/$(wpkg)_*.zip 2>/dev/null
-	@mv $(DIR)/$(wpkg)/$(wpkg)_$(pkg_v).zip $(WIN_REP)/3.4
-	@echo " ... done."
-	@echo
-
-repoMac30:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.0.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REP3)/3.0/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.0/
-	@echo " ... done."
-	@echo
-
-repoMac31:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REP3)/3.1/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.1/
-	@echo " ... done."
-	@echo ""
-
-repoMac32:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REP3)/3.2/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.2/
-	@echo " ... done."
-	@echo
-
-repoMac33:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.3.1/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REP3)/3.3/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.3/
-	@echo " ... done."
-	@echo
-
-repoMac34:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.4.0/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REP3)/3.4/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REP3)/3.4/
-	@echo " ... done."
-	@echo
-
-repoMacMav31:
-	@echo
-	@echo "  = R v3.1.2"
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.1.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REPMAV)/3.1/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REPMAV)/3.1/
-	@echo " ... done."
-	@echo
-
-repoMacMav32:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.2.2/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REPMAV)/3.2/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REPMAV)/3.2/
-	@echo " ... done."
-	@echo
-
-repoMacMav33:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.3.1/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REPMAV)/3.3/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REPMAV)/3.3/
-	@echo " ... done."
-	@echo
-
-repoMacMav34:
-	@echo
-	@echo " Building binaries ... "
-	@echo
-	@cd $(DIR)/dev ; \
-	  ~/R-3.4.0/bin/R CMD INSTALL -l tmp $(DIR)/$(wpkg)
-	@cd $(DIR)/dev/tmp ; \
-	  tar czf $(wpkg)_$(pkg_v).tgz $(wpkg)
-	@echo
-	@echo " ... replaceing old binaries ..."
-	-@rm -f $(MAC_REPMAV)/3.4/$(wpkg)_*.tgz
-	@mv $(DIR)/dev/tmp/$(wpkg)_$(pkg_v).tgz $(MAC_REPMAV)/3.4/
-	@echo " ... done."
-	@echo
-
-repoWinIndex:
-	@echo " Building repository package indices for Windows ..."
-	# -@cd $(WIN_REP)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
-	-@cd $(WIN_REP)/3.4/; ~/R-3.4.0/bin/R CMD BATCH $(DIR)/dev/writeWinIndices.R; rm -f *.Rout; rm -f .RData
-	@echo " ... done."
-	@echo ; echo
-
-repoMacIndex:
-	@echo " Building repository package indices for Mac ..."
-	# -@cd $(MAC_REP3)/3.0/; ~/R-3.0.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REP3)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REP3)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REP3)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REP3)/3.4/; ~/R-3.4.0/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REPMAV)/3.1/; ~/R-3.1.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REPMAV)/3.2/; ~/R-3.2.2/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REPMAV)/3.3/; ~/R-3.3.1/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	-@cd $(MAC_REPMAV)/3.4/; ~/R-3.4.0/bin/R CMD BATCH $(DIR)/dev/writeMacIndices.R; rm -f *.Rout
-	@echo " ... done."
+	@echo "  ** Finished updating repository with $(wpkg) v$(pkg_v)"
 
 
 inzightRepository:
@@ -478,62 +189,20 @@ addr = scienceit@docker.stat.auckland.ac.nz
 repodir ?= /srv/www/R
 repourl = $(addr):$(repodir)
 
-pkgToDocker:
-	-ssh $(addr) "rm $(repodir)/src/contrib/$(PKG)_*.tar.gz";
-	-cd $(src_lib); scp PACKAGES PACKAGES.gz $(PKG)_$(version).tar.gz $(repourl)/src/contrib/;
-	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.1/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.1/;
-	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.2/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.2/;
-	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.3/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.3/;
-	-ssh $(addr) "rm $(repodir)/bin/windows/contrib/3.4/$(PKG)_*.zip";
-	-cd $(WIN_REP)/3.4/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).zip $(repourl)/bin/windows/contrib/3.4/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.1/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.1/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.2/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.2/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.3/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.3/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/contrib/3.4/$(PKG)_*.tgz";
-	-cd $(MAC_REP3)/3.4/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/contrib/3.4/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/mavericks/contrib/3.1/$(PKG)_*.tgz";
-	-cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/mavericks/contrib/3.1/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/mavericks/contrib/3.2/$(PKG)_*.tgz";
-	-cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/mavericks/contrib/3.2/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/mavericks/contrib/3.3/$(PKG)_*.tgz";
-	-cd $(MAC_REPMAV)/3.3/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/mavericks/contrib/3.3/;
-	-ssh $(addr) "rm $(repodir)/bin/macosx/mavericks/contrib/3.4/$(PKG)_*.tgz";
-	-cd $(MAC_REPMAV)/3.4/; scp PACKAGES PACKAGES.gz $(PKG)_$(version).tgz $(repourl)/bin/macosx/mavericks/contrib/3.4/;
-
-inzToDocker:
-	-ssh $(addr) "rm /srv/www/R/src/contrib/*.tar.gz";
-	cd $(src_lib); scp PACKAGES PACKAGES.gz *.tar.gz $(repourl)/src/contrib/;
-	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.1/*.zip";
-	cd $(WIN_REP)/3.1/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.1/;
-	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.2/*.zip";
-	cd $(WIN_REP)/3.2/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.2/;
-	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.3/*.zip";
-	cd $(WIN_REP)/3.3/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.3/;
-	-ssh $(addr) "rm /srv/www/R/bin/windows/contrib/3.4/*.zip";
-	cd $(WIN_REP)/3.4/; scp PACKAGES PACKAGES.gz *.zip $(repourl)/bin/windows/contrib/3.4/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.1/*.tgz";
-	cd $(MAC_REP3)/3.1/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/contrib/3.1/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.2/*.tgz";
-	cd $(MAC_REP3)/3.2/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/contrib/3.2/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.3/*.tgz";
-	cd $(MAC_REP3)/3.3/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/contrib/3.3/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/contrib/3.4/*.tgz";
-	cd $(MAC_REP3)/3.4/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/contrib/3.4/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/mavericks/contrib/3.1/*.tgz";
-	cd $(MAC_REPMAV)/3.1/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/mavericks/contrib/3.1/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/mavericks/contrib/3.2/*.tgz";
-	cd $(MAC_REPMAV)/3.2/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/mavericks/contrib/3.2/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/mavericks/contrib/3.3/*.tgz";
-	cd $(MAC_REPMAV)/3.3/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/mavericks/contrib/3.3/;
-	-ssh $(addr) "rm /srv/www/R/bin/macosx/mavericks/contrib/3.4/*.tgz";
-	cd $(MAC_REPMAV)/3.4/; scp PACKAGES PACKAGES.gz *.tgz $(repourl)/bin/macosx/mavericks/contrib/3.4/;
-
+# sync www/R/bin and www/R/src directories
+dry := true
+ifeq ($(dry), false)
+flags := -alv
+else
+flags := -alvn
+endif
+sync:
+	@rsync $(flags) --delete www/R/bin/ $(repourl)/bin
+	@echo
+	@rsync $(flags) --delete www/R/src/ $(repourl)/src
+ifeq ($(dry), true)
+	@echo "\n *** Run \`sync dry=false\` to perform sync"
+endif
 
 
 winUpload:

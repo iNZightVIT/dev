@@ -1,48 +1,93 @@
-PKG_VERSION = $(shell grep -i ^version DESCRIPTION | cut -d : -d \  -f 2)
-PKG_NAME = $(shell grep -i ^package DESCRIPTION | cut -d : -d \  -f 2)
-CURRENT_DATE = $(shell date +%Y%m%d)
+R31 := ~/R-3.1.2/bin/R
+R32 := ~/R-3.2.2/bin/R
+R33 := ~/R-3.3.1/bin/R
+R34 := ~/R-3.4.0/bin/R
 
-INST_FILES := $(shell find inst -type f -print)
-MAN_FILES := $(wildcard man/*.Rd)
-R_FILES := $(wildcard R/*.R)
-PKG_FILES := DESCRIPTION NAMESPACE $(R_FILES) $(MAN_FILES) $(INST_FILES)
+DIR := ~/iNZight
+SRC := R/src
+WIN := R/bin/windows
+MAC := R/bin/macosx
 
-.PHONY: build check install run win release clean
+period := .
+empty :=
+V  := 3.4
+VS = $(subst $(period),$(empty),$(V))
+RV = ${R${VS}}
 
-build: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).tar.gz
+pkg_v ?= $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
+PACKAGE := $(PKG)_$(pkg_v)
 
-$(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).tar.gz: $(PKG_FILES)
-	sed -i "s/$(PKG_VERSION)/$(PKG_VERSION)-$(CURRENT_DATE)/" DESCRIPTION
-	R CMD build ./
-	sed -i "s/$(PKG_VERSION).*/$(PKG_VERSION)/" DESCRIPTION
+ifeq ($(V), 3.4)
+default: source windows mac clean
+else
+default: windows mac clean
+endif
 
-check: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).tar.gz
-	R CMD check $<
+source: $(PACKAGE).tar.gz
+	@echo "   - copying source files into place"
+	@rm -f $(SRC)/contrib/$(PKG)_*.tar.gz
+	@cp $^ $(SRC)/contrib/$^
+	@cd $(SRC)/contrib && \
+		$(RV) --slave -e "tools::write_PACKAGES( )" && \
+		rm -f .RData *.Rout
 
-install: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).tar.gz
-	R CMD INSTALL $<
+windows: $(PACKAGE).zip
+	@echo "   - copying windows binaries into place"
+	@rm -f $(WIN)/contrib/$(V)/$(PKG)_*.zip
+	@cp $^ $(WIN)/contrib/$(V)/$^
+	@echo "   - writing PACKAGES index"
+	@cd $(WIN)/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"win.binary\")" && \
+		rm -f .RData *.Rout
 
-run: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).tar.gz
-	R CMD INSTALL $<
-	R
-
-release: $(PKG_NAME).zip $(PKG_NAME).tar.gz
-
-win: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).zip
-
-$(PKG_NAME).tar.gz: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).tar.gz
-	cp $< $@
-
-$(PKG_NAME).zip: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).zip
-	cp $< $@
-
-$(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).zip: $(PKG_NAME)_$(PKG_VERSION)-$(CURRENT_DATE).tar.gz
-	mkdir tmp
-	R CMD INSTALL -l tmp $<
-	cd tmp ; zip --quiet -r $@ $(PKG_NAME) ; mv $@ ../
-	-rm -rf tmp
+mac: $(PACKAGE).tgz
+	@echo "   - copying mac binaries into place"
+	@rm -f $(MAC)/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/contrib/$(V)/$^
+	@cd $(MAC)/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
+		rm -f .RData *.Rout
+ifeq ($(V),3.4) # => el-capitan
+	@rm -f $(MAC)/el-capitan/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/el-capitan/contrib/$(V)/$^
+	@cd $(MAC)/el-capitan/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
+		rm -f .RData *.Rout
+endif
+ifeq ($(V),3.3) # => mavericks
+	@rm -f $(MAC)/mavericks/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/mavericks/contrib/$(V)/$^
+	@cd $(MAC)/mavericks/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
+		rm -f .RData *.Rout
+endif
+ifeq ($(V),3.2) # => mavericks
+	@rm -f $(MAC)/mavericks/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/mavericks/contrib/$(V)/$^
+	@cd $(MAC)/mavericks/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
+		rm -f .RData *.Rout
+endif
 
 clean:
-	-rm $(PKG_NAME)*.tar.gz
-	-rm -rf $(PKG_NAME).Rcheck
-	-rm $(PKG_NAME)*.zip
+	@echo Cleaning up
+	-@rm -f *.tar.gz *.tgz *.zip
+	-@rm -rf $(PKG)
+
+
+
+$(PACKAGE).tar.gz:
+	@echo "   - building packages source"
+	@$(RV) CMD build --no-build-vignettes $(DIR)/$(PKG)
+
+$(PKG): $(PACKAGE).tar.gz
+	@echo "   - building binaries"
+	@$(RV) CMD INSTALL -l . $^
+
+$(PACKAGE).zip: $(PKG)
+	@echo "   - zipping"
+	@zip --quiet -r $@ $(PKG)
+
+$(PACKAGE).tgz: $(PKG)
+	@echo "   - creating tarball"
+	@tar czf $@ $^
