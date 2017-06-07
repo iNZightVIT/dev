@@ -135,11 +135,6 @@ showVersions:
 DIR = ~/iNZight
 DIRO = ~/iNZight/iNZightVIT-WIN
 DIRN = ~/iNZight/iNZightVIT
-src_lib = $(DIR)/dev/www/R/src/contrib
-WIN_REP = $(DIR)/dev/www/R/bin/windows/contrib
-MAC_REP3 = $(DIR)/dev/www/R/bin/macosx/contrib
-MAC_REP2 = $(DIR)/dev/www/R/bin/macosx/leopard/contrib
-MAC_REPMAV = $(DIR)/dev/www/R/bin/macosx/mavericks/contrib
 
 
 winRelease:
