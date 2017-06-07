@@ -32,6 +32,13 @@ build:
 		cd ~/iNZight; git clone git@github.com:iNZightVIT/$$pkg ; \
 	done
 	cd ~/iNZight; mkdir tmp; mv VIT vit
+	@echo "Now run make addhooks"
+
+addhooks:
+	@for pkg in $(inz_packages); do \
+		cp githooks/* ../$$pkg/.git/hooks/ ;\
+ 	done
+	@echo "Git Hooks copied into iNZight repositories"
 
 # Now you can install them into a temporary directory: make all
 all:

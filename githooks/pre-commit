@@ -1,0 +1,15 @@
+#!/bin/bash
+
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+if [ "$BRANCH" == "master" ]; then
+    # Run make check
+    make crancheck
+    status=$(tail -n 1 *.Rcheck/00check.log)
+    make clean
+    if [ "$status" != "Status: OK" ]; then
+        echo ""
+        echo " *** R CMD check --as-cran FAILED. Get it to pass before commiting to master."
+        echo " *** If you really, really want to force this commit, use -n."
+        exit 1
+    fi
+fi
