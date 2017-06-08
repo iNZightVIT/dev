@@ -36,6 +36,8 @@ build:
 addhooks:
 	@for pkg in $(inz_packages); do \
 		cp githooks/* ../$$pkg/.git/hooks/ ;\
+		sed -i '/mergeoptions/d' ../$$pkg/.git/config ;\
+		sed -i '/^\[branch "master"\]$$/a \\tmergeoptions = --no-commit --no-ff' ../$$pkg/.git/config ;\
  	done
 	@echo "Git Hooks copied into iNZight repositories"
 
