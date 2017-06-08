@@ -12,7 +12,6 @@ all_packages = $(inz_packages)
 CD_INZ := cd ~/iNZight;
 
 # R versions
-R31 := ~/R-3.1.2/bin/R
 R32 := ~/R-3.2.2/bin/R
 R33 := ~/R-3.3.1/bin/R
 R34 := ~/R-3.4.0/bin/R
@@ -39,6 +38,21 @@ addhooks:
 		cp githooks/* ../$$pkg/.git/hooks/ ;\
  	done
 	@echo "Git Hooks copied into iNZight repositories"
+
+RGTK := CRAN
+ifeq ("$(V)", "3.2")
+	RGTK := OLD
+endif
+ifeq ("$(V)", "3.3")
+	RGTK := OLD
+endif
+installDep:
+ifeq ("$(RGTK)", "OLD")
+	@echo " * Installing Archives version of RGtk2 2.20.31 for pre-3.4 version of R"
+	@$(RV) --slave -e "install.packages('https://cran.stat.auckland.ac.nz/src/contrib/Archive/RGtk2/RGtk2_2.20.31.tar.gz', type = 'source', repos = NULL)"
+endif
+	@echo " * Installing iNZight packages and dependencies"
+	@$(RV) --slave -e "install.packages(c('iNZight', 'vit', 'iNZightPlots', 'iNZightMaps'), repos = c('http://r.docker.stat.auckland.ac.nz/R', 'https://cran.stat.auckland.ac.nz'), dependencies = TRUE)"
 
 # Now you can install them into a temporary directory: make all
 all:
