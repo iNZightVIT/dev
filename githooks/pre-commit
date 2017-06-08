@@ -12,4 +12,7 @@ if [ "$BRANCH" == "master" ]; then
         echo " *** If you really, really want to force this commit, use -n."
         exit 1
     fi
+
+    echo ""
+    echo " * Make sure you increment the VERSION and DATE files before release!"
 fi
