@@ -28,7 +28,7 @@ WINVS := $(subst $(period),$(empty),$(WINV))
 RWIN = ${R${WINVS}}
 
 build:
-	for pkg in $(inz_packages) ; do \
+	@for pkg in $(inz_packages) ; do \
 		cd ~/iNZight; git clone git@github.com:iNZightVIT/$$pkg ; \
 	done
 	cd ~/iNZight; mkdir tmp; mv VIT vit
@@ -42,23 +42,23 @@ addhooks:
 
 # Now you can install them into a temporary directory: make all
 all:
-	cd ../; $(RWIN) CMD INSTALL -l tmp $(inz_packages)
+	@cd ../; $(RWIN) CMD INSTALL -l tmp $(inz_packages)
 
 extra:
-	cd ../; $(RWIN) CMD INSTALL -l tmp $(extra)
+	@cd ../; $(RWIN) CMD INSTALL -l tmp $(extra)
 
 
 # If you want to install to your local R library, then make here:
 here:
-	$(CD_INZ) $(RV) CMD INSTALL $(inz_packages)
+	@$(CD_INZ) $(RV) CMD INSTALL $(inz_packages)
 
 extrahere:
-	$(CD_INZ) $(RV) CMD INSTALL $(extra)
+	@$(CD_INZ) $(RV) CMD INSTALL $(extra)
 
 # do the following to move into the Windows all-in-one directory:
 replace:
-	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(inz_packages)
-	for pkg in $(inz_packages) ; do \
+	@cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(inz_packages)
+	@for pkg in $(inz_packages) ; do \
 		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
 	done
 
@@ -102,6 +102,11 @@ masterall:
 	@for pkg in $(inz_packages) ; do \
 		echo "\n\n ==================================== "$$pkg"\n" ; \
 		cd ../$$pkg; git checkout master ; \
+	done
+devall:
+	@for pkg in $(inz_packages) ; do \
+		echo "\n\n ==================================== "$$pkg"\n" ; \
+		cd ../$$pkg; git checkout dev ; \
 	done
 
 branchall:
