@@ -1,6 +1,11 @@
 # iNZight Development Repository
 
-This repository is where we can store all of our development scripts, files, bug lists, etc. 
+This repository is where we can store all of our development scripts, files, bug lists, etc.
+
+||iNZight|iNZightPlots|iNZightModules|iNZightTS|iNZightMR|iNZightRegression|iNZightMaps|iNZightTools|vit|
+|--:|:--|:--|:--|:--|:--|:--|:--|:--|:--|
+|master||[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightPlots.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightPlots)||[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTS.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightTS)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMR.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightMR)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightRegression.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightRegression)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMaps.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightMaps)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTools.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightTools)||
+|dev||[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightPlots.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightPlots)||[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTS.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightTS)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMR.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightMR)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightRegression.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightRegression)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMaps.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightMaps)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTools.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightTools)||
 
 ***
 ## To start developing iNZightVIT (assumes Linux):
@@ -24,7 +29,7 @@ make build
 cd ..
 ```
 
-4) Now, inside `~/iNZight/`, you will have all of the required directories for 
+4) Now, inside `~/iNZight/`, you will have all of the required directories for
    developing iNZight.
 
 ***
