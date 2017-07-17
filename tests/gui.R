@@ -9,7 +9,7 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
-#load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
+load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 load_all("~/iNZight/iNZightRegression", export_all = FALSE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
