@@ -9,7 +9,7 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
-load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
+#load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 load_all("~/iNZight/iNZightRegression", export_all = FALSE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
@@ -30,8 +30,35 @@ KK$initializeGui(census.at.school.500)
 
 NULL
 
+try(dispose(w))
+## w <- gbasicdialog("Choose order of power", handler=function(h,...) {
+##     z <- as.numeric(svalue(zval))
+##     if (is.na(z)) gmessage("Order must be a number.", "Invalid Value",
+##                            "error", parent = h$obj)
+## }, parent=KK$win)
+w <- gwindow()
+g <- ggroup(cont=w)
+t <- glayout(homogeneous=TRUE, cont=g)
+t[1,1,anchor=c(1,0),expand=TRUE] = glabel("x^")
+t[1,2] = (zval <- gspinbutton(0, 5, 1, value=0, cont=t))
+
+
+
+Poly <- function(x, degree = 1, coefs = NULL, raw = FALSE, ...) {
+    notNA<-!is.na(x)
+    answer<-poly(x[notNA], degree=degree, coefs=coefs, raw=raw, ...)
+    THEMATRIX<-matrix(NA, nrow=length(x), ncol=degree)
+    THEMATRIX[notNA,]<-answer
+    attributes(THEMATRIX)[c('degree', 'coefs', 'class')]<- attributes(answer)[c('degree', 'coefs', 'class')]
+    THEMATRIX
+}
+
+
+#ginput("Choose power: ", "4", cont= g)
+
+
 vars <- colnames(KK$getActiveData())
-dispose(gw)
+try(dispose(gw))
 gw <- gbasicdialog("Select additional variables", do.buttons = FALSE)
 gg <- gvbox(container = gw)
 lab <- glabel("Select additional variables to export", container = gg)
@@ -42,6 +69,8 @@ tab <- gtable(vars, container = gg, multiple = TRUE)
 #    dispose(gw)
 #})
 size(gw) <- c(280, 300)
+
+
 
 
 
