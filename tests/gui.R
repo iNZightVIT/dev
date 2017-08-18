@@ -56,20 +56,33 @@ Poly <- function(x, degree = 1, coefs = NULL, raw = FALSE, ...) {
 
 #ginput("Choose power: ", "4", cont= g)
 
-
-vars <- colnames(KK$getActiveData())
+dat <- census.at.school.500
+vars <- colnames(dat)
 try(dispose(gw))
 gw <- gbasicdialog("Select additional variables", do.buttons = FALSE)
 gg <- gvbox(container = gw)
 lab <- glabel("Select additional variables to export", container = gg)
 font(lab) <- list(size = 12, weight = "bold")
-tab <- gtable(vars, container = gg, multiple = TRUE)
+tab <- gtable(vars, container = gg, multiple = FALSE)
 #gbutton("OK", container = gg, handler = function(h, ...) {
 #    vars <<- svalue(tab)
 #    dispose(gw)
 #})
 size(gw) <- c(280, 300)
-
+menulist <- list(numeric =
+                     list(gaction("I'm a number", handler=function(h, ...) {}),
+                          gaction("another option", handler=function(h,...) {})),
+                 factor =
+                     list(gaction("I am a factor!", handler=function(h,...) {}),
+                          gaction("Change levels", handler=function(h,...) {})))
+addHandlerSelectionChanged(tab, function(h, ...) {
+    blockHandlers(h$obj)
+    menu <- if (is.numeric(dat[[svalue(h$obj,FALSE)]])) menulist$numeric
+            else menulist$factor
+    addRightclickPopupMenu(tab, menu)
+    unblockHandlers(h$obj)
+})
+                                
 
 
 
