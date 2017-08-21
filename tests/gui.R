@@ -38,10 +38,10 @@ try(dispose(w))
 ## }, parent=KK$win)
 w <- gwindow()
 g <- ggroup(cont=w)
-t <- glayout(homogeneous=TRUE, cont=g)
-t[1,1,anchor=c(1,0),expand=TRUE] = glabel("x^")
-t[1,2] = (zval <- gspinbutton(0, 5, 1, value=0, cont=t))
+btn <- iNZight:::gimagebutton("properties", cont=g)
 
+Z <- addPopupMenu(btn, list(gaction("works")))
+gSignalHandlerDisconnect(btn, Z)
 
 
 Poly <- function(x, degree = 1, coefs = NULL, raw = FALSE, ...) {
