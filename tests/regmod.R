@@ -4,13 +4,20 @@ load_all("~/iNZight/iNZightRegression")
 data("census.at.school.500", package = "iNZight")
 dat <- census.at.school.500
 
-fit <- lm(height ~ armspan + gender + sqrt(age) + relevel(travel, "other"),
-          data = dat)
-fit2 <- glm(gender ~ armspan + travel + sqrt(age), data = dat,
+fit <- lm(height ~ armspan + age + year, data = dat)
+fit2 <- glm(gender ~ armspan, data = dat,
             family = binomial)
 
-load_all("~/iNZight/iNZightRegression")
-plotlm6(fit, 7)
+## load_all("~/iNZight/iNZightRegression")
+## e <- new.env()
+## assign("dat", dat, envir = e)
+## rm(dat)
+
+plotlm6(fit, 1)
+partialResPlot(fit, "armspan")
+
+plotlm6(fit, 1, env = e)
+
 plotlm6(fit2, 7)
 
 
