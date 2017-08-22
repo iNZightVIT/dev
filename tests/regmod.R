@@ -13,27 +13,14 @@ fit2 <- glm(gender ~ armspan, data = dat,
 ## assign("dat", dat, envir = e)
 ## rm(dat)
 
-plotlm6(fit, 1)
-partialResPlot(fit, "armspan")
+load_all("~/iNZight/iNZightRegression")
+fit <- lm(height ~ armspan + sqrt(age) + relevel(gender, "male") +
+              travel * getlunch, data = dat)
+plotlm6(fit, 7)
 
-plotlm6(fit, 1, env = e)
-
-plotlm6(fit2, 7)
-
-
-bs.fits <- replicate(30, {
-    update(fit, subset = sample(nrow(dat), replace = TRUE))
-}, simplify = FALSE)
-
-update(fit, subset = sample(nrow(dat), replace = TRUE))
-
-boot <- function(fit, N = 20, ...) UseMethod("boot")
-boot.lm <- function(fit, N = 20, ...) {
-    X <- model.matrix(fit)
-    ii <- sample(nrow(X), replace = TRUE)
-    Yi <- X[ii, 1]
-    Xi <- X[ii, -1]
-    Bhat <- solve(t(Xi) %*% Xi, t(Xi) %*% Yi)
-    Yhat <- Xi %*% Bhat
-    res <- Yi - Yhat
-}
+load_all("~/iNZight/iNZightRegression")
+fit <- lm(height ~ armspan + gender + sqrt(age) + relevel(gender, "male") +
+              travel * getlunch,
+          data = dat)
+iNZightQQplot(fit)
+histogramArray(fit)
