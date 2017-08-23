@@ -10,12 +10,12 @@ library(devtools)
 ## Load - generic
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
-load_all("~/iNZight/iNZightRegression", export_all = FALSE)
+#load_all("~/iNZight/iNZightRegression", export_all = FALSE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 #load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-load_all("~/iNZight/iNZightModules", export_all = FALSE)
-if (! "package:iNZight" %in% search())
+#load_all("~/iNZight/iNZightModules", export_all = FALSE)
+#if (! "package:iNZight" %in% search())
 load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
 ##data(gapminder, package = "iNZight")
@@ -23,12 +23,32 @@ data(census.at.school.500, package = 'iNZight')
 
 ## Run - generic
 KK <- iNZGUI$new()
-##KK$initializeGui()
+KK$initializeGui()
 ##KK$initializeGui(apiclus2)
-KK$initializeGui(census.at.school.500)
+##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 NULL
+
+interpolate <- function(code, ..., `_env` = parent.frame()) {
+    print(ls(`_env`))
+    if (length(list(...) > 0)) {
+        args <- lapply(list(...), as_call)
+        expr <- methods::substituteDirect(as_call(code), args)
+    } else {
+        expr <- as_call(code)
+    }
+    print(expr)
+    res=eval(expr, `_env`)
+    attr(res, "code") = expr
+    res
+}
+x <- 20
+y <- 10
+interpolate(~log(x, base = y))
+
+
+
 
 try(dispose(w))
 ## w <- gbasicdialog("Choose order of power", handler=function(h,...) {
