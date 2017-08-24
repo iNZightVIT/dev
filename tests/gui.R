@@ -1,4 +1,4 @@
-q()
+q("n")
 
 
 ## Set-up
@@ -11,7 +11,7 @@ library(devtools)
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-#load_all("~/iNZight/iNZightTools", export_all = FALSE)
+load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 #load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 #load_all("~/iNZight/iNZightModules", export_all = FALSE)
@@ -30,23 +30,10 @@ KK$initializeGui()
 
 NULL
 
-interpolate <- function(code, ..., `_env` = parent.frame()) {
-    print(ls(`_env`))
-    if (length(list(...) > 0)) {
-        args <- lapply(list(...), as_call)
-        expr <- methods::substituteDirect(as_call(code), args)
-    } else {
-        expr <- as_call(code)
-    }
-    print(expr)
-    res=eval(expr, `_env`)
-    attr(res, "code") = expr
-    res
-}
-x <- 20
-y <- 10
-interpolate(~log(x, base = y))
-
+load_all("~/iNZight/iNZightTools", export_all = FALSE)
+dat <- census.at.school.500
+dat2 <- numToCat(dat, "year")
+code(dat2)
 
 
 
