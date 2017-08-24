@@ -1,4 +1,4 @@
-q("n")
+q("no")
 
 
 ## Set-up
@@ -11,10 +11,10 @@ library(devtools)
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-load_all("~/iNZight/iNZightTools", export_all = FALSE)
+#load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 #load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-#load_all("~/iNZight/iNZightModules", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
 #if (! "package:iNZight" %in% search())
 load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
@@ -23,45 +23,22 @@ data(census.at.school.500, package = 'iNZight')
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui()
+##KK$initializeGui()
 ##KK$initializeGui(apiclus2)
-##KK$initializeGui(census.at.school.500)
+KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 NULL
 
-load_all("~/iNZight/iNZightTools", export_all = FALSE)
-dat <- census.at.school.500
-dat2 <- numToCat(dat, "year")
-code(dat2)
-
 
 
 try(dispose(w))
-## w <- gbasicdialog("Choose order of power", handler=function(h,...) {
-##     z <- as.numeric(svalue(zval))
-##     if (is.na(z)) gmessage("Order must be a number.", "Invalid Value",
-##                            "error", parent = h$obj)
-## }, parent=KK$win)
 w <- gwindow()
 g <- ggroup(cont=w)
-btn <- iNZight:::gimagebutton("properties", cont=g)
+btn <- iNZight:::gimagebutton("history", cont=g)
 
-Z <- addPopupMenu(btn, list(gaction("works")))
-gSignalHandlerDisconnect(btn, Z)
+## NULL
 
-
-Poly <- function(x, degree = 1, coefs = NULL, raw = FALSE, ...) {
-    notNA<-!is.na(x)
-    answer<-poly(x[notNA], degree=degree, coefs=coefs, raw=raw, ...)
-    THEMATRIX<-matrix(NA, nrow=length(x), ncol=degree)
-    THEMATRIX[notNA,]<-answer
-    attributes(THEMATRIX)[c('degree', 'coefs', 'class')]<- attributes(answer)[c('degree', 'coefs', 'class')]
-    THEMATRIX
-}
-
-
-#ginput("Choose power: ", "4", cont= g)
 
 dat <- census.at.school.500
 vars <- colnames(dat)
