@@ -53,7 +53,7 @@ updateDistribution <- function() {
   ## A list of packages we NEED to have installed (since older versions anyway...)
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
   if (length(pkgs) > 0)
-      tryCatch(utils::install.packages(pkgs, repos = "http://cran.rstudio.com"),
+      tryCatch(utils::install.packages(pkgs, repos = "https://cran.rstudio.com"),
                error = function(e) {
                    cat("Something went wrong trying to install additional dependencies.",
                        "\nTry the updater again, and if the problem continues,",
