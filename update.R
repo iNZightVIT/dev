@@ -41,7 +41,12 @@ updateDistribution <- function() {
             "gridSVG", "jsonlite", "xtable",
             "readr", "readxl")
   if (OS == "windows") pkgs <- c(pkgs, "RODBC")
-  if (OS == "osx") pkgs <- c(pkgs, "Acinonyx")
+  if (OS == "osx") {
+    try({
+      if (!"Acinonyx" %in% rownames(utils::installed.packages()))
+          utils::install.packages("Acinonyx", repos = c("http://rforge.net", "https://cran.rstudio.com"))
+    }, TRUE)
+  }
 
   ## --- Update iNZight packages:
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
