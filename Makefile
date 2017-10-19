@@ -212,6 +212,9 @@ addr = scienceit@docker.stat.auckland.ac.nz
 repodir ?= /srv/www/R
 repourl = $(addr):$(repodir)
 
+liveVersions:
+	ssh $(addr) ls $(repodir)/src/contrib
+
 # sync www/R/bin and www/R/src directories
 dry := true
 ifeq ($(dry), false)
