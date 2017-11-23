@@ -7,9 +7,22 @@ load_all("~/iNZight/iNZightTS")
 data("visitorsQ")
 
 ts <- iNZightTS(visitorsQ, var = "Australia")
+p <- plot(ts, t = 20, ylab = "Visitors", title = "%var")
+
+d <- decompositionplot(ts, t = 10)
+recompose(d)
 
 load_all("~/iNZight/iNZightTS")
-rawplot(ts, t = 20)#, animate = TRUE)
+ts <- iNZightTS(visitorsQ, var = colnames(visitorsQ)[-1])
+s <- plot(ts, title = "Visitors from %var")
+
+compareplot(ts)
+
+
+multiseries(ts)
+
+
+rawplot(ts, t = 10, animate = TRUE)
 
 
 data <- data.frame(Date = as.numeric(time(ts$tsObj)))
