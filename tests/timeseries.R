@@ -1,13 +1,18 @@
 library(devtools)
 library(tidyverse)
 
-install_github("iNZightVIT/iNZightTS@dev")
-library(iNZightTS)
+##install_github("iNZightVIT/iNZightTS@dev")
+##library(iNZightTS)
+load_all("~/iNZight/iNZightTS")
 data("visitorsQ")
 
 ts <- iNZightTS(visitorsQ, var = "Australia")
 
-data <- data.frame(Date = as.numeric(time(ts$tsObj)),
+load_all("~/iNZight/iNZightTS")
+rawplot(ts, t = 20)#, animate = TRUE)
+
+
+data <- data.frame(Date = as.numeric(time(ts$tsObj)))
                    Visitors = as.matrix(ts$tsObj))
 
 tsPlot <- function(data) {
