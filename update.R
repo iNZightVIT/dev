@@ -39,7 +39,7 @@ updateDistribution <- function() {
   ## List any packages added to iNZight after the release
   pkgs <- c("RColorBrewer",
             "gridSVG", "jsonlite", "xtable",
-            "readr", "readxl")
+            "readr", "readxl", "tibble")
   if (OS == "windows") pkgs <- c(pkgs, "RODBC")
   if (OS == "osx") {
     try({
