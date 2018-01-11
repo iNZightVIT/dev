@@ -1,9 +1,10 @@
 library(devtools)
-library(tidyverse)
+#library(tidyverse)
 
 ##install_github("iNZightVIT/iNZightTS@dev")
 ##library(iNZightTS)
 load_all("~/iNZight/iNZightTS")
+document("~/iNZight/iNZightTS")
 data("visitorsQ")
 
 ts <- iNZightTS(visitorsQ, var = "Australia")
@@ -14,7 +15,8 @@ recompose(d)
 
 load_all("~/iNZight/iNZightTS")
 ts <- iNZightTS(visitorsQ, var = colnames(visitorsQ)[-1])
-s <- plot(ts, title = "Visitors from %var")
+s <- plot(ts, title = "Visitors from %var", ylab = "Visitors",
+          multiplicative = FALSE)
 
 compareplot(ts)
 
