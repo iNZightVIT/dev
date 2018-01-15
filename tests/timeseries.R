@@ -6,25 +6,39 @@ library(devtools)
 load_all("~/iNZight/iNZightTS")
 document("~/iNZight/iNZightTS")
 data("visitorsQ")
+data("visitorsA2")
 
-ts <- iNZightTS(visitorsQ, var = "Australia")
-p <- plot(ts, t = 20, ylab = "Visitors", title = "%var")
+load_all("~/iNZight/iNZightTS")
+ta <- iNZightTS(visitorsA2, var = "Australia")
+P1 <- plot(ta, t = 20, ylab = "Visitors")
+
+tq <- iNZightTS(visitorsQ, var = "Australia")
+P2 <- plot(tq, t = 20, ylab = "Visitors", title = "%var")
 
 d <- decompositionplot(ts, t = 10)
 recompose(d)
 
 load_all("~/iNZight/iNZightTS")
-ts <- iNZightTS(visitorsQ, var = colnames(visitorsQ)[-1])
-s <- plot(ts, title = "Visitors from %var", ylab = "Visitors",
+ta2 <- iNZightTS(visitorsA2, var = colnames(visitorsA2)[2:3])
+s <- plot(ta2, title = "Visitors from %var", ylab = "Visitors",
           multiplicative = FALSE)
 
-compareplot(ts)
+load_all("~/iNZight/iNZightTS")
+tq2 <- iNZightTS(visitorsQ, var = colnames(visitorsQ)[2:5])
+s <- plot(tq2, title = "Visitors from %var", ylab = "Visitors",
+          multiplicative = FALSE)
+
+load_all("~/iNZight/iNZightTS")
+plot(ta2, compare = F)
+
+load_all("~/iNZight/iNZightTS")
+plot(tq2, compare = F, ylab = "Visitors")
+plot(tq2, compare = F, ylab = "Visitors", multiplicative = T)
 
 
-multiseries(ts)
 
 
-rawplot(ts, t = 10, animate = TRUE)
+rawplot(tq2)
 
 
 data <- data.frame(Date = as.numeric(time(ts$tsObj)))
