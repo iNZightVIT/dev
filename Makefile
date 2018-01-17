@@ -22,7 +22,7 @@ V  := 3.4
 VS = $(subst $(period),$(empty),$(V))
 RV = ${R${VS}}
 
-WINV := 3.2
+WINV := 3.4
 WINVS := $(subst $(period),$(empty),$(WINV))
 RWIN = ${R${WINVS}}
 
