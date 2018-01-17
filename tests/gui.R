@@ -11,10 +11,10 @@ library(devtools)
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-#load_all("~/iNZight/iNZightTools", export_all = FALSE)
+load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 #load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-load_all("~/iNZight/iNZightModules", export_all = FALSE)
+#load_all("~/iNZight/iNZightModules", export_all = FALSE)
 #if (! "package:iNZight" %in% search())
 load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
@@ -34,6 +34,13 @@ NULL
 
 try(dispose(w))
 w <- gwindow()
+t <- gtable(data.frame(Levels = 1:10), cont=w)
+t$get_items()
+
+g <- ggroup(cont=w)
+gimage(stock.id = 'up', size = 'LARGE_TOOLBAR', cont=g)
+
+
 t <- gtext("hello there", cont=w, font.attr = list(size = 20))
 svalue(t) <- ""
 insert(t, "hello", font.attr = list(size = 20))
