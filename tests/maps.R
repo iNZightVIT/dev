@@ -1,12 +1,15 @@
-###library(iNZightMaps)
-devtools::document("~/iNZight/iNZightMaps")
-devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+library(devtools)
+data('gapminder_2008', package = 'FutureLearnData')
 
-data(nzquakes)
+load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+load_all("~/iNZight/iNZightModules", export_all = FALSE)
+load_all("~/iNZight/iNZight", export_all = FALSE)
 
-map.obj <- iNZightMap(~latitude, ~longitude, data = nzquakes)
+iNZight(gapminder_2008)
 
-devtools::load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+
+
+
 plot(map.obj)
 
 
