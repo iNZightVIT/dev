@@ -48,6 +48,7 @@ endif
 ifeq ("$(V)", "3.3")
 	RGTK := OLD
 endif
+
 installDep:
 ifeq ("$(RGTK)", "OLD")
 	@echo " * Installing Archives version of RGtk2 2.20.31 for pre-3.4 version of R"
@@ -55,6 +56,9 @@ ifeq ("$(RGTK)", "OLD")
 endif
 	@echo " * Installing iNZight packages and dependencies"
 	@$(RV) --slave -e "install.packages(c('iNZight', 'vit', 'iNZightPlots', 'iNZightMaps', 'tidyverse'), repos = c('http://r.docker.stat.auckland.ac.nz/R', 'https://cran.stat.auckland.ac.nz'), dependencies = TRUE)"
+	@for pkg in $(inz_packages); do \
+		$(RV) -e "devtools::install_deps()" ;\
+	done
 
 # Now you can install them into a temporary directory: make all
 all:
