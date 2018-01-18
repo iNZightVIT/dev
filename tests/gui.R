@@ -23,9 +23,9 @@ data(census.at.school.500, package = 'iNZight')
 
 ## Run - generic
 KK <- iNZGUI$new()
-##KK$initializeGui()
+KK$initializeGui()
 ##KK$initializeGui(apiclus2)
-KK$initializeGui(census.at.school.500)
+##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 NULL
