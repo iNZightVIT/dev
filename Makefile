@@ -146,6 +146,16 @@ pushall:
 # How iNZighting!
 
 
+pkginfo:
+	@echo ""
+	@for pkg in $(inz_packages) ; do \
+		echo " - \033[32m$$pkg\033[0m@\033[35m`cd ../$$pkg && git rev-parse --abbrev-ref HEAD`\033[0m" ;\
+		echo " - local version:  \033[33m`grep -i ^version ../$$pkg/DESCRIPTION | cut -d : -d \  -f 2`\033[0m" ;\
+		echo " - server version: \033[33m`ssh scienceit@docker.stat.auckland.ac.nz ls /srv/www/R/src/contrib/$${pkg}_*.tar.gz | cut -d _ -f 2 | sed -e 's/\.tar\.gz//g'`\033[0m" ;\
+		echo ;\
+	done
+
+
 
 ## Show versions of all packages:
 showVersions:
