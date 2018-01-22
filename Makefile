@@ -22,7 +22,7 @@ V  := 3.4
 VS = $(subst $(period),$(empty),$(V))
 RV = ${R${VS}}
 
-WINV := 3.4
+WINV := 3.2
 WINVS := $(subst $(period),$(empty),$(WINV))
 RWIN = ${R${WINVS}}
 
@@ -81,6 +81,7 @@ replace:
 	@for pkg in $(inz_packages) ; do \
 		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
 	done
+	@rm -rf ../iNZightVIT-WIN/prog_files/library/iNZightMaps
 
 extrareplace:
 	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(extra)
