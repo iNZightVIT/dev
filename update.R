@@ -40,7 +40,11 @@ updateDistribution <- function() {
   pkgs <- c("RColorBrewer",
             "gridSVG", "jsonlite", "xtable",
             "readr", "readxl", "tibble")
-  if (OS == "windows") pkgs <- c(pkgs, "RODBC")
+  if (OS == "windows") {
+    if (!requireNamespace("hms", quietly = TRUE))
+      utils::install.packages('hms', type = 'binary')
+    pkgs <- c(pkgs, "RODBC")
+  }
   if (OS == "osx") {
     try({
       if (!"Acinonyx" %in% rownames(utils::installed.packages()))
