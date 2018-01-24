@@ -73,6 +73,13 @@ updateDistribution <- function() {
   if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
       utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz/R")
 
+  try({
+    if (packageVersion('iNZight') == numeric_version(3.2) &&
+        grepl("2018-01-24", packageDescription('iNZight')$Built)) {
+      install.packages('iNZight', repos = 'http://r.docker.stat.auckland.ac.nz')
+    }
+  }, silent = TRUE)
+
   ## success message
   cat("==========================================================\n")
   cat("               Updating complete!!\n")
