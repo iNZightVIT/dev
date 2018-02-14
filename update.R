@@ -39,7 +39,7 @@ updateDistribution <- function() {
   ## List any packages added to iNZight after the release
   pkgs <- c("RColorBrewer",
             "gridSVG", "jsonlite", "xtable",
-            "readr", "readxl", "tibble")
+            "readr", "readxl", "tibble", "tidyr")
   if (OS == "windows") {
     if (!requireNamespace("hms", quietly = TRUE))
       utils::install.packages('hms', type = 'binary')
