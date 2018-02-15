@@ -54,6 +54,17 @@ updateDistribution <- function() {
 
   ## --- Update iNZight packages:
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
+  
+  if (!requireNamespace('Rcpp', quietly = TRUE)) {
+    install.packages('Rcpp', repos=c('https://cran.rstudio.com'))
+    if (!requireNamespace('Rcpp', quietly = TRUE)) {
+       tcltk::tkmessageBox(title = "Unable to install dependencies", 
+                           message = "Unfortunately one of the dependencies could not be installed.\n\nPlease contact inzight_support@stat.auckland.ac.nz",
+                           icon = "info", type = "ok")
+       stop()
+    }
+    cat('Successfully installed Rcpp...\n')
+  }
 
   ## libz <- .libPaths()
   ## libz <- libz[!grepl("modules", libz)]
