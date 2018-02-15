@@ -56,7 +56,7 @@ updateDistribution <- function() {
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
   
   if (!requireNamespace('Rcpp', quietly = TRUE)) {
-    install.packages('Rcpp', repos=c('https://cran.rstudio.com'))
+    install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
     if (!requireNamespace('Rcpp', quietly = TRUE)) {
        tcltk::tkmessageBox(title = "Unable to install dependencies", 
                            message = "Unfortunately one of the dependencies could not be installed.\n\nPlease contact inzight_support@stat.auckland.ac.nz",
