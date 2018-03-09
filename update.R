@@ -1,7 +1,9 @@
 ## UPDATE VERSION NUMBERS AS REQUIRED
+if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
 LATEST <- switch(OS,
                  "windows" = 1.1,
                  "osx" = 1.0)
+if (!exists("VERSION")) VERSION <- 0
 
 updateDistribution <- function() {
 
@@ -18,9 +20,6 @@ updateDistribution <- function() {
       return(invisible(NULL))
   }
 
-  if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
-
-  if (!exists("VERSION")) VERSION <- 0
   if (VERSION < LATEST) {
       utils::download.file(
         sprintf("https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-%s.R", OS),
