@@ -24,7 +24,7 @@ updateDistribution <- function() {
   if (VERSION < LATEST) {
       utils::download.file(
         sprintf("https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-%s.R", OS),
-        ".Rprofile"
+        ifelse(OS == 'windows', ".Rprofile", file.path(Sys.getenv('APPDIR'), '.Rprofile'))
       )
 
       tcltk::tkmessageBox(title = "Rerun Updater", message = "Update script updated - please run the Updater again.",
