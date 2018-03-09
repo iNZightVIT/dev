@@ -1,3 +1,8 @@
+## UPDATE VERSION NUMBERS AS REQUIRED
+LATEST <- switch(OS,
+                 "windows" = 1.1,
+                 "osx" = 1.0)
+
 updateDistribution <- function() {
 
   if (utils::packageVersion("iNZight") < 3) {
@@ -14,11 +19,6 @@ updateDistribution <- function() {
   }
 
   if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
-
-  ## UPDATE VERSION NUMBERS AS REQUIRED
-  LATEST <- switch(OS,
-                   "windows" = 1.1,
-                   "osx" = 1.0)
 
   if (!exists("VERSION")) VERSION <- 0
   if (VERSION < LATEST) {
