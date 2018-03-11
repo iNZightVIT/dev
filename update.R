@@ -22,7 +22,10 @@ updateDistribution <- function() {
 
   if (VERSION < LATEST) {
       utils::download.file(
-        sprintf("https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-%s.R", OS),
+        sprintf("https://raw.githubusercontent.com/iNZightVIT/%s", 
+                ifelse(OS == 'windows', 
+                       'dev/master/updateProfile-windows.R',
+                       'iNZightVIT-osx-installer/master/Installer/iNZightVIT/.Rprofile')),
         ifelse(OS == 'windows', ".Rprofile", file.path(Sys.getenv('APPDIR'), '.Rprofile'))
       )
 
