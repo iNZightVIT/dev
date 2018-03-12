@@ -21,13 +21,22 @@ updateDistribution <- function() {
   }
 
   if (VERSION < LATEST) {
-      utils::download.file(
-        sprintf("https://raw.githubusercontent.com/iNZightVIT/%s", 
-                ifelse(OS == 'windows', 
-                       'dev/master/updateProfile-windows.R',
-                       'iNZightVIT-osx-installer/master/Installer/iNZightVIT/.Rprofile')),
-        ifelse(OS == 'windows', ".Rprofile", file.path(Sys.getenv('APPDIR'), '.Rprofile'))
-      )
+      if (OS == "osx") {
+        conf <-
+          tcltk::tk_messageBox(message = paste("A new Mac installer has been released.",
+                                               "\nTo update, you'll need to download it and re-install",
+                                               "iNZight. Click OK to go to the website now."),
+                               title = "New iNZight for Mac Installer", icon = "info", type = "okcancel")
+        if (conf == "ok")
+          utils::browseURL("https://www.stat.auckland.ac.nz/~wild/iNZight/getinzight.php")
+        q("no")
+        return(invisible(NULL))
+      } else {
+        utils::download.file(
+          "https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-windows.R",
+          ".Rprofile"
+        )
+      }
 
       tcltk::tkmessageBox(title = "Rerun Updater", message = "Update script updated - please run the Updater again.",
                           type = "ok", icon = "info")
