@@ -6,6 +6,12 @@ LATEST <- switch(OS,
 if (!exists("VERSION")) VERSION <- 0
 
 updateDistribution <- function() {
+  try({
+    cat("Updating iNZightVIT for", switch(OS, "Windows", "Mac"), "\n")
+    cat(" * Current version:", utils::packageVersion("iNZight"), "\n")
+    cat(" * Running on", R.version.string, "\n")
+    cat(" * Update source:", paste(getOption("repos"), collapse = ", "), "\n")
+  }, silent = TRUE)
 
   if (utils::packageVersion("iNZight") < 3) {
       conf <-
@@ -67,7 +73,7 @@ updateDistribution <- function() {
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
   
   if (!requireNamespace('Rcpp', quietly = TRUE)) {
-    install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
+    utils::install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
     if (!requireNamespace('Rcpp', quietly = TRUE)) {
        tcltk::tkmessageBox(title = "Unable to install dependencies", 
                            message = "Unfortunately one of the dependencies could not be installed.\n\nPlease contact inzight_support@stat.auckland.ac.nz",
