@@ -6,13 +6,6 @@ LATEST <- switch(OS,
 if (!exists("VERSION")) VERSION <- 0
 
 updateDistribution <- function() {
-  try({
-    cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
-    cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
-    cat(" * Running on", R.version.string, "\n")
-    cat(" * Update source:", paste(getOption("repos"), collapse = ", "), "\n")
-  }, silent = TRUE)
-
   if (utils::packageVersion("iNZight") < 3) {
       conf <-
           tcltk::tk_messageBox(message = paste("iNZight 3 is now available for download from our website.",
@@ -52,6 +45,13 @@ updateDistribution <- function() {
   cat("==========================================================\n")
   cat("               Checking for updates ...\n")
   cat("==========================================================\n\n")
+  
+  try({
+    cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
+    cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
+    cat(" * Running on", R.version.string, "\n")
+    cat(" * Update source:", paste(getOption("repos"), collapse = ", "), "\n")
+  }, silent = TRUE)
 
   ## List any packages added to iNZight after the release
   pkgs <- c("RColorBrewer", "hexbin",
