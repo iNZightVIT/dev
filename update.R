@@ -8,7 +8,7 @@ if (!exists("VERSION")) VERSION <- 0
 updateDistribution <- function() {
   try({
     cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
-    cat(" * Current version:", utils::packageVersion("iNZight"), "\n")
+    cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
     cat(" * Running on", R.version.string, "\n")
     cat(" * Update source:", paste(getOption("repos"), collapse = ", "), "\n")
   }, silent = TRUE)
