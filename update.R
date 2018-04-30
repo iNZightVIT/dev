@@ -83,14 +83,23 @@ updateDistribution <- function() {
     cat('Successfully installed Rcpp...\n')
   }
 
-  ## libz <- .libPaths()
-  ## libz <- libz[!grepl("modules", libz)]
-  ## instlib <- libz[1]
+  if (OS == "windows") {
+    libz <- .libPaths()
+    libz <- libz[!grepl("modules", libz)]
+    instlib <- libz[1]
+    if (as.numeric(file.access(instlib, mode = 2)) == -1) {
+      warning("Unable to write to the main package library - will attempt installing additional dependencies elsewhere.\nIf you are unable to run iNZight, you may need to run the installer as Admin.") 
+      instlib <- .libPaths()[1]
+    }
+  } else {
+    instlib <- .libPaths()[1] 
+  }
+  
 
   ## A list of packages we NEED to have installed (since older versions anyway...)
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
   if (length(pkgs) > 0)
-      tryCatch(utils::install.packages(pkgs, repos = "https://cran.rstudio.com"),
+      tryCatch(utils::install.packages(pkgs, repos = "https://cran.rstudio.com", lib = instlib),
                error = function(e) {
                    cat("Something went wrong trying to install additional dependencies.",
                        "\nTry the updater again, and if the problem continues,",
