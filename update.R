@@ -6,7 +6,6 @@ LATEST <- switch(OS,
 if (!exists("VERSION")) VERSION <- 0
 
 updateDistribution <- function() {
-
   if (utils::packageVersion("iNZight") < 3) {
       conf <-
           tcltk::tk_messageBox(message = paste("iNZight 3 is now available for download from our website.",
@@ -46,9 +45,17 @@ updateDistribution <- function() {
   cat("==========================================================\n")
   cat("               Checking for updates ...\n")
   cat("==========================================================\n\n")
+  
+  try({
+    cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
+    cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
+    cat(" * Running on", R.version.string, "\n")
+    cat(" * Updating packages located in:", paste(.libPaths(), collapse = ", "), "\n")
+    cat(" * Update source:", paste(getOption("repos"), collapse = ", "), "\n")
+  }, silent = TRUE)
 
   ## List any packages added to iNZight after the release
-  pkgs <- c("RColorBrewer",
+  pkgs <- c("RColorBrewer", "hexbin",
             "gridSVG", "jsonlite", "xtable",
             "readr", "readxl", "tibble", "tidyr")
   if (OS == "windows") {
@@ -67,7 +74,7 @@ updateDistribution <- function() {
   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
   
   if (!requireNamespace('Rcpp', quietly = TRUE)) {
-    install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
+    utils::install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
     if (!requireNamespace('Rcpp', quietly = TRUE)) {
        tcltk::tkmessageBox(title = "Unable to install dependencies", 
                            message = "Unfortunately one of the dependencies could not be installed.\n\nPlease contact inzight_support@stat.auckland.ac.nz",
@@ -77,14 +84,23 @@ updateDistribution <- function() {
     cat('Successfully installed Rcpp...\n')
   }
 
-  ## libz <- .libPaths()
-  ## libz <- libz[!grepl("modules", libz)]
-  ## instlib <- libz[1]
+  if (OS == "windows") {
+    libz <- .libPaths()
+    libz <- libz[!grepl("modules", libz)]
+    instlib <- libz[1]
+    if (as.numeric(file.access(instlib, mode = 2)) == -1) {
+      warning("Unable to write to the main package library - will attempt installing additional dependencies elsewhere.\nIf you are unable to run iNZight, you may need to run the installer as Admin.") 
+      instlib <- .libPaths()[1]
+    }
+  } else {
+    instlib <- .libPaths()[1] 
+  }
+  
 
   ## A list of packages we NEED to have installed (since older versions anyway...)
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
   if (length(pkgs) > 0)
-      tryCatch(utils::install.packages(pkgs, repos = "https://cran.rstudio.com"),
+      tryCatch(utils::install.packages(pkgs, repos = "https://cran.rstudio.com", lib = instlib),
                error = function(e) {
                    cat("Something went wrong trying to install additional dependencies.",
                        "\nTry the updater again, and if the problem continues,",
