@@ -2,6 +2,7 @@ R31 := ~/R-3.1.2/bin/R
 R32 := ~/R-3.2.2/bin/R
 R33 := ~/R-3.3.1/bin/R
 R34 := ~/R-3.4.0/bin/R
+R35 := ~/R-3.5.0/bin/R
 
 DIR := ~/iNZight
 SRC := R/src
@@ -10,7 +11,7 @@ MAC := R/bin/macosx
 
 period := .
 empty :=
-V  := 3.4
+V  := 3.5
 VS = $(subst $(period),$(empty),$(V))
 RV = ${R${VS}}
 
@@ -42,11 +43,13 @@ windows: $(PACKAGE).zip
 
 mac: $(PACKAGE).tgz
 	@echo "   - copying mac binaries into place"
-	@rm -f $(MAC)/contrib/$(V)/$(PKG)_*.tgz
-	@cp $^ $(MAC)/contrib/$(V)/$^
-	@cd $(MAC)/contrib/$(V) && \
+ifeq ($(V),3.5) # => el-capitan
+	@rm -f $(MAC)/el-capitan/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/el-capitan/contrib/$(V)/$^
+	@cd $(MAC)/el-capitan/contrib/$(V) && \
 		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
 		rm -f .RData *.Rout
+endif
 ifeq ($(V),3.4) # => el-capitan
 	@rm -f $(MAC)/el-capitan/contrib/$(V)/$(PKG)_*.tgz
 	@cp $^ $(MAC)/el-capitan/contrib/$(V)/$^
@@ -65,6 +68,11 @@ ifeq ($(V),3.2) # => mavericks
 	@rm -f $(MAC)/mavericks/contrib/$(V)/$(PKG)_*.tgz
 	@cp $^ $(MAC)/mavericks/contrib/$(V)/$^
 	@cd $(MAC)/mavericks/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
+		rm -f .RData *.Rout
+	@rm -f $(MAC)/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/contrib/$(V)/$^
+	@cd $(MAC)/contrib/$(V) && \
 		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
 		rm -f .RData *.Rout
 endif

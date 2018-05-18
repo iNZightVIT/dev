@@ -15,10 +15,11 @@ CD_INZ := cd ~/iNZight;
 R32 := ~/R-3.2.2/bin/R
 R33 := ~/R-3.3.1/bin/R
 R34 := ~/R-3.4.0/bin/R
+R35 := ~/R-3.5.0/bin/R
 
 period := .
 empty :=
-V  := 3.4
+V  := 3.5
 VS = $(subst $(period),$(empty),$(V))
 RV = ${R${VS}}
 
@@ -203,7 +204,7 @@ winPatchAll:
 
 ## User will define wpkg=iNZightPlots, eg
 pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
-RVs = 3.2 3.3 3.4
+RVs = 3.2 3.3 3.4 3.5
 repositoryFiles:
 	@echo "==== Building $(wpkg) v$(pkg_v)"
 	@for rv in $(RVs); do \
@@ -274,19 +275,3 @@ changeLog:
 	@echo
 
 
-help:
-	@echo
-	@echo "To build binaries for packages, run:"
-	@echo "   make repositoryFiles wpkg=NAME_OF_PACKAGE"
-	@echo
-	@echo "To push these to the repository, run:"
-	@echo "   make pkgToDocker PKG=NAME_OF_PACKAGE"
-	@echo
-	@echo "To update the NEWS files on the website, run:"
-	@echo "   make newFiles"
-	@echo
-	@echo "To make a ZIP archive of iNZightVIT for Windows:"
-	@echo "   1. make sure the iNZightVIT-WIN repository is up-to-date with git pull,"
-	@echo "   2. Run:"
-	@echo "      make winRelease"
-	@echo
