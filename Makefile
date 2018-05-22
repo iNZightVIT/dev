@@ -58,7 +58,9 @@ endif
 	@echo " * Installing iNZight packages and dependencies"
 	@$(RV) --slave -e "install.packages(c('iNZight', 'vit', 'iNZightPlots', 'iNZightMaps', 'tidyverse'), repos = c('http://r.docker.stat.auckland.ac.nz/R', 'https://cran.stat.auckland.ac.nz'), dependencies = TRUE)"
 	@for pkg in $(inz_packages); do \
-		$(RV) -e "devtools::install_deps()" ;\
+		echo "\n *** "$$pkg" ...\n" && \
+			cd ../$$pkg && \
+			$(RV) --slave -e "devtools::install_deps(); devtools::install()" ;\
 	done
 
 # Now you can install them into a temporary directory: make all
