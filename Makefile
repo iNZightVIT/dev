@@ -6,7 +6,7 @@
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules iNZight vit FutureLearnData
-extra := gWidgets2RGtk2 countrycode
+extra := gWidgets2RGtk2 countrycode ggplot2 ggsfextra
 all_packages = $(inz_packages)
 
 CD_INZ := cd ~/iNZight;
@@ -149,10 +149,10 @@ pushall:
 
 # How iNZighting!
 
-
+ppkgs=$(inz_packages) ggsfextra ggplot2
 pkginfo:
 	@echo ""
-	@for pkg in $(inz_packages) ; do \
+	@for pkg in $(ppkgs) ; do \
 		echo " - \033[32m$$pkg\033[0m@\033[35m`cd ../$$pkg && git rev-parse --abbrev-ref HEAD`\033[0m" ;\
 		echo " - local version:  \033[33m`grep -i ^version ../$$pkg/DESCRIPTION | cut -d : -d \  -f 2`\033[0m" ;\
 		echo " - server version: \033[33m`ssh scienceit@docker.stat.auckland.ac.nz ls /srv/www/R/src/contrib/$${pkg}_*.tar.gz | cut -d _ -f 2 | sed -e 's/\.tar\.gz//g'`\033[0m" ;\
