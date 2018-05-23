@@ -56,7 +56,7 @@ ifeq ("$(RGTK)", "OLD")
 	@$(RV) --slave -e "install.packages('https://cran.stat.auckland.ac.nz/src/contrib/Archive/RGtk2/RGtk2_2.20.31.tar.gz', type = 'source', repos = NULL)"
 endif
 	@echo " * Installing iNZight packages and dependencies"
-	@$(RV) --slave -e "install.packages(c('iNZight', 'vit', 'iNZightPlots', 'iNZightMaps', 'tidyverse'), repos = c('http://r.docker.stat.auckland.ac.nz/R', 'https://cran.stat.auckland.ac.nz'), dependencies = TRUE)"
+	@$(RV) --slave -e "install.packages(c('devtools'), repos='https://cran.stat.auckland.ac.nz')"
 	@for pkg in $(inz_packages); do \
 		echo "\n *** "$$pkg" ...\n" && \
 			cd ../$$pkg && \
