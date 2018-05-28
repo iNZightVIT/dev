@@ -33,7 +33,12 @@ plot(ta2, compare = F)
 
 load_all("~/iNZight/iNZightTS")
 plot(tq2, compare = F, ylab = "Visitors")
+
 plot(tq2, compare = F, ylab = "Visitors", multiplicative = T)
+
+x = tq2
+multiplicative = FALSE
+t = 0
 
 
 
