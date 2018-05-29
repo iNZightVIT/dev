@@ -15,7 +15,8 @@ P1 <- plot(ta, t = 20, ylab = "Visitors")
 tq <- iNZightTS(visitorsQ, var = "Australia")
 P2 <- plot(tq, t = 20, ylab = "Visitors", title = "%var")
 
-d <- decompositionplot(ts, t = 10)
+d <- decompositionplot(tq, t = 10)
+
 recompose(d)
 
 load_all("~/iNZight/iNZightTS")
