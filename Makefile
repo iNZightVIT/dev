@@ -27,6 +27,8 @@ WINV := 3.2
 WINVS := $(subst $(period),$(empty),$(WINV))
 RWIN = ${R${WINVS}}
 
+keepMaps:=false
+
 build:
 	@for pkg in $(inz_packages) ; do \
 		cd ~/iNZight; git clone git@github.com:iNZightVIT/$$pkg ; \
@@ -84,7 +86,9 @@ replace:
 	@for pkg in $(inz_packages) ; do \
 		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
 	done
+ifeq ($(keepMaps), false)
 	@rm -rf ../iNZightVIT-WIN/prog_files/library/iNZightMaps
+endif
 
 extrareplace:
 	cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(extra)
