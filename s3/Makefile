@@ -16,8 +16,7 @@ getAWSCred:
 #python3 aws_saml_login.py --user $(AWS_USER) --idp iam.auckland.ac.nz
 	
 createHTML:
-	python3 create_webpages.py --path ../www/R/bin
-	python3 create_webpages.py --path ../www/R/src
+	python3 create_webpages.py --path ../www/R
 	
 syncChanges:
 	aws --profile saml s3 sync ./r.docker.aws.ccoe.auckland.ac.nz s3://r.docker.stat.auckland.ac.nz

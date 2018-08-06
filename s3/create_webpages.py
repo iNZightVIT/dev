@@ -103,7 +103,7 @@ for dirname, dirnames, filenames in os.walk('.'):
 
   for subdirname in dirnames:
     #print(os.path.join(dirname, subdirname))
-    if subdirname != "icons":
+    if not ((subdirname == "icons") or (subdirname == "templates") or (subdirname == "data") or (subdirname == "tracker")):
       editTime = creation_date(os.path.join(dirname, subdirname))
       html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/R/icons/folder.png\"></td><td><a href=\"" + subdirname + "/\">" +subdirname + "/</a></td><td>" + str(editTime) + "</td><td> - </td></tr>"
 
