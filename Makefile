@@ -192,10 +192,13 @@ winRelease:
 	cp updateProfile-windows.R $(DIRO)/prog_files/.Rprofile
 	cd $(DIRO); rm -rf prog_files/library/iNZightMaps; makensis INSTALL_SCRIPT.nsi
 
+WININST=iNZightVIT-installer-$(INZIGHT_VERSION).zip
 winReleaseZIP:
 	cp -rv $(DIRO) $(DIRN)
 	cd $(DIRN); rm -rf .git
-	cd $(DIR); zip -r iNZightVIT-v$(INZIGHT_VERSION)-zipfile.zip iNZightVIT
+	cd $(DIR); zip -r $(WININST) iNZightVIT
+	mv $(WININST) s3/www/iNZightVIT/Windows/
+	cd s3/www/iNZightVIT && ln -s Windows/$(WININST) iNZightVIT-installer.zip
 	rm -rf $(DIRN)
 
 PATCH_PKGS ?= $(inz_packages)
@@ -231,35 +234,35 @@ inzightRepository:
 
 
 version ?= $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
-addr = scienceit@docker.stat.auckland.ac.nz
-repodir ?= /srv/www/R
-repourl = $(addr):$(repodir)
+# addr = scienceit@docker.stat.auckland.ac.nz
+# repodir ?= /srv/www/R
+# repourl = $(addr):$(repodir)
 
 liveVersions:
 	@R --slave -e "available.packages(repos='http://r.docker.stat.auckland.ac.nz/R')[, 'Version']"
 
 # sync www/R/bin and www/R/src directories
-dry := true
-ifeq ($(dry), false)
-flags := -alv
-else
-flags := -alvn
-endif
-sync:
-	@rsync $(flags) --delete www/R/bin/ $(repourl)/bin
-	@echo
-	@rsync $(flags) --delete www/R/src/ $(repourl)/src
-ifeq ($(dry), true)
-	@echo "\n *** Run \`sync dry=false\` to perform sync"
-endif
+# dry := true
+# ifeq ($(dry), false)
+# flags := -alv
+# else
+# flags := -alvn
+# endif
+# sync:
+# 	@rsync $(flags) --delete www/R/bin/ $(repourl)/bin
+# 	@echo
+# 	@rsync $(flags) --delete www/R/src/ $(repourl)/src
+# ifeq ($(dry), true)
+# 	@echo "\n *** Run \`sync dry=false\` to perform sync"
+# endif
 
 
-winUpload:
-	@echo Uploading installer and creating symlink ...
-	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
+# winUpload:
+# 	@echo Uploading installer and creating symlink ...
+# 	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
 
-ssh:
-	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight; bash --login"
+# ssh:
+# 	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight; bash --login"
 
 
 
