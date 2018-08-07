@@ -78,7 +78,7 @@ for dirname, dirnames, filenames in os.walk('.'):
       #print(os.path.join(dirname, filename))
       editTime = creation_date(os.path.join(dirname, filename))
       fileSize = file_size(os.path.join(dirname, filename))
-      html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/R/icons/file.png\"></td><td><a href=\"" + filename + "\">" + filename + "/</a></td><td>" + str(editTime) + "</td><td>" + fileSize + "</td></tr>"
+      html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/R/icons/file.png\"></td><td><a href=\"" + filename + "\">" + filename + "</a></td><td>" + str(editTime) + "</td><td>" + fileSize + "</td></tr>"
           
   html_str = html_str + """
           </table>
