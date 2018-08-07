@@ -1,3 +1,7 @@
 secure.txt
 *~
 *.html
+*.tar.*
+*.zip
+*.exe
+*.dmg

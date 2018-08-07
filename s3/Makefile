@@ -18,9 +18,9 @@ setupPythonWindows:
 	pip install ./requirements.txt
 
 getAWSCred:
-	python3 aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
+	python3 aws_saml_login.py --user $(AWS_USER) --idp iam.auckland.ac.nz
+# python3 aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
 
-#python3 aws_saml_login.py --user $(AWS_USER) --idp iam.auckland.ac.nz
 	
 createHTML:
 	python3 create_webpages.py --path www
@@ -51,7 +51,9 @@ V  := 3.5
 VS = $(subst $(period),$(empty),$(V))
 RV = ${R${VS}}
 
+ifneq ($(PKG),)
 pkg_v ?= $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
+endif
 PACKAGE := $(PKG)_$(pkg_v)
 
 
