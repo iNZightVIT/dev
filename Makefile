@@ -153,13 +153,14 @@ pushall:
 
 # How iNZighting!
 
-ppkgs=$(inz_packages) ggsfextra ggplot2
+INZREPO=http://r.docker.stat.auckland.ac.nz
+ppkgs=$(inz_packages) ggsfextra RgoogleMaps
 pkginfo:
 	@echo ""
 	@for pkg in $(ppkgs) ; do \
 		echo " - \033[32m$$pkg\033[0m@\033[35m`cd ../$$pkg && git rev-parse --abbrev-ref HEAD`\033[0m" ;\
 		echo " - local version:  \033[33m`grep -i ^version ../$$pkg/DESCRIPTION | cut -d : -d \  -f 2`\033[0m" ;\
-		echo " - server version: \033[33m`ssh scienceit@docker.stat.auckland.ac.nz ls /srv/www/R/src/contrib/$${pkg}_*.tar.gz | cut -d _ -f 2 | sed -e 's/\.tar\.gz//g'`\033[0m" ;\
+		echo " - server version: \033[33m`pkg=$$pkg R --slave -e 'cat(available.packages(repos="$(INZREPO)")[Sys.getenv("pkg"), \"Version\"])'`\033[0m" ;\
 		echo ;\
 	done
 
@@ -215,11 +216,11 @@ repositoryFiles:
 	@echo "==== Building $(wpkg) v$(pkg_v)"
 	@for rv in $(RVs); do \
 		echo " *** R version $$rv" ;\
-		$(MAKE) -C www PKG=$$wpkg V=$$rv ;\
+		$(MAKE) -C s3 PKG=$$wpkg V=$$rv ;\
 	done
 	@echo "  ** Setting file permissions ..."
-	@find www/R -type f -exec chmod 664 {} +
-	@find www/R -type d -exec chmod 775 {} +
+	@find s3/www/R -type f -exec chmod 664 {} +
+	@find s3/www/R -type d -exec chmod 775 {} +
 	@echo "  ** Finished updating repository with $(wpkg) v$(pkg_v)"
 
 
@@ -235,7 +236,7 @@ repodir ?= /srv/www/R
 repourl = $(addr):$(repodir)
 
 liveVersions:
-	ssh $(addr) ls $(repodir)/src/contrib
+	@R --slave -e "available.packages(repos='http://r.docker.stat.auckland.ac.nz/R')[, 'Version']"
 
 # sync www/R/bin and www/R/src directories
 dry := true

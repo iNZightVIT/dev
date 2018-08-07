@@ -46,41 +46,7 @@ for dirname, dirnames, filenames in os.walk('.'):
       <head>
         <title>iNZight Package Repository</title>
 
-        <style type="text/css">
-          body {
-            font-family: Verdana, Arial, sans-serif;    
-          } 
-
-          #container {
-            max-width: 940px;
-            margin: 0 auto;
-          }
-
-          a, a:visited, a:active {
-            font-family: Monospace;
-            color: #0000cc;
-          }
-          a:hover {
-            color: #000066;
-          }
-
-          table {
-            text-align: left;
-          }
-
-          td, th {
-            padding-right: 30px;
-          }
-
-          .nopad {
-            padding: 0;
-          }
-
-          .footer {
-            font-size: 10px;
-            margin-top: 50px;
-          }
-        </style>
+        <link rel='stylesheet' type='text/css' href='/style.css'>
       </head>
 
       <body>
