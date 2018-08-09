@@ -5,7 +5,8 @@
 # make build
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
-inz_packages =  iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightMaps iNZightModules iNZight vit FutureLearnData
+inzight_packages = iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightModules iNZight vit FutureLearnData
+inz_packages =  $(inzight_packages) iNZightMaps
 extra := gWidgets2RGtk2 countrycode ggplot2 ggsfextra
 all_packages = $(inz_packages)
 
@@ -23,7 +24,7 @@ V  := 3.5
 VS = $(subst $(period),$(empty),$(V))
 RV = ${R${VS}}
 
-WINV := 3.2
+WINV := 3.5
 WINVS := $(subst $(period),$(empty),$(WINV))
 RWIN = ${R${WINVS}}
 
@@ -67,7 +68,10 @@ endif
 
 # Now you can install them into a temporary directory: make all
 all:
-	@cd ../; $(RWIN) CMD INSTALL -l tmp $(inz_packages)
+	@cd ../; $(RWIN) CMD INSTALL -l tmp $(inzight_packages)
+ifeq ($(keepMaps),true)
+	@cd ../; $(RWIN) CMD INSTALL -l tmp iNZightMaps
+endif
 
 extra:
 	@cd ../; $(RWIN) CMD INSTALL -l tmp $(extra)
@@ -83,11 +87,11 @@ extrahere:
 # do the following to move into the Windows all-in-one directory:
 replace:
 	@cd ../iNZightVIT-WIN/prog_files/library; rm -rf $(inz_packages)
-	@for pkg in $(inz_packages) ; do \
+	@for pkg in $(inzight_packages) ; do \
 		mv ../tmp/$$pkg ../iNZightVIT-WIN/prog_files/library/ ; \
 	done
-ifeq ($(keepMaps), false)
-	@rm -rf ../iNZightVIT-WIN/prog_files/library/iNZightMaps
+ifeq ($(keepMaps),true)
+	@mv ../tmp/iNZightMaps ../iNZightVIT-WIN/prog_files/library/
 endif
 
 extrareplace:
