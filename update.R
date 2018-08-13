@@ -32,7 +32,7 @@ updateDistribution <- function() {
         return(invisible(NULL))
       } else {
         utils::download.file(
-          "https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-windows.R",
+          "https://raw.githubusercontent.com/iNZightVIT/iNZightVIT-WIN/master/assets/.Rprofile",
           ".Rprofile"
         )
       }
