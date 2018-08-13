@@ -1,9 +1,13 @@
 ## UPDATE iNZightVIT:
 
-VERSION = 1.1
+VERSION = 1.2
 
 Sys.setenv("R_HOME" = file.path(getwd()))
 .libPaths(file.path(getwd(), "library"))
+
+repo <- c("CRAN" = "https://cran.rstudio.com",
+          "iNZight" = "http://r.docker.stat.auckland.ac.nz/R")
+options(repos = repo)
 
 ## Update modules in the Documents/iNZightVIT/modules directory:
 lib <- file.path("~", "iNZightVIT", "modules")

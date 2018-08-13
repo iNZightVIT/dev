@@ -1,7 +1,7 @@
 ## UPDATE VERSION NUMBERS AS REQUIRED
 if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
 LATEST <- switch(OS,
-                 "windows" = 1.1,
+                 "windows" = 1.2,
                  "osx" = 1.0)
 if (!exists("VERSION")) VERSION <- 0
 
