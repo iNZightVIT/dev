@@ -2,7 +2,7 @@
 if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
 LATEST <- switch(OS,
                  "windows" = 1.2,
-                 "osx" = 1.0)
+                 "osx" = 2.0)
 if (!exists("VERSION")) VERSION <- 0
 
 updateDistribution <- function() {
@@ -21,15 +21,19 @@ updateDistribution <- function() {
 
   if (VERSION < LATEST) {
       if (OS == "osx") {
-        conf <-
-          tcltk::tk_messageBox(message = paste("A new Mac installer has been released.",
-                                               "\nTo update, you'll need to download it and re-install",
-                                               "iNZight. Click OK to go to the website now."),
-                               title = "New iNZight for Mac Installer", icon = "info", type = "okcancel")
-        if (conf == "ok")
-          utils::browseURL("https://www.stat.auckland.ac.nz/~wild/iNZight/getinzight.php")
-        q("no")
-        return(invisible(NULL))
+        if (VERSION >= 2.0 && LATEST < 3.0) {
+          ## only need to update .Rprofile until a big update occurs
+        } else {
+          conf <-
+            tcltk::tk_messageBox(message = paste("A new Mac installer has been released.",
+                                                 "\nTo update, you'll need to download it and re-install",
+                                                 "iNZight. Click OK to go to the website now."),
+                                 title = "New iNZight for Mac Installer", icon = "info", type = "okcancel")
+          if (conf == "ok")
+            utils::browseURL("https://www.stat.auckland.ac.nz/~wild/iNZight/getinzight.php")
+          q("no")
+          return(invisible(NULL))
+        }
       } else {
         utils::download.file(
           "https://raw.githubusercontent.com/iNZightVIT/iNZightVIT-WIN/master/assets/.Rprofile",
