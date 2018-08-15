@@ -71,7 +71,7 @@ updateDistribution <- function() {
 #   }
 
   ## --- Update iNZight packages:
-  utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
+#   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
   
 #   if (!requireNamespace('Rcpp', quietly = TRUE)) {
 #     utils::install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
