@@ -75,7 +75,7 @@ updateDistribution <- function() {
   }
 
   ## --- Update iNZight packages:
-  utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
+  utils::update.packages(repos = "https://r.docker.stat.auckland.ac.nz", ask = FALSE)
   
   if (!requireNamespace('Rcpp', quietly = TRUE)) {
     utils::install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
@@ -113,12 +113,12 @@ updateDistribution <- function() {
                },
                finally = cat("Additional dependencies installed.\n"))
   if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
-      utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz/R")
+      utils::install.packages("FutureLearnData", repos = "https://r.docker.stat.auckland.ac.nz")
 
   try({
     if (packageVersion('iNZight') == numeric_version(3.2) &&
         grepl("2018-01-24", packageDescription('iNZight')$Built)) {
-      install.packages('iNZight', repos = 'http://r.docker.stat.auckland.ac.nz')
+      install.packages('iNZight', repos = 'https://r.docker.stat.auckland.ac.nz')
     }
   }, silent = TRUE)
 
