@@ -252,7 +252,8 @@ repostructure:
 	@for i in 4 5; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/3.$$i; done
 	@for i in 2 3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/3.$$i; done
 	@mkdir -p $(s3rep)/src/contrib
-	@mkdir -p $(s3rep)/downloads
+	@mkdir -p $(s3rep)/downloads/Windows
+	@mkdir -p $(s3rep)/downloads/macOS
 
 newsFiles:
 	@for pkg in $(inz_packages) ; do \
