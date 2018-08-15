@@ -19,8 +19,6 @@ setupPythonWindows:
 	pip install ./requirements.txt
 
 getAWSCred:
-	# python3 aws_saml_login.py --idp iam.auckland.ac.nz
-	#python3 aws_saml_login.py --user $(AWS_USER) --idp iam.auckland.ac.nz
 	python3 aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
 
 	

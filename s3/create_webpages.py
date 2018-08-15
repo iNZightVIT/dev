@@ -74,7 +74,7 @@ for dirname, dirnames, filenames in os.walk('.'):
       html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/icons/folder.png\"></td><td><a href=\"" + subdirname + "/\">" +subdirname + "/</a></td><td>" + str(editTime) + "</td><td> - </td></tr>"
 
   for filename in filenames:
-    if not ((filename == "index.html") or (filename == "create_webpages.py") or (filename == "create_webpages.7z")):
+    if not ((filename == "index.html") or (filename == "create_webpages.py") or (filename == "create_webpages.7z") or (filename == "style.css")):
       #print(os.path.join(dirname, filename))
       editTime = creation_date(os.path.join(dirname, filename))
       fileSize = file_size(os.path.join(dirname, filename))
