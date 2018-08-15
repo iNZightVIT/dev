@@ -71,14 +71,14 @@ for dirname, dirnames, filenames in os.walk('.'):
     #print(os.path.join(dirname, subdirname))
     if not ((subdirname == "icons") or (subdirname == "templates") or (subdirname == "data") or (subdirname == "tracker")):
       editTime = creation_date(os.path.join(dirname, subdirname))
-      html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/R/icons/folder.png\"></td><td><a href=\"" + subdirname + "/\">" +subdirname + "/</a></td><td>" + str(editTime) + "</td><td> - </td></tr>"
+      html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/icons/folder.png\"></td><td><a href=\"" + subdirname + "/\">" +subdirname + "/</a></td><td>" + str(editTime) + "</td><td> - </td></tr>"
 
   for filename in filenames:
     if not ((filename == "index.html") or (filename == "create_webpages.py") or (filename == "create_webpages.7z")):
       #print(os.path.join(dirname, filename))
       editTime = creation_date(os.path.join(dirname, filename))
       fileSize = file_size(os.path.join(dirname, filename))
-      html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/R/icons/file.png\"></td><td><a href=\"" + filename + "\">" + filename + "</a></td><td>" + str(editTime) + "</td><td>" + fileSize + "</td></tr>"
+      html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/icons/file.png\"></td><td><a href=\"" + filename + "\">" + filename + "</a></td><td>" + str(editTime) + "</td><td>" + fileSize + "</td></tr>"
           
   html_str = html_str + """
           </table>

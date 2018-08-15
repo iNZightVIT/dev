@@ -247,12 +247,12 @@ liveVersions:
 	@R --slave -e "available.packages(repos='http://r.docker.stat.auckland.ac.nz/R')[, 'Version']"
 
 repostructure:
-	rm -rf $(s3rep)/bin $(s3rep)/src
 	@for i in  2 3 4 5; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
 	@mkdir -p $(s3rep)/bin/macosx/contrib/3.2
 	@for i in 4 5; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/3.$$i; done
 	@for i in 2 3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/3.$$i; done
 	@mkdir -p $(s3rep)/src/contrib
+	@mkdir -p $(s3rep)/downloads
 
 newsFiles:
 	@for pkg in $(inz_packages) ; do \
