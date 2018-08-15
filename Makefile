@@ -10,13 +10,18 @@ inz_packages =  $(inzight_packages) iNZightMaps
 extra := gWidgets2RGtk2 countrycode ggplot2 ggsfextra
 all_packages = $(inz_packages)
 
+s3rep = s3/www
+DLDIR = $(s3rep)/downloads
+BINDIR = $(s3rep)/bin
+SRCDIR = $(s3rep)/src
+
 CD_INZ := cd ~/iNZight;
 
 # R versions
-R32 := ~/R-3.2.2/bin/R
-R33 := ~/R-3.3.1/bin/R
-R34 := ~/R-3.4.0/bin/R
-R35 := ~/R-3.5.0/bin/R
+R32 := ~/R-3.2/bin/R
+R33 := ~/R-3.3/bin/R
+R34 := ~/R-3.4/bin/R
+R35 := ~/R-3.5/bin/R
 
 period := .
 empty :=
@@ -197,12 +202,13 @@ winRelease:
 	cd $(DIRO); rm -rf prog_files/library/iNZightMaps; makensis INSTALL_SCRIPT.nsi
 
 WININST=iNZightVIT-installer-$(INZIGHT_VERSION).zip
+
 winReleaseZIP:
 	cp -rv $(DIRO) $(DIRN)
 	cd $(DIRN); rm -rf .git
 	cd $(DIR); zip -r $(WININST) iNZightVIT
-	mv $(WININST) s3/www/iNZightVIT/Windows/
-	cd s3/www/iNZightVIT && ln -s Windows/$(WININST) iNZightVIT-installer.zip
+	mv $(WININST) $(DLDIR)/Windows/
+	cd $(DLDIR) && ln -s Windows/$(WININST) iNZightVIT-installer.zip
 	rm -rf $(DIRN)
 
 PATCH_PKGS ?= $(inz_packages)
@@ -226,8 +232,8 @@ repositoryFiles:
 		$(MAKE) -C s3 PKG=$$wpkg V=$$rv ;\
 	done
 	@echo "  ** Setting file permissions ..."
-	@find s3/www/R -type f -exec chmod 664 {} +
-	@find s3/www/R -type d -exec chmod 775 {} +
+	@find $(s3dir) -type f -exec chmod 664 {} +
+	@find $(s3dir) -type d -exec chmod 775 {} +
 	@echo "  ** Finished updating repository with $(wpkg) v$(pkg_v)"
 
 
@@ -236,39 +242,17 @@ inzightRepository:
 	  make repositoryFiles wpkg=$$pkg ; \
 	done
 
-
 version ?= $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
-# addr = scienceit@docker.stat.auckland.ac.nz
-# repodir ?= /srv/www/R
-# repourl = $(addr):$(repodir)
-
 liveVersions:
 	@R --slave -e "available.packages(repos='http://r.docker.stat.auckland.ac.nz/R')[, 'Version']"
 
-# sync www/R/bin and www/R/src directories
-# dry := true
-# ifeq ($(dry), false)
-# flags := -alv
-# else
-# flags := -alvn
-# endif
-# sync:
-# 	@rsync $(flags) --delete www/R/bin/ $(repourl)/bin
-# 	@echo
-# 	@rsync $(flags) --delete www/R/src/ $(repourl)/src
-# ifeq ($(dry), true)
-# 	@echo "\n *** Run \`sync dry=false\` to perform sync"
-# endif
-
-
-# winUpload:
-# 	@echo Uploading installer and creating symlink ...
-# 	@scp $(DIRO)/iNZightVIT-installer.exe tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/downloads/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
-
-# ssh:
-# 	ssh -t tell029@login02.fos.auckland.ac.nz "cd /mnt/tell029/web/homepages.stat/inzight-www/iNZight; bash --login"
-
-
+repostructure:
+	rm -rf $(s3rep)/bin $(s3rep)/src
+	@for i in  2 3 4 5; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
+	@mkdir -p $(s3rep)/bin/macosx/contrib/3.2
+	@for i in 4 5; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/3.$$i; done
+	@for i in 2 3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/3.$$i; done
+	@mkdir -p $(s3rep)/src/contrib
 
 newsFiles:
 	@for pkg in $(inz_packages) ; do \

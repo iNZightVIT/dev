@@ -6,9 +6,10 @@ endif
 
 
 installPython:
-	sudo add-apt-repository -y ppa:deadsnakes/ppa
+	-sudo add-apt-repository -y ppa:deadsnakes/ppa
 	sudo apt update
-	sudo apt install python3.6 python3-pip -y
+	sudo apt install python3.6 -y
+	sudo easy_install3 pip
 	sudo pip3 install -r ./requirements.txt
 	
 #Assumes that Python 3 64-bit is already installed, as well as PIP
@@ -18,8 +19,9 @@ setupPythonWindows:
 	pip install ./requirements.txt
 
 getAWSCred:
-	python3 aws_saml_login.py --user $(AWS_USER) --idp iam.auckland.ac.nz
-# python3 aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
+	# python3 aws_saml_login.py --idp iam.auckland.ac.nz
+	#python3 aws_saml_login.py --user $(AWS_USER) --idp iam.auckland.ac.nz
+	python3 aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
 
 	
 createHTML:
@@ -29,21 +31,15 @@ syncChanges:
 	aws --profile saml s3 sync www s3://r.docker.stat.auckland.ac.nz
 
 
-
-
-
-
-
-R31 := ~/R-3.1.2/bin/R
-R32 := ~/R-3.2.2/bin/R
-R33 := ~/R-3.3.1/bin/R
-R34 := ~/R-3.4.0/bin/R
-R35 := ~/R-3.5.0/bin/R
+R32 := ~/R-3.2/bin/R
+R33 := ~/R-3.3/bin/R
+R34 := ~/R-3.4/bin/R
+R35 := ~/R-3.5/bin/R
 
 DIR := ~/iNZight
-SRC := www/R/src
-WIN := www/R/bin/windows
-MAC := www/R/bin/macosx
+SRC := www/src
+WIN := www/bin/windows
+MAC := www/bin/macosx
 
 period := .
 empty :=
