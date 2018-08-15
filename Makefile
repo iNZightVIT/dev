@@ -198,8 +198,9 @@ DIRN = ~/iNZight/iNZightVIT
 
 
 winRelease:
-	cp updateProfile-windows.R $(DIRO)/prog_files/.Rprofile
-	cd $(DIRO); rm -rf prog_files/library/iNZightMaps; makensis INSTALL_SCRIPT.nsi
+	# @cd $(DIRO); makensis INSTALL_SCRIPT.nsi
+	@mv $(DIRO)/iNZightVIT-installer.exe $(DLDIR)/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
+	@cd $(DLDIR); ln -sf Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe
 
 WININST=iNZightVIT-installer-$(INZIGHT_VERSION).zip
 
