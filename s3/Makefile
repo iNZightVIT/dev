@@ -32,6 +32,8 @@ syncChanges:
 syncDownloads:
 	aws --profile saml s3 sync www/downloads s3://r.docker.stat.auckland.ac.nz/downloads
 
+clearCache:
+	aws --profile 'saml' cloudfront create-invalidation --distribution-id $(AWS_ID) --paths "/*"
 
 
 R32 := ~/R-3.2/bin/R
