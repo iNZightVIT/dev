@@ -26,7 +26,12 @@ createHTML:
 	python3 create_webpages.py --path www
 	
 syncChanges:
-	aws --profile saml s3 sync www s3://r.docker.stat.auckland.ac.nz
+	aws --profile saml s3 sync www/src s3://r.docker.stat.auckland.ac.nz/src
+	aws --profile saml s3 sync www/bin s3://r.docker.stat.auckland.ac.nz/bin
+	
+syncDownloads:
+	aws --profile saml s3 sync www/downloads s3://r.docker.stat.auckland.ac.nz/downloads
+
 
 
 R32 := ~/R-3.2/bin/R
