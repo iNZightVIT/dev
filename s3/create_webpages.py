@@ -67,13 +67,13 @@ for dirname, dirnames, filenames in os.walk('.'):
   if (dirname.count('\\') > 1) or (dirname.count('/') > 1):
     html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/R/icons/updir.png\"></td><td><a href=\"../\">Parent Directory</a></td><td> - </td><td> - </td></tr>"
 
-  for subdirname in dirnames:
+  for subdirname in sorted(dirnames):
     #print(os.path.join(dirname, subdirname))
     if not ((subdirname == "icons") or (subdirname == "templates") or (subdirname == "data") or (subdirname == "tracker")):
       editTime = creation_date(os.path.join(dirname, subdirname))
       html_str = html_str + "<tr><td class=\"nopad\"><img src=\"/icons/folder.png\"></td><td><a href=\"" + subdirname + "/\">" +subdirname + "/</a></td><td>" + str(editTime) + "</td><td> - </td></tr>"
 
-  for filename in filenames:
+  for filename in sorted(filenames):
     if not ((filename == "index.html") or (filename == "create_webpages.py") or (filename == "create_webpages.7z") or (filename == "style.css")):
       #print(os.path.join(dirname, filename))
       editTime = creation_date(os.path.join(dirname, filename))
