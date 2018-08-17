@@ -162,7 +162,7 @@ pushall:
 
 # How iNZighting!
 
-INZREPO=http://r.docker.stat.auckland.ac.nz
+INZREPO=https://r.docker.stat.auckland.ac.nz
 ppkgs=$(inz_packages) ggsfextra RgoogleMaps
 pkginfo:
 	@echo ""
@@ -245,7 +245,7 @@ inzightRepository:
 
 version ?= $(shell grep -i ^version $(DIR)/$(PKG)/DESCRIPTION | cut -d : -d \  -f 2)
 liveVersions:
-	@R --slave -e "available.packages(repos='http://r.docker.stat.auckland.ac.nz/R')[, 'Version']"
+	@R --slave -e "available.packages(repos='https://r.docker.stat.auckland.ac.nz')[, 'Version']"
 
 repostructure:
 	@for i in  2 3 4 5; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
