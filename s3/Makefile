@@ -4,6 +4,7 @@ else
 default: windows mac clean createHTML
 endif
 
+PYTHON := python3.6
 
 installPython:
 	-sudo add-apt-repository -y ppa:deadsnakes/ppa
@@ -19,11 +20,11 @@ setupPythonWindows:
 	pip install ./requirements.txt
 
 getAWSCred:
-	python3 aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
+	$(PYTHON) aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
 
 	
 createHTML:
-	python3 create_webpages.py --path www
+	$(PYTHON) create_webpages.py --path www
 	
 syncChanges:
 	aws --profile saml s3 sync www/src s3://r.docker.stat.auckland.ac.nz/src
