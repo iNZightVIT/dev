@@ -61,7 +61,7 @@ endif
 installDep:
 ifeq ("$(RGTK)", "OLD")
 	@echo " * Installing Archives version of RGtk2 2.20.31 for pre-3.4 version of R"
-	@$(RV) --slave -e "install.packages('https://cran.stat.auckland.ac.nz/src/contrib/Archive/RGtk2/RGtk2_2.20.31.tar.gz', type = 'source', repos = NULL)"
+	@$(RV) --slave -e "if (!requireNamespace('RGtk2', quietly = TRUE)) install.packages('https://cran.stat.auckland.ac.nz/src/contrib/Archive/RGtk2/RGtk2_2.20.31.tar.gz', type = 'source', repos = NULL)"
 endif
 	@echo " * Installing iNZight packages and dependencies"
 	@$(RV) --slave -e "install.packages(c('devtools'), repos='https://cran.stat.auckland.ac.nz')"
