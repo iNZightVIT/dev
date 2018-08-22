@@ -198,7 +198,7 @@ DIRN = ~/iNZight/iNZightVIT
 
 
 winRelease:
-	# @cd $(DIRO); makensis INSTALL_SCRIPT.nsi
+	@cd $(DIRO); makensis INSTALL_SCRIPT.nsi
 	@mv $(DIRO)/iNZightVIT-installer.exe $(DLDIR)/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
 	@cd $(DLDIR); ln -sf Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe
 
