@@ -12,16 +12,17 @@ rule <- function() cat(rep("=", width), "\n\n", sep = "")
 ## set library path
 LIB <- file.path(Sys.getenv('APPDIR'), ".library")
 .libPaths(LIB)
-repo <- c("http://r.docker.stat.auckland.ac.nz/R",
+repo <- c("https://r.docker.stat.auckland.ac.nz",
           "https://cran.rstudio.com")
 options(repos = repo)
 
+### - this doesn't work because pkg-config isn't compiled for their specific mac :(
 ## Don't ask user to compile from source .. just do it!
-options(install.packages.compile.from.source = 'always')
+# options(install.packages.compile.from.source = 'always')
 ## to ensure we can build packages correctly ...
-Sys.setenv(PKG_CONFIG = 
-    file.path("/Applications", "iNZightVIT", "Update.app",
-              "Contents", "Resources", "pkg-config"))
+# Sys.setenv(PKG_CONFIG = 
+#     file.path("/Applications", "iNZightVIT", "Update.app",
+#               "Contents", "Resources", "pkg-config"))
 
 installPkgs <- function(...) {
     cat(" * checking for installed dependencies \n")
