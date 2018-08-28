@@ -2,7 +2,7 @@
 if (!exists("OS")) OS <- ifelse(.Platform$OS == "windows", "windows", "osx")
 LATEST <- switch(OS,
                  "windows" = 1.2,
-                 "osx" = 1.0)
+                 "osx" = 2.0)
 if (!exists("VERSION")) VERSION <- 0
 
 updateDistribution <- function() {
@@ -21,18 +21,22 @@ updateDistribution <- function() {
 
   if (VERSION < LATEST) {
       if (OS == "osx") {
-        conf <-
-          tcltk::tk_messageBox(message = paste("A new Mac installer has been released.",
-                                               "\nTo update, you'll need to download it and re-install",
-                                               "iNZight. Click OK to go to the website now."),
-                               title = "New iNZight for Mac Installer", icon = "info", type = "okcancel")
-        if (conf == "ok")
-          utils::browseURL("https://www.stat.auckland.ac.nz/~wild/iNZight/getinzight.php")
-        q("no")
-        return(invisible(NULL))
+        if (VERSION >= 2.0 && LATEST < 3.0) {
+          ## only need to update .Rprofile until a big update occurs
+        } else {
+          conf <-
+            tcltk::tk_messageBox(message = paste("A new Mac installer has been released.",
+                                                 "\nTo update, you'll need to download it and re-install",
+                                                 "iNZight. Click OK to go to the website now."),
+                                 title = "New iNZight for Mac Installer", icon = "info", type = "okcancel")
+          if (conf == "ok")
+            utils::browseURL("https://www.stat.auckland.ac.nz/~wild/iNZight/getinzight.php")
+          q("no")
+          return(invisible(NULL))
+        }
       } else {
         utils::download.file(
-          "https://raw.githubusercontent.com/iNZightVIT/dev/master/updateProfile-windows.R",
+          "https://raw.githubusercontent.com/iNZightVIT/iNZightVIT-WIN/master/assets/.Rprofile",
           ".Rprofile"
         )
       }
@@ -55,68 +59,68 @@ updateDistribution <- function() {
   }, silent = TRUE)
 
   ## List any packages added to iNZight after the release
-#   pkgs <- c("RColorBrewer", "hexbin",
-#             "gridSVG", "jsonlite", "xtable",
-#             "readr", "readxl", "tibble", "tidyr")
-#   if (OS == "windows") {
-#     if (!requireNamespace("hms", quietly = TRUE))
-#       utils::install.packages('hms', type = 'binary')
-#     pkgs <- c(pkgs, "RODBC")
-#   }
-#   if (OS == "osx") {
-#     try({
-#       if (!"Acinonyx" %in% rownames(utils::installed.packages()))
-#           utils::install.packages("Acinonyx", repos = c("http://rforge.net", "https://cran.rstudio.com"))
-#     }, TRUE)
-#   }
+  pkgs <- c("RColorBrewer", "hexbin",
+            "gridSVG", "jsonlite", "xtable",
+            "readr", "readxl", "tibble", "tidyr")
+  if (OS == "windows") {
+    if (!requireNamespace("hms", quietly = TRUE))
+      utils::install.packages('hms', type = 'binary')
+    pkgs <- c(pkgs, "RODBC")
+  }
+  if (OS == "osx") {
+    try({
+      if (!"Acinonyx" %in% rownames(utils::installed.packages()))
+          utils::install.packages("Acinonyx", repos = c("http://rforge.net", "https://cran.rstudio.com"))
+    }, TRUE)
+  }
 
   ## --- Update iNZight packages:
-#   utils::update.packages(repos = "http://r.docker.stat.auckland.ac.nz/R", ask = FALSE)
+  utils::update.packages(repos = "https://r.docker.stat.auckland.ac.nz", ask = FALSE)
   
-#   if (!requireNamespace('Rcpp', quietly = TRUE)) {
-#     utils::install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
-#     if (!requireNamespace('Rcpp', quietly = TRUE)) {
-#        tcltk::tkmessageBox(title = "Unable to install dependencies", 
-#                            message = "Unfortunately one of the dependencies could not be installed.\n\nPlease contact inzight_support@stat.auckland.ac.nz",
-#                            icon = "info", type = "ok")
-#        stop()
-#     }
-#     cat('Successfully installed Rcpp...\n')
-#   }
+  if (!requireNamespace('Rcpp', quietly = TRUE)) {
+    utils::install.packages('Rcpp', repos=c('https://cran.rstudio.com'), type = "binary")
+    if (!requireNamespace('Rcpp', quietly = TRUE)) {
+       tcltk::tkmessageBox(title = "Unable to install dependencies", 
+                           message = "Unfortunately one of the dependencies could not be installed.\n\nPlease contact inzight_support@stat.auckland.ac.nz",
+                           icon = "info", type = "ok")
+       stop()
+    }
+    cat('Successfully installed Rcpp...\n')
+  }
 
-#   if (OS == "windows") {
-#     libz <- .libPaths()
-#     libz <- libz[!grepl("modules", libz)]
-#     instlib <- libz[1]
-#     if (as.numeric(file.access(instlib, mode = 2)) == -1) {
-#       warning("Unable to write to the main package library - will attempt installing additional dependencies elsewhere.\nIf you are unable to run iNZight, you may need to run the installer as Admin.") 
-#       instlib <- .libPaths()[1]
-#     }
-#   } else {
-#     instlib <- .libPaths()[1] 
-#   }
+  if (OS == "windows") {
+    libz <- .libPaths()
+    libz <- libz[!grepl("modules", libz)]
+    instlib <- libz[1]
+    if (as.numeric(file.access(instlib, mode = 2)) == -1) {
+      warning("Unable to write to the main package library - will attempt installing additional dependencies elsewhere.\nIf you are unable to run iNZight, you may need to run the installer as Admin.") 
+      instlib <- .libPaths()[1]
+    }
+  } else {
+    instlib <- .libPaths()[1] 
+  }
   
 
   ## A list of packages we NEED to have installed (since older versions anyway...)
-#   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
-#   if (length(pkgs) > 0)
-#       tryCatch(utils::install.packages(pkgs, repos = "https://cran.rstudio.com", lib = instlib),
-#                error = function(e) {
-#                    cat("Something went wrong trying to install additional dependencies.",
-#                        "\nTry the updater again, and if the problem continues,",
-#                        "\n  contact inzight_support@stat.auckland.ac.nz\n\n")
-#                    cat("The following messages were received: \n", e)
-#                },
-#                finally = cat("Additional dependencies installed.\n"))
-#   if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
-#       utils::install.packages("FutureLearnData", repos = "http://r.docker.stat.auckland.ac.nz/R")
+  pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
+  if (length(pkgs) > 0)
+      tryCatch(utils::install.packages(pkgs, repos = "https://cran.rstudio.com", lib = instlib),
+               error = function(e) {
+                   cat("Something went wrong trying to install additional dependencies.",
+                       "\nTry the updater again, and if the problem continues,",
+                       "\n  contact inzight_support@stat.auckland.ac.nz\n\n")
+                   cat("The following messages were received: \n", e)
+               },
+               finally = cat("Additional dependencies installed.\n"))
+  if (! "FutureLearnData" %in% rownames(utils::installed.packages()) )
+      utils::install.packages("FutureLearnData", repos = "https://r.docker.stat.auckland.ac.nz")
 
-#   try({
-#     if (packageVersion('iNZight') == numeric_version(3.2) &&
-#         grepl("2018-01-24", packageDescription('iNZight')$Built)) {
-#       install.packages('iNZight', repos = 'http://r.docker.stat.auckland.ac.nz')
-#     }
-#   }, silent = TRUE)
+  try({
+    if (packageVersion('iNZight') == numeric_version(3.2) &&
+        grepl("2018-01-24", packageDescription('iNZight')$Built)) {
+      install.packages('iNZight', repos = 'https://r.docker.stat.auckland.ac.nz')
+    }
+  }, silent = TRUE)
 
   ## success message
   cat("==========================================================\n")

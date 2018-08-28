@@ -138,7 +138,6 @@ def get_password():
 	if not password:
 		print('Cannot obtain password')
 		sys.exit(1)
-	print (password)
 	return password
 
 # Get a multi-factor token
@@ -154,7 +153,6 @@ def get_mfa_token():
 	if not mftoken:
 		print('Cannot obtain multi-factor token')
 		sys.exit(1)
-	print(mftoken)
 	return mftoken
 
 # Create browser
