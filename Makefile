@@ -196,6 +196,11 @@ DIR = ~/iNZight
 DIRO = ~/iNZight/iNZightVIT-WIN
 DIRN = ~/iNZight/iNZightVIT
 
+MACINST=iNZightVIT-mac-$(INZIGHT_VERSION).dmg
+MACDB=~/Dropbox/iNZight/$(MACINST)
+macRelease: | $(MACDB)
+	@cp $(MACDB) $(DLDIR)/macOS/
+	@cd $(DLDIR); ln -sf macOS/$(MACINST) iNZightVIT-mac.dmg
 
 winRelease:
 	@cd $(DIRO); makensis INSTALL_SCRIPT.nsi
