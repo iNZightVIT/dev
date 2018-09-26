@@ -50,6 +50,8 @@ updateDistribution <- function() {
   cat("               Checking for updates ...\n")
   cat("==========================================================\n\n")
   
+  if ("@CRAN@" %in% getOption('repos')) 
+    options(repos = c("https://r.docker.stat.auckland.ac.nz", "https://cran.stat.auckland.ac.nz"))
   try({
     cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
     cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
