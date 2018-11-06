@@ -23,10 +23,10 @@ data(api, package="survey")
 
 ## Run - generic
 KK <- iNZGUI$new()
-##KK$initializeGui()
+KK$initializeGui()
 ##KK$initializeGui(apiclus1)
 ##KK$getActiveDoc()$dataModel$setDesign(clus1="dnum",wt="pw",fpc="fpc")
-KK$initializeGui(census.at.school.500)
+##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 

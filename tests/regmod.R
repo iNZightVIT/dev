@@ -55,3 +55,15 @@ lines(sm$x[o], sm$fitted[o], col = "orangered", lwd = 4)
 
 dev.new()
 plotlm6(fit, 1)
+
+
+
+
+load_all("~/iNZight/iNZightRegression")
+fit <- lm(height ~ age, data = dat)
+iNZightSummary(fit, exclude = "age")
+
+
+load_all("~/iNZight/iNZightRegression")
+fit <- glm(gender ~ rightfoot + age, data = dat, family = binomial())
+iNZightSummary(fit)
