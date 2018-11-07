@@ -10,23 +10,27 @@ library(devtools)
 ## Load - generic
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
-load_all("~/iNZight/iNZightRegression", export_all = FALSE)
+#load_all("~/iNZight/iNZightRegression", export_all = FALSE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
-load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-load_all("~/iNZight/iNZightModules", export_all = FALSE)
-if (! "package:iNZight" %in% search())
-    load_all(export_all = FALSE)
+#load_all("~/iNZight/iNZightPlots", export_all = FALSE)
+#load_all("~/iNZight/iNZightModules", export_all = FALSE)
+#if (! "package:iNZight" %in% search())
+load_all(export_all = FALSE)
 data(census.at.school.500, package = 'iNZight')
-data(gapminder, package = "iNZight")
-data(api, package="survey")
+#data(gapminder, package = "iNZight")
+#data(api, package="survey")
 
 ## Run - generic
 KK <- iNZGUI$new()
 KK$initializeGui()
+
+
+KK$initializeGui(census.at.school.500)
+
 ##KK$initializeGui(apiclus1)
 ##KK$getActiveDoc()$dataModel$setDesign(clus1="dnum",wt="pw",fpc="fpc")
-##KK$initializeGui(census.at.school.500)
+KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 
