@@ -1,4 +1,85 @@
 library(devtools)
+
+load_all('~/iNZight/iNZightMaps')
+data(quakes)
+
+obj <- iNZightMap(~lat, ~long, quakes)
+plot(obj)
+
+library(ggmap)
+
+bbox <- c(rbind(range(quakes$long, na.rm = TRUE),
+                range(quakes$lat, na.rm = TRUE)))
+map <- get_stamenmap(bbox, zoom = 5)
+ggmap(map) + geom_point(aes(long, lat), data = quakes)
+
+## adjust bbox for window
+grid.newpage()
+pushViewport(viewport(width = 0.8, height = 0.9))
+grid.rect()
+
+pw <- as.numeric(convertWidth(unit(1, "npc"), "in"))
+ph <- as.numeric(convertHeight(unit(1, "npc"), "in"))
+pr <- pw / ph
+
+bd <- apply(matrix(bbox, ncol = 2), 1, diff)
+br <- bd[1] / bd[2]
+
+if (br < pr) {
+    ## br is narrower
+    ## extend bbox WIDTH so br == pr
+    bc <- mean(bbox[c(1, 3)])
+    bw <- br * bd[2]
+    bbox[1] <- bc - bw/2
+    bbox[3] <- bc + bw/2
+} else {
+    ## pr is narrower
+}
+
+zoom <- 5
+if (bbox[1] < -180) {
+} else if (bbox[3] > 180) {
+    bbox.right <- bbox.left <- bbox
+    bbox.left[3] <- 179.99999
+    bbox.right[1] <- -180
+    bbox.right[3] <- bbox.right[3] - 360
+    map.left <- get_stamenmap(bbox.left, zoom = zoom)   
+    map.right <- get_stamenmap(bbox.right, zoom = zoom)
+    map <- as.raster(cbind(as.matrix(map.left), as.matrix(map.right)))
+}
+
+grid.newpage()
+pushViewport(viewport(width = 0.8, height = 0.9,
+                      xscale = bbox[c(1,3)], yscale = bbox[c(2, 4)]))
+grid.raster(map)
+grid.rect()
+qp <- LonLat2XY(quakes$long, quakes$lat, zoom)
+grid.points(quakes$long, quakes$lat, gp = gpar(cex = 0.5), pch = 19)
+
+
+
+map <- get_stamenmap(bbox, zoom = 6)
+ggmap(map)
+
+
+NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################################### OLD
+
+library(devtools)
 data('gapminder_2008', package = 'FutureLearnData')
 
 load_all("~/iNZight/iNZightMaps", export_all = FALSE)
