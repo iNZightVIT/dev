@@ -3,38 +3,73 @@ library(devtools)
 load_all('~/iNZight/iNZightMaps')
 data(quakes)
 
-obj <- iNZightMap(~lat, ~long, quakes)
-plot(obj)
+#obj <- iNZightMap(~lat, ~long, quakes)
+#plot(obj)
 
 library(ggmap)
+library(grid)
 
-bbox <- c(rbind(range(quakes$long, na.rm = TRUE),
+zoom <- 5
+bbox <- c(rbind(range(quakes$long, na.rm = TRUE) - 50,
                 range(quakes$lat, na.rm = TRUE)))
-map <- get_stamenmap(bbox, zoom = 5)
-ggmap(map) + geom_point(aes(long, lat), data = quakes)
+
+map <- get_stamenmap(bbox, zoom)
+## ggmap(map) + geom_point(aes(long, lat), data = quakes)
 
 ## adjust bbox for window
 grid.newpage()
 pushViewport(viewport(width = 0.8, height = 0.9))
 grid.rect()
+mapgrob <- rasterGrob(map)
+grid.draw(mapgrob)
 
-pw <- as.numeric(convertWidth(unit(1, "npc"), "in"))
-ph <- as.numeric(convertHeight(unit(1, "npc"), "in"))
+
+pw <- convertWidth(current.viewport()$width, "mm", TRUE)
+ph <- convertHeight(current.viewport()$height, "mm", TRUE)
 pr <- pw / ph
 
-bd <- apply(matrix(bbox, ncol = 2), 1, diff)
-br <- bd[1] / bd[2]
+lons <- bbox[c(1, 3)]
+lats <- bbox[c(2, 4)]
+corners <- expand.grid(lon = lons, lat = lats)
+tile.bounds <- LonLat2XY(corners$lon, corners$lat, zoom = zoom)
+
+tile.y <- tile.bounds$Y + tile.bounds$y / 255
+tile.x <- tile.bounds$X + tile.bounds$x / 255
+tile.h <- diff(range(tile.y))
+tile.w <- tile.h * pr
+
+tile.x <- mean(tile.x) + c(-1, 1) * tile.w / 2
+tile.bounds$X <- floor(tile.x)
+tile.bounds$x <- (tile.x - floor(tile.x)) * 255
+newcorners <-
+    do.call(rbind, apply(tile.bounds, 1, function(x)
+        XY2LonLat(x[1], x[2], zoom, x[3], x[4])))
+
+bbox <- c(t(apply(newcorners, 2, range)))
+
+
+
+mw <- convertWidth(grobWidth(mapgrob), "mm", TRUE)
+mh <- convertHeight(grobHeight(mapgrob), "mm", TRUE)
+mr <- mw / mh
+
+
+
 
 if (br < pr) {
     ## br is narrower
     ## extend bbox WIDTH so br == pr
-    bc <- mean(bbox[c(1, 3)])
-    bw <- br * bd[2]
-    bbox[1] <- bc - bw/2
-    bbox[3] <- bc + bw/2
+    bw <- bh * pr
+    bc <- mean(xt)
+    xt[1] <- bc - bw/2
+    xt[2] <- bc + bw/2
 } else {
     ## pr is narrower
 }
+
+## back transform to get bbox
+bbox[c(1, 3)] <- xt * 180 / pi
+bbox[c(2, 4)] <- (2 * atan(exp(yt)) - pi / 2) * 180 / pi
 
 zoom <- 5
 if (bbox[1] < -180) {
@@ -46,6 +81,8 @@ if (bbox[1] < -180) {
     map.left <- get_stamenmap(bbox.left, zoom = zoom)   
     map.right <- get_stamenmap(bbox.right, zoom = zoom)
     map <- as.raster(cbind(as.matrix(map.left), as.matrix(map.right)))
+} else {
+    map <- get_stamenmap(bbox, zoom = zoom)
 }
 
 grid.newpage()
@@ -53,6 +90,7 @@ pushViewport(viewport(width = 0.8, height = 0.9,
                       xscale = bbox[c(1,3)], yscale = bbox[c(2, 4)]))
 grid.raster(map)
 grid.rect()
+
 qp <- LonLat2XY(quakes$long, quakes$lat, zoom)
 grid.points(quakes$long, quakes$lat, gp = gpar(cex = 0.5), pch = 19)
 
