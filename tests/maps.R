@@ -2,16 +2,22 @@ library(devtools)
 
 load_all('~/iNZight/iNZightMaps')
 data(quakes)
+data(nzquakes)
 
-#obj <- iNZightMap(~lat, ~long, quakes)
-#plot(obj)
+obj <- iNZightMap(~lat, ~long, quakes)
+plot(obj, sizeby = mag, colby = depth)
+
+obj2 <- iNZightMap(~Latitude, ~Longitude, nzquakes)
+plot(obj2, map.zoom = 5, type = "terrain-background",
+     colby = Felt)
+
 
 library(ggmap)
 library(grid)
 
 zoom <- 5
-bbox <- c(rbind(range(quakes$long, na.rm = TRUE) - 50,
-                range(quakes$lat, na.rm = TRUE)))
+bbox <- c(rbind(extendrange(quakes$long),
+                extendrange(quakes$lat)))
 
 map <- get_stamenmap(bbox, zoom)
 ## ggmap(map) + geom_point(aes(long, lat), data = quakes)
@@ -19,10 +25,17 @@ map <- get_stamenmap(bbox, zoom)
 ## adjust bbox for window
 grid.newpage()
 pushViewport(viewport(width = 0.8, height = 0.9))
-grid.rect()
-mapgrob <- rasterGrob(map)
+mapgrob <- rasterGrob(map, name = "temporary.map")
 grid.draw(mapgrob)
 
+## mw <- convertWidth(grobWidth(mapgrob), "npc", TRUE)
+## mh <- convertHeight(grobHeight(mapgrob), "npc", TRUE)
+## mainvp <- viewport(width = mw, height = mh,
+##                    xscale = bbox[c(1, 3)], yscale = bbox[c(2, 4)])
+## pushViewport(mainvp)
+## grid.rect()
+
+## grid.points(quakes$long, quakes$lat)
 
 pw <- convertWidth(current.viewport()$width, "mm", TRUE)
 ph <- convertHeight(current.viewport()$height, "mm", TRUE)
@@ -48,6 +61,17 @@ newcorners <-
 bbox <- c(t(apply(newcorners, 2, range)))
 
 
+map <- get_stamenmap(bbox, zoom)
+## ggmap(map) + geom_point(aes(long, lat), data = quakes)
+
+## adjust bbox for window
+grid.newpage()
+pushViewport(viewport(width = 0.8, height = 0.9))
+mapgrob <- rasterGrob(map)
+grid.draw(mapgrob)
+
+
+
 
 mw <- convertWidth(grobWidth(mapgrob), "mm", TRUE)
 mh <- convertHeight(grobHeight(mapgrob), "mm", TRUE)
@@ -56,22 +80,22 @@ mr <- mw / mh
 
 
 
-if (br < pr) {
-    ## br is narrower
-    ## extend bbox WIDTH so br == pr
-    bw <- bh * pr
-    bc <- mean(xt)
-    xt[1] <- bc - bw/2
-    xt[2] <- bc + bw/2
-} else {
-    ## pr is narrower
-}
+## if (mr < pr) {
+##     ## br is narrower
+##     ## extend bbox WIDTH so br == pr
+##     bw <- bh * pr
+##     bc <- mean(xt)
+##     xt[1] <- bc - bw/2
+##     xt[2] <- bc + bw/2
+## } else {
+##     ## pr is narrower
+## }
 
-## back transform to get bbox
-bbox[c(1, 3)] <- xt * 180 / pi
-bbox[c(2, 4)] <- (2 * atan(exp(yt)) - pi / 2) * 180 / pi
+## ## back transform to get bbox
+## bbox[c(1, 3)] <- xt * 180 / pi
+## bbox[c(2, 4)] <- (2 * atan(exp(yt)) - pi / 2) * 180 / pi
 
-zoom <- 5
+## zoom <- 5
 if (bbox[1] < -180) {
 } else if (bbox[3] > 180) {
     bbox.right <- bbox.left <- bbox
@@ -86,18 +110,38 @@ if (bbox[1] < -180) {
 }
 
 grid.newpage()
-pushViewport(viewport(width = 0.8, height = 0.9,
-                      xscale = bbox[c(1,3)], yscale = bbox[c(2, 4)]))
-grid.raster(map)
-grid.rect()
+pushViewport(viewport(width = 0.8, height = 0.9))
+mapgrob <- rasterGrob(map)
+grid.draw(mapgrob)
+
+## mw <- convertWidth(grobWidth(mapgrob), "mm", TRUE)
+## mh <- convertHeight(grobHeight(mapgrob), "mm", TRUE)
+## mr <- mw / mh
+
+## pw <- convertWidth(current.viewport()$width, "mm", TRUE)
+## ph <- convertHeight(current.viewport()$height, "mm", TRUE)
+## pr <- pw / ph
+
+## create a new viewport with the same ratio
+lons <- bbox[c(1, 3)]
+lats <- bbox[c(2, 4)]
+corners <- expand.grid(lon = lons, lat = lats)
+tile.bounds <- LonLat2XY(corners$lon, corners$lat, zoom = zoom)
+xlim <- range(tile.bounds$X + tile.bounds$x / 255)
+ylim <- range(tile.bounds$Y + tile.bounds$y / 255)
+
+ptvp <- viewport(height = grobHeight(mapgrob),
+                 width = grobWidth(mapgrob),
+                 xscale = xlim, yscale = rev(ylim))
+pushViewport(ptvp)
+grid.rect(gp = gpar())
 
 qp <- LonLat2XY(quakes$long, quakes$lat, zoom)
-grid.points(quakes$long, quakes$lat, gp = gpar(cex = 0.5), pch = 19)
+qp$xp <- qp$X + qp$x / 255
+qp$yp <- qp$Y + qp$y / 255
 
+grid.points(qp$xp, qp$yp, gp = gpar(cex = 0.5), pch = 19)
 
-
-map <- get_stamenmap(bbox, zoom = 6)
-ggmap(map)
 
 
 NULL
