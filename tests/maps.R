@@ -5,11 +5,13 @@ data(quakes)
 data(nzquakes)
 
 obj <- iNZightMap(~lat, ~long, quakes)
-plot(obj, sizeby = mag, colby = depth)
+plot(obj, sizeby = mag, colby = depth, type = "toner-lite")
 
 obj2 <- iNZightMap(~Latitude, ~Longitude, nzquakes)
+plot(obj2, map.zoom = 6, type = "toner-lines", colby = Felt)
+
 plot(obj2, map.zoom = 5, type = "terrain-background",
-     colby = Felt)
+     colby = Felt, g1 = NorMidSth)
 
 
 library(ggmap)
