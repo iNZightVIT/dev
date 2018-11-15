@@ -18,10 +18,10 @@ SRCDIR = $(s3rep)/src
 CD_INZ := cd ~/iNZight;
 
 # R versions
-R32 := ~/R-3.2/bin/R
-R33 := ~/R-3.3/bin/R
-R34 := ~/R-3.4/bin/R
-R35 := ~/R-3.5/bin/R
+R32 := R-3.2
+R33 := R-3.3
+R34 := R-3.4
+R35 := R-3.5
 
 period := .
 empty :=
