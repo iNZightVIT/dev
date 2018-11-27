@@ -28,8 +28,13 @@ KK <- iNZGUI$new()
 ##KK$initializeGui()
 KK$initializeGui(census.at.school.500)
 
-KK$getActiveDoc()$getModel()$setName("hello", KK)
+KK$getActiveDoc()$getModel()$setName("hello")
+KK$getActiveDoc()$getModel()$name
+attributes(KK$getActiveData())
 KK$rhistory$history
+
+
+KK$getActiveDoc()$getModel()$dataSetChanged$.listeners
 
 ##KK$initializeGui(apiclus1)
 ##KK$getActiveDoc()$dataModel$setDesign(clus1="dnum",wt="pw",fpc="fpc")
