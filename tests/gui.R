@@ -25,15 +25,14 @@ data(census.at.school.500, package = 'iNZight')
 
 ## Run - generic
 KK <- iNZGUI$new()
-##KK$initializeGui()
-KK$initializeGui(census.at.school.500)
+KK$initializeGui()
+##KK$initializeGui(census.at.school.500)
 
 KK$getActiveDoc()$getModel()$setName("hello")
 KK$getActiveDoc()$getModel()$name
 attr(KK$getActiveData(), "name", exact = TRUE)
 attributes(KK$getActiveData())
 KK$rhistory$history
-
 
 KK$getActiveDoc()$getModel()$dataSetChanged$.listeners
 
