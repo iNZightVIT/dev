@@ -27,7 +27,7 @@ period := .
 empty :=
 V  := 3.5
 VS = $(subst $(period),$(empty),$(V))
-RV = ${R${VS}}
+RV := ${R${VS}}
 
 WINV := 3.5
 WINVS := $(subst $(period),$(empty),$(WINV))
