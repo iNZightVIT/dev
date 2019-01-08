@@ -9,7 +9,7 @@ library(devtools)
 
 ## Load - generic
 try(dispose(KK$win), TRUE)
-##load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
 #load_all("~/iNZight/iNZightTools", export_all = FALSE)
@@ -18,16 +18,14 @@ try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
 #if (! "package:iNZight" %in% search())
     load_all(export_all = FALSE)
-data(census.at.school.500, package = 'iNZight')
+#data(census.at.school.500, package = 'iNZight')
 #data(gapminder, package = "iNZight")
 ##data(api, package="survey")
-#data(nzquakes)
+data(nzquakes)
 
 ## Run - generic
 KK <- iNZGUI$new()
-KK$initializeGui(census.at.school.500)
-
-
+##KK$initializeGui(census.at.school.500)
 KK$initializeGui()
 
 KK$statusbar$set("Testing", type = "loading")
