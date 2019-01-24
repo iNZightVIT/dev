@@ -1,5 +1,6 @@
 library(devtools)
 
+load_all('~/iNZight/iNZightPlots')
 load_all('~/iNZight/iNZightMaps')
 data(quakes)
 data(nzquakes)
