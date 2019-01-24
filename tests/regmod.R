@@ -67,3 +67,11 @@ iNZightSummary(fit, exclude = "age")
 load_all("~/iNZight/iNZightRegression")
 fit <- glm(gender ~ rightfoot + age, data = dat, family = binomial())
 iNZightSummary(fit)
+
+
+## Null model
+load_all("~/iNZight/iNZightRegression")
+fit0 <- lm(height ~ age, data = dat)
+iNZightSummary(fit0)
+plotlm6(fit0, which = 1)
+
