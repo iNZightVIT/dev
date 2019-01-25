@@ -16,19 +16,23 @@ try(dispose(KK$win), TRUE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
 load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
-if (! "package:iNZight" %in% search())
+#if (! "package:iNZight" %in% search())
     load_all(export_all = FALSE)
 #data(census.at.school.500, package = 'iNZight')
 data(gapminder, package = "iNZight")
 ##data(api, package="survey")
 data(nzquakes, package = "iNZightMaps")
+data(visitorsQ, package = "iNZightTS")
+data(census.at.school.5000, package = "iNZightMR")
 
 ## Run - generic
 KK <- iNZGUI$new()
-##KK$initializeGui(census.at.school.500)
+##KK$initializeGui(census.at.school.5000)
+##KK$initializeGui(visitorsQ)
+KK$initializeGui(census.at.school.500)
 ##KK$initializeGui()
 ##KK$initializeGui(gapminder)
-KK$initializeGui(nzquakes)
+##KK$initializeGui(nzquakes)
 
 KK$statusbar$set("Testing", type = "loading")
 KK$statusbar$set("Testing complete", time = 5000)
@@ -44,9 +48,10 @@ KK$rhistory$history
 
 KK$getActiveDoc()$getModel()$dataSetChanged$.listeners
 
-##KK$initializeGui(apiclus1)
-##KK$getActiveDoc()$dataModel$setDesign(clus1="dnum",wt="pw",fpc="fpc")
-KK$initializeGui(census.at.school.500)
+data(api, package='survey')
+KK$initializeGui(apiclus1)
+KK$getActiveDoc()$dataModel$setDesign(clus1="dnum",wt="pw",fpc="fpc")
+##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui(gapminder)
 
 
