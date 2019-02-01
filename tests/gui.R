@@ -11,28 +11,37 @@ library(devtools)
 try(dispose(KK$win), TRUE)
 #load_all("~/iNZight/gWidgets2RGtk2", export_all = FALSE)
 #load_all("~/iNZight/iNZightRegression", export_all = FALSE)
-#load_all("~/iNZight/iNZightTools", export_all = FALSE)
+load_all("~/iNZight/iNZightTools", export_all = FALSE)
 #load_all("~/iNZight/iNZightTS", export_all = FALSE)
 load_all("~/iNZight/iNZightPlots", export_all = FALSE)
-load_all("~/iNZight/iNZightMaps", export_all = FALSE)
+#load_all("~/iNZight/iNZightMaps", export_all = FALSE)
 load_all("~/iNZight/iNZightModules", export_all = FALSE)
 #if (! "package:iNZight" %in% search())
     load_all(export_all = FALSE)
 #data(census.at.school.500, package = 'iNZight')
-data(gapminder, package = "iNZight")
+#data(gapminder, package = "iNZight")
 ##data(api, package="survey")
 data(nzquakes, package = "iNZightMaps")
-data(visitorsQ, package = "iNZightTS")
-data(census.at.school.5000, package = "iNZightMR")
+#data(visitorsQ, package = "iNZightTS")
+#data(census.at.school.5000, package = "iNZightMR")
+#paris <- smart_read("~/iNZight/iNZightTools/tests/testthat/datetimes.csv")
 
 ## Run - generic
 KK <- iNZGUI$new()
+##KK$initializeGui(paris)
 ##KK$initializeGui(census.at.school.5000)
 ##KK$initializeGui(visitorsQ)
-KK$initializeGui(census.at.school.500)
+##KK$initializeGui(census.at.school.500)
 ##KK$initializeGui()
 ##KK$initializeGui(gapminder)
-##KK$initializeGui(nzquakes)
+qdat <- nzquakes %>%
+    dplyr::mutate(year = 2000) %>%
+    convert_to_datetime(
+        c('year', 'Month', 'Day', 'Hour', 'Minute'),
+        'year month day Hour Minute',
+        'time'
+    )
+KK$initializeGui(qdat)
 
 KK$statusbar$set("Testing", type = "loading")
 KK$statusbar$set("Testing complete", time = 5000)
