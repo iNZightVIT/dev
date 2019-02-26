@@ -1211,6 +1211,8 @@ data("gapminder", package = "iNZight"); d <- gapminder
 d$date <- as.Date(paste(d$Year, "01", "01", sep = "-"))
 
 upd()
+iNZightPlot(Year, GDPpercapita, data = d)
+iNZightPlot(GDPpercapita, Year, data = d)
 iNZightPlot(date, GDPpercapita, data = d)
 iNZightPlot(date, GDPpercapita, data = d, transform = list(y = "log10"))
 iNZightPlot(date, GDPpercapita, data = d, transform = list(y = "log"))
@@ -1218,19 +1220,19 @@ iNZightPlot(date, GDPpercapita, data = d, transform = list(y = "log"))
 data(census.at.school.500, package = "iNZight"); d <- census.at.school.500
 
 upd()
-iNZightPlot(cellsource, data = d)
-iNZightPlot(cellsource, data = d, bar.counts = TRUE)
-table(d$cellsource)
+browseURL(exportHTML(iNZightPlot(cellsource, data = d)))
+browseURL(exportHTML(iNZightPlot(cellsource, data = d, bar.counts = TRUE)))
 
 upd()
-iNZightPlot(getlunch, data = d, colby = gender)
-iNZightPlot(getlunch, data = d, bar.counts = TRUE, colby = gender)
+browseURL(exportHTML(iNZightPlot(getlunch, data = d, colby = gender)))
+browseURL(exportHTML(iNZightPlot(getlunch, data = d, bar.counts = TRUE, colby = gender)))
 
 upd()
-iNZightPlot(gender, cellsource, data = d)
-iNZightPlot(gender, cellsource, data = d, bar.counts = TRUE)
+browseURL(exportHTML(iNZightPlot(gender, cellsource, data = d)))
+browseURL(exportHTML(iNZightPlot(gender, cellsource, data = d, bar.counts = TRUE)))
 
 upd()
 iNZightPlot(height, data = d)
 iNZightPlot(height, data = d, transform = list(x = "log"))
 iNZightPlot(height, data = d, transform = list(x = "log10"))
+
