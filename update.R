@@ -99,7 +99,7 @@ updateDistribution <- function() {
       if ( packageVersion(pkg) < numeric_version(pkgdep_v[[pkg]]) )
         utils::update.packages(pkg, repos = "https://cran.rstudio.com", ask = FALSE)
     }
-  }, quiet = TRUE)
+  }, silent = TRUE)
 
   if (OS == "windows") {
     libz <- .libPaths()
