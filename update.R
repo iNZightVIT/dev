@@ -89,6 +89,17 @@ updateDistribution <- function() {
     }
     cat('Successfully installed Rcpp...\n')
   }
+  
+  # pkg versions
+  try({
+    pkgdep_v <- list(
+      dplyr = "0.8.0"
+    )
+    for (pkg in names(pkgdep_v)) {
+      if (packageVersion(pkg) < numeric_version(pkgdep_v[[pkg]])
+        utils::update.packages(pkg, repos = "https://cran.rstudio.com", ask = FALSE)
+    }
+  }, quiet = TRUE)
 
   if (OS == "windows") {
     libz <- .libPaths()
