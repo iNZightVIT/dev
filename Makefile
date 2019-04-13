@@ -68,7 +68,7 @@ endif
 	@for pkg in $(inz_packages); do \
 		echo "\n *** "$$pkg" ...\n" && \
 			cd ../$$pkg && \
-			$(RV) --slave -e "devtools::install_deps(); devtools::install()" ;\
+			$(RV) --slave -e "devtools::install_deps(upgrade = 'always'); devtools::install()" ;\
 	done
 
 # Now you can install them into a temporary directory: make all
