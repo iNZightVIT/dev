@@ -56,8 +56,8 @@ updateDistribution <- function() {
     cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
     cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
     cat(" * Running on", R.version.string, "\n")
-    cat(" * Updating packages located in:\n", paste("    -", .libPaths(), collapse = "\n"), "\n")
-    cat(" * Update source:\n", paste("    -", getOption("repos"), collapse = "\n"), "\n")
+    cat(" * Updating packages located in:\n", paste("    -", .libPaths(), collapse = "\n "), "\n")
+    cat(" * Update source:\n", paste("    -", getOption("repos"), collapse = "\n "), "\n")
   }, silent = TRUE)
 
   ## List any packages added to iNZight after the release
@@ -96,9 +96,9 @@ updateDistribution <- function() {
       dplyr = "0.8.0"
     )
     for (pkg in names(pkgdep_v)) {
-      cat(" *", pkg)
+      cat(" *", pkg, packageVersion(pkg))
       if ( packageVersion(pkg) < numeric_version(pkgdep_v[[pkg]]) ) {
-        cat(" - updating from version", packageVersion(pkg), "to version", pkgdep_v[[pkg]])
+        cat(" -> updating to", pkgdep_v[[pkg]])
         utils::install.packages(pkg, repos = "https://cran.rstudio.com", lib = instlib)
       }
       cat("\n")
