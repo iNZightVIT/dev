@@ -90,6 +90,18 @@ updateDistribution <- function() {
     cat('Successfully installed Rcpp...\n')
   }
   
+  if (OS == "windows") {
+    libz <- .libPaths()
+    libz <- libz[!grepl("modules", libz)]
+    instlib <- libz[1]
+    if (as.numeric(file.access(instlib, mode = 2)) == -1) {
+      warning("Unable to write to the main package library - will attempt installing additional dependencies elsewhere.\nIf you are unable to run iNZight, you may need to run the installer as Admin.") 
+      instlib <- .libPaths()[1]
+    }
+  } else {
+    instlib <- .libPaths()[1] 
+  }
+  
   # pkg versions
   cat(" * checking versions of dependencies\n")
   try({
@@ -103,25 +115,12 @@ updateDistribution <- function() {
       cat("   - ", pkg, as.character(pv))
       if ( pv < numeric_version(pkgdep_v[[pkg]]) ) {
         cat(" -> updating to", pkgdep_v[[pkg]])
-        utils::install.packages(pkg, repos = "https://cran.rstudio.com")
+        utils::install.packages(pkg, repos = "https://cran.rstudio.com", lib = instlib)
       }
       cat("\n")
     }
     
   }, silent = TRUE)
-
-  if (OS == "windows") {
-    libz <- .libPaths()
-    libz <- libz[!grepl("modules", libz)]
-    instlib <- libz[1]
-    if (as.numeric(file.access(instlib, mode = 2)) == -1) {
-      warning("Unable to write to the main package library - will attempt installing additional dependencies elsewhere.\nIf you are unable to run iNZight, you may need to run the installer as Admin.") 
-      instlib <- .libPaths()[1]
-    }
-  } else {
-    instlib <- .libPaths()[1] 
-  }
-  
 
   ## A list of packages we NEED to have installed (since older versions anyway...)
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
