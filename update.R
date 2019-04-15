@@ -91,6 +91,7 @@ updateDistribution <- function() {
   }
   
   # pkg versions
+  cat(" * checking versions of dependencies\n")
   try({
     
     pkgdep_v <- list(
