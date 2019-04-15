@@ -56,8 +56,8 @@ updateDistribution <- function() {
     cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
     cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
     cat(" * Running on", R.version.string, "\n")
-    cat(" * Updating packages located in:", paste(.libPaths(), collapse = ", "), "\n")
-    cat(" * Update source:", paste(getOption("repos"), collapse = ", "), "\n")
+    cat(" * Updating packages located in:\n", paste("    -", .libPaths(), collapse = "\n"), "\n")
+    cat(" * Update source:\n", paste("    -", getOption("repos"), collapse = "\n"), "\n")
   }, silent = TRUE)
 
   ## List any packages added to iNZight after the release
