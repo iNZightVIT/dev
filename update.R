@@ -98,8 +98,8 @@ updateDistribution <- function() {
     )
     
     for (pkg in names(pkgdep_v)) {
-      cat(" *", pkg, packageVersion(pkg))
-      if ( packageVersion(pkg) < numeric_version(pkgdep_v[[pkg]]) ) {
+      cat(" *", pkg, utils::packageVersion(pkg))
+      if ( utils::packageVersion(pkg) < numeric_version(pkgdep_v[[pkg]]) ) {
         cat(" -> updating to", pkgdep_v[[pkg]])
         utils::install.packages(pkg, repos = "https://cran.rstudio.com", lib = instlib)
       }
