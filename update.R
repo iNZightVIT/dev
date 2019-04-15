@@ -92,9 +92,11 @@ updateDistribution <- function() {
   
   # pkg versions
   try({
+    
     pkgdep_v <- list(
       dplyr = "0.8.0"
     )
+    
     for (pkg in names(pkgdep_v)) {
       cat(" *", pkg, packageVersion(pkg))
       if ( packageVersion(pkg) < numeric_version(pkgdep_v[[pkg]]) ) {
@@ -103,6 +105,7 @@ updateDistribution <- function() {
       }
       cat("\n")
     }
+    
   }, silent = TRUE)
 
   if (OS == "windows") {
