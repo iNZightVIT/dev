@@ -56,8 +56,8 @@ updateDistribution <- function() {
     cat("Updating iNZightVIT for", switch(OS, "windows" = "Windows", "osx" = "Mac"), "\n")
     cat(" * Current version:", as.character(utils::packageVersion("iNZight")), "\n")
     cat(" * Running on", R.version.string, "\n")
-    cat(" * Updating packages located in:", paste(.libPaths(), collapse = ", "), "\n")
-    cat(" * Update source:", paste(getOption("repos"), collapse = ", "), "\n")
+    cat(" * Updating packages located in:\n", paste("    -", .libPaths(), collapse = "\n "), "\n")
+    cat(" * Update source:\n", paste("    -", getOption("repos"), collapse = "\n "), "\n")
   }, silent = TRUE)
 
   ## List any packages added to iNZight after the release
@@ -89,7 +89,7 @@ updateDistribution <- function() {
     }
     cat('Successfully installed Rcpp...\n')
   }
-
+  
   if (OS == "windows") {
     libz <- .libPaths()
     libz <- libz[!grepl("modules", libz)]
@@ -102,6 +102,25 @@ updateDistribution <- function() {
     instlib <- .libPaths()[1] 
   }
   
+  # pkg versions
+  cat(" * checking versions of dependencies\n")
+  try({
+    
+    pkgdep_v <- list(
+      dplyr = "0.8.0"
+    )
+    
+    for (pkg in names(pkgdep_v)) {
+      pv <- utils::packageVersion(pkg)
+      cat("   - ", pkg, as.character(pv))
+      if ( pv < numeric_version(pkgdep_v[[pkg]]) ) {
+        cat(" -> updating to", pkgdep_v[[pkg]])
+        utils::install.packages(pkg, repos = "https://cran.rstudio.com", lib = instlib)
+      }
+      cat("\n")
+    }
+    
+  }, silent = TRUE)
 
   ## A list of packages we NEED to have installed (since older versions anyway...)
   pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
@@ -125,7 +144,7 @@ updateDistribution <- function() {
   }, silent = TRUE)
 
   ## success message
-  cat("==========================================================\n")
+  cat("\n==========================================================\n")
   cat("               Updating complete!!\n")
   cat("==========================================================\n\n")
 
