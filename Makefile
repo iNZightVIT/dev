@@ -7,7 +7,7 @@
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
 inzight_packages = iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightModules iNZight vit FutureLearnData
 inz_packages =  $(inzight_packages) iNZightMaps
-extra := gWidgets2RGtk2 countrycode ggsfextra ggmap
+extra := ggsfextra
 all_packages = $(inz_packages)
 
 s3rep = s3/www
@@ -163,7 +163,7 @@ pushall:
 # How iNZighting!
 
 INZREPO=https://r.docker.stat.auckland.ac.nz
-ppkgs=$(inz_packages) ggsfextra ggmap
+ppkgs=$(all_packages)
 pkginfo:
 	@echo ""
 	@for pkg in $(ppkgs) ; do \
