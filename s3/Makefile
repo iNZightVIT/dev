@@ -42,6 +42,7 @@ R32 := R-3.2
 R33 := R-3.3
 R34 := R-3.4
 R35 := R-3.5
+R36 := R-3.6
 
 DIR := ~/iNZight
 SRC := www/src
@@ -50,7 +51,7 @@ MAC := www/bin/macosx
 
 period := .
 empty :=
-V  := 3.5
+V  := 3.6
 VS = $(subst $(period),$(empty),$(V))
 RV = ${R${VS}}
 
@@ -79,6 +80,13 @@ windows: $(PACKAGE).zip
 
 mac: $(PACKAGE).tgz
 	@echo "   - copying mac binaries into place"
+ifeq ($(V),3.6) # => el-capitan
+	@rm -f $(MAC)/el-capitan/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/el-capitan/contrib/$(V)/$^
+	@cd $(MAC)/el-capitan/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
+		rm -f .RData *.Rout
+endif
 ifeq ($(V),3.5) # => el-capitan
 	@rm -f $(MAC)/el-capitan/contrib/$(V)/$(PKG)_*.tgz
 	@cp $^ $(MAC)/el-capitan/contrib/$(V)/$^

@@ -22,14 +22,15 @@ R32 := R-3.2
 R33 := R-3.3
 R34 := R-3.4
 R35 := R-3.5
+R36 := R-3.6
 
 period := .
 empty :=
-V  := 3.5
+V  := 3.6
 VS = $(subst $(period),$(empty),$(V))
 RV := ${R${VS}}
 
-WINV := 3.5
+WINV := 3.6
 WINVS := $(subst $(period),$(empty),$(WINV))
 RWIN = ${R${WINVS}}
 
@@ -230,7 +231,7 @@ winPatchAll:
 
 ## User will define wpkg=iNZightPlots, eg
 pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
-RVs = 3.2 3.3 3.4 3.5
+RVs = 3.2 3.3 3.4 3.5 3.6
 repositoryFiles:
 	@echo "==== Building $(wpkg) v$(pkg_v)"
 	@for rv in $(RVs); do \
@@ -253,9 +254,9 @@ liveVersions:
 	@R --slave -e "available.packages(repos='https://r.docker.stat.auckland.ac.nz')[, 'Version']"
 
 repostructure:
-	@for i in  2 3 4 5; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
+	@for i in  2 3 4 5 6; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
 	@mkdir -p $(s3rep)/bin/macosx/contrib/3.2
-	@for i in 4 5; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/3.$$i; done
+	@for i in 4 5 6; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/3.$$i; done
 	@for i in 2 3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/3.$$i; done
 	@mkdir -p $(s3rep)/src/contrib
 	@mkdir -p $(s3rep)/downloads/Windows
