@@ -63,28 +63,36 @@ updateDistribution <- function() {
 
   ## Fetch a list of package versions that are required:
   if (OS == "windows") {
+    libz <- .libPaths()
+    instlib <- libz[!grepl("modules", libz)][1]
+    modlib <- libz[grepl("modules", )][1]
+
+    branch <- "master"
+    if ("iNZightMaps" %in% list.files(instlib)) {
+      branch <- "master-maps"
+    }
+
     pkgsf <- tempfile()
     utils::download.file(
-      "https://raw.githubusercontent.com/iNZightVIT/iNZightVIT-WIN/master/packages.txt",
+      sprintf(
+        "https://raw.githubusercontent.com/iNZightVIT/iNZightVIT-WIN/%s/packages.txt",
+        branch
+      )
       pkgsf
     )
     pkgs <- readLines(pkgsf)
     unlink(pkgsf)
 
-    libz <- .libPaths()
-    instlib <- libz[!grepl("modules", libz)][1]
-    modlib <- libz[grepl("modules", )][1]
-
     if (as.numeric(file.access(instlib, mode = 2)) == -1) {
-      warning("Unable to write to the main package library - try running the updater as Admin.")
+      tcltk::tkmessageBox(title = "Run as admin",
+        message = "The updater is unable to write to the package library. Please try running as admin (by right-clicking the updater).",
+        type = "ok",
+        icon = "error"
+      )
+      return(invisible(NULL))
     } else {
       # compare versions of these packages:
-      ap <- utils::available.packages(
-        repos = c(
-          "https://r.docker.stat.auckland.ac.nz",
-          "https://cran.rstudio.com"
-        )
-      )
+      ap <- utils::available.packages()
       latestVersions <- ap[pkgs, "Version"]
       currentVersions <- sapply(pkgs, function(pkg) {
         if (!requireNamespace(pkg, quietly = TRUE)) return(NA)
@@ -97,23 +105,17 @@ updateDistribution <- function() {
       })
       utils::install.packages(
         rownames(pkgs)[pkgs[, "update"]],
-        lib = instlib,
-        repos = c(
-          "https://r.docker.stat.auckland.ac.nz",
-          "https://cran.rstudio.com"
-        )
+        lib = instlib
       )
     }
 
     ## update modules directory
     utils::update.packages(
-      lib.loc = modlib,
-      repos = c(
-        "https://r.docker.stat.auckland.ac.nz",
-        "https://cran.rstudio.com"
-      )
+      lib.loc = modlib
       ask = FALSE,
     )
+
+    ## end new windows updater
   } else {
 
     ## List any packages added to iNZight after the release
