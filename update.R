@@ -65,7 +65,7 @@ updateDistribution <- function() {
   if (OS == "windows") {
     libz <- .libPaths()
     instlib <- libz[!grepl("modules", libz)][1]
-    modlib <- libz[grepl("modules", )][1]
+    modlib <- libz[grepl("modules", libz)][1]
 
     branch <- "master"
     if ("iNZightMaps" %in% list.files(instlib)) {
