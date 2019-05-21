@@ -96,18 +96,12 @@ updateDistribution <- function() {
       pkgs <- pkgs[pkgs %in% rownames(ap)]
       latestVersions <- ap[pkgs, "Version"]
       currentVersions <- sapply(pkgs, function(pkg) {
-        if (!requireNamespace(pkg, quietly = TRUE)) return(NA)
+        if (!requireNamespace(pkg, quietly = TRUE)) return("0.0")
         as.character(utils::packageVersion(pkg))
       })
-
-      pkgs <- cbind(currentVersions, latestVersions)
-      pkgs[, "update"] <- apply(pkgs, 1, function(x) {
-        !is.na(x[1]) && numeric_version(x[1]) < numeric_version(x[2])
-      })
-      utils::install.packages(
-        rownames(pkgs)[pkgs[, "update"]],
-        lib = instlib
-      )
+      
+      updatePkg <- numeric_version(currentVersions) < numeric_version(latestVersions)
+      utils::install.packages(pkgs[updatePkg], lib = instlib)
     }
 
     ## update modules directory
