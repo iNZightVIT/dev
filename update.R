@@ -93,6 +93,7 @@ updateDistribution <- function() {
     } else {
       # compare versions of these packages:
       ap <- utils::available.packages()
+      pkgs <- pkgs[pkgs %in% rownames(ap)]
       latestVersions <- ap[pkgs, "Version"]
       currentVersions <- sapply(pkgs, function(pkg) {
         if (!requireNamespace(pkg, quietly = TRUE)) return(NA)
