@@ -111,8 +111,8 @@ updateDistribution <- function() {
 
     ## update modules directory
     utils::update.packages(
-      lib.loc = modlib
-      ask = FALSE,
+      lib.loc = modlib,
+      ask = FALSE
     )
 
     ## end new windows updater
