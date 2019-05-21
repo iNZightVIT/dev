@@ -77,7 +77,7 @@ updateDistribution <- function() {
       sprintf(
         "https://raw.githubusercontent.com/iNZightVIT/iNZightVIT-WIN/%s/packages.txt",
         branch
-      )
+      ),
       pkgsf
     )
     pkgs <- readLines(pkgsf)
