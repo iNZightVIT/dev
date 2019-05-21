@@ -91,9 +91,10 @@ updateDistribution <- function() {
       )
       return(invisible(NULL))
     } else {
-      # compare versions of these packages:
+      # compare versions of these packages (ignoring some):
+      ignorepkgs <- c("RGtk2")
       ap <- utils::available.packages()
-      pkgs <- pkgs[pkgs %in% rownames(ap)]
+      pkgs <- pkgs[pkgs %in% rownames(ap) & !pkgs %in% ignorepkgs]
       latestVersions <- ap[pkgs, "Version"]
       currentVersions <- sapply(pkgs, function(pkg) {
         if (!requireNamespace(pkg, quietly = TRUE)) return("0.0")
