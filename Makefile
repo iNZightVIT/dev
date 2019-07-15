@@ -261,15 +261,6 @@ repostructure:
 	@mkdir -p $(s3rep)/downloads/Windows
 	@mkdir -p $(s3rep)/downloads/macOS
 
-newsFiles:
-	@for pkg in $(inz_packages) ; do \
-	  ~/R-3.6/R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
-	done
-	@echo "NEWS files converted to HTML and moved to dev/changes ..."
-	@cd changes; Rscript --vanilla addLinks.R;
-	@echo "Copying to server ..."
-	@scp changes/*.php tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/support/changelog/changes/
-	@echo "Done.\n\n"
 
 changeLog:
 	@echo Copying NEWS files to www repository ...
