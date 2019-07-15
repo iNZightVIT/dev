@@ -108,18 +108,6 @@ ifeq ($(V),3.3) # => mavericks
 		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
 		rm -f .RData *.Rout
 endif
-ifeq ($(V),3.2) # => mavericks
-	@rm -f $(MAC)/mavericks/contrib/$(V)/$(PKG)_*.tgz
-	@cp $^ $(MAC)/mavericks/contrib/$(V)/$^
-	@cd $(MAC)/mavericks/contrib/$(V) && \
-		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
-		rm -f .RData *.Rout
-	@rm -f $(MAC)/contrib/$(V)/$(PKG)_*.tgz
-	@cp $^ $(MAC)/contrib/$(V)/$^
-	@cd $(MAC)/contrib/$(V) && \
-		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
-		rm -f .RData *.Rout
-endif
 
 clean:
 	@echo Cleaning up
