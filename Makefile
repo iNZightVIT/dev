@@ -204,9 +204,9 @@ macRelease: | $(MACDB)
 	@cd $(DLDIR); ln -sf macOS/$(MACINST) iNZightVIT-mac.dmg
 
 winRelease:
-	@cd $(DIRO); makensis INSTALL_SCRIPT.nsi
-	@mv $(DIRO)/iNZightVIT-installer.exe $(DLDIR)/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
-	@cd $(DLDIR); ln -sf Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe
+	@echo "Fetching latest windows installer from Github ..."
+	@curl -s https://github.com/iNZightVIT/win-installer/releases/download/`./current_win_release.sh`/iNZightVIT-installer.exe -o $(DLDIR)/Windows/iNZightVIT-installer-`./current_win_release.sh`.exe
+	@ln -sf Windows/iNZightVIT-installer-`./current_win_release.sh`.exe $(DLDIR)/iNZightVIT-installer.exe
 
 WININST=iNZightVIT-installer-$(INZIGHT_VERSION).zip
 
