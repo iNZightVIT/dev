@@ -204,9 +204,9 @@ macRelease: | $(MACDB)
 	@cd $(DLDIR); ln -sf macOS/$(MACINST) iNZightVIT-mac.dmg
 
 winRelease:
-	@cd $(DIRO); makensis INSTALL_SCRIPT.nsi
-	@mv $(DIRO)/iNZightVIT-installer.exe $(DLDIR)/Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe
-	@cd $(DLDIR); ln -sf Windows/iNZightVIT-installer-$(INZIGHT_VERSION).exe iNZightVIT-installer.exe
+	@echo "Fetching latest windows installer from Github ..."
+	@curl -sL https://github.com/iNZightVIT/win-installer/releases/download/`./current_win_release.sh`/iNZightVIT-installer.exe -o $(DLDIR)/Windows/iNZightVIT-installer-`./current_win_release.sh`.exe
+	@ln -sf Windows/iNZightVIT-installer-`./current_win_release.sh`.exe $(DLDIR)/iNZightVIT-installer.exe
 
 WININST=iNZightVIT-installer-$(INZIGHT_VERSION).zip
 
@@ -231,7 +231,7 @@ winPatchAll:
 
 ## User will define wpkg=iNZightPlots, eg
 pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
-RVs = 3.2 3.3 3.4 3.5 3.6
+RVs = 3.3 3.4 3.5 3.6
 repositoryFiles:
 	@echo "==== Building $(wpkg) v$(pkg_v)"
 	@for rv in $(RVs); do \
@@ -254,23 +254,13 @@ liveVersions:
 	@R --slave -e "available.packages(repos='https://r.docker.stat.auckland.ac.nz')[, 'Version']"
 
 repostructure:
-	@for i in  2 3 4 5 6; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
-	@mkdir -p $(s3rep)/bin/macosx/contrib/3.2
+	@for i in  3 4 5 6; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
 	@for i in 4 5 6; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/3.$$i; done
-	@for i in 2 3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/3.$$i; done
+	@for i in 3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/3.$$i; done
 	@mkdir -p $(s3rep)/src/contrib
 	@mkdir -p $(s3rep)/downloads/Windows
 	@mkdir -p $(s3rep)/downloads/macOS
 
-newsFiles:
-	@for pkg in $(inz_packages) ; do \
-	  ~/R-3.2.2/R CMD Rdconv --type=html --output=changes/$$pkg.html $(DIR)/$$pkg/inst/NEWS.Rd ; \
-	done
-	@echo "NEWS files converted to HTML and moved to dev/changes ..."
-	@cd changes; Rscript --vanilla addLinks.R;
-	@echo "Copying to server ..."
-	@scp changes/*.php tell029@login02.fos.auckland.ac.nz:/mnt/tell029/web/homepages.stat/inzight-www/iNZight/support/changelog/changes/
-	@echo "Done.\n\n"
 
 changeLog:
 	@echo Copying NEWS files to www repository ...
