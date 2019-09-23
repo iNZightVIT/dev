@@ -205,7 +205,7 @@ macRelease: | $(MACDB)
 
 winRelease:
 	@echo "Fetching latest windows installer from Github ..."
-	@curl -s https://github.com/iNZightVIT/win-installer/releases/download/`./current_win_release.sh`/iNZightVIT-installer.exe -o $(DLDIR)/Windows/iNZightVIT-installer-`./current_win_release.sh`.exe
+	@curl -sL https://github.com/iNZightVIT/win-installer/releases/download/`./current_win_release.sh`/iNZightVIT-installer.exe -o $(DLDIR)/Windows/iNZightVIT-installer-`./current_win_release.sh`.exe
 	@ln -sf Windows/iNZightVIT-installer-`./current_win_release.sh`.exe $(DLDIR)/iNZightVIT-installer.exe
 
 WININST=iNZightVIT-installer-$(INZIGHT_VERSION).zip
