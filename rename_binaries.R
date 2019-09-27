@@ -1,5 +1,6 @@
 pkg <- basename(getwd())
 rv <- as.character(getRversion())
+cat(sprintf("Renaming files for %s with R version %s\n", pkg, rv))
 for (ext in c(".zip", ".tgz")) {
     file <- list.files(pattern = sprintf("%s.+%s", pkg, ext))
     if (length(file)) {
