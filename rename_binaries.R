@@ -1,5 +1,8 @@
 pkg <- basename(getwd())
-rv <- as.character(getRversion())
+rv <- paste(
+    strsplit(as.character(getRversion()), "\\.")[[1]][1:2], 
+    collapse = "."
+)
 cat(sprintf("Renaming files for %s with R version %s\n", pkg, rv))
 for (ext in c(".zip", ".tgz")) {
     file <- list.files(
