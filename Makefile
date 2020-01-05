@@ -1,5 +1,9 @@
 # This file allows quick building/updating of packages in the iNZight directory.
 
+default: README.md
+README.md: README.Rmd
+	@$(RV) --slave -e "rmarkdown::render('$^')"
+
 # If you haven't got any of the packages (i.e., only this one) then
 # first place this dev/ directory in a folder (perhaps iNZight/?) and:
 # make build
@@ -269,5 +273,3 @@ changeLog:
 	done
 	@echo Done
 	@echo
-
-
