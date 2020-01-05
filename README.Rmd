@@ -89,6 +89,7 @@ ggraph(graph, layout = "kk") +
     arrow = arrow(length = unit(3, "mm"), type = "open")
   ) +
   geom_node_label(aes(label = name)) +
+  theme_classic() +
   theme(legend.position = "bottom") +
   scale_edge_colour_manual(values = c("orangered", "steelblue")) +
   scale_edge_alpha_manual(values = c(1, 0.5))
