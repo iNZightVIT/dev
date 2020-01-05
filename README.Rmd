@@ -18,19 +18,19 @@ This repository is where we can store all of our development scripts, files, bug
 
 1) Create a new directory: `~/iNZight`
    (This must be in your home directory)
-```
+```{bash,eval=FALSE}
 mkdir ~/iNZight
 cd ~/iNZight
 ```
 
 2) Inside `iNZight`, clone the `dev` repository (assumes git is set up):
-```
+```{bash,eval=FALSE}
 git clone git@github.com:iNZightVIT/dev
 cd dev
 ```
 
 3) From inside the `dev` directory, build the full iNZight development directories:
-```
+```{bash,eval=FALSE}
 make build
 cd ..
 ```

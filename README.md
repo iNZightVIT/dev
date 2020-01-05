@@ -66,20 +66,26 @@ To start developing iNZightVIT (assumes Linux):
 
 1.  Create a new directory: `~/iNZight` (This must be in your home directory)
 
-        mkdir ~/iNZight
-        cd ~/iNZight
+``` bash
+mkdir ~/iNZight
+cd ~/iNZight
+```
 
-2.  Inside `iNZight`, clone the `dev` repository (assumes git is set up):
+1.  Inside `iNZight`, clone the `dev` repository (assumes git is set up):
 
-        git clone git@github.com:iNZightVIT/dev
-        cd dev
+``` bash
+git clone git@github.com:iNZightVIT/dev
+cd dev
+```
 
-3.  From inside the `dev` directory, build the full iNZight development directories:
+1.  From inside the `dev` directory, build the full iNZight development directories:
 
-        make build
-        cd ..
+``` bash
+make build
+cd ..
+```
 
-4.  Now, inside `~/iNZight/`, you will have all of the required directories for developing iNZight.
+1.  Now, inside `~/iNZight/`, you will have all of the required directories for developing iNZight.
 
 ------------------------------------------------------------------------
 
