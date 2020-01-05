@@ -42,18 +42,59 @@ cd ..
 ## Dependency Structure
 
 
-
-
 This graph shows the interaction between various iNZight R packages.
-![Diagram](https://raw.githubusercontent.com/iNZightVIT/dev/master/iNZight_dependencies.png)
 
-* __Imports__ = solid line
-* __Suggests__ = dashed line
-* __Enhances__ = dotted line
-* Lines in BLACK are OK as is
-* Lines in RED are dependencies that are marked for removal
-* Lines in GREEN are dependencies that are marked for addition
-* Lines in ORANGE are dependencies that are marked for adjustment
+```{r,echo=FALSE}
+library(magrittr)
+library(ggraph)
+library(igraph)
+
+pkgs <- c(
+  "iNZight", "iNZightPlots", "iNZightMR", "iNZightTools",
+  "iNZightTS", "iNZightRegression", "iNZightModules",
+  "iNZightMaps"
+)
+get_deps <- function(pkg, dep) {
+  deps <- remotes::local_package_deps(pkg, dep)
+  if (length(deps) == 0 || !any(deps %in% pkgs)) return(NULL)
+  deps <- deps[deps %in% pkgs]
+
+  tibble::tibble(
+    package = rep(basename(pkg), length(deps)),
+    dependency = deps,
+    type = rep(dep, length(deps))
+  )
+}
+pkg_deps <- lapply(pkgs,
+  function(pkg) {
+    dplyr::bind_rows(
+      depends = get_deps(file.path("..", pkg), "depends"),
+      imports = get_deps(file.path("..", pkg), "imports"),
+      suggests = get_deps(file.path("..", pkg), "suggests"),
+      enhances = get_deps(file.path("..", pkg), "enhances")
+    )
+  }
+) %>% dplyr::bind_rows()
+
+
+graph <- graph_from_data_frame(pkg_deps)
+ggraph(graph, layout = "kk") +
+  geom_edge_fan(
+    aes(
+      colour = type,
+      alpha = type,
+      start_cap = label_rect(node1.name, padding = margin(2, 2, 3, 2, "mm")),
+      end_cap = label_rect(node2.name, padding = margin(2, 2, 3, 2, "mm"))
+    ),
+    arrow = arrow(length = unit(3, "mm"), type = "open")
+  ) +
+  geom_node_label(aes(label = name)) +
+  theme(legend.position = "bottom") +
+  scale_edge_colour_manual(values = c("orangered", "steelblue")) +
+  scale_edge_alpha_manual(values = c(1, 0.5))
+
+```
+
 
 
 ***

@@ -92,15 +92,22 @@ cd ..
 Dependency Structure
 --------------------
 
-This graph shows the interaction between various iNZight R packages. ![Diagram](https://raw.githubusercontent.com/iNZightVIT/dev/master/iNZight_dependencies.png)
+This graph shows the interaction between various iNZight R packages.
 
--   **Imports** = solid line
--   **Suggests** = dashed line
--   **Enhances** = dotted line
--   Lines in BLACK are OK as is
--   Lines in RED are dependencies that are marked for removal
--   Lines in GREEN are dependencies that are marked for addition
--   Lines in ORANGE are dependencies that are marked for adjustment
+    ## Loading required package: ggplot2
+
+    ## 
+    ## Attaching package: 'igraph'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     decompose, spectrum
+
+    ## The following object is masked from 'package:base':
+    ## 
+    ##     union
+
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ------------------------------------------------------------------------
 
