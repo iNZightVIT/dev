@@ -94,19 +94,6 @@ Dependency Structure
 
 This graph shows the interaction between various iNZight R packages.
 
-    ## Loading required package: ggplot2
-
-    ## 
-    ## Attaching package: 'igraph'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     decompose, spectrum
-
-    ## The following object is masked from 'package:base':
-    ## 
-    ##     union
-
 ![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ------------------------------------------------------------------------
