@@ -235,11 +235,11 @@ winPatchAll:
 
 ## User will define wpkg=iNZightPlots, eg
 pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
-RVs = 3.3 3.4 3.5 3.6
+RVs = 3.4 3.5 3.6
 repositoryFiles:
-	@echo "==== Building $(wpkg) v$(pkg_v)"
+	@echo "==== Building $(wpkg) v$(pkg_v)\n"
 	@for rv in $(RVs); do \
-		echo " *** R version $$rv" ;\
+		echo "\n\n *********************** R version $$rv ************************\n\n" ;\
 		$(MAKE) -C s3 PKG=$$wpkg V=$$rv ;\
 	done
 	@echo "  ** Setting file permissions ..."
