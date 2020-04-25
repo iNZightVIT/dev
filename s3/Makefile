@@ -126,12 +126,12 @@ clean:
 
 $(PACKAGE).tar.gz:
 	@echo "   - building packages source"
-	@echo Version is .. $(VS) ..
-	$(RV) CMD build --no-build-vignettes $(DIR)/$(PKG)
+	@$(RV) CMD build --no-build-vignettes $(DIR)/$(PKG)
 
 $(PKG): $(PACKAGE).tar.gz
 	@echo "   - building binaries"
-	@$(RV) CMD INSTALL -l . $^
+	@echo Version is .. $(VS) ..
+	$(RV) CMD INSTALL -l . $^
 
 $(PACKAGE).zip: $(PKG)
 	@echo "   - zipping"
