@@ -43,7 +43,7 @@ R33 := R-3.3
 R34 := R-3.4
 R35 := R-3.5
 R36 := R-3.6
-R34 := R-3.4
+R34 := R-4.0
 
 DIR := ~/iNZight
 SRC := www/src
