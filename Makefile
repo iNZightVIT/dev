@@ -239,7 +239,7 @@ pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f
 RVs = 3.4 3.5 3.6 4.0
 repositoryFiles:
 	@echo "==== Building $(wpkg) v$(pkg_v)\n"
-	@for rv in $(RVs); do \
+	for rv in $(RVs); do \
 		echo "\n\n *********************** R version $$rv ************************\n\n" ;\
 		$(MAKE) -C s3 PKG=$$wpkg V=$$rv ;\
 	done
