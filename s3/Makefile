@@ -126,6 +126,7 @@ clean:
 
 $(PACKAGE).tar.gz:
 	@echo "   - building packages source"
+	@echo $(VS)
 	$(RV) CMD build --no-build-vignettes $(DIR)/$(PKG)
 
 $(PKG): $(PACKAGE).tar.gz
