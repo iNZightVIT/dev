@@ -12,7 +12,7 @@ installPython:
 	sudo apt install python3.6 -y
 	sudo easy_install3 pip
 	sudo pip3 install -r ./requirements.txt
-	
+
 #Assumes that Python 3 64-bit is already installed, as well as PIP
 setupPythonWindows:
 	#installs dependency Windows takes issue with
@@ -22,7 +22,7 @@ setupPythonWindows:
 getAWSCred:
 	$(PYTHON) aws_saml_login.py --user $(AWS_USER) --password $(AWS_PASS) --token $(AWS_TOKEN) --idp iam.auckland.ac.nz
 
-	
+
 createHTML:
 	$(PYTHON) create_webpages.py --path www
 
@@ -43,6 +43,7 @@ R33 := R-3.3
 R34 := R-3.4
 R35 := R-3.5
 R36 := R-3.6
+R34 := R-3.4
 
 DIR := ~/iNZight
 SRC := www/src
@@ -80,6 +81,13 @@ windows: $(PACKAGE).zip
 
 mac: $(PACKAGE).tgz
 	@echo "   - copying mac binaries into place"
+ifeq ($(V),4.0) # => catalina
+	@rm -f $(MAC)/contrib/$(V)/$(PKG)_*.tgz
+	@cp $^ $(MAC)/contrib/$(V)/$^
+	@cd $(MAC)/contrib/$(V) && \
+		$(RV) --slave -e "tools::write_PACKAGES(type = \"mac.binary\")" && \
+		rm -f .RData *.Rout
+endif
 ifeq ($(V),3.6) # => el-capitan
 	@rm -f $(MAC)/el-capitan/contrib/$(V)/$(PKG)_*.tgz
 	@cp $^ $(MAC)/el-capitan/contrib/$(V)/$^

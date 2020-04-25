@@ -236,7 +236,7 @@ winPatchAll:
 
 ## User will define wpkg=iNZightPlots, eg
 pkg_v ?= $(shell grep -i ^version $(DIR)/$(wpkg)/DESCRIPTION | cut -d : -d \  -f 2)
-RVs = 3.4 3.5 3.6
+RVs = 3.4 3.5 3.6 4.0
 repositoryFiles:
 	@echo "==== Building $(wpkg) v$(pkg_v)\n"
 	@for rv in $(RVs); do \
@@ -259,9 +259,10 @@ liveVersions:
 	@R --slave -e "available.packages(repos='https://r.docker.stat.auckland.ac.nz')[, 'Version']"
 
 repostructure:
-	@for i in  3 4 5 6; do mkdir -p $(s3rep)/bin/windows/contrib/3.$$i ; done
-	@for i in 4 5 6; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/3.$$i; done
-	@for i in 3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/3.$$i; done
+	@for i in  3.3 3.4 3.5 3.6 4.0; do mkdir -p $(s3rep)/bin/windows/contrib/$$i ; done
+	@for i in 3.4 3.5 3.6 4.0; do mkdir -p $(s3rep)/bin/macosx/el-capitan/contrib/$$i; done
+	@for i in 3.3; do mkdir -p $(s3rep)/bin/macosx/mavericks/contrib/$$i; done
+	@for i in 4.0; do mkdir -p $(s3rep)/bin/macosx/contrib/$$i; done
 	@mkdir -p $(s3rep)/src/contrib
 	@mkdir -p $(s3rep)/downloads/Windows
 	@mkdir -p $(s3rep)/downloads/macOS
