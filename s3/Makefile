@@ -130,7 +130,7 @@ $(PACKAGE).tar.gz:
 
 $(PKG): $(PACKAGE).tar.gz
 	@echo "   - building binaries"
-	$(RV) CMD INSTALL -l . $^
+	@$(RV) CMD INSTALL -l . $^
 
 $(PACKAGE).zip: $(PKG)
 	@echo "   - zipping"
