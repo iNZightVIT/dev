@@ -43,7 +43,7 @@ R33 := R-3.3
 R34 := R-3.4
 R35 := R-3.5
 R36 := R-3.6
-R34 := R-4.0
+R40 := R-4.0
 
 DIR := ~/iNZight
 SRC := www/src
@@ -130,7 +130,6 @@ $(PACKAGE).tar.gz:
 
 $(PKG): $(PACKAGE).tar.gz
 	@echo "   - building binaries"
-	@echo Version is .. $(VS) ..
 	$(RV) CMD INSTALL -l . $^
 
 $(PACKAGE).zip: $(PKG)
