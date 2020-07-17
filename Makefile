@@ -9,8 +9,8 @@ README.md: README.Rmd
 # make build
 
 INZIGHT_VERSION = $(shell grep -i ^version ../iNZight/DESCRIPTION | cut -d : -d \  -f 2)
-inzight_packages = iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightModules iNZight vit FutureLearnData iNZightUpdate iNZightMultivariate
-inz_packages =  $(inzight_packages) iNZightMaps
+inzight_packages = iNZightTS iNZightRegression iNZightMR iNZightPlots iNZightTools iNZightModules iNZight vit FutureLearnData iNZightUpdate
+inz_packages =  $(inzight_packages) iNZightMaps iNZightMultivariate
 extra := ggsfextra
 all_packages = $(inz_packages)
 
