@@ -11,7 +11,7 @@ installPython:
 	sudo apt update
 	sudo apt install python3.6 -y
 	sudo easy_install3 pip
-	sudo pip3 install -r ./requirements.txt
+	sudo -H pip3 install -r ./requirements.txt
 
 #Assumes that Python 3 64-bit is already installed, as well as PIP
 setupPythonWindows:
