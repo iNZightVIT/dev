@@ -30,6 +30,7 @@ ARGS=--dry --delete
 syncChanges:
 	aws --profile saml s3 sync $(ARGS) www/src s3://r.docker.stat.auckland.ac.nz/src
 	aws --profile saml s3 sync $(ARGS) www/bin s3://r.docker.stat.auckland.ac.nz/bin
+	@echo "Now email anyone who might need to know about this update (Lite?)!!"
 
 syncDownloads:
 	aws --profile saml s3 sync www/downloads s3://r.docker.stat.auckland.ac.nz/downloads
