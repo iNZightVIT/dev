@@ -13,6 +13,28 @@ This repository is where we can store all of our development scripts, files, bug
 |master|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZight.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZight)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightPlots.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightPlots)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightModules.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightModules)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTS.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightTS)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMR.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightMR)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightRegression.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightRegression)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMaps.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightMaps)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTools.svg?branch=master)](https://travis-ci.org/iNZightVIT/iNZightTools)||
 |dev|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZight.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZight)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightPlots.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightPlots)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightModules.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightModules)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTS.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightTS)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMR.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightMR)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightRegression.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightRegression)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightMaps.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightMaps)|[![Travis-CI Build Status](https://travis-ci.org/iNZightVIT/iNZightTools.svg?branch=dev)](https://travis-ci.org/iNZightVIT/iNZightTools)||
 
+```{r,echo=FALSE,message=FALSE}
+library(magrittr)
+library(dplyr)
+
+pkgs <- tibble(
+  package = c(
+    "iNZight", "iNZightPlots", "iNZightMR", "iNZightTools",
+    "iNZightTS", "iNZightRegression", "iNZightModules",
+    "iNZightMaps"
+  )
+) %>%
+  mutate(
+    master = glue::glue("![R-CMD-check](https://github.com/iNZightVIT/{package}/workflows/R-CMD-check/badge.svg)"),
+    dev = glue::glue("![R-CMD-check](https://github.com/iNZightVIT/{package}/workflows/R-CMD-check/badge.svg?branch=dev)"),
+    codecov = glue::glue("[![Codecov test coverage](https://codecov.io/gh/iNZightVIT/{package}/branch/master/graph/badge.svg)](https://codecov.io/gh/iNZightVIT/{package}?branch=master)"),
+    cran = glue::glue("[![CRAN](https://www.r-pkg.org/badges/version/{package})](https://CRAN.R-project.org/package={package})")
+  )
+
+knitr::kable(pkgs)
+```
+
+
 ***
 ## To start developing iNZightVIT (assumes Linux):
 
