@@ -176,6 +176,7 @@ pkginfo:
 		echo " - \033[32m$$pkg\033[0m@\033[35m`cd ../$$pkg && git rev-parse --abbrev-ref HEAD`\033[0m" ;\
 		echo " - local version:  \033[33m`grep -i ^version ../$$pkg/DESCRIPTION | cut -d : -d \  -f 2`\033[0m" ;\
 		echo " - server version: \033[33m`pkg=$$pkg R --slave -e 'cat(available.packages(repos="$(INZREPO)")[Sys.getenv("pkg"), \"Version\"])'`\033[0m" ;\
+		echo " - CRAN version: \033[33m`pkg=$$pkg R --slave -e 'tryCatch(cat(available.packages(repos="https://cran.stat.auckland.ac.nz")[Sys.getenv("pkg"), \"Version\"]), error = function(err) cat(""))'`\033[0m" ;\
 		echo ;\
 	done
 
