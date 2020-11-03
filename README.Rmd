@@ -61,7 +61,7 @@ cd ..
 
 This graph shows the interaction between various iNZight R packages.
 
-```{r,echo=FALSE,message=FALSE}
+```{r,echo=FALSE,message=FALSE,fig.width=8,fig.height=5}
 library(magrittr)
 library(ggraph)
 library(igraph)
@@ -93,9 +93,9 @@ pkg_deps <- lapply(pkgs,
   }
 ) %>% dplyr::bind_rows()
 
-
+set.seed(27)
 graph <- graph_from_data_frame(pkg_deps)
-ggraph(graph, layout = "kk") +
+ggraph(graph, layout = "dh") +
   geom_edge_fan(
     aes(
       colour = type,
@@ -109,7 +109,8 @@ ggraph(graph, layout = "kk") +
   theme_graph() +
   theme(legend.position = "bottom") +
   scale_edge_colour_manual(values = c("orangered", "steelblue")) +
-  scale_edge_alpha_manual(values = c(1, 0.5))
+  scale_edge_alpha_manual(values = c(1, 0.5)) +
+  xlim(-6.5, 2)
 
 ```
 
