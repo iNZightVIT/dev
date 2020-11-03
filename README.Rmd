@@ -85,10 +85,10 @@ get_deps <- function(pkg, dep) {
 pkg_deps <- lapply(pkgs,
   function(pkg) {
     dplyr::bind_rows(
-      depends = get_deps(file.path("..", pkg), "depends"),
-      imports = get_deps(file.path("..", pkg), "imports"),
-      suggests = get_deps(file.path("..", pkg), "suggests"),
-      enhances = get_deps(file.path("..", pkg), "enhances")
+      depends = get_deps(file.path("..", pkg), "Depends"),
+      imports = get_deps(file.path("..", pkg), "Imports"),
+      suggests = get_deps(file.path("..", pkg), "Suggests"),
+      enhances = get_deps(file.path("..", pkg), "Enhances")
     )
   }
 ) %>% dplyr::bind_rows()

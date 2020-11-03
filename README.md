@@ -1,6 +1,5 @@
 
-iNZight Development Repository
-==============================
+# iNZight Development Repository
 
 This repository is where we can store all of our development scripts, files, bug lists, etc.
 
@@ -17,8 +16,7 @@ This repository is where we can store all of our development scripts, files, bug
 
 ------------------------------------------------------------------------
 
-To start developing iNZightVIT (assumes Linux):
------------------------------------------------
+## To start developing iNZightVIT (assumes Linux):
 
 1.  Create a new directory: `~/iNZight` (This must be in your home directory)
 
@@ -45,8 +43,7 @@ cd ..
 
 ------------------------------------------------------------------------
 
-Dependency Structure
---------------------
+## Dependency Structure
 
 This graph shows the interaction between various iNZight R packages.
 
