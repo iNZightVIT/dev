@@ -20,6 +20,7 @@ pkgs <- tibble(
   )
 ) %>%
   mutate(
+    package = glue::glue("[{package}](https://github.com/iNZightVIT/{package})"),
     master = glue::glue("![R-CMD-check](https://github.com/iNZightVIT/{package}/workflows/R-CMD-check/badge.svg)"),
     dev = glue::glue("![R-CMD-check](https://github.com/iNZightVIT/{package}/workflows/R-CMD-check/badge.svg?branch=dev)"),
     codecov = glue::glue("[![Codecov test coverage](https://codecov.io/gh/iNZightVIT/{package}/branch/master/graph/badge.svg)](https://codecov.io/gh/iNZightVIT/{package}?branch=master)"),
