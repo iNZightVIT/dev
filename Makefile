@@ -31,11 +31,11 @@ R40 := R-4.0
 
 period := .
 empty :=
-V  := 3.6
+V  := 4.0
 VS = $(subst $(period),$(empty),$(V))
 RV := ${R${VS}}
 
-WINV := 3.6
+WINV := 4.0
 WINVS := $(subst $(period),$(empty),$(WINV))
 RWIN = ${R${WINVS}}
 
