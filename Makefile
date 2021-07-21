@@ -21,6 +21,8 @@ SRCDIR = $(s3rep)/src
 
 CD_INZ := cd ~/iNZight;
 
+CPU := 1
+
 # R versions
 R32 := R-3.2
 R33 := R-3.3
@@ -70,11 +72,11 @@ ifeq ("$(RGTK)", "OLD")
 	@$(RV) --slave -e "if (!requireNamespace('RGtk2', quietly = TRUE)) install.packages('https://cran.stat.auckland.ac.nz/src/contrib/Archive/RGtk2/RGtk2_2.20.31.tar.gz', type = 'source', repos = NULL)"
 endif
 	@echo " * Installing iNZight packages and dependencies"
-	@$(RV) --slave -e "install.packages(c('devtools'), repos='https://cran.stat.auckland.ac.nz')"
-	@for pkg in $(inz_packages); do \
+	$(RV) --slave -e "install.packages(c('remotes'), repos='https://cran.stat.auckland.ac.nz', Ncpus = $(CPU))"
+	for pkg in $(inz_packages); do \
 		echo "\n *** "$$pkg" ...\n" && \
 			cd ../$$pkg && \
-			$(RV) --slave -e "devtools::install_deps(upgrade = 'always', Ncpus = 3); devtools::install()" ;\
+			$(RV) --slave -e "remotes::install_deps(upgrade = 'always', Ncpus = $(CPU)); remotes::install_local()" ;\
 	done
 
 # Now you can install them into a temporary directory: make all
